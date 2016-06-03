@@ -29,3 +29,6 @@
 
 # vim
 *.swp
+
+# build dir
+build/
