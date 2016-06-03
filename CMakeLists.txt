@@ -15,7 +15,11 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # import dependencies
+find_package(OpenGL REQUIRED 4.5)
 include(ImportEigen)
+include(ImportGLFW)
+include(ImportMKL)
+
 
 option(BUILD_TESTING "Build tests" ON)
 
@@ -28,4 +32,5 @@ configure_file(
 )
 
 add_subdirectory(Source)
+
 

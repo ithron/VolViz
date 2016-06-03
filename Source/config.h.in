@@ -1,0 +1,11 @@
+#ifndef VolViz_config_h
+#define VolViz_config_h
+
+// versioning
+#define VOLVIZ_VERSION "@PROJECT_VERSION@"
+#define VOLVIZ_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define VOLVIZ_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define VOLVIZ_VERSION_PATCH @PROJECT_VERSION_PATCH@
+
+#endif // VolViz_config_h
+
