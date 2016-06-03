@@ -35,4 +35,5 @@
 # Python compiled code
 *.pyc
 
-
+# build dir
+build/
