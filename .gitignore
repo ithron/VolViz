@@ -29,3 +29,10 @@
 
 # vim
 *.swp
+.lvimrc
+.ycm_extra_conf.py
+
+# Python compiled code
+*.pyc
+
+
