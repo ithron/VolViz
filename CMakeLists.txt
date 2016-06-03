@@ -31,6 +31,6 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/Source/config.h.in" "${PROJECT_BINARY_DIR}/config.h"
 )
 
-add_subdirectory(Source)
+add_subdirectory(Source VolViz)
 
 

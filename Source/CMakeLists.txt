@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
+option(BUILD_APP "Build mesh viewer app?" ON)
+
+if (BUILD_APP)
+  include(ImportIgl)
+endif()
+
 set(DEFAULT_COMPILE_FEATURES
   cxx_alias_templates
   cxx_alignas
@@ -77,7 +83,7 @@ target_link_libraries(MeshViewer
   PUBLIC
     Eigen
     glfw
-    OpenGL
+    ${OPENGL_LIBRARIES}
     ${MKL_TARGET}
 )
 target_include_directories(MeshViewer PUBLIC
@@ -87,12 +93,21 @@ target_include_directories(MeshViewer PUBLIC
 target_compile_features(MeshViewer PUBLIC ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(MeshViewer PRIVATE ${DEFAULT_COMPILER_OPTIONS})
 
+set(INSTALL_TARGETS MeshViewer)
+
 add_library(VolViz::MeshViewer ALIAS MeshViewer)
 
-add_executable(MeshViewerApp meshViewerApp.cpp)
-target_link_libraries(MeshViewerApp PRIVATE VolViz::MeshViewer)
-target_compile_features(MeshViewerApp PRIVATE ${DEFAULT_COMPILE_FEATURES})
-target_compile_options(MeshViewerApp PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+if (BUILD_APP)
+  add_executable(MeshViewerApp meshViewerApp.cpp)
+  target_link_libraries(MeshViewerApp PRIVATE
+    VolViz::MeshViewer
+    IGL
+  )
+  target_compile_features(MeshViewerApp PRIVATE ${DEFAULT_COMPILE_FEATURES})
+  target_compile_options(MeshViewerApp PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+
+  set(INSTALL_TARGETS ${INSTALL_TARGETS} MeshViewerApp)
+endif()
 
 if (BUILD_TESTING)
   # add test targets here
@@ -109,8 +124,7 @@ endif()
 
 install(
   TARGETS
-    MeshViewer
-    MeshViewerApp
+    ${INSTALL_TARGETS}
   EXPORT
     VolVizExport
   ARCHIVE DESTINATION lib
@@ -139,6 +153,11 @@ configure_package_config_file(
 configure_package_config_file(
   ${DEPENDENCIES_DIR}/cmake/ImportEigen.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/ImportEigen.cmake
+  INSTALL_DESTINATION lib/cmake/VolViz
+)
+configure_package_config_file(
+  ${DEPENDENCIES_DIR}/cmake/ImportIgl.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/ImportIgl.cmake
   INSTALL_DESTINATION lib/cmake/VolViz
 )
 configure_package_config_file(
