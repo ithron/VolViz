@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 option(BUILD_APP "Build mesh viewer app?" ON)
 
 if (BUILD_APP)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${DEPENDENCIES_DIR}/cmake)
   include(ImportIgl)
 endif()
 

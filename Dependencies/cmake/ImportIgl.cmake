@@ -2,6 +2,6 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 add_library(IGL INTERFACE IMPORTED)
 set_property(TARGET IGL PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-  ${DEPENDENCIES_DIR}/libigl
+  ${DEPENDENCIES_DIR}/libigl/include
 )
 

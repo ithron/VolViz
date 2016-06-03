@@ -193,7 +193,9 @@ public:
 
   operator bool() const noexcept;
 
-  template <class... Attrs> void setMesh(Viewer::Mesh<Attrs...> const &mesh);
+  template <class VertBase, class IdxBase>
+  void setMesh(Eigen::MatrixBase<VertBase> const &V,
+               Eigen::MatrixBase<IdxBase> const &I);
 
 private:
   void setupShaders();

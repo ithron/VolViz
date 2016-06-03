@@ -56,9 +56,10 @@ Viewer::operator bool() const noexcept { return *impl_; }
 
 void Viewer::renderOneFrame() { impl_->renderOneFrame(); }
 
-template <class... Attrs>
-void Viewer::setMesh(Viewer::Mesh<Attrs...> const &mesh) {
-  impl_->setMesh(mesh);
+template <class VertBase, class IdxBase>
+void Viewer::setMesh(Eigen::MatrixBase<VertBase> const &V,
+                     Eigen::MatrixBase<IdxBase> const &I) {
+  impl_->setMesh(V, I);
 }
 
 GLFW::GLFW() {
@@ -450,24 +451,23 @@ MeshViewerImpl::operator bool() const noexcept {
   return !glfwWindowShouldClose(glfw_.window);
 }
 
-template <class... Attrs>
-void MeshViewerImpl::setMesh(Viewer::Mesh<Attrs...> const &mesh) {
+template <class VertBase, class IdxBase>
+void MeshViewerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
+                             Eigen::MatrixBase<IdxBase> const &I) {
   using Verts =
       std::vector<Eigen::Vector4f, Eigen::aligned_allocator<Eigen::Vector4f>>;
   using Triangle = Eigen::Matrix<std::uint32_t, 3, 1>;
-  using Indices = std::vector<Triangle>;
-  auto const &V = mesh.vertices();
-  auto const &I = mesh.triangles();
+  using Triangles = std::vector<Triangle>;
 
   auto verts = Verts();
-  verts.reserve(V.size());
-  auto indices = Indices();
-  indices.reserve(I.size());
+  verts.reserve(static_cast<std::size_t>(V.rows()));
+  auto indices = Triangles();
+  indices.reserve(static_cast<std::size_t>(I.rows()));
 
-  for (auto const &v : V)
-    verts.emplace_back(v.template cast<float>().homogeneous());
-  for (auto const &i : I)
-    indices.emplace_back(i.template cast<std::uint32_t>());
+  for (auto i = 0; i < V.rows(); ++i)
+    verts.emplace_back(V.row(i).template cast<float>().homogeneous());
+  for (auto i = 0; i < I.rows(); ++i)
+    indices.emplace_back(I.row(i).template cast<std::uint32_t>());
 
   // setup VBO
   auto vertBuff = Buffer();
@@ -497,8 +497,12 @@ void MeshViewerImpl::setMesh(Viewer::Mesh<Attrs...> const &mesh) {
   mesh_.nTriangles = indices.size();
 }
 
-template void Viewer::setMesh<>(Viewer::Mesh<> const &);
-template void MeshViewerImpl::setMesh<>(Viewer::Mesh<> const &);
+template void Viewer::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
+                                Eigen::MatrixBase<Eigen::MatrixXi> const &);
+
+template void
+MeshViewerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
+                          Eigen::MatrixBase<Eigen::MatrixXi> const &);
 
 void MeshViewerImpl::handleKeyInput(int key, int, int action, int) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
