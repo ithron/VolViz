@@ -65,6 +65,16 @@ if (("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang") OR
     -Wno-c++98-compat-pedantic
     -Wno-global-constructors
     -Wno-reserved-id-macro
+    -Wno-documentation
+    -Wno-documentation-unknown-command
+    -Wno-old-style-cast
+    -Wno-deprecated
+    -Wno-missing-noreturn
+    -Wno-used-but-marked-unused
+    -Wno-padded
+    -Wno-cast-align
+    -Wno-double-promotion
+    -Wno-sign-compare
   )
 endif()
 if (${CMAKE_COMPILER_IS_GNUCXX})

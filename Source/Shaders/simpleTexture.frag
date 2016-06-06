@@ -1,13 +1,13 @@
 R"(
-#version 430 core
+#version 410 core
 
-layout(location = 0) uniform sampler2D texture;
+uniform sampler2D tex;
 in vec2 texcoord;
 
 layout(location = 0) out vec4 color;
 
 void main() {
-  color = texture2D(texture, texcoord);
+  color = texture(tex, texcoord);
 }
 
 )"

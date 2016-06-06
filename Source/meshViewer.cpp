@@ -63,9 +63,14 @@ void Viewer::setMesh(Eigen::MatrixBase<VertBase> const &V,
 }
 
 GLFW::GLFW() {
-  if (!glfwInit()) throw(std::runtime_error("Failed to init GLFW"));
+  if (!glfwInit())
+    throw(std::runtime_error("Failed to init GLFW"));
 
   glfwWindowHint(GLFW_VISIBLE, false);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   if (!(window = glfwCreateWindow(Viewer::kDefaultWidth, Viewer::kDefaultHeight,
                                   Viewer::kTitle, nullptr, nullptr))) {
     throw std::runtime_error("Failed to create GLFW window");
@@ -97,7 +102,8 @@ GLFW::GLFW() {
     auto ptr = glfwGetWindowUserPointer(win);
     assert(ptr != nullptr && "Invalid user pointer");
     auto *const self = static_cast<GLFW *>(ptr);
-    if (self->scrollWheelInputHandler) self->scrollWheelInputHandler(x, y);
+    if (self->scrollWheelInputHandler)
+      self->scrollWheelInputHandler(x, y);
   });
 
   // setup mouse button callback
@@ -105,7 +111,8 @@ GLFW::GLFW() {
     auto ptr = glfwGetWindowUserPointer(win);
     assert(ptr != nullptr && "Invalid user pointer");
     auto *const self = static_cast<GLFW *>(ptr);
-    if (self->mouseButtonCallback) self->mouseButtonCallback(b, a, m);
+    if (self->mouseButtonCallback)
+      self->mouseButtonCallback(b, a, m);
   });
 
   // setup mouse move callback
@@ -113,7 +120,8 @@ GLFW::GLFW() {
     auto ptr = glfwGetWindowUserPointer(win);
     assert(ptr != nullptr && "Invalid user pointer");
     auto *const self = static_cast<GLFW *>(ptr);
-    if (self->mouseMoveCallback) self->mouseMoveCallback(x, y);
+    if (self->mouseMoveCallback)
+      self->mouseMoveCallback(x, y);
   });
 
   makeCurrent();
@@ -123,7 +131,8 @@ GLFW::GLFW() {
 GLFW::GLFW(GLFW &&rhs) : window(rhs.window) { rhs.window = nullptr; }
 
 GLFW::~GLFW() {
-  if (window) glfwDestroyWindow(window);
+  if (window)
+    glfwDestroyWindow(window);
   glfwTerminate();
 }
 
@@ -140,14 +149,16 @@ void GLFW::makeCurrent() noexcept { glfwMakeContextCurrent(window); }
 std::size_t GLFW::width() const noexcept {
   int w, h;
   glfwGetWindowSize(window, &w, &h);
-  if (!isHidden()) return static_cast<std::size_t>(w);
+  if (!isHidden())
+    return static_cast<std::size_t>(w);
   return Viewer::kDefaultWidth;
 }
 
 std::size_t GLFW::height() const noexcept {
   int w, h;
   glfwGetWindowSize(window, &w, &h);
-  if (!isHidden()) return static_cast<std::size_t>(h);
+  if (!isHidden())
+    return static_cast<std::size_t>(h);
   return Viewer::kDefaultHeight;
 }
 
@@ -232,6 +243,21 @@ ShaderProgram &ShaderProgram::attachShader(Shader const &shader) {
 ShaderProgram &ShaderProgram::link() {
   glLinkProgram(program_);
   assert(glGetError() == GL_NO_ERROR && "Failed to link program");
+
+  // Check for linking errors
+  GLint isLinked = GL_FALSE;
+  glGetProgramiv(program_, GL_LINK_STATUS, &isLinked);
+
+  if (!isLinked) {
+    GLint maxLength = 0;
+    glGetProgramiv(program_, GL_INFO_LOG_LENGTH, &maxLength);
+    std::vector<GLchar> infoLog(maxLength);
+    glGetProgramInfoLog(program_, maxLength, &maxLength, infoLog.data());
+
+    throw std::runtime_error("Failed to link program: " +
+                             std::string(infoLog.data()));
+  }
+
   std::cout << "Sucessfully linked program " << program_ << std::endl;
   detachShaders();
   return *this;
@@ -240,11 +266,13 @@ ShaderProgram &ShaderProgram::link() {
 void ShaderProgram::use() const {
   assert(glGetError() == GL_NO_ERROR && "Dirty OpenGL error stack");
   glUseProgram(program_);
-  assert(glGetError() == GL_NO_ERROR && "Failed to use program");
+  auto const err = glGetError();
+  assert(err == GL_NO_ERROR && "Failed to use program");
 }
 
 void ShaderProgram::detachShaders() {
-  for (auto s : attachedShaders_) glDetachShader(program_, s);
+  for (auto s : attachedShaders_)
+    glDetachShader(program_, s);
   attachedShaders_.clear();
 }
 
@@ -297,10 +325,22 @@ VertexArray &VertexArray::enableVertexAttribArray(GLuint idx) {
 }
 
 MeshViewerImpl::MeshViewerImpl() {
+
+  // check OpenGL version
+  GLint major, minor;
+  glGetIntegerv(GL_MAJOR_VERSION, &major);
+  glGetIntegerv(GL_MINOR_VERSION, &minor);
+
+  std::cout << "OpenGL " << major << "." << minor << std::endl;
+  if (major < 4 || !(major == 4 && minor >= 1)) {
+    throw std::runtime_error("Need at least OpenGL version 4.1");
+  }
+
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     setupFBOs();
@@ -315,14 +355,14 @@ MeshViewerImpl::MeshViewerImpl() {
 
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
     switch (moveState_) {
-      case MoveState::None:
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-          moveState_ = MoveState::Rotating;
-        break;
-      case MoveState::Rotating:
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-          moveState_ = MoveState::None;
-        break;
+    case MoveState::None:
+      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+        moveState_ = MoveState::Rotating;
+      break;
+    case MoveState::Rotating:
+      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+        moveState_ = MoveState::None;
+      break;
     }
   };
 
@@ -341,35 +381,25 @@ MeshViewerImpl::MeshViewerImpl() {
                                    sqrt(1.0 - lastMousePos_.squaredNorm()));
 
     switch (moveState_) {
-      case MoveState::Rotating: {
-        auto const angle =
-            acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) *
-            2;
-        Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
-        if (angle > 1e-3) {
-          cameraOrientation_ *=
-              Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
-          cameraOrientation_.normalize();
-        }
-        break;
+    case MoveState::Rotating: {
+      auto const angle =
+          acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) * 2;
+      Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
+      if (angle > 1e-3) {
+        cameraOrientation_ *=
+            Eigen::Quaternionf(
+                Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                .inverse();
+        cameraOrientation_.normalize();
       }
-      case MoveState::None:
-        break;
+      break;
+    }
+    case MoveState::None:
+      break;
     }
 
     lastMousePos_ = pos;
   };
-
-  // check OpenGL version
-  GLint major, minor;
-  glGetIntegerv(GL_MAJOR_VERSION, &major);
-  glGetIntegerv(GL_MINOR_VERSION, &minor);
-
-  std::cout << "OpenGL " << major << "." << minor << std::endl;
-  if (major < 4 || !(major == 4 && minor >= 5)) {
-    throw std::runtime_error("Need at least OpenGL version 4.5");
-  }
 }
 
 void MeshViewerImpl::setupShaders() {
@@ -377,24 +407,24 @@ void MeshViewerImpl::setupShaders() {
       ShaderProgram()
           .attachShader(Shader(GL_VERTEX_SHADER, Shaders::nullVertShaderSrc))
           .attachShader(
-               Shader(GL_GEOMETRY_SHADER, Shaders::fullscreenQuadGeomShaderSrc))
+              Shader(GL_GEOMETRY_SHADER, Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(
-               Shader(GL_FRAGMENT_SHADER, Shaders::simpleTextureFragShaderSrc))
+              Shader(GL_FRAGMENT_SHADER, Shaders::simpleTextureFragShaderSrc))
           .link());
   auto geomProg = std::move(
       ShaderProgram()
           .attachShader(Shader(GL_VERTEX_SHADER, Shaders::simpleVertShaderSrc))
           .attachShader(
-               Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
+              Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       ShaderProgram()
           .attachShader(Shader(GL_VERTEX_SHADER, Shaders::nullVertShaderSrc))
           .attachShader(
-               Shader(GL_GEOMETRY_SHADER, Shaders::gridGeometryShaderSrc))
+              Shader(GL_GEOMETRY_SHADER, Shaders::gridGeometryShaderSrc))
           .attachShader(
-               Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
+              Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
           .link());
 
   geometryStageProgram_ = std::move(geomProg);
@@ -507,12 +537,12 @@ MeshViewerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
 void MeshViewerImpl::handleKeyInput(int key, int, int action, int) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
-      case GLFW_KEY_DOWN:
-        cameraPosition_(2) += 0.1;
-        break;
-      case GLFW_KEY_UP:
-        cameraPosition_(2) -= 0.1;
-        break;
+    case GLFW_KEY_DOWN:
+      cameraPosition_(2) += 0.1;
+      break;
+    case GLFW_KEY_UP:
+      cameraPosition_(2) -= 0.1;
+      break;
     }
   }
 }
@@ -535,7 +565,7 @@ void MeshViewerImpl::renderOneFrame() {
   // glBindFramebuffer(GL_FRAMEBUFFER, 0);
   assert(glGetError() == GL_NO_ERROR && "Failed to bind framebuffer");
   glClearColor(0.f, 0.4f, 0.4f, 1.f);
-  glClearDepth(1.f);
+  glClearDepth(1.0);
   glClearStencil(0);
   glEnable(GL_FRAMEBUFFER_SRGB);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -543,26 +573,49 @@ void MeshViewerImpl::renderOneFrame() {
 
   assert(glfwGetCurrentContext() == glfw_.window && "Context not current");
   // Render geometry to FBO
+  std::cout << "geom shader: " << gridProgram_.program_ << std::endl;
   geometryStageProgram_.use();
-  assert(glGetError() == GL_NO_ERROR && "OpenGL Error stack not clear");
-  glUniformMatrix4fv(0, 1, false, MVP.data());
+  {
+    auto const err = glGetError();
+    assert(err == GL_NO_ERROR && "OpenGL Error stack not clear");
+  }
+  glUniformMatrix4fv(
+      glGetUniformLocation(gridProgram_.program_, "modelViewProjectionMatrix"),
+      1, false, MVP.data());
   assert(glGetError() == GL_NO_ERROR && "Failed to upload uniform");
   if (mesh_.vao.name != 0) {
     mesh_.vao.bind();
+    {
+      auto const err = glGetError();
+      assert(err == GL_NO_ERROR && "Failed to bind VAO");
+    }
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
                    GL_UNSIGNED_INT, nullptr);
+    {
+      auto const err = glGetError();
+      assert(err == GL_NO_ERROR && "glDrawElements failed");
+    }
   }
   glBindVertexArray(0);
-  assert(glGetError() == GL_NO_ERROR && "glDrawElements failed");
 
   // TODO: Draw grid if enabled
+  std::cout << "grid shader: " << gridProgram_.program_ << std::endl;
   gridProgram_.use();
   assert(glGetError() == GL_NO_ERROR && "OpenGL Error stack not clear");
-  glUniform1f(0, 2.f);
-  assert(glGetError() == GL_NO_ERROR && "Failed to upload scale uniform");
-  glUniformMatrix4fv(1, 1, false, MVP.data());
+  glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
+  {
+    auto const err = glGetError();
+    assert(err == GL_NO_ERROR && "Failed to upload scale uniform");
+  }
+  glUniformMatrix4fv(
+      glGetUniformLocation(gridProgram_.program_, "viewProjectionMatrix"), 1,
+      false, MVP.data());
   assert(glGetError() == GL_NO_ERROR && "Failed to upload MVP matrix");
   glDrawArrays(GL_POINTS, 0, 1);
+  {
+    auto const err = glGetError();
+    assert(err == GL_NO_ERROR && "glDrawArrays failed");
+  }
 
   // Render FBA color attachment to screen
   glDisable(GL_DEPTH_TEST);

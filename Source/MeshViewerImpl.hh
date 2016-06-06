@@ -3,6 +3,7 @@
 
 #include "MeshViewer.hh"
 
+#define GLFW_INCLUDE_GLCOREARB
 #define GLFW_INCLUDE_GLEXT
 #define GL_GLEXT_PROTOTYPES
 #include <GLFW/glfw3.h>
@@ -20,6 +21,8 @@
 
 namespace MeshViewer {
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpadded"
 /// Structure that handle GLFW state using RAII
 struct GLFW {
 
@@ -68,6 +71,7 @@ private:
 
   GLuint shader_;
 };
+#pragma clang diagnostic pop
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpadded"
@@ -86,14 +90,15 @@ public:
   ShaderProgram &attachShader(Shader const &shader);
 
   template <class Container> ShaderProgram &attachShaders(Container &&c) {
-    for (auto const &s : std::forward<Container>(c)) attachShader(s);
+    for (auto const &s : std::forward<Container>(c))
+      attachShader(s);
   }
 
   ShaderProgram &link();
 
   void use() const;
 
-private:
+  // private:
   void detachShaders();
 
   GLuint program_;
@@ -147,7 +152,8 @@ template <std::size_t N> struct Textures {
   GLuint names[N];
 
   inline Textures(int) {
-    for (std::size_t i = 0; i < N; ++i) names[i] = 0;
+    for (std::size_t i = 0; i < N; ++i)
+      names[i] = 0;
   }
   inline Textures() { glGenTextures(N, names); }
 

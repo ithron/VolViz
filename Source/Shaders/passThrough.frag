@@ -1,13 +1,13 @@
 R"(
 
-#version 430 core
+#version 410 core
 
-in vec4 colorIn;
+layout (location = 0) in vec4 color;
 
-layout(location = 0) out vec4 color;
+layout(location = 0) out vec4 colorOut;
 
 void main() {
-  color = colorIn;
+  colorOut = color;
 }
 
 )"

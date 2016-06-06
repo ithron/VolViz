@@ -1,24 +1,24 @@
 R"(
-#version 450 core
+#version 410 core
 
 const uint size = 31;
 
 layout(points) in;
-layout(line_strip, max_vertices = 4 * size) out;
+layout(line_strip, max_vertices = 124 /* 4 * size */) out;
 
 layout(location = 0) out vec4 color;
 
 /* layout(location = 0) in vec4 origin; */
 
-layout(location = 0) uniform float scale;
-layout(location = 1) uniform mat4 viewProjectionMatrix;
+uniform float scale;
+uniform mat4 viewProjectionMatrix;
 
 void main() {
   vec4 p;
   const float halfSize = float(size/2);
   const int halfSizei = int(size / 2);
-  const float minCoord = -scale * halfSize;
-  const float maxCoord = scale * halfSize;
+  float minCoord = -scale * halfSize;
+  float maxCoord = scale * halfSize;
 
   /* for (int i = -int(size/2); i <= int(size/2); ++i) { */
   for (int i = -halfSizei; i <= halfSizei; ++i) {

@@ -1,5 +1,5 @@
 R"(
-#version 420 core
+#version 410 core
 
 void main() {
 }
