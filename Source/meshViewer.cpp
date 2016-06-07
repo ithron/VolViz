@@ -459,6 +459,25 @@ void MeshViewerImpl::setupFBOs() {
 
   textures_ = std::move(textures);
   fbo_ = std::move(fbo);
+
+  // create dummy VAO for single single point rendering
+  {
+    auto vao = VertexArray{};
+    vao.enableVertexAttribArray(0);
+
+    auto const vert = Eigen::Vector3f::Zero().eval();
+    auto vb = Buffer{};
+    vb.upload(GL_ARRAY_BUFFER, 3 * sizeof(float), vert.data(), GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    singleVertexData_.vBuff = std::move(vb);
+    singleVertexData_.vao = std::move(vao);
+  }
+  // DEBUG END
 }
 
 Eigen::Matrix4f MeshViewerImpl::projectionMatrix(std::size_t width,
@@ -561,7 +580,7 @@ void MeshViewerImpl::renderOneFrame() {
 
   assertGL("OpenGL Error stack not clear");
   glBindFramebuffer(GL_FRAMEBUFFER, fbo_.name);
-  //  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  //    glBindFramebuffer(GL_FRAMEBUFFER, 0);
   assertGL("Failed to bind framebuffer");
   glClearColor(0.f, 0.4f, 0.4f, 1.f);
   glClearDepth(1.0);
@@ -580,6 +599,7 @@ void MeshViewerImpl::renderOneFrame() {
       1, false, MVP.data());
   assertGL("Failed to upload uniform");
   if (mesh_.vao.name != 0) {
+    std::cout << "Render mesh" << std::endl;
     mesh_.vao.bind();
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
                    GL_UNSIGNED_INT, nullptr);
@@ -587,19 +607,20 @@ void MeshViewerImpl::renderOneFrame() {
   }
   glBindVertexArray(0);
 
-  //  // TODO: Draw grid if enabled
-  //  std::cout << "grid shader: " << gridProgram_.program_ << std::endl;
-  //  gridProgram_.use();
-  //  assertGL("OpenGL Error stack not clear");
-  //  glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
-  //  assertGL("Failed to upload scale uniform");
-  //  glUniformMatrix4fv(
-  //      glGetUniformLocation(gridProgram_.program_, "viewProjectionMatrix"),
-  //      1,
-  //      false, MVP.data());
-  //  assertGL("Failed to upload MVP matrix");
-  //  glDrawArrays(GL_POINTS, 0, 1);
-  //  assertGL("glDrawArrays failed");
+  // TODO: Draw grid if enabled
+  std::cout << "grid shader: " << gridProgram_.program_ << std::endl;
+  gridProgram_.use();
+  assertGL("OpenGL Error stack not clear");
+  glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
+  assertGL("Failed to upload scale uniform");
+  glUniformMatrix4fv(
+      glGetUniformLocation(gridProgram_.program_, "viewProjectionMatrix"), 1,
+      false, MVP.data());
+  assertGL("Failed to upload MVP matrix");
+  singleVertexData_.vao.bind();
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+  glBindVertexArray(0);
 
   // Render FBA color attachment to screen
   glDisable(GL_DEPTH_TEST);
@@ -612,14 +633,14 @@ void MeshViewerImpl::renderOneFrame() {
   glBindTexture(GL_TEXTURE_2D, textures_.names[0]);
 
   // draw fullscreen quad using the geometry shader
+  singleVertexData_.vao.bind();
   assertGL("Dirty openGL state");
-  //  glDrawArrays(GL_POINTS, 0, 1);
+  glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
+  glBindVertexArray(0);
 
   glfwSwapBuffers(glfw_.window);
   glfwWaitEvents();
-
-  std::cout << "One frame rendered!" << std::endl;
 }
 
 } // namespace MeshViewer

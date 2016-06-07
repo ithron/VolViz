@@ -214,12 +214,17 @@ private:
   Textures<2> textures_{0};
   FramebufferObject fbo_{0};
 
-  struct {
+  struct MeshData {
     VertexArray vao{0};
     Buffer vertices{0};
     Buffer indices{0};
     std::size_t nTriangles = 0;
   } mesh_;
+
+  struct SingleVertData {
+    Buffer vBuff{0};
+    VertexArray vao{0};
+  } singleVertexData_;
 
   enum class MoveState { None, Rotating } moveState_ = MoveState::None;
 

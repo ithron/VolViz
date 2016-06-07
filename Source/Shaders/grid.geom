@@ -1,10 +1,10 @@
 R"(
 #version 410 core
 
-const uint size = 31;
+const uint size = 63;
 
 layout(points) in;
-layout(line_strip, max_vertices = 124 /* 4 * size */) out;
+layout(line_strip, max_vertices = 252 /* 4 * size */) out;
 
 layout(location = 0) out vec4 color;
 

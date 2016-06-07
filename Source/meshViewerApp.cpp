@@ -51,7 +51,8 @@ int main(int argc, char **argv) {
 
   auto viewer = Viewer{};
 
-  viewer.setMesh((V * 100).eval(), T);
+  //  viewer.setMesh((V * 100).eval(), T);
+  viewer.setMesh(V, T);
 
   viewer.start();
 
