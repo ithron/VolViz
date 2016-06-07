@@ -15,6 +15,7 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # import dependencies
+include_directories(SYSTEM ${DEPENDENCIES_DIR}/GLHeaders)
 find_package(OpenGL REQUIRED 4.5)
 include(ImportEigen)
 include(ImportGLFW)

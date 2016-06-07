@@ -60,6 +60,7 @@ if (("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang") OR
     -Weverything
 #disable warnings
     -Qunused-arguments
+    -Wno-unknown-warning-option
     -Wno-c++98-compat
     -Wno-c++98-compat-bind-to-temporary-copy
     -Wno-c++98-compat-pedantic
