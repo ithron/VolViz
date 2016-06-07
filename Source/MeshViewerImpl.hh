@@ -1,12 +1,9 @@
 #ifndef SBSSegmentation_MeshViewerImpl_hh
 #define SBSSegmentation_MeshViewerImpl_hh
 
+#include "Error.h"
+#include "GLFW.h"
 #include "MeshViewer.hh"
-
-#define GLFW_INCLUDE_GLCOREARB
-#define GLFW_INCLUDE_GLEXT
-#define GL_GLEXT_PROTOTYPES
-#include <GLFW/glfw3.h>
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>

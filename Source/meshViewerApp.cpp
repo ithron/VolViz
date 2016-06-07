@@ -36,8 +36,7 @@ int main(int argc, char **argv) {
   } else if (ext == "obj")
     igl::readOBJ(filename, V, T);
   else {
-    std::cerr << std::endl
-              << "Unrecognized mesh format: " << ext << std::endl;
+    std::cerr << std::endl << "Unrecognized mesh format: " << ext << std::endl;
     return EXIT_FAILURE;
   }
   std::cout << "done." << std::endl;
@@ -56,7 +55,9 @@ int main(int argc, char **argv) {
 
   viewer.start();
 
-  while (viewer) { viewer.renderOneFrame(); }
+  while (viewer) {
+    viewer.renderOneFrame();
+  }
 
   return EXIT_SUCCESS;
 }

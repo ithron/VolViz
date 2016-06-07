@@ -164,10 +164,10 @@ std::size_t GLFW::height() const noexcept {
 
 Shader::Shader(GLenum type, std::string const &source) {
   shader_ = glCreateShader(type);
-  assert(shader_ != 0 && "Failed to create shader");
+  assertGL("Failed to create shader");
   auto const src = source.c_str();
   glShaderSource(shader_, 1, &src, nullptr);
-  assert(glGetError() == GL_NO_ERROR && "Failed to upload shader source");
+  assertGL("Failed to upload shader source");
   compile();
 }
 
@@ -186,11 +186,11 @@ Shader &Shader::operator=(Shader &&rhs) {
 
 void Shader::compile() const {
   glCompileShader(shader_);
-  assert(glGetError() == GL_NO_ERROR && "Shader compilation failed");
+  assertGL("Shader compilation failed");
 
   GLint success = 0;
   glGetShaderiv(shader_, GL_COMPILE_STATUS, &success);
-  assert(glGetError() == GL_NO_ERROR && "Failed to get shader compile status");
+  assertGL("Failed to get shader compile status");
 
   if (success) {
     std::cout << "Sucessfully compiled shader " << shader_ << std::endl;
@@ -199,11 +199,11 @@ void Shader::compile() const {
 
   GLint logSize = 0;
   glGetShaderiv(shader_, GL_INFO_LOG_LENGTH, &logSize);
-  assert(glGetError() == GL_NO_ERROR && "Failed to get shader info log length");
+  assertGL("Failed to get shader info log length");
   std::vector<GLchar> log(static_cast<std::size_t>(logSize));
 
   glGetShaderInfoLog(shader_, logSize, &logSize, log.data());
-  assert(glGetError() == GL_NO_ERROR && "Failed to get shader info log");
+  assertGL("Failed to get shader info log");
 
   std::cerr << "Failed to compile shader " << shader_ << ":" << std::endl
             << std::string(log.data()) << std::endl;
@@ -235,14 +235,14 @@ ShaderProgram &ShaderProgram::operator=(ShaderProgram &&rhs) {
 
 ShaderProgram &ShaderProgram::attachShader(Shader const &shader) {
   glAttachShader(program_, shader.shader_);
-  assert(glGetError() == GL_NO_ERROR && "Shader attachment failed");
+  assertGL("Shader attachment failed");
   attachedShaders_.push_back(shader.shader_);
   return *this;
 }
 
 ShaderProgram &ShaderProgram::link() {
   glLinkProgram(program_);
-  assert(glGetError() == GL_NO_ERROR && "Failed to link program");
+  assertGL("Failed to link program");
 
   // Check for linking errors
   GLint isLinked = GL_FALSE;
@@ -264,10 +264,9 @@ ShaderProgram &ShaderProgram::link() {
 }
 
 void ShaderProgram::use() const {
-  assert(glGetError() == GL_NO_ERROR && "Dirty OpenGL error stack");
+  assertGL("Dirty OpenGL error stack");
   glUseProgram(program_);
-  auto const err = glGetError();
-  assert(err == GL_NO_ERROR && "Failed to use program");
+  assertGL("Failed to use program");
 }
 
 void ShaderProgram::detachShaders() {
@@ -278,7 +277,7 @@ void ShaderProgram::detachShaders() {
 
 Buffer::Buffer() {
   glGenBuffers(1, &name);
-  assert(glGetError() == GL_NO_ERROR && "Buffer creation failed");
+  assertGL("Buffer creation failed");
 }
 
 Buffer::~Buffer() { glDeleteBuffers(1, &name); }
@@ -293,12 +292,12 @@ Buffer &Buffer::operator=(Buffer &&rhs) {
 
 void Buffer::bind(GLenum target) const {
   glBindBuffer(target, name);
-  assert(glGetError() == GL_NO_ERROR && "Failed to bind buffer");
+  assertGL("Failed to bind buffer");
 }
 
 VertexArray::VertexArray() {
   glGenVertexArrays(1, &name);
-  assert(glGetError() == GL_NO_ERROR && "Vertex array creation failed");
+  assertGL("Vertex array creation failed");
 }
 
 VertexArray::~VertexArray() { glDeleteVertexArrays(1, &name); };
@@ -313,14 +312,14 @@ VertexArray &VertexArray::operator=(VertexArray &&rhs) {
 
 VertexArray &VertexArray::bind() {
   glBindVertexArray(name);
-  assert(glGetError() == GL_NO_ERROR && "Failed to bind vertex array");
+  assertGL("Failed to bind vertex array");
   return *this;
 }
 
 VertexArray &VertexArray::enableVertexAttribArray(GLuint idx) {
   bind();
   glEnableVertexAttribArray(idx);
-  assert(glGetError() == GL_NO_ERROR && "Failed to enabkle vertex attribute");
+  assertGL("Failed to enabkle vertex attribute");
   return *this;
 }
 
@@ -513,12 +512,12 @@ void MeshViewerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
   // setup VAO
   auto vao = VertexArray();
   vao.enableVertexAttribArray(0);
-  vao.enableVertexAttribArray(1);
+  //  vao.enableVertexAttribArray(1);
   vertBuff.bind(GL_ARRAY_BUFFER);
   glVertexAttribPointer(0, 4, GL_FLOAT, false, 0, nullptr);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
   idxBuff.bind(GL_ELEMENT_ARRAY_BUFFER);
   glBindVertexArray(0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
   mesh_.vertices = std::move(vertBuff);
@@ -560,10 +559,10 @@ void MeshViewerImpl::renderOneFrame() {
       Eigen::AngleAxisf(0.f, Eigen::Vector3f::UnitZ());
   Eigen::Matrix4f const MVP = pMatrix * camTrans.inverse().matrix();
 
-  assert(glGetError() == GL_NO_ERROR && "OpenGL Error stack not clear");
+  assertGL("OpenGL Error stack not clear");
   glBindFramebuffer(GL_FRAMEBUFFER, fbo_.name);
-  // glBindFramebuffer(GL_FRAMEBUFFER, 0);
-  assert(glGetError() == GL_NO_ERROR && "Failed to bind framebuffer");
+  //  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  assertGL("Failed to bind framebuffer");
   glClearColor(0.f, 0.4f, 0.4f, 1.f);
   glClearDepth(1.0);
   glClearStencil(0);
@@ -573,62 +572,54 @@ void MeshViewerImpl::renderOneFrame() {
 
   assert(glfwGetCurrentContext() == glfw_.window && "Context not current");
   // Render geometry to FBO
-  std::cout << "geom shader: " << gridProgram_.program_ << std::endl;
   geometryStageProgram_.use();
-  {
-    auto const err = glGetError();
-    assert(err == GL_NO_ERROR && "OpenGL Error stack not clear");
-  }
+  assertGL("OpenGL Error stack not clean");
+
   glUniformMatrix4fv(
       glGetUniformLocation(gridProgram_.program_, "modelViewProjectionMatrix"),
       1, false, MVP.data());
-  assert(glGetError() == GL_NO_ERROR && "Failed to upload uniform");
+  assertGL("Failed to upload uniform");
   if (mesh_.vao.name != 0) {
     mesh_.vao.bind();
-    {
-      auto const err = glGetError();
-      assert(err == GL_NO_ERROR && "Failed to bind VAO");
-    }
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
                    GL_UNSIGNED_INT, nullptr);
-    {
-      auto const err = glGetError();
-      assert(err == GL_NO_ERROR && "glDrawElements failed");
-    }
+    assertGL("glDrawElements failed");
   }
   glBindVertexArray(0);
 
-  // TODO: Draw grid if enabled
-  std::cout << "grid shader: " << gridProgram_.program_ << std::endl;
-  gridProgram_.use();
-  assert(glGetError() == GL_NO_ERROR && "OpenGL Error stack not clear");
-  glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
-  {
-    auto const err = glGetError();
-    assert(err == GL_NO_ERROR && "Failed to upload scale uniform");
-  }
-  glUniformMatrix4fv(
-      glGetUniformLocation(gridProgram_.program_, "viewProjectionMatrix"), 1,
-      false, MVP.data());
-  assert(glGetError() == GL_NO_ERROR && "Failed to upload MVP matrix");
-  glDrawArrays(GL_POINTS, 0, 1);
-  {
-    auto const err = glGetError();
-    assert(err == GL_NO_ERROR && "glDrawArrays failed");
-  }
+  //  // TODO: Draw grid if enabled
+  //  std::cout << "grid shader: " << gridProgram_.program_ << std::endl;
+  //  gridProgram_.use();
+  //  assertGL("OpenGL Error stack not clear");
+  //  glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
+  //  assertGL("Failed to upload scale uniform");
+  //  glUniformMatrix4fv(
+  //      glGetUniformLocation(gridProgram_.program_, "viewProjectionMatrix"),
+  //      1,
+  //      false, MVP.data());
+  //  assertGL("Failed to upload MVP matrix");
+  //  glDrawArrays(GL_POINTS, 0, 1);
+  //  assertGL("glDrawArrays failed");
 
   // Render FBA color attachment to screen
   glDisable(GL_DEPTH_TEST);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   displayStageProgram_.use();
+  auto const loc = glGetUniformLocation(displayStageProgram_.program_, "tex");
+  glUniform1i(loc, 0);
+  assertGL("glUniform1i failed");
   glActiveTexture(GL_TEXTURE0 + 0);
   glBindTexture(GL_TEXTURE_2D, textures_.names[0]);
 
   // draw fullscreen quad using the geometry shader
-  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("Dirty openGL state");
+  //  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
 
   glfwSwapBuffers(glfw_.window);
   glfwWaitEvents();
+
+  std::cout << "One frame rendered!" << std::endl;
 }
 
 } // namespace MeshViewer
