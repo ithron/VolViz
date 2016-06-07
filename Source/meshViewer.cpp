@@ -63,8 +63,7 @@ void Viewer::setMesh(Eigen::MatrixBase<VertBase> const &V,
 }
 
 GLFW::GLFW() {
-  if (!glfwInit())
-    throw(std::runtime_error("Failed to init GLFW"));
+  if (!glfwInit()) throw(std::runtime_error("Failed to init GLFW"));
 
   glfwWindowHint(GLFW_VISIBLE, false);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -102,8 +101,7 @@ GLFW::GLFW() {
     auto ptr = glfwGetWindowUserPointer(win);
     assert(ptr != nullptr && "Invalid user pointer");
     auto *const self = static_cast<GLFW *>(ptr);
-    if (self->scrollWheelInputHandler)
-      self->scrollWheelInputHandler(x, y);
+    if (self->scrollWheelInputHandler) self->scrollWheelInputHandler(x, y);
   });
 
   // setup mouse button callback
@@ -111,8 +109,7 @@ GLFW::GLFW() {
     auto ptr = glfwGetWindowUserPointer(win);
     assert(ptr != nullptr && "Invalid user pointer");
     auto *const self = static_cast<GLFW *>(ptr);
-    if (self->mouseButtonCallback)
-      self->mouseButtonCallback(b, a, m);
+    if (self->mouseButtonCallback) self->mouseButtonCallback(b, a, m);
   });
 
   // setup mouse move callback
@@ -120,8 +117,7 @@ GLFW::GLFW() {
     auto ptr = glfwGetWindowUserPointer(win);
     assert(ptr != nullptr && "Invalid user pointer");
     auto *const self = static_cast<GLFW *>(ptr);
-    if (self->mouseMoveCallback)
-      self->mouseMoveCallback(x, y);
+    if (self->mouseMoveCallback) self->mouseMoveCallback(x, y);
   });
 
   makeCurrent();
@@ -131,8 +127,7 @@ GLFW::GLFW() {
 GLFW::GLFW(GLFW &&rhs) : window(rhs.window) { rhs.window = nullptr; }
 
 GLFW::~GLFW() {
-  if (window)
-    glfwDestroyWindow(window);
+  if (window) glfwDestroyWindow(window);
   glfwTerminate();
 }
 
@@ -149,16 +144,14 @@ void GLFW::makeCurrent() noexcept { glfwMakeContextCurrent(window); }
 std::size_t GLFW::width() const noexcept {
   int w, h;
   glfwGetWindowSize(window, &w, &h);
-  if (!isHidden())
-    return static_cast<std::size_t>(w);
+  if (!isHidden()) return static_cast<std::size_t>(w);
   return Viewer::kDefaultWidth;
 }
 
 std::size_t GLFW::height() const noexcept {
   int w, h;
   glfwGetWindowSize(window, &w, &h);
-  if (!isHidden())
-    return static_cast<std::size_t>(h);
+  if (!isHidden()) return static_cast<std::size_t>(h);
   return Viewer::kDefaultHeight;
 }
 
@@ -251,7 +244,7 @@ ShaderProgram &ShaderProgram::link() {
   if (!isLinked) {
     GLint maxLength = 0;
     glGetProgramiv(program_, GL_INFO_LOG_LENGTH, &maxLength);
-    std::vector<GLchar> infoLog(maxLength);
+    std::vector<GLchar> infoLog(static_cast<std::size_t>(maxLength));
     glGetProgramInfoLog(program_, maxLength, &maxLength, infoLog.data());
 
     throw std::runtime_error("Failed to link program: " +
@@ -270,8 +263,7 @@ void ShaderProgram::use() const {
 }
 
 void ShaderProgram::detachShaders() {
-  for (auto s : attachedShaders_)
-    glDetachShader(program_, s);
+  for (auto s : attachedShaders_) glDetachShader(program_, s);
   attachedShaders_.clear();
 }
 
@@ -337,9 +329,8 @@ MeshViewerImpl::MeshViewerImpl() {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
-    handleKeyInput(k, s, a, m);
-  };
+  glfw_.keyInputHandler =
+      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     setupFBOs();
@@ -354,14 +345,14 @@ MeshViewerImpl::MeshViewerImpl() {
 
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
     switch (moveState_) {
-    case MoveState::None:
-      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-        moveState_ = MoveState::Rotating;
-      break;
-    case MoveState::Rotating:
-      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-        moveState_ = MoveState::None;
-      break;
+      case MoveState::None:
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+          moveState_ = MoveState::Rotating;
+        break;
+      case MoveState::Rotating:
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+          moveState_ = MoveState::None;
+        break;
     }
   };
 
@@ -380,21 +371,21 @@ MeshViewerImpl::MeshViewerImpl() {
                                    sqrt(1.0 - lastMousePos_.squaredNorm()));
 
     switch (moveState_) {
-    case MoveState::Rotating: {
-      auto const angle =
-          acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) * 2;
-      Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
-      if (angle > 1e-3) {
-        cameraOrientation_ *=
-            Eigen::Quaternionf(
-                Eigen::AngleAxisf(static_cast<float>(angle), axis))
-                .inverse();
-        cameraOrientation_.normalize();
+      case MoveState::Rotating: {
+        auto const angle =
+            acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) *
+            2;
+        Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
+        if (angle > 1e-3) {
+          cameraOrientation_ *=
+              Eigen::Quaternionf(
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
+          cameraOrientation_.normalize();
+        }
+        break;
       }
-      break;
-    }
-    case MoveState::None:
-      break;
+      case MoveState::None:
+        break;
     }
 
     lastMousePos_ = pos;
@@ -406,24 +397,24 @@ void MeshViewerImpl::setupShaders() {
       ShaderProgram()
           .attachShader(Shader(GL_VERTEX_SHADER, Shaders::nullVertShaderSrc))
           .attachShader(
-              Shader(GL_GEOMETRY_SHADER, Shaders::fullscreenQuadGeomShaderSrc))
+               Shader(GL_GEOMETRY_SHADER, Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(
-              Shader(GL_FRAGMENT_SHADER, Shaders::simpleTextureFragShaderSrc))
+               Shader(GL_FRAGMENT_SHADER, Shaders::simpleTextureFragShaderSrc))
           .link());
   auto geomProg = std::move(
       ShaderProgram()
           .attachShader(Shader(GL_VERTEX_SHADER, Shaders::simpleVertShaderSrc))
           .attachShader(
-              Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
+               Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       ShaderProgram()
           .attachShader(Shader(GL_VERTEX_SHADER, Shaders::nullVertShaderSrc))
           .attachShader(
-              Shader(GL_GEOMETRY_SHADER, Shaders::gridGeometryShaderSrc))
+               Shader(GL_GEOMETRY_SHADER, Shaders::gridGeometryShaderSrc))
           .attachShader(
-              Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
+               Shader(GL_FRAGMENT_SHADER, Shaders::passThroughFragShaderSrc))
           .link());
 
   geometryStageProgram_ = std::move(geomProg);
@@ -555,12 +546,12 @@ MeshViewerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
 void MeshViewerImpl::handleKeyInput(int key, int, int action, int) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
-    case GLFW_KEY_DOWN:
-      cameraPosition_(2) += 0.1;
-      break;
-    case GLFW_KEY_UP:
-      cameraPosition_(2) -= 0.1;
-      break;
+      case GLFW_KEY_DOWN:
+        cameraPosition_(2) += 0.1;
+        break;
+      case GLFW_KEY_UP:
+        cameraPosition_(2) -= 0.1;
+        break;
     }
   }
 }
