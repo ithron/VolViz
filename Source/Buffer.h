@@ -4,6 +4,8 @@
 #include "Error.h"
 #include "GL.h"
 
+#include <cstddef>
+
 namespace VolViz {
 namespace GL {
 

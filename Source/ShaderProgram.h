@@ -45,8 +45,9 @@ private:
 class ShaderProgram {
 public:
   inline ShaderProgram() noexcept {
+    assertGL("OpenGL error stack not clean");
     program_ = glCreateProgram();
-    assertGL("Shader program creationf ailed");
+    assert(program_ != 0 && "Shader program creation failed");
   }
 
   inline ~ShaderProgram() {
@@ -78,7 +79,8 @@ public:
 
   template <class Container>
   inline ShaderProgram &attachShaders(Container &&c) noexcept {
-    for (auto const &s : std::forward<Container>(c)) attachShader(s);
+    for (auto const &s : std::forward<Container>(c))
+      attachShader(s);
   }
 
   ShaderProgram &link();
@@ -89,13 +91,14 @@ public:
     assertGL("Failed to use program");
   }
 
-// private:
+  // private:
   inline void detachShaders() noexcept {
-    for (auto s : attachedShaders_) glDetachShader(program_, s);
+    for (auto s : attachedShaders_)
+      glDetachShader(program_, s);
     attachedShaders_.clear();
   }
 
-  GLuint program_;
+  GLuint program_ = 0;
   std::vector<GLuint> attachedShaders_;
 };
 #pragma clang diagnostic pop

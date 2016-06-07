@@ -3,6 +3,8 @@
 #include "GL.h"
 #include "Visualizer.h"
 
+#include <iostream>
+
 namespace VolViz {
 
 ////////////////////////////////
@@ -12,6 +14,8 @@ namespace VolViz {
 namespace Private_ {
 
 VisualizerImpl::VisualizerImpl() {
+
+  glfw_.makeCurrent();
 
   // check OpenGL version
   GLint major, minor;
@@ -25,8 +29,9 @@ VisualizerImpl::VisualizerImpl() {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     setupFBOs();
@@ -40,14 +45,14 @@ VisualizerImpl::VisualizerImpl() {
 
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
     switch (moveState_) {
-      case MoveState::None:
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-          moveState_ = MoveState::Rotating;
-        break;
-      case MoveState::Rotating:
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-          moveState_ = MoveState::None;
-        break;
+    case MoveState::None:
+      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+        moveState_ = MoveState::Rotating;
+      break;
+    case MoveState::Rotating:
+      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+        moveState_ = MoveState::None;
+      break;
     }
   };
 
@@ -66,21 +71,21 @@ VisualizerImpl::VisualizerImpl() {
                                    sqrt(1.0 - lastMousePos_.squaredNorm()));
 
     switch (moveState_) {
-      case MoveState::Rotating: {
-        auto const angle =
-            acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) *
-            2;
-        Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
-        if (angle > 1e-3) {
-          cameraOrientation_ *=
-              Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
-          cameraOrientation_.normalize();
-        }
-        break;
+    case MoveState::Rotating: {
+      auto const angle =
+          acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) * 2;
+      Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
+      if (angle > 1e-3) {
+        cameraOrientation_ *=
+            Eigen::Quaternionf(
+                Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                .inverse();
+        cameraOrientation_.normalize();
       }
-      case MoveState::None:
-        break;
+      break;
+    }
+    case MoveState::None:
+      break;
     }
 
     lastMousePos_ = pos;
@@ -91,7 +96,7 @@ void VisualizerImpl::setupShaders() {
   auto dispProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -100,7 +105,7 @@ void VisualizerImpl::setupShaders() {
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
@@ -108,7 +113,7 @@ void VisualizerImpl::setupShaders() {
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -238,12 +243,12 @@ VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
 void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
-      case GLFW_KEY_DOWN:
-        cameraPosition_(2) += 0.1;
-        break;
-      case GLFW_KEY_UP:
-        cameraPosition_(2) -= 0.1;
-        break;
+    case GLFW_KEY_DOWN:
+      cameraPosition_(2) += 0.1;
+      break;
+    case GLFW_KEY_UP:
+      cameraPosition_(2) -= 0.1;
+      break;
     }
   }
 }
@@ -255,7 +260,7 @@ void VisualizerImpl::renderOneFrame() {
   auto const pMatrix =
       // projectionMatrix(glfw_.width(), glfw_.height(), Viewer::kDefaultFOV);
       projectionMatrix(glfw_.width(), glfw_.height(), 90);
-  assert(glfw_.window && "invalid window handle");
+
   Eigen::Transform<float, 3, Eigen::Affine> camTrans =
       cameraOrientation_ * Eigen::Translation3f(cameraPosition_) *
       Eigen::AngleAxisf(0.f, Eigen::Vector3f::UnitZ());
@@ -272,7 +277,6 @@ void VisualizerImpl::renderOneFrame() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
 
-  assert(glfwGetCurrentContext() == glfw_.window && "Context not current");
   // Render geometry to FBO
   geometryStageProgram_.use();
   assertGL("OpenGL Error stack not clean");
