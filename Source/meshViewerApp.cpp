@@ -36,7 +36,8 @@ int main(int argc, char **argv) {
   } else if (ext == "obj")
     igl::readOBJ(filename, V, T);
   else {
-    std::cerr << std::endl << "Unrecognized mesh format: " << ext << std::endl;
+    std::cerr << std::endl
+              << "Unrecognized mesh format: " << ext << std::endl;
     return EXIT_FAILURE;
   }
   std::cout << "done." << std::endl;
@@ -51,14 +52,21 @@ int main(int argc, char **argv) {
 
   auto viewer = Viewer{};
 
-  //  viewer.setMesh((V * 100).eval(), T);
-  viewer.setMesh(V, T);
+  // viewer.setMesh(V, T);
+
+  // DEBUG
+  {
+    auto verts = Eigen::MatrixXd(3, 3);
+    verts << 0, 1, 0, -1, -1, 0, 1, -1, 0;
+    auto indices = Eigen::MatrixXi(1, 3);
+    indices << 0, 1, 2;
+
+    viewer.setMesh(verts, indices);
+  }
 
   viewer.start();
 
-  while (viewer) {
-    viewer.renderOneFrame();
-  }
+  while (viewer) { viewer.renderOneFrame(); }
 
   return EXIT_SUCCESS;
 }

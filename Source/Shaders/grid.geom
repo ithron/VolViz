@@ -1,10 +1,10 @@
 R"(
 #version 410 core
 
-const uint size = 63;
+const uint size = 31;
 
 layout(points) in;
-layout(line_strip, max_vertices = 252 /* 4 * size */) out;
+layout(line_strip, max_vertices = 124 /* 4 * size */) out;
 
 layout(location = 0) out vec4 color;
 
@@ -20,7 +20,6 @@ void main() {
   float minCoord = -scale * halfSize;
   float maxCoord = scale * halfSize;
 
-  /* for (int i = -int(size/2); i <= int(size/2); ++i) { */
   for (int i = -halfSizei; i <= halfSizei; ++i) {
     // Horizontal grid line
     p = vec4(minCoord, scale * float(i), 0.0, 1.0);

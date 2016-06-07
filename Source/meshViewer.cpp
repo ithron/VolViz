@@ -67,7 +67,10 @@ GLFW::GLFW() {
 
   glfwWindowHint(GLFW_VISIBLE, false);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+#if defined(__APPLE__)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+#endif
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   if (!(window = glfwCreateWindow(Viewer::kDefaultWidth, Viewer::kDefaultHeight,
@@ -185,10 +188,7 @@ void Shader::compile() const {
   glGetShaderiv(shader_, GL_COMPILE_STATUS, &success);
   assertGL("Failed to get shader compile status");
 
-  if (success) {
-    std::cout << "Sucessfully compiled shader " << shader_ << std::endl;
-    return;
-  }
+  if (success) { return; }
 
   GLint logSize = 0;
   glGetShaderiv(shader_, GL_INFO_LOG_LENGTH, &logSize);
@@ -251,7 +251,6 @@ ShaderProgram &ShaderProgram::link() {
                              std::string(infoLog.data()));
   }
 
-  std::cout << "Sucessfully linked program " << program_ << std::endl;
   detachShaders();
   return *this;
 }
@@ -522,9 +521,8 @@ void MeshViewerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
   // setup VAO
   auto vao = VertexArray();
   vao.enableVertexAttribArray(0);
-  //  vao.enableVertexAttribArray(1);
   vertBuff.bind(GL_ARRAY_BUFFER);
-  glVertexAttribPointer(0, 4, GL_FLOAT, false, 0, nullptr);
+  glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * sizeof(float), nullptr);
   idxBuff.bind(GL_ELEMENT_ARRAY_BUFFER);
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -571,7 +569,7 @@ void MeshViewerImpl::renderOneFrame() {
 
   assertGL("OpenGL Error stack not clear");
   glBindFramebuffer(GL_FRAMEBUFFER, fbo_.name);
-  //    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  // glBindFramebuffer(GL_FRAMEBUFFER, 0);
   assertGL("Failed to bind framebuffer");
   glClearColor(0.f, 0.4f, 0.4f, 1.f);
   glClearDepth(1.0);
@@ -586,11 +584,11 @@ void MeshViewerImpl::renderOneFrame() {
   assertGL("OpenGL Error stack not clean");
 
   glUniformMatrix4fv(
-      glGetUniformLocation(gridProgram_.program_, "modelViewProjectionMatrix"),
+      glGetUniformLocation(gridProgram_.program_,
+      "modelViewProjectionMatrix"),
       1, false, MVP.data());
   assertGL("Failed to upload uniform");
   if (mesh_.vao.name != 0) {
-    std::cout << "Render mesh" << std::endl;
     mesh_.vao.bind();
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
                    GL_UNSIGNED_INT, nullptr);
@@ -599,7 +597,6 @@ void MeshViewerImpl::renderOneFrame() {
   glBindVertexArray(0);
 
   // TODO: Draw grid if enabled
-  std::cout << "grid shader: " << gridProgram_.program_ << std::endl;
   gridProgram_.use();
   assertGL("OpenGL Error stack not clear");
   glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
@@ -617,7 +614,8 @@ void MeshViewerImpl::renderOneFrame() {
   glDisable(GL_DEPTH_TEST);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   displayStageProgram_.use();
-  auto const loc = glGetUniformLocation(displayStageProgram_.program_, "tex");
+  auto const loc = glGetUniformLocation(displayStageProgram_.program_,
+  "tex");
   glUniform1i(loc, 0);
   assertGL("glUniform1i failed");
   glActiveTexture(GL_TEXTURE0 + 0);
