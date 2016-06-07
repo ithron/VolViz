@@ -31,6 +31,7 @@ endif()
 configure_file(
   "${PROJECT_SOURCE_DIR}/Source/config.h.in" "${PROJECT_BINARY_DIR}/config.h"
 )
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(Source VolViz)
 

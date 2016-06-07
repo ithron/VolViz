@@ -49,7 +49,7 @@ set(DEFAULT_COMPILE_FEATURES
 )
 
 set(PUBLIC_HEADERS
-  MeshViewer.h
+  Visualizer.h
 )
 
 
@@ -88,45 +88,48 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   )
 endif()
 
-add_library(MeshViewer SHARED
-  meshViewer.cpp
+add_library(VolViz SHARED
+  GLFW.cpp
+  ShaderProgram.cpp
+  Shaders.cpp
+  Visualizer.cpp
 )
-target_link_libraries(MeshViewer
+target_link_libraries(VolViz
   PUBLIC
     Eigen
     glfw
     ${OPENGL_LIBRARIES}
     ${MKL_TARGET}
 )
-target_include_directories(MeshViewer PUBLIC
+target_include_directories(VolViz PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
   $<INSTALL_INTERFACE:include/VolViz>
 )
-target_compile_features(MeshViewer PUBLIC ${DEFAULT_COMPILE_FEATURES})
-target_compile_options(MeshViewer PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+target_compile_features(VolViz PUBLIC ${DEFAULT_COMPILE_FEATURES})
+target_compile_options(VolViz PRIVATE ${DEFAULT_COMPILER_OPTIONS})
 
-set(INSTALL_TARGETS MeshViewer)
+set(INSTALL_TARGETS VolViz)
 
-add_library(VolViz::MeshViewer ALIAS MeshViewer)
+add_library(VolViz::VolViz ALIAS VolViz)
 
 if (BUILD_APP)
-  add_executable(MeshViewerApp meshViewerApp.cpp)
-  target_link_libraries(MeshViewerApp PRIVATE
-    VolViz::MeshViewer
+  add_executable(VolVisualizer VolVisualizer.cpp)
+  target_link_libraries(VolVisualizer PRIVATE
+    VolViz::VolViz
     IGL
   )
-  target_compile_features(MeshViewerApp PRIVATE ${DEFAULT_COMPILE_FEATURES})
-  target_compile_options(MeshViewerApp PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+  target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})
+  target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS})
 
-  set(INSTALL_TARGETS ${INSTALL_TARGETS} MeshViewerApp)
+  set(INSTALL_TARGETS ${INSTALL_TARGETS} VolVisualizer)
 endif()
 
 if (BUILD_TESTING)
-  # add test targets here
+#add test targets here
 endif()
 
 if (BUILD_TESTING)
-  # find_package(GTest REQUIRED)
+#find_package(GTest REQUIRED)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Dependencies/googletest gtest)
 endif()
 
@@ -144,14 +147,14 @@ install(
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include/VolViz
 )
-# install(EXPORT VolVizExport NAMESPACE VolViz::
-#   DESTINATION lib/cmake/VolViz
-# )
+#install(EXPORT VolVizExport NAMESPACE VolViz::
+#DESTINATION lib / cmake / VolViz
+#)
 install(FILES ${PUBLIC_HEADERS}
   DESTINATION include/VolViz
 )
 
-# export(EXPORT VolVizExport NAMESPACE VolViz::)
+#export(EXPORT VolVizExport NAMESPACE VolViz::)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(VolVizConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
@@ -181,4 +184,3 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
   DESTINATION lib/cmake/VolViz
 )
-

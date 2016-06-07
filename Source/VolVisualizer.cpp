@@ -1,4 +1,4 @@
-#include "MeshViewer.hh"
+#include "Visualizer.h"
 
 #include <Eigen/Core>
 #include <igl/readOBJ.h>
@@ -10,7 +10,7 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-  using MeshViewer::Viewer;
+  using VolViz::Visualizer;
   using Eigen::Vector3d;
   using Vertices = Eigen::MatrixXd;
   using Triangles = Eigen::MatrixXi;
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
   std::cout << "bbox: " << min.transpose() << " - " << max.transpose()
             << std::endl;
 
-  auto viewer = Viewer{};
+  auto viewer = Visualizer{};
 
   // viewer.setMesh(V, T);
 
