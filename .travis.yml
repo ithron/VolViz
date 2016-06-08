@@ -27,7 +27,7 @@ before_install:
   - tar xf $HOME/clang+llvm.tar.xz -C $HOME/clang-3.6.0 --strip-components 1
 
 install:
-  - if [ "$CXX" = "clang++" ]; then export CXX="$HOME/clang-3.6.0/bin/clang++" CC="clang-3.6"; fi
+  - if [ "$CXX" = "clang++" ]; then export CXX="$HOME/clang-3.6.0/bin/clang++" CC="$HOME/clang-3.6/bin/clang"; fi
   - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
 
 env:
