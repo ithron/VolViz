@@ -89,7 +89,8 @@ void ShaderProgram::queryUniforms() {
                       std::forward_as_tuple(loc));
   }
 
-  assert(uniforms_.size() == count && "Postcondition violation");
+  assert(uniforms_.size() == static_cast<std::size_t>(count) &&
+         "Postcondition violation");
 }
 } // namespace GL
 } // namespace VolViz
