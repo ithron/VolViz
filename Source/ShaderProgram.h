@@ -4,7 +4,10 @@
 #include "Error.h"
 #include "GL.h"
 
+#include <Eigen/Core>
+
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace VolViz {
@@ -40,6 +43,46 @@ private:
   GLuint shader_;
 };
 
+class UniformProxy {
+public:
+  inline UniformProxy(GLint loccation) noexcept : location_(loccation) {}
+
+  UniformProxy(UniformProxy const &) = delete;
+  UniformProxy(UniformProxy &&) = default;
+
+  UniformProxy const &operator=(float f) const noexcept {
+    assertGL("Precondition violation");
+    glUniform1f(location_, f);
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &operator=(GLint i) const noexcept {
+    assertGL("Precondition violation");
+    glUniform1i(location_, i);
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &operator=(Eigen::Matrix4f const &m) const noexcept {
+    assertGL("Precondition violation");
+    glUniformMatrix4fv(location_, 1, false, m.data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &
+  operator=(Eigen::Transpose<Eigen::Matrix4f> const &m) const noexcept {
+    assertGL("Precondition violation");
+    glUniformMatrix4fv(location_, 1, true, m.nestedExpression().data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+private:
+  GLint const location_;
+};
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpadded"
 /// RAII wrapper for OpenGL shader programs objects
@@ -62,12 +105,14 @@ public:
     using std::swap;
     swap(program_, rhs.program_);
     swap(attachedShaders_, rhs.attachedShaders_);
+    swap(uniforms_, rhs.uniforms_);
   }
 
   inline ShaderProgram &operator=(ShaderProgram &&rhs) noexcept {
     using std::swap;
     swap(program_, rhs.program_);
     swap(attachedShaders_, rhs.attachedShaders_);
+    swap(uniforms_, rhs.uniforms_);
     return *this;
   }
 
@@ -80,8 +125,7 @@ public:
 
   template <class Container>
   inline ShaderProgram &attachShaders(Container &&c) noexcept {
-    for (auto const &s : std::forward<Container>(c))
-      attachShader(s);
+    for (auto const &s : std::forward<Container>(c)) attachShader(s);
   }
 
   ShaderProgram &link();
@@ -92,15 +136,28 @@ public:
     assertGL("Failed to use program");
   }
 
+  inline UniformProxy const &operator[](std::string const &name) const {
+    auto search = uniforms_.find(name);
+    if (search != uniforms_.end()) { return search->second; }
+
+    throw std::runtime_error(name +
+                             " is not an active uniform of shader program " +
+                             std::to_string(program_));
+  }
+
   // private:
   inline void detachShaders() noexcept {
-    for (auto s : attachedShaders_)
-      glDetachShader(program_, s);
+    for (auto s : attachedShaders_) glDetachShader(program_, s);
     attachedShaders_.clear();
   }
 
-  GLuint program_ = 0;
+  void queryUniforms();
+
+  using UniformTable = std::unordered_map<std::string, UniformProxy>;
+
   std::vector<GLuint> attachedShaders_;
+  UniformTable uniforms_;
+  GLuint program_ = 0;
 };
 #pragma clang diagnostic pop
 

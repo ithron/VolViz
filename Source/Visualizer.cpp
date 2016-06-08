@@ -29,9 +29,8 @@ VisualizerImpl::VisualizerImpl() {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
-    handleKeyInput(k, s, a, m);
-  };
+  glfw_.keyInputHandler =
+      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     setupFBOs();
@@ -45,14 +44,14 @@ VisualizerImpl::VisualizerImpl() {
 
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
     switch (moveState_) {
-    case MoveState::None:
-      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-        moveState_ = MoveState::Rotating;
-      break;
-    case MoveState::Rotating:
-      if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-        moveState_ = MoveState::None;
-      break;
+      case MoveState::None:
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+          moveState_ = MoveState::Rotating;
+        break;
+      case MoveState::Rotating:
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+          moveState_ = MoveState::None;
+        break;
     }
   };
 
@@ -71,21 +70,21 @@ VisualizerImpl::VisualizerImpl() {
                                    sqrt(1.0 - lastMousePos_.squaredNorm()));
 
     switch (moveState_) {
-    case MoveState::Rotating: {
-      auto const angle =
-          acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) * 2;
-      Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
-      if (angle > 1e-3) {
-        cameraOrientation_ *=
-            Eigen::Quaternionf(
-                Eigen::AngleAxisf(static_cast<float>(angle), axis))
-                .inverse();
-        cameraOrientation_.normalize();
+      case MoveState::Rotating: {
+        auto const angle =
+            acos(min(1.0, static_cast<double>(pos3.transpose() * lastPos3))) *
+            2;
+        Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
+        if (angle > 1e-3) {
+          cameraOrientation_ *=
+              Eigen::Quaternionf(
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
+          cameraOrientation_.normalize();
+        }
+        break;
       }
-      break;
-    }
-    case MoveState::None:
-      break;
+      case MoveState::None:
+        break;
     }
 
     lastMousePos_ = pos;
@@ -96,7 +95,7 @@ void VisualizerImpl::setupShaders() {
   auto dispProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -105,7 +104,7 @@ void VisualizerImpl::setupShaders() {
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
@@ -113,7 +112,7 @@ void VisualizerImpl::setupShaders() {
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -243,12 +242,12 @@ VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
 void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
-    case GLFW_KEY_DOWN:
-      cameraPosition_(2) += 0.1;
-      break;
-    case GLFW_KEY_UP:
-      cameraPosition_(2) -= 0.1;
-      break;
+      case GLFW_KEY_DOWN:
+        cameraPosition_(2) += 0.1;
+        break;
+      case GLFW_KEY_UP:
+        cameraPosition_(2) -= 0.1;
+        break;
     }
   }
 }
@@ -268,7 +267,6 @@ void VisualizerImpl::renderOneFrame() {
 
   assertGL("OpenGL Error stack not clear");
   glBindFramebuffer(GL_FRAMEBUFFER, fbo_.name);
-  // glBindFramebuffer(GL_FRAMEBUFFER, 0);
   assertGL("Failed to bind framebuffer");
   glClearColor(0.f, 0.4f, 0.4f, 1.f);
   glClearDepth(1.0);
@@ -281,10 +279,7 @@ void VisualizerImpl::renderOneFrame() {
   geometryStageProgram_.use();
   assertGL("OpenGL Error stack not clean");
 
-  glUniformMatrix4fv(
-      glGetUniformLocation(gridProgram_.program_, "modelViewProjectionMatrix"),
-      1, false, MVP.data());
-  assertGL("Failed to upload uniform");
+  geometryStageProgram_["modelViewProjectionMatrix"] = MVP;
   if (mesh_.vao.name != 0) {
     mesh_.vao.bind();
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
@@ -295,13 +290,9 @@ void VisualizerImpl::renderOneFrame() {
 
   // TODO: Draw grid if enabled
   gridProgram_.use();
-  assertGL("OpenGL Error stack not clear");
-  glUniform1f(glGetUniformLocation(gridProgram_.program_, "scale"), 2.f);
-  assertGL("Failed to upload scale uniform");
-  glUniformMatrix4fv(
-      glGetUniformLocation(gridProgram_.program_, "viewProjectionMatrix"), 1,
-      false, MVP.data());
-  assertGL("Failed to upload MVP matrix");
+  gridProgram_["scale"] = 2.f;
+  gridProgram_["viewProjectionMatrix"] = MVP;
+
   singleVertexData_.vao.bind();
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
@@ -311,15 +302,12 @@ void VisualizerImpl::renderOneFrame() {
   glDisable(GL_DEPTH_TEST);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   displayStageProgram_.use();
-  auto const loc = glGetUniformLocation(displayStageProgram_.program_, "tex");
-  glUniform1i(loc, 0);
-  assertGL("glUniform1i failed");
+  displayStageProgram_["tex"] = 0;
   glActiveTexture(GL_TEXTURE0 + 0);
   glBindTexture(GL_TEXTURE_2D, textures_.names[0]);
 
   // draw fullscreen quad using the geometry shader
   singleVertexData_.vao.bind();
-  assertGL("Dirty openGL state");
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
   glBindVertexArray(0);

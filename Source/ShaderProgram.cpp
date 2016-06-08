@@ -1,9 +1,12 @@
 #include "ShaderProgram.h"
 
+#include <array>
 #include <iostream>
 
 namespace VolViz {
 namespace GL {
+
+#pragma mark Shader
 
 Shader::Shader(GLenum type, std::string const &source) {
   shader_ = glCreateShader(type);
@@ -37,6 +40,8 @@ void Shader::compile() const {
   throw std::runtime_error("Shader compilation failed");
 }
 
+#pragma mark -
+#pragma mark ShaderProgram
 ShaderProgram &ShaderProgram::link() {
   glLinkProgram(program_);
   assertGL("Failed to link program");
@@ -56,8 +61,33 @@ ShaderProgram &ShaderProgram::link() {
   }
 
   detachShaders();
+
+  queryUniforms();
+
   return *this;
 }
 
+void ShaderProgram::queryUniforms() {
+  assert(uniforms_.empty() && "Precondition violation");
+  // get uniform count
+  GLint count = 0;
+  glGetProgramiv(program_, GL_ACTIVE_UNIFORMS, &count);
+  std::array<char, 4096> nameBuffer;
+  GLsizei length = 0;
+
+  uniforms_.reserve(static_cast<std::size_t>(count));
+
+  for (auto i = 0; i < count; ++i) {
+    glGetActiveUniformName(program_, static_cast<GLuint>(i),
+                           static_cast<GLsizei>(nameBuffer.size()), &length,
+                           nameBuffer.data());
+
+    uniforms_.emplace(std::piecewise_construct,
+                      std::forward_as_tuple(nameBuffer.data()),
+                      std::forward_as_tuple(static_cast<GLint>(i)));
+  }
+
+  assert(uniforms_.size() == count && "Postcondition violation");
+}
 } // namespace GL
 } // namespace VolViz
