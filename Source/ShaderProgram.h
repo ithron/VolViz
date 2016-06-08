@@ -143,6 +143,9 @@ public:
     throw std::runtime_error(name +
                              " is not an active uniform of shader program " +
                              std::to_string(program_));
+    // Dummy return statement because GCC is complaining, this code is never
+    // reached!
+    return uniforms_.begin()->second;
   }
 
   // private:
