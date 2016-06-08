@@ -59,7 +59,7 @@ private:
 
   Eigen::Vector2d lastMousePos_ = Eigen::Vector2d::Zero();
 
-  Eigen::Vector3f cameraPosition_ = Eigen::Vector3f::UnitZ();
+  Eigen::Vector3f cameraPosition_ = Eigen::Vector3f::Zero();
   Eigen::Quaternionf cameraOrientation_ = Eigen::Quaternionf::Identity();
 };
 
