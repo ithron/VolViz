@@ -126,6 +126,7 @@ public:
   template <class Container>
   inline ShaderProgram &attachShaders(Container &&c) noexcept {
     for (auto const &s : std::forward<Container>(c)) attachShader(s);
+    return *this;
   }
 
   ShaderProgram &link();
