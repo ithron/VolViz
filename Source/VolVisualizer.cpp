@@ -52,17 +52,7 @@ int main(int argc, char **argv) {
 
   auto viewer = Visualizer{};
 
-  // viewer.setMesh(V, T);
-
-  // DEBUG
-  {
-    auto verts = Eigen::MatrixXd(3, 3);
-    verts << 0, 1, 0, -1, -1, 0, 1, -1, 0;
-    auto indices = Eigen::MatrixXi(1, 3);
-    indices << 0, 1, 2;
-
-    viewer.setMesh(verts, indices);
-  }
+  viewer.setMesh(V, T);
 
   viewer.start();
 
