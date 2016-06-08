@@ -4,6 +4,7 @@
 #include "Error.h"
 #include "GL.h"
 
+#include <string>
 #include <vector>
 
 namespace VolViz {
