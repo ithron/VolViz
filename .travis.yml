@@ -15,7 +15,8 @@ addons:
       - g++-5
       - cmake
       - cmake-data
-      - libglu-dev
+      - xorg-dev
+      - libglu1-mesa-dev
       - mesa-common-dev
 
 os:
