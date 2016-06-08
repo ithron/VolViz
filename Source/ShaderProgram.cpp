@@ -25,7 +25,7 @@ void Shader::compile() const {
   glGetShaderiv(shader_, GL_COMPILE_STATUS, &success);
   assertGL("Failed to get shader compile status");
 
-  if (success) { return; }
+  if (success) return;
 
   GLint logSize = 0;
   glGetShaderiv(shader_, GL_INFO_LOG_LENGTH, &logSize);
@@ -82,9 +82,11 @@ void ShaderProgram::queryUniforms() {
                            static_cast<GLsizei>(nameBuffer.size()), &length,
                            nameBuffer.data());
 
+    auto const loc = glGetUniformLocation(program_, nameBuffer.data());
+
     uniforms_.emplace(std::piecewise_construct,
                       std::forward_as_tuple(nameBuffer.data()),
-                      std::forward_as_tuple(static_cast<GLint>(i)));
+                      std::forward_as_tuple(loc));
   }
 
   assert(uniforms_.size() == count && "Postcondition violation");
