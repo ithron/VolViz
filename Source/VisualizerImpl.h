@@ -1,6 +1,7 @@
 #ifndef VolViz_VisualizerImpl_h
 #define VolViz_VisualizerImpl_h
 
+#include "Binding.h"
 #include "Buffer.h"
 #include "Framebuffer.h"
 #include "GLFW.h"
@@ -11,6 +12,8 @@
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
+
+#include <atomic>
 
 namespace VolViz {
 namespace Private_ {
@@ -29,12 +32,21 @@ public:
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
 
+  /// If true a grid is shown
+  std::atomic<bool> gridEnabled{true};
+
 private:
   void setupShaders();
   void setupFBOs();
-  Eigen::Matrix4f projectionMatrix(std::size_t width, std::size_t height,
-                                   float fov) const noexcept;
+  Eigen::Matrix4f projectionMatrix() const noexcept;
+  Eigen::Matrix4f viewMatrix() const noexcept;
   void handleKeyInput(int key, int scancode, int action, int mode);
+
+  void renderMeshes() const;
+
+  void renderGrid() const;
+
+  void renderFinalPass() const;
 
   GL::GLFW glfw_;
   GL::ShaderProgram geometryStageProgram_;
@@ -42,6 +54,7 @@ private:
   GL::ShaderProgram gridProgram_;
   GL::Textures<2> textures_{0};
   GL::Framebuffer fbo_{0};
+  float fov = 150.f;
 
   struct MeshData {
     GL::VertexArray vao{0};

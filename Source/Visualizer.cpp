@@ -29,9 +29,8 @@ VisualizerImpl::VisualizerImpl() {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
-    handleKeyInput(k, s, a, m);
-  };
+  glfw_.keyInputHandler =
+      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     setupFBOs();
@@ -79,8 +78,7 @@ VisualizerImpl::VisualizerImpl() {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
-                  .inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -97,7 +95,7 @@ void VisualizerImpl::setupShaders() {
   auto dispProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -106,7 +104,7 @@ void VisualizerImpl::setupShaders() {
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
@@ -114,7 +112,7 @@ void VisualizerImpl::setupShaders() {
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -175,9 +173,9 @@ void VisualizerImpl::setupFBOs() {
   // DEBUG END
 }
 
-Eigen::Matrix4f VisualizerImpl::projectionMatrix(std::size_t width,
-                                                 std::size_t height,
-                                                 float fov) const noexcept {
+Eigen::Matrix4f VisualizerImpl::projectionMatrix() const noexcept {
+  auto const width = glfw_.width();
+  auto const height = glfw_.height();
   auto constexpr pi = static_cast<float>(M_PI);
   auto const fovy = 1.f / std::tan(fov * pi / 360.f);
   auto const aspect = static_cast<float>(width) / static_cast<float>(height);
@@ -186,6 +184,13 @@ Eigen::Matrix4f VisualizerImpl::projectionMatrix(std::size_t width,
   P << fovy / aspect, 0, 0, 0, 0, fovy, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0;
 
   return P;
+}
+
+Eigen::Matrix4f VisualizerImpl::viewMatrix() const noexcept {
+  Eigen::Transform<float, 3, Eigen::Affine> camTrans =
+      cameraOrientation_ * Eigen::Translation3f(cameraPosition_);
+
+  return camTrans.matrix();
 }
 
 void VisualizerImpl::start() { glfw_.show(); }
@@ -223,12 +228,14 @@ void VisualizerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   // setup VAO
   auto vao = GL::VertexArray();
-  vao.enableVertexAttribArray(0);
-  vertBuff.bind(GL_ARRAY_BUFFER);
-  glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * sizeof(float), nullptr);
-  idxBuff.bind(GL_ELEMENT_ARRAY_BUFFER);
-  glBindVertexArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  {
+    auto vaoBinding = GL::binding(vao);
+    vao.enableVertexAttribArray(0);
+    auto vbBinding =
+        GL::binding(vertBuff, static_cast<GLenum>(GL_ARRAY_BUFFER));
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * sizeof(float), nullptr);
+    idxBuff.bind(GL_ELEMENT_ARRAY_BUFFER);
+  }
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
   mesh_.vertices = std::move(vertBuff);
@@ -258,15 +265,6 @@ void VisualizerImpl::renderOneFrame() {
 
   glfw_.makeCurrent();
 
-  auto const pMatrix =
-      // projectionMatrix(glfw_.width(), glfw_.height(), Viewer::kDefaultFOV);
-      projectionMatrix(glfw_.width(), glfw_.height(), 90);
-
-  Eigen::Transform<float, 3, Eigen::Affine> camTrans =
-      cameraOrientation_ * Eigen::Translation3f(cameraPosition_) *
-      Eigen::AngleAxisf(0.f, Eigen::Vector3f::UnitZ());
-  Eigen::Matrix4f const MVP = pMatrix * camTrans.inverse().matrix();
-
   assertGL("OpenGL Error stack not clear");
   glBindFramebuffer(GL_FRAMEBUFFER, fbo_.name);
   assertGL("Failed to bind framebuffer");
@@ -275,6 +273,23 @@ void VisualizerImpl::renderOneFrame() {
   glClearStencil(0);
   glEnable(GL_FRAMEBUFFER_SRGB);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+  renderMeshes();
+
+  if (gridEnabled) renderGrid();
+
+  renderFinalPass();
+
+  glfw_.swapBuffers();
+  glfw_.waitEvents();
+}
+
+void VisualizerImpl::renderMeshes() const {
+  auto const pMatrix = projectionMatrix();
+  auto const vMatrix = viewMatrix();
+
+  auto const MVP = (pMatrix * vMatrix).eval();
+
   glEnable(GL_DEPTH_TEST);
 
   // Render geometry to FBO
@@ -283,39 +298,39 @@ void VisualizerImpl::renderOneFrame() {
 
   geometryStageProgram_["modelViewProjectionMatrix"] = MVP;
   if (mesh_.vao.name != 0) {
-    mesh_.vao.bind();
+    auto boundVao = GL::binding(mesh_.vao);
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
                    GL_UNSIGNED_INT, nullptr);
     assertGL("glDrawElements failed");
   }
-  glBindVertexArray(0);
+}
 
-  // TODO: Draw grid if enabled
+void VisualizerImpl::renderGrid() const {
+  auto const pMatrix = projectionMatrix();
+  auto const vMatrix = viewMatrix();
+
   gridProgram_.use();
   gridProgram_["scale"] = 2.f;
-  gridProgram_["viewProjectionMatrix"] = MVP;
+  gridProgram_["viewProjectionMatrix"] = pMatrix * vMatrix;
 
-  singleVertexData_.vao.bind();
+  auto boundVao = binding(singleVertexData_.vao);
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
-  glBindVertexArray(0);
+}
 
+void VisualizerImpl::renderFinalPass() const {
   // Render FBA color attachment to screen
   glDisable(GL_DEPTH_TEST);
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   displayStageProgram_.use();
   displayStageProgram_["tex"] = 0;
   glActiveTexture(GL_TEXTURE0 + 0);
   glBindTexture(GL_TEXTURE_2D, textures_.names[0]);
 
   // draw fullscreen quad using the geometry shader
-  singleVertexData_.vao.bind();
+  auto boundVao = GL::binding(singleVertexData_.vao);
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
-  glBindVertexArray(0);
-
-  glfw_.swapBuffers();
-  glfw_.waitEvents();
 }
 
 } // namespace Private_

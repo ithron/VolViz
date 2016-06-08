@@ -30,7 +30,7 @@ struct VertexArray {
     return *this;
   }
 
-  inline void bind() noexcept {
+  inline void bind() const noexcept {
     glBindVertexArray(name);
     assertGL("Failed to bind vertex array");
   }
