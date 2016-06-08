@@ -24,11 +24,12 @@ os:
 
 env:
   global:
-    - CLANG_VERSION=3.6.0
+    - CLANG_VERSION=3.8.0
     - CLANG_ARCHIVE=$HOME/clang+llvm.tar.xz
     - CLANG_DIR=$HOME/clang-$CLANG_VERSION
     - CPPFLAGS="-I $CLANG_DIR/include/c++/v1"
-    - CXXFLAGS=-lc++
+    - CXXFLAGS=-lc++ -lc++abi -L$CLANG_DIR/lib
+    - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CLANG_DIR/lib
 
   matrix:
     - BUILD_TYPE=Debug
