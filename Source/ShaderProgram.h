@@ -138,7 +138,7 @@ public:
 
   inline UniformProxy const &operator[](std::string const &name) const {
     auto search = uniforms_.find(name);
-    if (search != uniforms_.end()) { return search->second; }
+    if (search != uniforms_.end()) return search->second;
 
     throw std::runtime_error(name +
                              " is not an active uniform of shader program " +

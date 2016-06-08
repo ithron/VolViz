@@ -29,8 +29,9 @@ VisualizerImpl::VisualizerImpl() {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     setupFBOs();
@@ -78,7 +79,8 @@ VisualizerImpl::VisualizerImpl() {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                  .inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -95,7 +97,7 @@ void VisualizerImpl::setupShaders() {
   auto dispProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -104,7 +106,7 @@ void VisualizerImpl::setupShaders() {
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::simpleVertShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
@@ -112,7 +114,7 @@ void VisualizerImpl::setupShaders() {
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
