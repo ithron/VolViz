@@ -189,7 +189,7 @@ Eigen::Matrix4f VisualizerImpl::projectionMatrix() const noexcept {
 
 Eigen::Matrix4f VisualizerImpl::viewMatrix() const noexcept {
   Eigen::Transform<float, 3, Eigen::Affine> camTrans =
-      cameraOrientation_ * Eigen::Translation3f(cameraPosition_);
+      (cameraOrientation_ * Eigen::Translation3f(cameraPosition_)).inverse();
 
   return camTrans.matrix();
 }
