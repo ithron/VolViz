@@ -9,6 +9,7 @@
 #include "Shaders.h"
 #include "Textures.h"
 #include "VertexArray.h"
+#include "Visualizer.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
@@ -54,7 +55,7 @@ private:
   GL::ShaderProgram gridProgram_;
   GL::Textures<2> textures_{0};
   GL::Framebuffer fbo_{0};
-  float fov = 150.f;
+  float fov = Visualizer::kDefaultFOV;
 
   struct MeshData {
     GL::VertexArray vao{0};

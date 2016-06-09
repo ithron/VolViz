@@ -13,7 +13,7 @@ class VisualizerImpl;
 
 class Visualizer {
 public:
-  static auto constexpr kDefaultFOV = 170;
+  static auto constexpr kDefaultFOV = 110;
   static auto constexpr kTitle = "Volume Visualizer";
 
   Visualizer();
