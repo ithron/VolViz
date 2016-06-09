@@ -19,6 +19,12 @@ extern std::string const passThroughFragShaderSrc;
 
 extern std::string const gridGeometryShaderSrc;
 
+extern std::string const deferredVertexShaderSrc;
+
+extern std::string const deferredPassthroughFragShaderSrc;
+
+extern std::string const normalVisualizationFragShaderSrc;
+
 } // namespace Shaders
 } // namespace GL
 } // namespace VolViz

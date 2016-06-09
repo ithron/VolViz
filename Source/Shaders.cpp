@@ -25,6 +25,19 @@ std::string const passThroughFragShaderSrc =
 std::string const gridGeometryShaderSrc =
 #include "Shaders/grid.geom"
     ;
+
+std::string const deferredVertexShaderSrc =
+#include "Shaders/deferred.vert"
+    ;
+
+std::string const deferredPassthroughFragShaderSrc =
+#include "Shaders/deferredPassThrough.frag"
+    ;
+
+std::string const normalVisualizationFragShaderSrc =
+#include "Shaders/normalVisualization.frag"
+    ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders
