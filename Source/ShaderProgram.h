@@ -79,6 +79,13 @@ public:
     return *this;
   }
 
+  UniformProxy const &operator=(Eigen::Matrix3f const &m) const noexcept {
+    assertGL("Precondition violation");
+    glUniformMatrix3fv(location_, 1, true, m.data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
 private:
   GLint const location_;
 };
