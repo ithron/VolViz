@@ -33,7 +33,8 @@ VisualizerImpl::VisualizerImpl() {
       [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
-    setupFBOs();
+    this->setupFBOs(); // this is used explicitly here because gcc complains
+                       // otherwise, although it's perectly standard conformant
     glViewport(0, 0, static_cast<GLsizei>(glfw_.width()),
                static_cast<GLsizei>(glfw_.height()));
   };
