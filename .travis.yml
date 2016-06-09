@@ -40,8 +40,8 @@ env:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "clang++" ]]; then wget http://llvm.org/releases/$CLANG_VERSION/clang+llvm-$CLANG_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz -O $CLANG_ARCHIVE && mkdir $CLANG_DIR && tar xf $CLANG_ARCHIVE -C $CLANG_DIR --strip-components 1; fi
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "clang++" ]]; then export CPPFLAGS="-isystem $CLANG_DIR/include/c++/v1"; fi
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "clang++" ]]; then export CXXFLAGS="-lc++ -lc++abi -L$CLANG_DIR/lib"; fi
+  - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "clang++" ]]; then export CXXFLAGS="-isystem $CLANG_DIR/include/c++/v1"; fi
+  - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "clang++" ]]; then export LDFLAGS="-lc++ -lc++abi -L$CLANG_DIR/lib"; fi
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "clang++" ]]; then export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CLANG_DIR/lib"; fi
 
 install:
