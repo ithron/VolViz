@@ -24,7 +24,7 @@ public:
   using Point2 = Eigen::Vector2f;
   using Size2 = Eigen::Vector2f;
 
-  VisualizerImpl();
+  VisualizerImpl(Visualizer *vis);
 
   void start();
 
@@ -36,10 +36,9 @@ public:
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
 
-  /// If true a grid is shown
-  std::atomic<bool> gridEnabled{true};
-
 private:
+  friend class ::VolViz::Visualizer;
+
   /// IDs for the auxiliary textures used for the deferred rendering
   enum class TextureID : std::size_t {
     Normals = 0,
@@ -80,11 +79,16 @@ private:
   /// Renders all textures of the deferred lighting pass
   void renderLightingTextures();
 
+  /// Defferred shading lighing pass
+  void renderLights();
+
   /// Renders the final image to screen
   void renderFinalPass();
 
   /// @defgroup privateMembers Private member variables
   /// @{
+
+  Visualizer *visualizer_ = nullptr;
 
   /// @defgroup shaders Shader Programs
   /// @{
@@ -94,6 +98,8 @@ private:
   GL::ShaderProgram normalQuadProgram_;
   GL::ShaderProgram depthQuadProgram_;
   GL::ShaderProgram gridProgram_;
+  GL::ShaderProgram ambientPassProgram_;
+  GL::ShaderProgram lightingPassProgram_;
   /// @}
 
   /// Auxiliary textures use in the deferred shading process.
@@ -117,8 +123,10 @@ private:
     GL::Buffer vertices{0};
     /// index buffer
     GL::Buffer indices{0};
-    std::size_t nTriangles = 0;
     /// number of primitives (i.e. triangles) to render
+    std::size_t nTriangles = 0;
+    /// The shininess of the mesh surface
+    float shininess = 0.01f;
   } mesh_;
 
   /// Data representing a single vertex, required by the grid and fullscreen
@@ -146,6 +154,7 @@ private:
   Eigen::Vector3f cameraPosition_ = Eigen::Vector3f::Zero();
   Eigen::Quaternionf cameraOrientation_ = Eigen::Quaternionf::Identity();
   //@}
+
   //@}
 };
 

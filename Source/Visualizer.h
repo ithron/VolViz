@@ -4,6 +4,7 @@
 #include <Eigen/Core>
 
 #include <memory>
+#include <atomic>
 
 namespace VolViz {
 
@@ -35,6 +36,10 @@ public:
   template <class VertBase, class IdxBase>
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
+
+  std::atomic<bool> showGrid{true};
+
+  std::atomic<float> ambientFactor{1.f};
 
 private:
   std::unique_ptr<Private_::VisualizerImpl> impl_;

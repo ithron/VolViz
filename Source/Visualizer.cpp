@@ -13,7 +13,7 @@ namespace VolViz {
 
 namespace Private_ {
 
-VisualizerImpl::VisualizerImpl() {
+VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   glfw_.makeCurrent();
 
@@ -114,16 +114,35 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::normalVisualizationFragShaderSrc))
                     .link());
 
-  auto depthQuadProg =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::depthVisualizationFragShaderSrc))
-                    .link());
+  auto depthQuadProg = std::move(
+      GL::ShaderProgram()
+          .attachShader(
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+          .attachShader(
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+          .attachShader(GL::Shader(
+              GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
+          .link());
+
+  auto ambientPassProg = std::move(
+      GL::ShaderProgram()
+          .attachShader(
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+          .attachShader(
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
+                                   GL::Shaders::ambientPassFragShaderSrc))
+          .link());
+
+  auto lightingPassProg = std::move(
+      GL::ShaderProgram()
+          .attachShader(
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+          .attachShader(
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
+                                   GL::Shaders::lightingPassFragShaderSrc))
+          .link());
 
   auto geomProg = std::move(
       GL::ShaderProgram()
@@ -149,6 +168,8 @@ void VisualizerImpl::setupShaders() {
   gridProgram_ = std::move(gridProg);
   normalQuadProgram_ = std::move(normalQuadProg);
   depthQuadProgram_ = std::move(depthQuadProg);
+  ambientPassProgram_ = std::move(ambientPassProg);
+  lightingPassProgram_ = std::move(lightingPassProg);
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -364,10 +385,10 @@ void VisualizerImpl::renderOneFrame() {
 
   renderMeshes();
 
-  // if (gridEnabled) renderGrid();
-
   switch (viewState_) {
     case ViewState::Scene3D:
+      if (visualizer_->showGrid) renderGrid();
+      renderLights();
       break;
     case ViewState::LightingComponents:
       renderLightingTextures();
@@ -407,6 +428,7 @@ void VisualizerImpl::renderMeshes() {
   geometryStageProgram_.use();
   assertGL("OpenGL Error stack not clean");
 
+  geometryStageProgram_["shininess"] = mesh_.shininess;
   geometryStageProgram_["modelViewProjectionMatrix"] = MVP;
   geometryStageProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
   if (mesh_.vao.name != 0) {
@@ -421,6 +443,13 @@ void VisualizerImpl::renderMeshes() {
 }
 
 void VisualizerImpl::renderGrid() {
+
+  auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+  glClearDepth(1.0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  glEnable(GL_DEPTH_TEST);
+
   auto const pMatrix = projectionMatrix();
   auto const vMatrix = viewMatrix();
 
@@ -456,8 +485,8 @@ void VisualizerImpl::renderLightingTextures() {
 void VisualizerImpl::renderFinalPass() {
   // Render FBA color attachment to screen
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
-  glDisable(GL_FRAMEBUFFER_SRGB);
-  // glEnable(GL_FRAMEBUFFER_SRGB);
+  // glDisable(GL_FRAMEBUFFER_SRGB);
+  glEnable(GL_FRAMEBUFFER_SRGB);
   renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
 }
 
@@ -493,6 +522,62 @@ void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
   assertGL("glDrawArrays failed");
 }
 
+void VisualizerImpl::renderLights() {
+
+  auto fboBinding = GL::binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+  glClearDepth(1.0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  glEnable(GL_DEPTH_TEST);
+
+  glBlendFunc(GL_ONE, GL_ONE);
+  glEnable(GL_BLEND);
+  // Ambient pass
+  ambientPassProgram_.use();
+  ambientPassProgram_["ambientFactor"] = visualizer_->ambientFactor;
+
+  renderFullscreenQuad(TextureID::Albedo, ambientPassProgram_);
+
+  // Diffuse and specular lighting
+  // glBlendEquationSeparate(GL_FUNC_ADD, GL_MAX);
+  // glBlendFunc(GL_ONE, GL_ONE);
+  // glEnable(GL_BLEND);
+
+  auto const lightPosition =
+      (viewMatrix() * Eigen::Vector4f( 1.0, 0.0, 4.0, 0.0)).eval();
+
+  lightingPassProgram_.use();
+  lightingPassProgram_["topLeft"] = Point2(-1, 1);
+  lightingPassProgram_["size"] = Point2(2, 2);
+  lightingPassProgram_["normalTex"] = 0;
+  lightingPassProgram_["depthTex"] = 1;
+  lightingPassProgram_["albedoTex"] = 2;
+  lightingPassProgram_["specularTex"] = 3;
+  lightingPassProgram_["lightPosition"] = lightPosition;
+  lightingPassProgram_["lightColor"] = Eigen::Vector3f(1, 1, 1);
+
+  glActiveTexture(GL_TEXTURE0 + 0);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Normals]);
+
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
+
+  glActiveTexture(GL_TEXTURE2);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+
+  glActiveTexture(GL_TEXTURE3);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Specular]);
+
+  auto boundVao = GL::binding(singleVertexData_.vao);
+
+  // draw quad using the geometry shader
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+
+  glDisable(GL_BLEND);
+}
+
 } // namespace Private_
 
 /////////////////////////////
@@ -500,13 +585,20 @@ void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
 //
 
 Visualizer::Visualizer()
-    : impl_(std::make_unique<Private_::VisualizerImpl>()) {}
+    : impl_(std::make_unique<Private_::VisualizerImpl>(this)) {}
 
 Visualizer::~Visualizer() = default;
 
-Visualizer::Visualizer(Visualizer &&) = default;
+Visualizer::Visualizer(Visualizer &&rhs) : impl_(std::move(rhs.impl_)) {
+  impl_->visualizer_ = this;
+}
 
-Visualizer &Visualizer::operator=(Visualizer &&) = default;
+Visualizer &Visualizer::operator=(Visualizer &&rhs) {
+  using std::swap;
+  swap(impl_, rhs.impl_);
+  impl_->visualizer_ = this;
+  return *this;
+}
 
 void Visualizer::start() { impl_->start(); }
 

@@ -52,9 +52,11 @@ int main(int argc, char **argv) {
 
   auto viewer = Visualizer{};
 
-  viewer.setMesh(V, T);
+  viewer.setMesh(( 10 * V).eval(), T);
 
   viewer.start();
+  viewer.showGrid = false;
+  viewer.ambientFactor = 0.2f;
 
   while (viewer) { viewer.renderOneFrame(); }
 
