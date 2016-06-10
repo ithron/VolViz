@@ -9,8 +9,8 @@ namespace Shaders {
 std::string const nullVertShaderSrc =
 #include "Shaders/null.vert"
     ;
-std::string const fullscreenQuadGeomShaderSrc =
-#include "Shaders/fullscreenQuad.geom"
+std::string const quadGeomShaderSrc =
+#include "Shaders/quad.geom"
     ;
 std::string const simpleTextureFragShaderSrc =
 #include "Shaders/simpleTexture.frag"
@@ -36,6 +36,10 @@ std::string const deferredPassthroughFragShaderSrc =
 
 std::string const normalVisualizationFragShaderSrc =
 #include "Shaders/normalVisualization.frag"
+    ;
+
+std::string const depthVisualizationFragShaderSrc =
+#include "Shaders/depthVisualization.frag"
     ;
 
 #pragma clang diagnostic pop

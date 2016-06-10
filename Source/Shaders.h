@@ -9,7 +9,7 @@ namespace Shaders {
 
 extern std::string const nullVertShaderSrc;
 
-extern std::string const fullscreenQuadGeomShaderSrc;
+extern std::string const quadGeomShaderSrc;
 
 extern std::string const simpleTextureFragShaderSrc;
 
@@ -24,6 +24,8 @@ extern std::string const deferredVertexShaderSrc;
 extern std::string const deferredPassthroughFragShaderSrc;
 
 extern std::string const normalVisualizationFragShaderSrc;
+
+extern std::string const depthVisualizationFragShaderSrc;
 
 } // namespace Shaders
 } // namespace GL
