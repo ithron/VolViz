@@ -42,6 +42,14 @@ std::string const depthVisualizationFragShaderSrc =
 #include "Shaders/depthVisualization.frag"
     ;
 
+std::string const ambientPassFragShaderSrc =
+#include "Shaders/ambientPass.frag"
+    ;
+
+std::string const lightingPassFragShaderSrc =
+#include "Shaders/lighting.frag"
+    ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders
