@@ -93,16 +93,38 @@ VisualizerImpl::VisualizerImpl() {
 }
 
 void VisualizerImpl::setupShaders() {
-  auto dispProg = std::move(
+  auto quadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
                GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                   GL::Shaders::fullscreenQuadGeomShaderSrc))
           .attachShader(
-               GL::Shader(GL_FRAGMENT_SHADER,
-                          GL::Shaders::normalVisualizationFragShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
+                                   GL::Shaders::simpleTextureFragShaderSrc))
           .link());
+
+  auto normalQuadProg =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::quadGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::normalVisualizationFragShaderSrc))
+                    .link());
+
+  auto depthQuadProg =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::quadGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::depthVisualizationFragShaderSrc))
+                    .link());
+
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
@@ -123,8 +145,10 @@ void VisualizerImpl::setupShaders() {
           .link());
 
   geometryStageProgram_ = std::move(geomProg);
-  displayStageProgram_ = std::move(dispProg);
+  quadProgram_ = std::move(quadProg);
   gridProgram_ = std::move(gridProg);
+  normalQuadProgram_ = std::move(normalQuadProg);
+  depthQuadProgram_ = std::move(depthQuadProg);
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -142,19 +166,19 @@ void VisualizerImpl::setupFBOs() {
 
     // albedo texure
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // specular texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Specular]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -167,8 +191,8 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::Albedo], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D,
                            textures_[TextureID::Specular], 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
-                           GL_TEXTURE_2D, textures_[TextureID::Depth], 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
+                           textures_[TextureID::Depth], 0);
     // check FBO
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
       throw std::runtime_error(
@@ -322,11 +346,11 @@ VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
 void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
-      case GLFW_KEY_DOWN:
-        cameraPosition_(2) += 0.1;
+      case GLFW_KEY_1:
+        viewState_ = ViewState::Scene3D;
         break;
-      case GLFW_KEY_UP:
-        cameraPosition_(2) -= 0.1;
+      case GLFW_KEY_2:
+        viewState_ = ViewState::LightingComponents;
         break;
     }
   }
@@ -342,13 +366,21 @@ void VisualizerImpl::renderOneFrame() {
 
   // if (gridEnabled) renderGrid();
 
+  switch (viewState_) {
+    case ViewState::Scene3D:
+      break;
+    case ViewState::LightingComponents:
+      renderLightingTextures();
+      break;
+  }
+
   renderFinalPass();
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
 }
 
-void VisualizerImpl::renderMeshes() const {
+void VisualizerImpl::renderMeshes() {
   auto const pMatrix = projectionMatrix();
   auto const vMatrix = viewMatrix();
   auto const MVP = (pMatrix * vMatrix).eval();
@@ -358,7 +390,7 @@ void VisualizerImpl::renderMeshes() const {
       {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2}};
 
   // Bind FBO and set it up for MRT
-  glBindFramebuffer(GL_FRAMEBUFFER, lightingFbo_.name);
+  auto fboBinding = binding(lightingFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
   assertGL("Failed to bind framebuffer");
   glDrawBuffers(attachments.size(), attachments.data());
 
@@ -368,6 +400,8 @@ void VisualizerImpl::renderMeshes() const {
   glDisable(GL_FRAMEBUFFER_SRGB);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
+  glDepthMask(true);
+  glColorMask(true, true, true, true);
 
   // Render geometry to FBO
   geometryStageProgram_.use();
@@ -386,7 +420,7 @@ void VisualizerImpl::renderMeshes() const {
   glDrawBuffers(1, attachments.data());
 }
 
-void VisualizerImpl::renderGrid() const {
+void VisualizerImpl::renderGrid() {
   auto const pMatrix = projectionMatrix();
   auto const vMatrix = viewMatrix();
 
@@ -399,17 +433,62 @@ void VisualizerImpl::renderGrid() const {
   assertGL("glDrawArrays failed");
 }
 
-void VisualizerImpl::renderFinalPass() const {
-  // Render FBA color attachment to screen
-  glDisable(GL_DEPTH_TEST);
-  GL::Framebuffer::unbind(GL_FRAMEBUFFER);
-  displayStageProgram_.use();
-  displayStageProgram_["tex"] = 0;
-  glActiveTexture(GL_TEXTURE0 + 0);
-  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Normals]);
+void VisualizerImpl::renderLightingTextures() {
+  auto boundFBO = GL::binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
-  // draw fullscreen quad using the geometry shader
+  auto const halfWindowSize = (Size2{glfw_.width(), glfw_.height()} / 2).eval();
+
+  glClearColor(1.0f, 1.f, 1.0f, 1.0f);
+  glClear(GL_COLOR_BUFFER_BIT);
+  glDisable(GL_FRAMEBUFFER_SRGB);
+  glDisable(GL_DEPTH_TEST);
+  renderQuad(Point2::Zero(), halfWindowSize, TextureID::Normals,
+             normalQuadProgram_);
+  renderQuad(Point2::Zero() + Point2(halfWindowSize(0), 0), halfWindowSize,
+             TextureID::Depth, depthQuadProgram_);
+  glEnable(GL_FRAMEBUFFER_SRGB);
+  renderQuad(Point2::Zero() + Point2(0, halfWindowSize(1)), halfWindowSize,
+             TextureID::Albedo, quadProgram_);
+  renderQuad(Point2::Zero() + halfWindowSize, halfWindowSize,
+             TextureID::Specular, quadProgram_);
+}
+
+void VisualizerImpl::renderFinalPass() {
+  // Render FBA color attachment to screen
+  GL::Framebuffer::unbind(GL_FRAMEBUFFER);
+  glDisable(GL_FRAMEBUFFER_SRGB);
+  // glEnable(GL_FRAMEBUFFER_SRGB);
+  renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
+}
+
+void VisualizerImpl::renderFullscreenQuad(TextureID texture,
+                                          GL::ShaderProgram &prog) {
+  renderQuad(Point2::Zero(), Size2(glfw_.width(), glfw_.height()), texture,
+             prog);
+}
+
+void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
+                                TextureID texture, GL::ShaderProgram &prog) {
+  auto const windowSize = Size2(glfw_.width(), glfw_.height());
+  glDisable(GL_DEPTH_TEST);
+
+  // convert window coordinates (in pixel) to clip space coordinates
+  auto const topLeftClipsSpace = (topLeft - windowSize / 2)
+                                     .cwiseQuotient(windowSize / 2)
+                                     .cwiseProduct(Point2(1, -1))
+                                     .eval();
+  auto const sizeClipSpace = size.cwiseQuotient(windowSize / 2).eval();
+
+  prog.use();
+  prog["topLeft"] = topLeftClipsSpace;
+  prog["size"] = sizeClipSpace;
+  prog["tex"] = 0;
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, textures_[texture]);
+
   auto boundVao = GL::binding(singleVertexData_.vao);
+
+  // draw quad using the geometry shader
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
 }

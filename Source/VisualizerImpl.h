@@ -21,6 +21,9 @@ namespace Private_ {
 
 class VisualizerImpl {
 public:
+  using Point2 = Eigen::Vector2f;
+  using Size2 = Eigen::Vector2f;
+
   VisualizerImpl();
 
   void start();
@@ -62,13 +65,23 @@ private:
   void handleKeyInput(int key, int scancode, int action, int mode);
 
   /// Renders the set mesh if any
-  void renderMeshes() const;
+  void renderMeshes();
 
   /// Renders a grid
-  void renderGrid() const;
+  void renderGrid();
+
+  /// Renderes a textured quad
+  void renderQuad(Point2 const &topLeft, Size2 const &size, TextureID texture,
+                  GL::ShaderProgram &prog);
+
+  /// Renders a textured fullscreen quad
+  void renderFullscreenQuad(TextureID texture, GL::ShaderProgram &quad);
+
+  /// Renders all textures of the deferred lighting pass
+  void renderLightingTextures();
 
   /// Renders the final image to screen
-  void renderFinalPass() const;
+  void renderFinalPass();
 
   /// @defgroup privateMembers Private member variables
   /// @{
@@ -77,7 +90,9 @@ private:
   /// @{
   GL::GLFW glfw_;
   GL::ShaderProgram geometryStageProgram_;
-  GL::ShaderProgram displayStageProgram_;
+  GL::ShaderProgram quadProgram_;
+  GL::ShaderProgram normalQuadProgram_;
+  GL::ShaderProgram depthQuadProgram_;
   GL::ShaderProgram gridProgram_;
   /// @}
 
@@ -86,6 +101,7 @@ private:
     inline GLuint operator[](TextureID id) const noexcept {
       return textures_.names[static_cast<std::size_t>(id)];
     }
+
   private:
     GL::Textures<5> textures_;
   } textures_;
@@ -111,6 +127,11 @@ private:
     GL::Buffer vBuff{0};
     GL::VertexArray vao{0};
   } singleVertexData_;
+
+  enum class ViewState {
+    Scene3D,
+    LightingComponents
+  } viewState_{ViewState::Scene3D};
 
   ///@defgroup cameraRelated Camera related variables
   /// @{
