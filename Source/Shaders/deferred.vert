@@ -19,8 +19,8 @@ void main() {
   // normal = normalize(transpose(inverseModelViewMatrix) * normalIn);
   normal = normalize(inverseModelViewMatrix * normalIn);
   // set fixed colors for now
-  albedo = vec3(1.0, 1.0, 1.0);
-  specular = vec4(1.0, 1.0, 1.0, shininess);
+  albedo = vec3(0.8);
+  specular = vec4(0.8, 0.0, 0.0, shininess);
 }
 
 )"

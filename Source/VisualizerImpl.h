@@ -126,7 +126,7 @@ private:
     /// number of primitives (i.e. triangles) to render
     std::size_t nTriangles = 0;
     /// The shininess of the mesh surface
-    float shininess = 0.01f;
+    float shininess = 100.f;
   } mesh_;
 
   /// Data representing a single vertex, required by the grid and fullscreen
