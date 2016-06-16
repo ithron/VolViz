@@ -50,6 +50,10 @@ std::string const lightingPassFragShaderSrc =
 #include "Shaders/lighting.frag"
     ;
 
+std::string const specularVisualizationFragShaderSrc =
+#include "Shaders/specularVisualization.frag"
+    ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders

@@ -29,8 +29,9 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
@@ -79,7 +80,8 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                  .inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -96,9 +98,9 @@ void VisualizerImpl::setupShaders() {
   auto quadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::simpleTextureFragShaderSrc))
           .link());
@@ -117,19 +119,30 @@ void VisualizerImpl::setupShaders() {
   auto depthQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
 
+  auto specularQuadProg =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::quadGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::specularVisualizationFragShaderSrc))
+                    .link());
+
   auto ambientPassProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
@@ -137,9 +150,9 @@ void VisualizerImpl::setupShaders() {
   auto lightingPassProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::lightingPassFragShaderSrc))
           .link());
@@ -149,14 +162,14 @@ void VisualizerImpl::setupShaders() {
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
           .attachShader(
-               GL::Shader(GL_FRAGMENT_SHADER,
-                          GL::Shaders::deferredPassthroughFragShaderSrc))
+              GL::Shader(GL_FRAGMENT_SHADER,
+                         GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -170,6 +183,7 @@ void VisualizerImpl::setupShaders() {
   depthQuadProgram_ = std::move(depthQuadProg);
   ambientPassProgram_ = std::move(ambientPassProg);
   lightingPassProgram_ = std::move(lightingPassProg);
+  specularQuadProgram_ = std::move(specularQuadProg);
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -179,20 +193,14 @@ void VisualizerImpl::setupFBOs() {
   // set up FBO
 
   { // textures and FBO for the geometry stage
-    // normal texture
-    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Normals]);
+    // normal and specular texture
+    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // albedo texure
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // specular texture
-    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Specular]);
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -207,11 +215,9 @@ void VisualizerImpl::setupFBOs() {
     GL::Framebuffer fbo;
     glBindFramebuffer(GL_FRAMEBUFFER, fbo.name);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                           textures_[TextureID::Normals], 0);
+                           textures_[TextureID::NormalsAndSpecular], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D,
                            textures_[TextureID::Albedo], 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D,
-                           textures_[TextureID::Specular], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::Depth], 0);
     // check FBO
@@ -471,7 +477,7 @@ void VisualizerImpl::renderLightingTextures() {
   glClear(GL_COLOR_BUFFER_BIT);
   glDisable(GL_FRAMEBUFFER_SRGB);
   glDisable(GL_DEPTH_TEST);
-  renderQuad(Point2::Zero(), halfWindowSize, TextureID::Normals,
+  renderQuad(Point2::Zero(), halfWindowSize, TextureID::NormalsAndSpecular,
              normalQuadProgram_);
   renderQuad(Point2::Zero() + Point2(halfWindowSize(0), 0), halfWindowSize,
              TextureID::Depth, depthQuadProgram_);
@@ -479,7 +485,7 @@ void VisualizerImpl::renderLightingTextures() {
   renderQuad(Point2::Zero() + Point2(0, halfWindowSize(1)), halfWindowSize,
              TextureID::Albedo, quadProgram_);
   renderQuad(Point2::Zero() + halfWindowSize, halfWindowSize,
-             TextureID::Specular, quadProgram_);
+             TextureID::NormalsAndSpecular, specularQuadProgram_);
 }
 
 void VisualizerImpl::renderFinalPass() {
@@ -545,29 +551,25 @@ void VisualizerImpl::renderLights() {
   // glEnable(GL_BLEND);
 
   auto const lightPosition =
-      (viewMatrix() * Eigen::Vector4f( 1.0, 0.0, 4.0, 0.0)).eval();
+      (viewMatrix() * Eigen::Vector4f(1.0, 0.0, 4.0, 0.0)).eval();
 
   lightingPassProgram_.use();
   lightingPassProgram_["topLeft"] = Point2(-1, 1);
   lightingPassProgram_["size"] = Point2(2, 2);
-  lightingPassProgram_["normalTex"] = 0;
+  lightingPassProgram_["normalAndSpecularTex"] = 0;
   lightingPassProgram_["depthTex"] = 1;
   lightingPassProgram_["albedoTex"] = 2;
-  lightingPassProgram_["specularTex"] = 3;
   lightingPassProgram_["lightPosition"] = lightPosition;
   lightingPassProgram_["lightColor"] = Eigen::Vector3f(1, 1, 1);
 
   glActiveTexture(GL_TEXTURE0 + 0);
-  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Normals]);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
 
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
 
   glActiveTexture(GL_TEXTURE2);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
-
-  glActiveTexture(GL_TEXTURE3);
-  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Specular]);
 
   auto boundVao = GL::binding(singleVertexData_.vao);
 

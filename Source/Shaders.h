@@ -31,6 +31,8 @@ extern std::string const ambientPassFragShaderSrc;
 
 extern std::string const lightingPassFragShaderSrc;
 
+extern std::string const specularVisualizationFragShaderSrc;
+
 } // namespace Shaders
 } // namespace GL
 } // namespace VolViz

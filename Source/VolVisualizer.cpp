@@ -36,8 +36,7 @@ int main(int argc, char **argv) {
   } else if (ext == "obj")
     igl::readOBJ(filename, V, T);
   else {
-    std::cerr << std::endl
-              << "Unrecognized mesh format: " << ext << std::endl;
+    std::cerr << std::endl << "Unrecognized mesh format: " << ext << std::endl;
     return EXIT_FAILURE;
   }
   std::cout << "done." << std::endl;
@@ -50,9 +49,14 @@ int main(int argc, char **argv) {
   std::cout << "bbox: " << min.transpose() << " - " << max.transpose()
             << std::endl;
 
+  //  Eigen::MatrixXd V(3, 3);
+  //  V << 0, 1, 0, -1, -1, 0, 1, -1, 0;
+  //  Eigen::MatrixXi T(1, 3);
+  //  T << 0, 1, 2;
+
   auto viewer = Visualizer{};
 
-  viewer.setMesh(( 10 * V).eval(), T);
+  viewer.setMesh((10 * V).eval(), T);
 
   viewer.start();
   viewer.showGrid = false;

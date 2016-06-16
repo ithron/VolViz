@@ -41,11 +41,10 @@ private:
 
   /// IDs for the auxiliary textures used for the deferred rendering
   enum class TextureID : std::size_t {
-    Normals = 0,
+    NormalsAndSpecular = 0,
     Albedo = 1,
-    Specular = 2,
-    Depth = 3,
-    RenderedImage = 4
+    Depth = 2,
+    RenderedImage = 3
   };
 
   /// Compiles and links all shader programs
@@ -97,6 +96,7 @@ private:
   GL::ShaderProgram quadProgram_;
   GL::ShaderProgram normalQuadProgram_;
   GL::ShaderProgram depthQuadProgram_;
+  GL::ShaderProgram specularQuadProgram_;
   GL::ShaderProgram gridProgram_;
   GL::ShaderProgram ambientPassProgram_;
   GL::ShaderProgram lightingPassProgram_;
@@ -109,7 +109,7 @@ private:
     }
 
   private:
-    GL::Textures<5> textures_;
+    GL::Textures<4> textures_;
   } textures_;
   /// Frabebuffer used for the deferred shading
   GL::Framebuffer lightingFbo_{0};
