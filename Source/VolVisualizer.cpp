@@ -10,7 +10,7 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-  using VolViz::Visualizer;
+  using namespace VolViz;
   using Eigen::Vector3d;
   using Vertices = Eigen::MatrixXd;
   using Triangles = Eigen::MatrixXi;
@@ -60,7 +60,21 @@ int main(int argc, char **argv) {
 
   viewer.start();
   viewer.showGrid = false;
-  viewer.ambientFactor = 0.2f;
+
+  Light light;
+  light.ambientFactor = 0.1f;
+  light.color = Color::UnitY();
+  light.position = PositionH(1, 1, 1, 0);
+
+  viewer.addLight(0, light);
+
+  light.color = Color::UnitX();
+  light.position = PositionH(2, 1, 1, 0);
+  viewer.addLight(1, light);
+
+  light.color = Color::UnitZ();
+  light.position = PositionH(1, 2, 1, 0);
+  viewer.addLight(2, light);
 
   while (viewer) { viewer.renderOneFrame(); }
 

@@ -15,6 +15,8 @@
 #include <Eigen/Geometry>
 
 #include <atomic>
+#include <mutex>
+#include <unordered_map>
 
 namespace VolViz {
 namespace Private_ {
@@ -23,6 +25,7 @@ class VisualizerImpl {
 public:
   using Point2 = Eigen::Vector2f;
   using Size2 = Eigen::Vector2f;
+  using Lights = std::unordered_map<Visualizer::LightName, Light>;
 
   VisualizerImpl(Visualizer *vis);
 
@@ -81,8 +84,19 @@ private:
   /// Defferred shading lighing pass
   void renderLights();
 
+  void renderAmbientLighting();
+  void renderDiffuseLighting();
+  void renderSpecularLighting();
+
+  void renderLightDiffuse(Light const &light);
+
+  void renderLightSpecular(Light const &light);
+
+
   /// Renders the final image to screen
   void renderFinalPass();
+
+  void addLight(Visualizer::LightName name, Light const &light);
 
   /// @defgroup privateMembers Private member variables
   /// @{
@@ -94,12 +108,13 @@ private:
   GL::GLFW glfw_;
   GL::ShaderProgram geometryStageProgram_;
   GL::ShaderProgram quadProgram_;
+  GL::ShaderProgram hdrQuadProgram_;
   GL::ShaderProgram normalQuadProgram_;
   GL::ShaderProgram depthQuadProgram_;
   GL::ShaderProgram specularQuadProgram_;
   GL::ShaderProgram gridProgram_;
   GL::ShaderProgram ambientPassProgram_;
-  GL::ShaderProgram lightingPassProgram_;
+  GL::ShaderProgram diffuseLightingPassProgram_;
   /// @}
 
   /// Auxiliary textures use in the deferred shading process.
@@ -140,6 +155,10 @@ private:
     Scene3D,
     LightingComponents
   } viewState_{ViewState::Scene3D};
+
+  /// Lights
+  Lights lights_;
+  std::mutex lightMutex_;
 
   ///@defgroup cameraRelated Camera related variables
   /// @{

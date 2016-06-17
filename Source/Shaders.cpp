@@ -15,6 +15,9 @@ std::string const quadGeomShaderSrc =
 std::string const simpleTextureFragShaderSrc =
 #include "Shaders/simpleTexture.frag"
     ;
+std::string const hdrTextureFragShaderSrc =
+#include "Shaders/hdrTexture.frag"
+    ;
 std::string const simpleVertShaderSrc =
 #include "Shaders/simple.vert"
     ;
@@ -46,8 +49,8 @@ std::string const ambientPassFragShaderSrc =
 #include "Shaders/ambientPass.frag"
     ;
 
-std::string const lightingPassFragShaderSrc =
-#include "Shaders/lighting.frag"
+std::string const diffuseLightingPassFragShaderSrc =
+#include "Shaders/diffuseLighting.frag"
     ;
 
 std::string const specularVisualizationFragShaderSrc =

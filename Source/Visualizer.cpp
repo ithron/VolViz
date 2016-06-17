@@ -3,7 +3,70 @@
 #include "GL.h"
 #include "Visualizer.h"
 
+#include <Eigen/Geometry>
+
 #include <iostream>
+#include <mutex>
+
+namespace {
+
+/// Copmutes the axis aligned bouding box in normalised device coordinates
+/// of the influcence region of the given light
+Eigen::AlignedBox2f
+computeLightRect(VolViz::Light const &light, Eigen::Matrix4f const &viewMatrix,
+                 Eigen::Matrix4f const &projectionMatrix) noexcept {
+  using namespace VolViz;
+  using Eigen::Vector4f;
+  using Eigen::Vector3f;
+  using Eigen::Vector2f;
+
+  auto const radius = light.distanceAtForAttenuation(0.001f);
+
+  Position const pos = (viewMatrix * light.position).head<3>();
+  Position const viewX = (viewMatrix * PositionH::UnitX() * radius).head<3>();
+  Position const viewY = (viewMatrix * PositionH::UnitY() * radius).head<3>();
+  Position const viewZ = (viewMatrix * PositionH::UnitZ() * radius).head<3>();
+
+  Position const points[] = {
+      pos + viewX + viewY + viewZ, pos + viewX + viewY - viewZ,
+      pos + viewX - viewY + viewZ, pos + viewX - viewY - viewZ,
+      pos - viewX + viewY + viewZ, pos - viewX + viewY - viewZ,
+      pos - viewX - viewY + viewZ, pos - viewX - viewY - viewZ,
+  };
+
+  Position minP = 100.f * Position::Ones();
+  Position maxP = -100.f * Position::Ones();
+
+  for (auto const &p : gsl::as_span(points, 8)) {
+    minP = minP.cwiseMin(p);
+    maxP = maxP.cwiseMax(p);
+  }
+
+  std::cout << "AABB: " << minP.transpose() << " - " << maxP.transpose()
+            << std::endl;
+
+  // set z component of minP to maxP's z component
+  minP(2) = maxP(2);
+
+  // project min and max points
+  Vector4f projMinP = projectionMatrix * minP.homogeneous();
+  Vector4f projMaxP = projectionMatrix * maxP.homogeneous();
+
+  projMinP /= projMinP(3);
+  projMaxP /= projMaxP(3);
+
+  Vector4f const pMin = projMinP.cwiseMin(projMaxP);
+  Vector4f const pMax = projMaxP.cwiseMax(projMinP);
+
+  auto const projAABB = Eigen::AlignedBox2f(pMin.head<2>(), pMax.head<2>());
+
+  std::cout << "Projected AABB: " << projAABB.min().transpose() << " - "
+            << projAABB.max().transpose() << std::endl;
+
+  return projAABB;
+}
+
+} // anonumous namespace
 
 namespace VolViz {
 
@@ -29,9 +92,8 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
-    handleKeyInput(k, s, a, m);
-  };
+  glfw_.keyInputHandler =
+      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
@@ -80,8 +142,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
-                  .inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -98,11 +159,21 @@ void VisualizerImpl::setupShaders() {
   auto quadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::simpleTextureFragShaderSrc))
+          .link());
+
+  auto hdrQuadProg = std::move(
+      GL::ShaderProgram()
+          .attachShader(
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+          .attachShader(
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
+                                   GL::Shaders::hdrTextureFragShaderSrc))
           .link());
 
   auto normalQuadProg =
@@ -119,9 +190,9 @@ void VisualizerImpl::setupShaders() {
   auto depthQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
@@ -140,36 +211,37 @@ void VisualizerImpl::setupShaders() {
   auto ambientPassProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
 
-  auto lightingPassProg = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::lightingPassFragShaderSrc))
-          .link());
+  auto diffLightingPassProg =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::quadGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::diffuseLightingPassFragShaderSrc))
+                    .link());
 
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
           .attachShader(
-              GL::Shader(GL_FRAGMENT_SHADER,
-                         GL::Shaders::deferredPassthroughFragShaderSrc))
+               GL::Shader(GL_FRAGMENT_SHADER,
+                          GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -182,8 +254,9 @@ void VisualizerImpl::setupShaders() {
   normalQuadProgram_ = std::move(normalQuadProg);
   depthQuadProgram_ = std::move(depthQuadProg);
   ambientPassProgram_ = std::move(ambientPassProg);
-  lightingPassProgram_ = std::move(lightingPassProg);
+  diffuseLightingPassProgram_ = std::move(diffLightingPassProg);
   specularQuadProgram_ = std::move(specularQuadProg);
+  hdrQuadProgram_ = std::move(hdrQuadProg);
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -233,7 +306,7 @@ void VisualizerImpl::setupFBOs() {
   { // textures and fbo for the lighting
     // final rendered image texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::RenderedImage]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -532,37 +605,42 @@ void VisualizerImpl::renderLights() {
 
   auto fboBinding = GL::binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  glEnable(GL_DEPTH_TEST);
+  renderAmbientLighting();
 
-  glBlendFunc(GL_ONE, GL_ONE);
-  glEnable(GL_BLEND);
+  renderDiffuseLighting();
+}
+
+void VisualizerImpl::renderAmbientLighting() {
+  std::lock_guard<std::mutex> lock(lightMutex_);
+  Color ambientColor = Color::Zero();
+
+  for (auto const &l : lights_) {
+    ambientColor += l.second.ambientFactor * l.second.color;
+  }
+
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+  glClear(GL_COLOR_BUFFER_BIT);
+  glDisable(GL_DEPTH_TEST);
+
   // Ambient pass
   ambientPassProgram_.use();
-  ambientPassProgram_["ambientFactor"] = visualizer_->ambientFactor;
+  ambientPassProgram_["lightColor"] = ambientColor;
 
   renderFullscreenQuad(TextureID::Albedo, ambientPassProgram_);
+}
 
-  // Diffuse and specular lighting
-  // glBlendEquationSeparate(GL_FUNC_ADD, GL_MAX);
-  // glBlendFunc(GL_ONE, GL_ONE);
-  // glEnable(GL_BLEND);
+void VisualizerImpl::renderDiffuseLighting() {
+  std::lock_guard<std::mutex> lock(lightMutex_);
 
-  auto const lightPosition =
-      (viewMatrix() * Eigen::Vector4f(1.0, 0.0, 4.0, 0.0)).eval();
+  auto const viewMat = viewMatrix();
+  auto const projMat = projectionMatrix();
 
-  lightingPassProgram_.use();
-  lightingPassProgram_["topLeft"] = Point2(-1, 1);
-  lightingPassProgram_["size"] = Point2(2, 2);
-  lightingPassProgram_["normalAndSpecularTex"] = 0;
-  lightingPassProgram_["depthTex"] = 1;
-  lightingPassProgram_["albedoTex"] = 2;
-  lightingPassProgram_["lightPosition"] = lightPosition;
-  lightingPassProgram_["lightColor"] = Eigen::Vector3f(1, 1, 1);
+  diffuseLightingPassProgram_.use();
+  diffuseLightingPassProgram_["normalAndSpecularTex"] = 1;
+  diffuseLightingPassProgram_["depthTex"] = 1;
+  diffuseLightingPassProgram_["albedoTex"] = 2;
 
-  glActiveTexture(GL_TEXTURE0 + 0);
+  glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
 
   glActiveTexture(GL_TEXTURE1);
@@ -571,13 +649,47 @@ void VisualizerImpl::renderLights() {
   glActiveTexture(GL_TEXTURE2);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
 
+  glBlendFunc(GL_ONE, GL_ONE);
+  glEnable(GL_BLEND);
+
   auto boundVao = GL::binding(singleVertexData_.vao);
 
-  // draw quad using the geometry shader
-  glDrawArrays(GL_POINTS, 0, 1);
-  assertGL("glDrawArrays failed");
+  for (auto const &lightEntry : lights_) {
+    auto const &light = lightEntry.second;
+    PositionH const lightPosition = viewMat * light.position;
+
+    std::cout << "Light " << lightEntry.first << " at "
+              << lightPosition.transpose() << std::endl;
+    auto const lightRect = computeLightRect(light, viewMat, projMat);
+    std::cout << "lightRect for light " << lightEntry.first << ": "
+              << lightRect.min().transpose() << " - "
+              << lightRect.max().transpose() << std::endl;
+    // lightRect to sceen coordinates
+    Point2 const topLeft = lightRect.min();
+    Point2 const size = lightRect.sizes();
+
+    std::cout << "lightRect for light " << lightEntry.first << ": "
+              << topLeft.transpose() << " - " << size.transpose() << std::endl;
+
+    diffuseLightingPassProgram_["topLeft"] = topLeft;
+    diffuseLightingPassProgram_["size"] = size;
+
+    diffuseLightingPassProgram_["lightPosition"] = lightPosition;
+    diffuseLightingPassProgram_["lightColor"] = light.color;
+    diffuseLightingPassProgram_["lightAttenuation"] = light.attenuationFactor;
+
+    // draw quad using the geometry shader
+    glDrawArrays(GL_POINTS, 0, 1);
+    assertGL("glDrawArrays failed");
+  }
 
   glDisable(GL_BLEND);
+}
+
+void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
+  std::lock_guard<std::mutex> lock(lightMutex_);
+
+  lights_.emplace(name, light);
 }
 
 } // namespace Private_
@@ -607,6 +719,10 @@ void Visualizer::start() { impl_->start(); }
 Visualizer::operator bool() const noexcept { return *impl_; }
 
 void Visualizer::renderOneFrame() { impl_->renderOneFrame(); }
+
+void Visualizer::addLight(LightName name, Light const &light) {
+  impl_->addLight(name, light);
+}
 
 template <class VertBase, class IdxBase>
 void Visualizer::setMesh(Eigen::MatrixBase<VertBase> const &V,

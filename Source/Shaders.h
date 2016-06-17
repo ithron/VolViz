@@ -13,6 +13,8 @@ extern std::string const quadGeomShaderSrc;
 
 extern std::string const simpleTextureFragShaderSrc;
 
+extern std::string const hdrTextureFragShaderSrc;
+
 extern std::string const simpleVertShaderSrc;
 
 extern std::string const passThroughFragShaderSrc;
@@ -29,7 +31,7 @@ extern std::string const depthVisualizationFragShaderSrc;
 
 extern std::string const ambientPassFragShaderSrc;
 
-extern std::string const lightingPassFragShaderSrc;
+extern std::string const diffuseLightingPassFragShaderSrc;
 
 extern std::string const specularVisualizationFragShaderSrc;
 
