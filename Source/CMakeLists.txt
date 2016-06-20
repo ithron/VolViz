@@ -88,7 +88,7 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   )
 endif()
 
-add_library(VolViz SHARED
+add_library(VolViz
   GLFW.cpp
   ShaderProgram.cpp
   Shaders.cpp
@@ -97,6 +97,8 @@ add_library(VolViz SHARED
 target_link_libraries(VolViz
   PUBLIC
     Eigen
+    GSL
+  PRIVATE
     glfw
     ${OPENGL_LIBRARIES}
     ${MKL_TARGET}
@@ -147,14 +149,14 @@ install(
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include/VolViz
 )
-#install(EXPORT VolVizExport NAMESPACE VolViz::
-#DESTINATION lib / cmake / VolViz
-#)
+install(EXPORT VolVizExport NAMESPACE VolViz::
+  DESTINATION lib/cmake/VolViz
+)
 install(FILES ${PUBLIC_HEADERS}
   DESTINATION include/VolViz
 )
 
-#export(EXPORT VolVizExport NAMESPACE VolViz::)
+export(EXPORT VolVizExport NAMESPACE VolViz::)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(VolVizConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake

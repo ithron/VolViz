@@ -18,8 +18,10 @@ endif()
 include_directories(SYSTEM ${DEPENDENCIES_DIR}/GLHeaders)
 find_package(OpenGL REQUIRED 4.5)
 include(ImportEigen)
+include(ImportGSL)
 include(ImportGLFW)
 include(ImportMKL)
+
 
 
 option(BUILD_TESTING "Build tests" ON)
