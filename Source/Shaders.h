@@ -33,6 +33,8 @@ extern std::string const ambientPassFragShaderSrc;
 
 extern std::string const diffuseLightingPassFragShaderSrc;
 
+extern std::string const specularLightingPassFragShaderSrc;
+
 extern std::string const specularVisualizationFragShaderSrc;
 
 } // namespace Shaders

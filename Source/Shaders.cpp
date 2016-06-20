@@ -53,6 +53,10 @@ std::string const diffuseLightingPassFragShaderSrc =
 #include "Shaders/diffuseLighting.frag"
     ;
 
+std::string const specularLightingPassFragShaderSrc =
+#include "Shaders/specularLighting.frag"
+    ;
+
 std::string const specularVisualizationFragShaderSrc =
 #include "Shaders/specularVisualization.frag"
     ;

@@ -172,6 +172,17 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::diffuseLightingPassFragShaderSrc))
                     .link());
 
+  auto specLightingPassProg =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::quadGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::specularLightingPassFragShaderSrc))
+                    .link());
+
   auto geomProg = std::move(
       GL::ShaderProgram()
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
@@ -198,6 +209,7 @@ void VisualizerImpl::setupShaders() {
   depthQuadProgram_ = std::move(depthQuadProg);
   ambientPassProgram_ = std::move(ambientPassProg);
   diffuseLightingPassProgram_ = std::move(diffLightingPassProg);
+  specularLightingPassProgram_ = std::move(specLightingPassProg);
   specularQuadProgram_ = std::move(specularQuadProg);
   hdrQuadProgram_ = std::move(hdrQuadProg);
 }
@@ -550,7 +562,14 @@ void VisualizerImpl::renderLights() {
 
   renderAmbientLighting();
 
+  glBlendFunc(GL_ONE, GL_ONE);
+  glEnable(GL_BLEND);
+
   renderDiffuseLighting();
+
+  renderSpecularLighting();
+
+  glDisable(GL_BLEND);
 }
 
 void VisualizerImpl::renderAmbientLighting() {
@@ -589,9 +608,6 @@ void VisualizerImpl::renderDiffuseLighting() {
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
 
-  glBlendFunc(GL_ONE, GL_ONE);
-  glEnable(GL_BLEND);
-
   auto boundVao = GL::binding(singleVertexData_.vao);
 
   for (auto const &lightEntry : lights_) {
@@ -609,8 +625,42 @@ void VisualizerImpl::renderDiffuseLighting() {
     glDrawArrays(GL_POINTS, 0, 1);
     assertGL("glDrawArrays failed");
   }
+}
 
-  glDisable(GL_BLEND);
+void VisualizerImpl::renderSpecularLighting() {
+  std::lock_guard<std::mutex> lock(lightMutex_);
+
+  auto const viewMat = viewMatrix();
+
+  specularLightingPassProgram_.use();
+  specularLightingPassProgram_["normalAndSpecularTex"] = 0;
+  specularLightingPassProgram_["albedoTex"] = 1;
+  specularLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
+  specularLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
+
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+
+  auto boundVao = GL::binding(singleVertexData_.vao);
+
+  for (auto const &lightEntry : lights_) {
+    auto const &light = lightEntry.second;
+
+    Expects(std::abs(light.position(3)) < 1e-3);
+
+    PositionH const lightPosition = (viewMat * light.position);
+
+    specularLightingPassProgram_["lightPosition"] =
+        lightPosition.head<3>().eval();
+    specularLightingPassProgram_["lightColor"] = light.color;
+
+    // draw quad using the geometry shader
+    glDrawArrays(GL_POINTS, 0, 1);
+    assertGL("glDrawArrays failed");
+  }
 }
 
 void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {

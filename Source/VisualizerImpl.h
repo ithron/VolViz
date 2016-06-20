@@ -115,6 +115,7 @@ private:
   GL::ShaderProgram gridProgram_;
   GL::ShaderProgram ambientPassProgram_;
   GL::ShaderProgram diffuseLightingPassProgram_;
+  GL::ShaderProgram specularLightingPassProgram_;
   /// @}
 
   /// Auxiliary textures use in the deferred shading process.
@@ -141,7 +142,7 @@ private:
     /// number of primitives (i.e. triangles) to render
     std::size_t nTriangles = 0;
     /// The shininess of the mesh surface
-    float shininess = 100.f;
+    float shininess = 10.f;
   } mesh_;
 
   /// Data representing a single vertex, required by the grid and fullscreen

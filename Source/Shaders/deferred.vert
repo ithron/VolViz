@@ -21,7 +21,7 @@ void main() {
   normal = normalize(inverseModelViewMatrix * normalIn);
   // set fixed colors for now
   albedo = vec3(0.8);
-  specular = 0.2;
+  specular = 1.0;
   
   gShininess = shininess;
 }
