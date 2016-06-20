@@ -33,9 +33,8 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
-    handleKeyInput(k, s, a, m);
-  };
+  glfw_.keyInputHandler =
+      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
@@ -84,8 +83,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
-                  .inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -102,9 +100,9 @@ void VisualizerImpl::setupShaders() {
   auto quadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::simpleTextureFragShaderSrc))
           .link());
@@ -112,9 +110,9 @@ void VisualizerImpl::setupShaders() {
   auto hdrQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::hdrTextureFragShaderSrc))
           .link());
@@ -133,9 +131,9 @@ void VisualizerImpl::setupShaders() {
   auto depthQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
@@ -154,9 +152,9 @@ void VisualizerImpl::setupShaders() {
   auto ambientPassProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
@@ -188,14 +186,14 @@ void VisualizerImpl::setupShaders() {
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
           .attachShader(
-              GL::Shader(GL_FRAGMENT_SHADER,
-                         GL::Shaders::deferredPassthroughFragShaderSrc))
+               GL::Shader(GL_FRAGMENT_SHADER,
+                          GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -407,6 +405,9 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_2:
         viewState_ = ViewState::LightingComponents;
         break;
+      case GLFW_KEY_G:
+        visualizer_->showGrid = !visualizer_->showGrid;
+        break;
     }
   }
 }
@@ -421,8 +422,8 @@ void VisualizerImpl::renderOneFrame() {
 
   switch (viewState_) {
     case ViewState::Scene3D:
-      if (visualizer_->showGrid) renderGrid();
       renderLights();
+      if (visualizer_->showGrid) renderGrid();
       break;
     case ViewState::LightingComponents:
       renderLightingTextures();
@@ -479,9 +480,9 @@ void VisualizerImpl::renderMeshes() {
 void VisualizerImpl::renderGrid() {
 
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  // glClearColor(0.f, 0.f, 0.f, 0.f);
+  // glClearDepth(1.0);
+  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
 
   auto const pMatrix = projectionMatrix();
@@ -558,7 +559,10 @@ void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
 
 void VisualizerImpl::renderLights() {
 
-  auto fboBinding = GL::binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+  auto depthBinding =
+      GL::binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
+  auto fboBinding =
+      GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
 
   renderAmbientLighting();
 
@@ -570,6 +574,11 @@ void VisualizerImpl::renderLights() {
   renderSpecularLighting();
 
   glDisable(GL_BLEND);
+
+  // blit the depth attachment
+  auto const w = static_cast<GLint>(glfw_.width());
+  auto const h = static_cast<GLint>(glfw_.height());
+  glBlitFramebuffer(0, 0, glfw_.width(), glfw_.height())
 }
 
 void VisualizerImpl::renderAmbientLighting() {
