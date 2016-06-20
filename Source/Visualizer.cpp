@@ -3,70 +3,11 @@
 #include "GL.h"
 #include "Visualizer.h"
 
-#include <Eigen/Geometry>
+#include <Eigen/Core>
+#include <gsl.h>
 
 #include <iostream>
 #include <mutex>
-
-namespace {
-
-/// Copmutes the axis aligned bouding box in normalised device coordinates
-/// of the influcence region of the given light
-Eigen::AlignedBox2f
-computeLightRect(VolViz::Light const &light, Eigen::Matrix4f const &viewMatrix,
-                 Eigen::Matrix4f const &projectionMatrix) noexcept {
-  using namespace VolViz;
-  using Eigen::Vector4f;
-  using Eigen::Vector3f;
-  using Eigen::Vector2f;
-
-  auto const radius = light.distanceAtForAttenuation(0.001f);
-
-  Position const pos = (viewMatrix * light.position).head<3>();
-  Position const viewX = (viewMatrix * PositionH::UnitX() * radius).head<3>();
-  Position const viewY = (viewMatrix * PositionH::UnitY() * radius).head<3>();
-  Position const viewZ = (viewMatrix * PositionH::UnitZ() * radius).head<3>();
-
-  Position const points[] = {
-      pos + viewX + viewY + viewZ, pos + viewX + viewY - viewZ,
-      pos + viewX - viewY + viewZ, pos + viewX - viewY - viewZ,
-      pos - viewX + viewY + viewZ, pos - viewX + viewY - viewZ,
-      pos - viewX - viewY + viewZ, pos - viewX - viewY - viewZ,
-  };
-
-  Position minP = 100.f * Position::Ones();
-  Position maxP = -100.f * Position::Ones();
-
-  for (auto const &p : gsl::as_span(points, 8)) {
-    minP = minP.cwiseMin(p);
-    maxP = maxP.cwiseMax(p);
-  }
-
-  std::cout << "AABB: " << minP.transpose() << " - " << maxP.transpose()
-            << std::endl;
-
-  // set z component of minP to maxP's z component
-  minP(2) = maxP(2);
-
-  // project min and max points
-  Vector4f projMinP = projectionMatrix * minP.homogeneous();
-  Vector4f projMaxP = projectionMatrix * maxP.homogeneous();
-
-  projMinP /= projMinP(3);
-  projMaxP /= projMaxP(3);
-
-  Vector4f const pMin = projMinP.cwiseMin(projMaxP);
-  Vector4f const pMax = projMaxP.cwiseMax(projMinP);
-
-  auto const projAABB = Eigen::AlignedBox2f(pMin.head<2>(), pMax.head<2>());
-
-  std::cout << "Projected AABB: " << projAABB.min().transpose() << " - "
-            << projAABB.max().transpose() << std::endl;
-
-  return projAABB;
-}
-
-} // anonumous namespace
 
 namespace VolViz {
 
@@ -92,8 +33,9 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
@@ -142,7 +84,8 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                  .inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -159,9 +102,9 @@ void VisualizerImpl::setupShaders() {
   auto quadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::simpleTextureFragShaderSrc))
           .link());
@@ -169,9 +112,9 @@ void VisualizerImpl::setupShaders() {
   auto hdrQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::hdrTextureFragShaderSrc))
           .link());
@@ -190,9 +133,9 @@ void VisualizerImpl::setupShaders() {
   auto depthQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
@@ -211,9 +154,9 @@ void VisualizerImpl::setupShaders() {
   auto ambientPassProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
@@ -234,14 +177,14 @@ void VisualizerImpl::setupShaders() {
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
           .attachShader(
-               GL::Shader(GL_FRAGMENT_SHADER,
-                          GL::Shaders::deferredPassthroughFragShaderSrc))
+              GL::Shader(GL_FRAGMENT_SHADER,
+                         GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -633,12 +576,13 @@ void VisualizerImpl::renderDiffuseLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
   auto const viewMat = viewMatrix();
-  auto const projMat = projectionMatrix();
 
   diffuseLightingPassProgram_.use();
   diffuseLightingPassProgram_["normalAndSpecularTex"] = 1;
   diffuseLightingPassProgram_["depthTex"] = 1;
   diffuseLightingPassProgram_["albedoTex"] = 2;
+  diffuseLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
+  diffuseLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -656,27 +600,14 @@ void VisualizerImpl::renderDiffuseLighting() {
 
   for (auto const &lightEntry : lights_) {
     auto const &light = lightEntry.second;
-    PositionH const lightPosition = viewMat * light.position;
 
-    std::cout << "Light " << lightEntry.first << " at "
-              << lightPosition.transpose() << std::endl;
-    auto const lightRect = computeLightRect(light, viewMat, projMat);
-    std::cout << "lightRect for light " << lightEntry.first << ": "
-              << lightRect.min().transpose() << " - "
-              << lightRect.max().transpose() << std::endl;
-    // lightRect to sceen coordinates
-    Point2 const topLeft = lightRect.min();
-    Point2 const size = lightRect.sizes();
+    Expects(std::abs(light.position(3)) < 1e-3);
 
-    std::cout << "lightRect for light " << lightEntry.first << ": "
-              << topLeft.transpose() << " - " << size.transpose() << std::endl;
+    PositionH const lightPosition = (viewMat * light.position);
 
-    diffuseLightingPassProgram_["topLeft"] = topLeft;
-    diffuseLightingPassProgram_["size"] = size;
-
-    diffuseLightingPassProgram_["lightPosition"] = lightPosition;
+    diffuseLightingPassProgram_["lightPosition"] =
+        lightPosition.head<3>().eval();
     diffuseLightingPassProgram_["lightColor"] = light.color;
-    diffuseLightingPassProgram_["lightAttenuation"] = light.attenuationFactor;
 
     // draw quad using the geometry shader
     glDrawArrays(GL_POINTS, 0, 1);

@@ -2,7 +2,6 @@
 #define VolViz_Visualizer_h
 
 #include <Eigen/Core>
-#include <gsl.h>
 
 #include <atomic>
 #include <memory>
@@ -25,27 +24,13 @@ class Light {
 public:
   /// Color of the light
   Color color{Color::Ones()};
-  /// Position of the light source. If the w (i.e. fourth) component is
-  /// zero, the light position is a infinie point. This can be used to model
-  /// directional light
+  /// Position of the light source. Since only directional light are supported,
+  /// the light is at an infinite position, therefore the position equals the
+  /// direction to the light source
   PositionH position{PositionH::Zero()};
-
-  /// The light's attenuation factor. The attenuation is computes as
-  /// 1 / (1 + factor * d^2), where d ist the distacne between a surface point
-  /// and the light source.
-  float attenuationFactor = 1.f;
 
   /// Factor that specifies how the light contributes to the ambient lighting
   float ambientFactor = 0.f;
-
-  inline float distanceAtForAttenuation(float att) const noexcept {
-    Expects(attenuationFactor > 0.f);
-    auto const sqDist = (1.f / att - 1.f) / attenuationFactor;
-
-    Ensures(sqDist >= 0.f);
-
-    return std::sqrt(sqDist);
-  }
 };
 
 class Visualizer {
