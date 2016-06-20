@@ -578,9 +578,8 @@ void VisualizerImpl::renderDiffuseLighting() {
   auto const viewMat = viewMatrix();
 
   diffuseLightingPassProgram_.use();
-  diffuseLightingPassProgram_["normalAndSpecularTex"] = 1;
-  diffuseLightingPassProgram_["depthTex"] = 1;
-  diffuseLightingPassProgram_["albedoTex"] = 2;
+  diffuseLightingPassProgram_["normalAndSpecularTex"] = 0;
+  diffuseLightingPassProgram_["albedoTex"] = 1;
   diffuseLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
   diffuseLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
 
@@ -588,9 +587,6 @@ void VisualizerImpl::renderDiffuseLighting() {
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
 
   glActiveTexture(GL_TEXTURE1);
-  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
-
-  glActiveTexture(GL_TEXTURE2);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
 
   glBlendFunc(GL_ONE, GL_ONE);
