@@ -88,7 +88,7 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   )
 endif()
 
-add_library(VolViz STATIC
+add_library(VolViz
   GLFW.cpp
   ShaderProgram.cpp
   Shaders.cpp
