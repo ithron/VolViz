@@ -14,9 +14,12 @@ namespace VolViz {
 ////////////////////////////////
 // VisualizerImpl
 //
+#pragma mark -
+#pragma mark VisualizerImpl
 
 namespace Private_ {
 
+#pragma mark Constructor
 VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   glfw_.makeCurrent();
@@ -97,6 +100,8 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
     lastMousePos_ = pos;
   };
 }
+
+#pragma mark Setup Code
 
 void VisualizerImpl::setupShaders() {
   auto quadProg = std::move(
@@ -265,11 +270,19 @@ void VisualizerImpl::setupFBOs() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+    // depth and stencil texture
+    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::FinalDepth]);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, width, height);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
     // setup FBO
     GL::Framebuffer fbo;
     glBindFramebuffer(GL_FRAMEBUFFER, fbo.name);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
                            textures_[TextureID::RenderedImage], 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
+                           textures_[TextureID::FinalDepth], 0);
     // check FBO
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
       throw std::runtime_error(
@@ -299,6 +312,8 @@ void VisualizerImpl::setupFBOs() {
   }
 }
 
+#pragma mark Matrix Computation
+
 Eigen::Matrix4f VisualizerImpl::projectionMatrix() const noexcept {
   auto const width = glfw_.width();
   auto const height = glfw_.height();
@@ -319,9 +334,17 @@ Eigen::Matrix4f VisualizerImpl::viewMatrix() const noexcept {
   return camTrans.matrix();
 }
 
+#pragma mark Interface Methods
+
 void VisualizerImpl::start() { glfw_.show(); }
 
 VisualizerImpl::operator bool() const noexcept { return glfw_; }
+
+void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
+  std::lock_guard<std::mutex> lock(lightMutex_);
+
+  lights_.emplace(name, light);
+}
 
 template <class VertBase, class IdxBase>
 void VisualizerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
@@ -407,9 +430,14 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_2:
         viewState_ = ViewState::LightingComponents;
         break;
+      case GLFW_KEY_G:
+        visualizer_->showGrid = !visualizer_->showGrid;
+        break;
     }
   }
 }
+
+#pragma mark Render Methods
 
 void VisualizerImpl::renderOneFrame() {
 
@@ -420,10 +448,11 @@ void VisualizerImpl::renderOneFrame() {
   renderMeshes();
 
   switch (viewState_) {
-    case ViewState::Scene3D:
-      if (visualizer_->showGrid) renderGrid();
+    case ViewState::Scene3D: {
       renderLights();
+      if (visualizer_->showGrid) renderGrid();
       break;
+    }
     case ViewState::LightingComponents:
       renderLightingTextures();
       break;
@@ -479,10 +508,6 @@ void VisualizerImpl::renderMeshes() {
 void VisualizerImpl::renderGrid() {
 
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  glEnable(GL_DEPTH_TEST);
 
   auto const pMatrix = projectionMatrix();
   auto const vMatrix = viewMatrix();
@@ -492,19 +517,22 @@ void VisualizerImpl::renderGrid() {
   gridProgram_["viewProjectionMatrix"] = (pMatrix * vMatrix).eval();
 
   auto boundVao = binding(singleVertexData_.vao);
+
+  glEnable(GL_DEPTH_TEST);
+  glDepthMask(GL_TRUE);
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
 }
 
 void VisualizerImpl::renderLightingTextures() {
-  auto boundFBO = GL::binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+  auto boundFBO =
+      GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
 
   auto const halfWindowSize = (Size2{glfw_.width(), glfw_.height()} / 2).eval();
 
-  glClearColor(1.0f, 1.f, 1.0f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT);
   glDisable(GL_FRAMEBUFFER_SRGB);
   glDisable(GL_DEPTH_TEST);
+
   renderQuad(Point2::Zero(), halfWindowSize, TextureID::NormalsAndSpecular,
              normalQuadProgram_);
   renderQuad(Point2::Zero() + Point2(halfWindowSize(0), 0), halfWindowSize,
@@ -521,7 +549,12 @@ void VisualizerImpl::renderFinalPass() {
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
   glEnable(GL_FRAMEBUFFER_SRGB);
-  renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
+  //  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  auto readBinding = GL::binding(finalFbo_, GL_READ_FRAMEBUFFER);
+  auto const w = static_cast<GLint>(glfw_.width());
+  auto const h = static_cast<GLint>(glfw_.height());
+  glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+  assertGL("Failed to blit framebuffer");
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,
@@ -533,7 +566,6 @@ void VisualizerImpl::renderFullscreenQuad(TextureID texture,
 void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
                                 TextureID texture, GL::ShaderProgram &prog) {
   auto const windowSize = Size2(glfw_.width(), glfw_.height());
-  glDisable(GL_DEPTH_TEST);
 
   // convert window coordinates (in pixel) to clip space coordinates
   auto const topLeftClipsSpace = (topLeft - windowSize / 2)
@@ -552,13 +584,21 @@ void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
   auto boundVao = GL::binding(singleVertexData_.vao);
 
   // draw quad using the geometry shader
+  glDisable(GL_DEPTH_TEST);
+  glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
 }
 
 void VisualizerImpl::renderLights() {
 
-  auto fboBinding = GL::binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+  auto depthBinding =
+      GL::binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
+  auto fboBinding =
+      GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
+
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+  glClear(GL_COLOR_BUFFER_BIT);
 
   renderAmbientLighting();
 
@@ -570,6 +610,12 @@ void VisualizerImpl::renderLights() {
   renderSpecularLighting();
 
   glDisable(GL_BLEND);
+
+  // blit the depth attachment
+  auto const w = static_cast<GLint>(glfw_.width());
+  auto const h = static_cast<GLint>(glfw_.height());
+  glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+  assertGL("Failed to blit framebuffer");
 }
 
 void VisualizerImpl::renderAmbientLighting() {
@@ -579,10 +625,6 @@ void VisualizerImpl::renderAmbientLighting() {
   for (auto const &l : lights_) {
     ambientColor += l.second.ambientFactor * l.second.color;
   }
-
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClear(GL_COLOR_BUFFER_BIT);
-  glDisable(GL_DEPTH_TEST);
 
   // Ambient pass
   ambientPassProgram_.use();
@@ -663,17 +705,13 @@ void VisualizerImpl::renderSpecularLighting() {
   }
 }
 
-void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
-  std::lock_guard<std::mutex> lock(lightMutex_);
-
-  lights_.emplace(name, light);
-}
-
 } // namespace Private_
 
 /////////////////////////////
 // Visualizer
 //
+#pragma mark -
+#pragma mark Visualizer
 
 Visualizer::Visualizer()
     : impl_(std::make_unique<Private_::VisualizerImpl>(this)) {}

@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   viewer.setMesh((10 * V).eval(), T);
 
   viewer.start();
-  viewer.showGrid = false;
+  viewer.showGrid = true;
 
   Light light;
   light.ambientFactor = 0.1f;
