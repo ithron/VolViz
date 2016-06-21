@@ -1,0 +1,21 @@
+dependencies: \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest_main.cc \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-internal.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-port.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-tuple.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest-message.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-string.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-filepath.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-type-util.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest-death-test.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-death-test-internal.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest-param-test.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-param-util.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-linked_ptr.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest-printers.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/internal/gtest-param-util-generated.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest_prod.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest-test-part.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest-typed-test.h \
+  /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include/gtest/gtest_pred_impl.h

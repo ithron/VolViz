@@ -1,0 +1,14 @@
+/Users/stefan/Projects/MIP/VolViz/build/CMakeFiles/RUN_TESTS.dir
+/Users/stefan/Projects/MIP/VolViz/build/CMakeFiles/install.dir
+/Users/stefan/Projects/MIP/VolViz/build/CMakeFiles/ALL_BUILD.dir
+/Users/stefan/Projects/MIP/VolViz/build/CMakeFiles/ZERO_CHECK.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/CMakeFiles/install.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/CMakeFiles/VolVisualizer.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/CMakeFiles/RUN_TESTS.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/CMakeFiles/VolViz.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest/CMakeFiles/RUN_TESTS.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest/CMakeFiles/install.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest/CMakeFiles/gtest_main.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest/CMakeFiles/gtest.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest/CMakeFiles/ALL_BUILD.dir
+/Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest/CMakeFiles/ZERO_CHECK.dir

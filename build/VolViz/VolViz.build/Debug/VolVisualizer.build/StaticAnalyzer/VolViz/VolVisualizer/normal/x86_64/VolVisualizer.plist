@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+ <key>clang_version</key>
+<string>Apple LLVM version 7.3.0 (clang-703.0.31)</string>
+ <key>files</key>
+ <array>
+  <string>/Users/stefan/Projects/MIP/VolViz/Dependencies/libigl/include/igl/ply.h</string>
+ </array>
+ <key>diagnostics</key>
+ <array>
+  <dict>
+   <key>path</key>
+   <array>
+    <dict>
+     <key>kind</key><string>event</string>
+     <key>location</key>
+     <dict>
+      <key>line</key><integer>850</integer>
+      <key>col</key><integer>3</integer>
+      <key>file</key><integer>0</integer>
+     </dict>
+     <key>ranges</key>
+     <array>
+       <array>
+        <dict>
+         <key>line</key><integer>850</integer>
+         <key>col</key><integer>15</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+        <dict>
+         <key>line</key><integer>850</integer>
+         <key>col</key><integer>30</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+       </array>
+     </array>
+     <key>depth</key><integer>0</integer>
+     <key>extended_message</key>
+     <string>Value stored to &apos;elem_data&apos; is never read</string>
+     <key>message</key>
+     <string>Value stored to &apos;elem_data&apos; is never read</string>
+    </dict>
+   </array>
+   <key>description</key><string>Value stored to &apos;elem_data&apos; is never read</string>
+   <key>category</key><string>Dead store</string>
+   <key>type</key><string>Dead assignment</string>
+   <key>check_name</key><string>deadcode.DeadStores</string>
+   <!-- This hash is experimental and going to change! -->
+   <key>issue_hash_content_of_line_in_context</key><string>90cac95ff3f7304f27342592b443afab</string>
+  <key>issue_context_kind</key><string>function</string>
+  <key>issue_context</key><string>ply_put_element</string>
+  <key>issue_hash_function_offset</key><string>15</string>
+  <key>location</key>
+  <dict>
+   <key>line</key><integer>850</integer>
+   <key>col</key><integer>3</integer>
+   <key>file</key><integer>0</integer>
+  </dict>
+  </dict>
+  <dict>
+   <key>path</key>
+   <array>
+    <dict>
+     <key>kind</key><string>event</string>
+     <key>location</key>
+     <dict>
+      <key>line</key><integer>908</integer>
+      <key>col</key><integer>9</integer>
+      <key>file</key><integer>0</integer>
+     </dict>
+     <key>ranges</key>
+     <array>
+       <array>
+        <dict>
+         <key>line</key><integer>908</integer>
+         <key>col</key><integer>21</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+        <dict>
+         <key>line</key><integer>908</integer>
+         <key>col</key><integer>55</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+       </array>
+     </array>
+     <key>depth</key><integer>0</integer>
+     <key>extended_message</key>
+     <string>Value stored to &apos;item_size&apos; is never read</string>
+     <key>message</key>
+     <string>Value stored to &apos;item_size&apos; is never read</string>
+    </dict>
+   </array>
+   <key>description</key><string>Value stored to &apos;item_size&apos; is never read</string>
+   <key>category</key><string>Dead store</string>
+   <key>type</key><string>Dead assignment</string>
+   <key>check_name</key><string>deadcode.DeadStores</string>
+   <!-- This hash is experimental and going to change! -->
+   <key>issue_hash_content_of_line_in_context</key><string>b858d33c27eba7cc6a367acce61ae445</string>
+  <key>issue_context_kind</key><string>function</string>
+  <key>issue_context</key><string>ply_put_element</string>
+  <key>issue_hash_function_offset</key><string>73</string>
+  <key>location</key>
+  <dict>
+   <key>line</key><integer>908</integer>
+   <key>col</key><integer>9</integer>
+   <key>file</key><integer>0</integer>
+  </dict>
+  </dict>
+  <dict>
+   <key>path</key>
+   <array>
+    <dict>
+     <key>kind</key><string>event</string>
+     <key>location</key>
+     <dict>
+      <key>line</key><integer>927</integer>
+      <key>col</key><integer>9</integer>
+      <key>file</key><integer>0</integer>
+     </dict>
+     <key>ranges</key>
+     <array>
+       <array>
+        <dict>
+         <key>line</key><integer>927</integer>
+         <key>col</key><integer>21</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+        <dict>
+         <key>line</key><integer>927</integer>
+         <key>col</key><integer>54</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+       </array>
+     </array>
+     <key>depth</key><integer>0</integer>
+     <key>extended_message</key>
+     <string>Value stored to &apos;item_size&apos; is never read</string>
+     <key>message</key>
+     <string>Value stored to &apos;item_size&apos; is never read</string>
+    </dict>
+   </array>
+   <key>description</key><string>Value stored to &apos;item_size&apos; is never read</string>
+   <key>category</key><string>Dead store</string>
+   <key>type</key><string>Dead assignment</string>
+   <key>check_name</key><string>deadcode.DeadStores</string>
+   <!-- This hash is experimental and going to change! -->
+   <key>issue_hash_content_of_line_in_context</key><string>c75bc844f3c2d76430af28a95251db0b</string>
+  <key>issue_context_kind</key><string>function</string>
+  <key>issue_context</key><string>ply_put_element</string>
+  <key>issue_hash_function_offset</key><string>92</string>
+  <key>location</key>
+  <dict>
+   <key>line</key><integer>927</integer>
+   <key>col</key><integer>9</integer>
+   <key>file</key><integer>0</integer>
+  </dict>
+  </dict>
+ </array>
+</dict>
+</plist>

@@ -1,0 +1,8 @@
+/Users/stefan/Projects/MIP/VolViz/build/glfw/include/GLFW/glfw3.h
+/Users/stefan/Projects/MIP/VolViz/build/glfw/include/GLFW/glfw3native.h
+/Users/stefan/Projects/MIP/VolViz/build/glfw/lib/cmake/glfw3/glfw3Config.cmake
+/Users/stefan/Projects/MIP/VolViz/build/glfw/lib/cmake/glfw3/glfw3ConfigVersion.cmake
+/Users/stefan/Projects/MIP/VolViz/build/glfw/lib/cmake/glfw3/glfw3Targets.cmake
+/Users/stefan/Projects/MIP/VolViz/build/glfw/lib/cmake/glfw3/glfw3Targets-noconfig.cmake
+/Users/stefan/Projects/MIP/VolViz/build/glfw/lib/pkgconfig/glfw3.pc
+/Users/stefan/Projects/MIP/VolViz/build/glfw/lib/libglfw3.a

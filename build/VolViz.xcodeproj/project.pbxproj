@@ -1,0 +1,1500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1313E7B357774659B5123252 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CEFDBF818DEF48A7BD3654A3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				9362CD0C7A43436A9678D39D /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		6CE9D3F3E2624490BC617946 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = DC83ED097BC84B849C281999 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				1CC5C119AAEE4DDBB92D8F80 /* CMake Rules */,
+			);
+			dependencies = (
+				7301A5159DC14177A9F7D00E /* PBXTargetDependency */,
+				43D02D8120384DB78D5EB90A /* PBXTargetDependency */,
+				909C639D83914C8EAEB2946A /* PBXTargetDependency */,
+				053B3F8143D14CA58F05F3EA /* PBXTargetDependency */,
+				AE5963EE3CF34923B0B2D303 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		6FD40CB45F924DB79E3429BB /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 081CF98E9D5040FAA15DC875 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				CC4A34D8830F4E3B8FB20FBE /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				BF7D5A566A4940B1A8C02B9D /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		84D924029E9149BEA4ABD63F /* RUN_TESTS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 36E371616EF343E49386812D /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */;
+			buildPhases = (
+				AA5587FABA5F44F1AB2855B1 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+			);
+			name = RUN_TESTS;
+			productName = RUN_TESTS;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0166FECCDD124D1C8B0C02C0 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest_main.cc */ = {isa = PBXBuildFile; fileRef = 371084E5434D4601A91447A9 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest_main.cc */; settings = {COMPILER_FLAGS = ""; }; };
+		0D560B8A3E2A4EA1BF5B8E21 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 95A690623C4843B4B582D2C6 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */; settings = {COMPILER_FLAGS = ""; }; };
+		117FE0C5B3D745819C9CBC1B /* /Users/stefan/Projects/MIP/VolViz/Source/VolVisualizer.cpp */ = {isa = PBXBuildFile; fileRef = 6DC1F22EB4EB4C0E967AF7A3 /* /Users/stefan/Projects/MIP/VolViz/Source/VolVisualizer.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		19F0780EC2024AC99C782546 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest-all.cc */ = {isa = PBXBuildFile; fileRef = A0794B05002D45099E2AD9B3 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest-all.cc */; settings = {COMPILER_FLAGS = ""; }; };
+		9094DBF943354576B74120A4 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 860651A0E5EB4B29AE0301D5 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */; settings = {COMPILER_FLAGS = ""; }; };
+		A810F632E7104D0BAB637BA4 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = F9712099F32F4F8AA3A6ED22 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */; settings = {COMPILER_FLAGS = ""; }; };
+		B16511061AB949F3AD8C993F /* /Users/stefan/Projects/MIP/VolViz/Source/Visualizer.cpp */ = {isa = PBXBuildFile; fileRef = 87B4AA025CED432983926199 /* /Users/stefan/Projects/MIP/VolViz/Source/Visualizer.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		C4D5F4375DD94D17A73A03FF /* /Users/stefan/Projects/MIP/VolViz/Source/ShaderProgram.cpp */ = {isa = PBXBuildFile; fileRef = 5A50A8349D7C473FB6B29FC7 /* /Users/stefan/Projects/MIP/VolViz/Source/ShaderProgram.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		C5A4C962E23A41E9B6B244FC /* /Users/stefan/Projects/MIP/VolViz/Source/GLFW.cpp */ = {isa = PBXBuildFile; fileRef = 1C90ACD1AF634F37A5E93F27 /* /Users/stefan/Projects/MIP/VolViz/Source/GLFW.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D3DCB952889844E989D5360B /* /Users/stefan/Projects/MIP/VolViz/Source/Shaders.cpp */ = {isa = PBXBuildFile; fileRef = 1367B430D2524373AEC00DC4 /* /Users/stefan/Projects/MIP/VolViz/Source/Shaders.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D87A64D3DEC8491D990BAE43 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = BFD86630451A4242AF6155F8 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		316B096D4EBD4D268584B605 = {
+			isa = PBXBuildStyle;
+		};
+		4BE36F6666174FE5A21110B9 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		6BD4F1C9ACA14997B6363684 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		9778C963ADE54F8FBD258934 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		C99D523007C2492095331BC8 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		1F69E57DFAE045F7986867B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 767AD4334CF942BD9995D932;
+			remoteInfo = VolVisualizer;
+		};
+		46B1AB0FE5F4487585F5116B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE9D3F3E2624490BC617946;
+			remoteInfo = ALL_BUILD;
+		};
+		6089850BB3C74FAC8EEFA929 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF20ED141FD44329BD8756CE;
+			remoteInfo = VolViz;
+		};
+		66CB071A9E79444C93E6B188 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32D8923DCCEB428BAD2FBF06;
+			remoteInfo = gtest;
+		};
+		7E4F6475A90D473A8CD80934 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF20ED141FD44329BD8756CE;
+			remoteInfo = VolViz;
+		};
+		A68DE0AF666D4772B89E762C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F665845549BA4CD888EAB654;
+			remoteInfo = gtest_main;
+		};
+		AC732E4B08FA4F6B8C9B301D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32D8923DCCEB428BAD2FBF06;
+			remoteInfo = gtest;
+		};
+		FD921589BC0F41728815EFBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6880AAF4B960403EA7E981D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1313E7B357774659B5123252;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05118A5C5EB445999548137E /* VolVisualizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = VolVisualizer; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+		1367B430D2524373AEC00DC4 /* /Users/stefan/Projects/MIP/VolViz/Source/Shaders.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Shaders.cpp; path = Source/Shaders.cpp; sourceTree = SOURCE_ROOT; };
+		1C90ACD1AF634F37A5E93F27 /* /Users/stefan/Projects/MIP/VolViz/Source/GLFW.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GLFW.cpp; path = Source/GLFW.cpp; sourceTree = SOURCE_ROOT; };
+		371084E5434D4601A91447A9 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest_main.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = gtest_main.cc; path = Dependencies/googletest/src/gtest_main.cc; sourceTree = SOURCE_ROOT; };
+		5A50A8349D7C473FB6B29FC7 /* /Users/stefan/Projects/MIP/VolViz/Source/ShaderProgram.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ShaderProgram.cpp; path = Source/ShaderProgram.cpp; sourceTree = SOURCE_ROOT; };
+		6DC1F22EB4EB4C0E967AF7A3 /* /Users/stefan/Projects/MIP/VolViz/Source/VolVisualizer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = VolVisualizer.cpp; path = Source/VolVisualizer.cpp; sourceTree = SOURCE_ROOT; };
+		860651A0E5EB4B29AE0301D5 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Source/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		87B4AA025CED432983926199 /* /Users/stefan/Projects/MIP/VolViz/Source/Visualizer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Visualizer.cpp; path = Source/Visualizer.cpp; sourceTree = SOURCE_ROOT; };
+		881F479876784716A8F98E17 /* gtest */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libgtest.a; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+		95A690623C4843B4B582D2C6 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Dependencies/googletest/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		97F9765104444E479371C693 /* /Users/stefan/Projects/MIP/VolViz/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		9FB5F691FB1D4AC5AEB47AD2 /* /Users/stefan/Projects/MIP/VolViz/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		A0794B05002D45099E2AD9B3 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest-all.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "gtest-all.cc"; path = "Dependencies/googletest/src/gtest-all.cc"; sourceTree = SOURCE_ROOT; };
+		BFD86630451A4242AF6155F8 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Source/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E2C89362C9BF4015B101B148 /* gtest_main */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libgtest_main.a; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2F9BA36521446CC93CF114F /* VolViz */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libVolViz.a; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9712099F32F4F8AA3A6ED22 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Dependencies/googletest/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		21AF00DDCE9E4E7CB527F4CF /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				A0794B05002D45099E2AD9B3 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest-all.cc */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		2803432909034B4799230D41 = {
+			isa = PBXGroup;
+			children = (
+				87F0720AFB1244318C1863FA /* Sources */,
+				8F54D6640A6040AE9FFC8E45 /* Resources */,
+				6A0F22CF9DEE4FCB82C4594F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		33EE74DD3C894A85A5FCFA4C /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				8E41236EA28A46C897B0F7AB /* CMake Rules */,
+				97F9765104444E479371C693 /* /Users/stefan/Projects/MIP/VolViz/CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		6A0F22CF9DEE4FCB82C4594F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05118A5C5EB445999548137E /* VolVisualizer */,
+				E2F9BA36521446CC93CF114F /* VolViz */,
+				881F479876784716A8F98E17 /* gtest */,
+				E2C89362C9BF4015B101B148 /* gtest_main */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87F0720AFB1244318C1863FA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				87FAA88CB7ED40CC976F3130 /* ALL_BUILD */,
+				33EE74DD3C894A85A5FCFA4C /* ZERO_CHECK */,
+				D901BB615B0E4730A6A1CC3F /* VolVisualizer */,
+				F59D8A561C3A4121BA352FEF /* VolViz */,
+				D1EDD9B8C7754DDB991070BA /* gtest_main */,
+				FC8AAAA4AD474A0DAF08F316 /* gtest */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		87FAA88CB7ED40CC976F3130 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				AEDD3D31DF3241CBB5860445 /* CMake Rules */,
+				9FB5F691FB1D4AC5AEB47AD2 /* /Users/stefan/Projects/MIP/VolViz/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		8E41236EA28A46C897B0F7AB /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8E47F3979CF8434D8F70A3D5 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C90ACD1AF634F37A5E93F27 /* /Users/stefan/Projects/MIP/VolViz/Source/GLFW.cpp */,
+				5A50A8349D7C473FB6B29FC7 /* /Users/stefan/Projects/MIP/VolViz/Source/ShaderProgram.cpp */,
+				1367B430D2524373AEC00DC4 /* /Users/stefan/Projects/MIP/VolViz/Source/Shaders.cpp */,
+				87B4AA025CED432983926199 /* /Users/stefan/Projects/MIP/VolViz/Source/Visualizer.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		8F54D6640A6040AE9FFC8E45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		94B68274548D440B9C7F3343 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				371084E5434D4601A91447A9 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest_main.cc */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		AEDD3D31DF3241CBB5860445 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		D1EDD9B8C7754DDB991070BA /* gtest_main */ = {
+			isa = PBXGroup;
+			children = (
+				94B68274548D440B9C7F3343 /* Source Files */,
+				95A690623C4843B4B582D2C6 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */,
+			);
+			name = gtest_main;
+			sourceTree = "<group>";
+		};
+		D901BB615B0E4730A6A1CC3F /* VolVisualizer */ = {
+			isa = PBXGroup;
+			children = (
+				FA73D4C387304A08ACEE30C0 /* Source Files */,
+				860651A0E5EB4B29AE0301D5 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */,
+			);
+			name = VolVisualizer;
+			sourceTree = "<group>";
+		};
+		F59D8A561C3A4121BA352FEF /* VolViz */ = {
+			isa = PBXGroup;
+			children = (
+				8E47F3979CF8434D8F70A3D5 /* Source Files */,
+				BFD86630451A4242AF6155F8 /* /Users/stefan/Projects/MIP/VolViz/Source/CMakeLists.txt */,
+			);
+			name = VolViz;
+			sourceTree = "<group>";
+		};
+		FA73D4C387304A08ACEE30C0 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DC1F22EB4EB4C0E967AF7A3 /* /Users/stefan/Projects/MIP/VolViz/Source/VolVisualizer.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		FC8AAAA4AD474A0DAF08F316 /* gtest */ = {
+			isa = PBXGroup;
+			children = (
+				21AF00DDCE9E4E7CB527F4CF /* Source Files */,
+				F9712099F32F4F8AA3A6ED22 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/CMakeLists.txt */,
+			);
+			name = gtest;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		32D8923DCCEB428BAD2FBF06 /* gtest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42A2DFA6105C4C888FC956A3 /* Build configuration list for PBXNativeTarget "gtest" */;
+			buildPhases = (
+				DFEE2FCB6D034E5984AEADBD /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gtest;
+			productName = gtest;
+			productReference = 881F479876784716A8F98E17 /* gtest */;
+			productType = "com.apple.product-type.library.static";
+		};
+		767AD4334CF942BD9995D932 /* VolVisualizer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C9E3C35A7554FCAAFA7152B /* Build configuration list for PBXNativeTarget "VolVisualizer" */;
+			buildPhases = (
+				4FFC90EEE18445268BE8EE3B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				87018B160FE842A48F214857 /* PBXTargetDependency */,
+			);
+			name = VolVisualizer;
+			productName = VolVisualizer;
+			productReference = 05118A5C5EB445999548137E /* VolVisualizer */;
+			productType = "com.apple.product-type.tool";
+		};
+		DF20ED141FD44329BD8756CE /* VolViz */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F74579E2C0648099572799B /* Build configuration list for PBXNativeTarget "VolViz" */;
+			buildPhases = (
+				4E1C4DC0CDD046D8A2976A7C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VolViz;
+			productName = VolViz;
+			productReference = E2F9BA36521446CC93CF114F /* VolViz */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F665845549BA4CD888EAB654 /* gtest_main */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC4811A4C6524D95A51C3AFF /* Build configuration list for PBXNativeTarget "gtest_main" */;
+			buildPhases = (
+				D2B9554B602C464A9900E34A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFE3D61A633641669C7B1306 /* PBXTargetDependency */,
+			);
+			name = gtest_main;
+			productName = gtest_main;
+			productReference = E2C89362C9BF4015B101B148 /* gtest_main */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6880AAF4B960403EA7E981D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0730;
+			};
+			buildConfigurationList = 1C7082A77247441897A67144 /* Build configuration list for PBXProject "VolViz" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				9778C963ADE54F8FBD258934 /* Debug */,
+				4BE36F6666174FE5A21110B9 /* Release */,
+				C99D523007C2492095331BC8 /* MinSizeRel */,
+				6BD4F1C9ACA14997B6363684 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 2803432909034B4799230D41;
+			projectDirPath = ../;
+			projectRoot = "";
+			targets = (
+				6CE9D3F3E2624490BC617946 /* ALL_BUILD */,
+				84D924029E9149BEA4ABD63F /* RUN_TESTS */,
+				1313E7B357774659B5123252 /* ZERO_CHECK */,
+				6FD40CB45F924DB79E3429BB /* install */,
+				767AD4334CF942BD9995D932 /* VolVisualizer */,
+				DF20ED141FD44329BD8756CE /* VolViz */,
+				32D8923DCCEB428BAD2FBF06 /* gtest */,
+				F665845549BA4CD888EAB654 /* gtest_main */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1CC5C119AAEE4DDBB92D8F80 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/stefan/Projects/MIP/VolViz/build -f /Users/stefan/Projects/MIP/VolViz/build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		839C789DC2EA4F8BA55592C9 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		8F337BCE6C21423DB7B4FF9F = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		9362CD0C7A43436A9678D39D /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/stefan/Projects/MIP/VolViz/build -f /Users/stefan/Projects/MIP/VolViz/build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		AA5587FABA5F44F1AB2855B1 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/stefan/Projects/MIP/VolViz/build -f /Users/stefan/Projects/MIP/VolViz/build/CMakeScripts/RUN_TESTS_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		C1F1843BA2684FAFAD259032 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		CC4A34D8830F4E3B8FB20FBE /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/stefan/Projects/MIP/VolViz/build -f /Users/stefan/Projects/MIP/VolViz/build/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		EEB1A93F9DA145DBBE8F8DFB = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E1C4DC0CDD046D8A2976A7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5A4C962E23A41E9B6B244FC /* /Users/stefan/Projects/MIP/VolViz/Source/GLFW.cpp */,
+				C4D5F4375DD94D17A73A03FF /* /Users/stefan/Projects/MIP/VolViz/Source/ShaderProgram.cpp */,
+				D3DCB952889844E989D5360B /* /Users/stefan/Projects/MIP/VolViz/Source/Shaders.cpp */,
+				B16511061AB949F3AD8C993F /* /Users/stefan/Projects/MIP/VolViz/Source/Visualizer.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FFC90EEE18445268BE8EE3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				117FE0C5B3D745819C9CBC1B /* /Users/stefan/Projects/MIP/VolViz/Source/VolVisualizer.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2B9554B602C464A9900E34A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0166FECCDD124D1C8B0C02C0 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest_main.cc */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE2FCB6D034E5984AEADBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19F0780EC2024AC99C782546 /* /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/src/gtest-all.cc */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		053B3F8143D14CA58F05F3EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32D8923DCCEB428BAD2FBF06 /* gtest */;
+			targetProxy = AC732E4B08FA4F6B8C9B301D /* PBXContainerItemProxy */;
+		};
+		43D02D8120384DB78D5EB90A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 767AD4334CF942BD9995D932 /* VolVisualizer */;
+			targetProxy = 1F69E57DFAE045F7986867B2 /* PBXContainerItemProxy */;
+		};
+		7301A5159DC14177A9F7D00E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF20ED141FD44329BD8756CE /* VolViz */;
+			targetProxy = 6089850BB3C74FAC8EEFA929 /* PBXContainerItemProxy */;
+		};
+		87018B160FE842A48F214857 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF20ED141FD44329BD8756CE /* VolViz */;
+			targetProxy = 7E4F6475A90D473A8CD80934 /* PBXContainerItemProxy */;
+		};
+		909C639D83914C8EAEB2946A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F665845549BA4CD888EAB654 /* gtest_main */;
+			targetProxy = A68DE0AF666D4772B89E762C /* PBXContainerItemProxy */;
+		};
+		AE5963EE3CF34923B0B2D303 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1313E7B357774659B5123252 /* ZERO_CHECK */;
+			targetProxy = FD921589BC0F41728815EFBD /* PBXContainerItemProxy */;
+		};
+		AFE3D61A633641669C7B1306 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32D8923DCCEB428BAD2FBF06 /* gtest */;
+			targetProxy = 66CB071A9E79444C93E6B188 /* PBXContainerItemProxy */;
+		};
+		BF7D5A566A4940B1A8C02B9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE9D3F3E2624490BC617946 /* ALL_BUILD */;
+			targetProxy = 46B1AB0FE5F4487585F5116B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		072843EBB8B544A98CEED109 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		07EEEC51A0644230954143D0 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		117BE235AE8243FA915C7FFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		17103B98E4444E1D8EBB8BDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "     -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest_main;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		1C064A3A6AF341CEADCE108F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/build;
+			};
+			name = Release;
+		};
+		1D2AFFF9A97C4A2C882D0847 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		275B314B96E14765A8B28092 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG   -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		375414AA819242C097F3CC1D /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/Dependencies/libigl/include, );
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/stefan/Projects/MIP/VolViz/build/VolViz/MinSizeRel/libVolViz.a    /Users/stefan/Projects/MIP/VolViz/build/glfw/lib/libglfw3.a -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo -framework OpenGL";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolVisualizer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		3B1231DFE7954E2ABCF58C74 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		3D9A00C9C70B49DEB143A1F3 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		49967994F8A94390A26AAC27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		60316C4F9FA847948C10EA8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/build/glfw/include, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolViz;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		737D385F31A0456F9AE68FC2 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG   -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest_main;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		73E40BAB888E42D2B1A752C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG   -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest_main;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		83C37FEBDABA4A499E1A327F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/build/glfw/include, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolViz;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		885409B7D3BE4B72A84AB3C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "     -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		8D63B5D58CCC471B8DCC56A0 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/build;
+			};
+			name = MinSizeRel;
+		};
+		9206FFFC04E7480BA538104D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		96F8D5556DBC4042A8E7051B /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/build;
+			};
+			name = RelWithDebInfo;
+		};
+		979AE381C27842A79D128D05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/build/glfw/include, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "   -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolViz;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		9B0ED75E779440DDA41A8C6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/Dependencies/libigl/include, );
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/stefan/Projects/MIP/VolViz/build/VolViz/Release/libVolViz.a    /Users/stefan/Projects/MIP/VolViz/build/glfw/lib/libglfw3.a -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo -framework OpenGL";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolVisualizer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		9C7705B1DBCE481B822AF82C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		A1181757ACE44F55BA6DC9BE /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		AFCFE4A4DC25410CB101892B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/Dependencies/libigl/include, );
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = "   -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/stefan/Projects/MIP/VolViz/build/VolViz/Debug/libVolViz.a    /Users/stefan/Projects/MIP/VolViz/build/glfw/lib/libglfw3.a -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo -framework OpenGL";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolVisualizer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		B3E3068E833A4C31A25DD13D /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/build/glfw/include, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolViz;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		C58BEFD87A7443188A5681FA /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG   -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest_main;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		C8727E3F18CC49BB800BD8BE /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		CAA360963F4A452CA04003A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		CE00F804D6874A1F805132DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		D616AA772ED7484AA04F5B9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		DEA3A56ACB124F7E86C2B6A6 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Source/.., "/Users/stefan/Projects/MIP/VolViz/Dependencies/Eigen-3.2.8", /Users/stefan/Projects/MIP/VolViz/Dependencies/libigl/include, );
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG -Werror -Weverything -Qunused-arguments -Wno-unknown-warning-option '-Wno-c++98-compat' '-Wno-c++98-compat-bind-to-temporary-copy' '-Wno-c++98-compat-pedantic' -Wno-global-constructors -Wno-reserved-id-macro -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast -Wno-deprecated -Wno-missing-noreturn -Wno-used-but-marked-unused -Wno-padded -Wno-cast-align -Wno-double-promotion -Wno-sign-compare -isystem/Users/stefan/Projects/MIP/VolViz/Dependencies/GSL/include '-std=gnu++14'  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/stefan/Projects/MIP/VolViz/build/VolViz/RelWithDebInfo/libVolViz.a    /Users/stefan/Projects/MIP/VolViz/build/glfw/lib/libglfw3.a -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo -framework OpenGL";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = VolVisualizer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		DFD9753EDC80479388D815F9 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG   -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		DFE94D12C8554DC3BE8E49C1 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		E84D7312E5DF4F22A9CB356F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/build;
+			};
+			name = Debug;
+		};
+		F7C4ECE2E2294C3C8AFF1E22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		FFD45F92941A48679ECC0CEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/stefan/Projects/MIP/VolViz/Dependencies/GLHeaders, /Users/stefan/Projects/MIP/VolViz/build, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest/include, /Users/stefan/Projects/MIP/VolViz/Dependencies/googletest, );
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG   -DGTEST_HAS_PTHREAD=1    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = gtest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/stefan/Projects/MIP/VolViz/build/VolViz/gtest;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		081CF98E9D5040FAA15DC875 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				117BE235AE8243FA915C7FFE /* Debug */,
+				49967994F8A94390A26AAC27 /* Release */,
+				C8727E3F18CC49BB800BD8BE /* MinSizeRel */,
+				07EEEC51A0644230954143D0 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1C7082A77247441897A67144 /* Build configuration list for PBXProject "VolViz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E84D7312E5DF4F22A9CB356F /* Debug */,
+				1C064A3A6AF341CEADCE108F /* Release */,
+				8D63B5D58CCC471B8DCC56A0 /* MinSizeRel */,
+				96F8D5556DBC4042A8E7051B /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		36E371616EF343E49386812D /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7C4ECE2E2294C3C8AFF1E22 /* Debug */,
+				D616AA772ED7484AA04F5B9F /* Release */,
+				3D9A00C9C70B49DEB143A1F3 /* MinSizeRel */,
+				072843EBB8B544A98CEED109 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3C9E3C35A7554FCAAFA7152B /* Build configuration list for PBXNativeTarget "VolVisualizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFCFE4A4DC25410CB101892B /* Debug */,
+				9B0ED75E779440DDA41A8C6F /* Release */,
+				375414AA819242C097F3CC1D /* MinSizeRel */,
+				DEA3A56ACB124F7E86C2B6A6 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		42A2DFA6105C4C888FC956A3 /* Build configuration list for PBXNativeTarget "gtest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				885409B7D3BE4B72A84AB3C2 /* Debug */,
+				FFD45F92941A48679ECC0CEE /* Release */,
+				275B314B96E14765A8B28092 /* MinSizeRel */,
+				DFD9753EDC80479388D815F9 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5F74579E2C0648099572799B /* Build configuration list for PBXNativeTarget "VolViz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				979AE381C27842A79D128D05 /* Debug */,
+				60316C4F9FA847948C10EA8E /* Release */,
+				83C37FEBDABA4A499E1A327F /* MinSizeRel */,
+				B3E3068E833A4C31A25DD13D /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CEFDBF818DEF48A7BD3654A3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAA360963F4A452CA04003A8 /* Debug */,
+				CE00F804D6874A1F805132DD /* Release */,
+				A1181757ACE44F55BA6DC9BE /* MinSizeRel */,
+				3B1231DFE7954E2ABCF58C74 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DC83ED097BC84B849C281999 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C7705B1DBCE481B822AF82C /* Debug */,
+				9206FFFC04E7480BA538104D /* Release */,
+				1D2AFFF9A97C4A2C882D0847 /* MinSizeRel */,
+				DFE94D12C8554DC3BE8E49C1 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EC4811A4C6524D95A51C3AFF /* Build configuration list for PBXNativeTarget "gtest_main" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17103B98E4444E1D8EBB8BDA /* Debug */,
+				73E40BAB888E42D2B1A752C3 /* Release */,
+				C58BEFD87A7443188A5681FA /* MinSizeRel */,
+				737D385F31A0456F9AE68FC2 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6880AAF4B960403EA7E981D5 /* Project object */;
+}
