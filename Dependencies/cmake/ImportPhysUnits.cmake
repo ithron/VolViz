@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+
+add_library(PhysUnits INTERFACE IMPORTED)
+set_property(TARGET PhysUnits PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+  ${DEPENDENCIES_DIR}/PhysUnits
+)

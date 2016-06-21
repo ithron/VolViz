@@ -98,7 +98,7 @@ target_link_libraries(VolViz
   PUBLIC
     Eigen
     GSL
-    simpleunit
+    PhysUnits
   PRIVATE
     glfw
     ${OPENGL_LIBRARIES}

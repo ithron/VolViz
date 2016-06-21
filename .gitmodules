@@ -22,3 +22,6 @@
 [submodule "Dependencies/simpleunit"]
 	path = Dependencies/simpleunit
 	url = https://github.com/wardw/simpleunit.git
+[submodule "Dependencies/PhysUnits"]
+	path = Dependencies/PhysUnits
+	url = https://github.com/martinmoene/PhysUnits-CT-Cpp11.git

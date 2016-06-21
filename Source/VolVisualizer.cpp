@@ -11,6 +11,7 @@
 
 int main(int argc, char **argv) {
   using namespace VolViz;
+  using namespace VolViz::literals;
   using Eigen::Vector3d;
   using Vertices = Eigen::MatrixXd;
   using Triangles = Eigen::MatrixXi;
@@ -75,6 +76,8 @@ int main(int argc, char **argv) {
   light.color = Color::UnitZ();
   light.position = PositionH(1, 2, 1, 0);
   viewer.addLight(2, light);
+
+  viewer.scale = 1_cm;
 
   while (viewer) { viewer.renderOneFrame(); }
 

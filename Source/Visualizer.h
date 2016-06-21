@@ -1,6 +1,9 @@
 #ifndef VolViz_Visualizer_h
 #define VolViz_Visualizer_h
 
+#include "Types.h"
+#include "AtomicWrapper.h"
+
 #include <Eigen/Core>
 
 #include <atomic>
@@ -63,6 +66,7 @@ public:
   void addLight(LightName name, Light const &light);
 
   std::atomic<bool> showGrid{true};
+  AtomicWrapper<Length> scale{1 * milli * meter};
 
 private:
   std::unique_ptr<Private_::VisualizerImpl> impl_;
