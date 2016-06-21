@@ -47,7 +47,8 @@ private:
     NormalsAndSpecular = 0,
     Albedo = 1,
     Depth = 2,
-    RenderedImage = 3
+    RenderedImage = 3,
+    FinalDepth = 4
   };
 
   /// Compiles and links all shader programs
@@ -92,7 +93,6 @@ private:
 
   void renderLightSpecular(Light const &light);
 
-
   /// Renders the final image to screen
   void renderFinalPass();
 
@@ -125,7 +125,7 @@ private:
     }
 
   private:
-    GL::Textures<4> textures_;
+    GL::Textures<5> textures_;
   } textures_;
   /// Frabebuffer used for the deferred shading
   GL::Framebuffer lightingFbo_{0};
