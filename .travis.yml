@@ -60,7 +60,7 @@ before_script:
 script:
   - make all
 
-after_sucess:
+after_success:
   - cd $TRAVIS_BUILD_DIR
   - chmod +x generateDocumentationAndDeploy.sh
   - ./generateDocumentationAndDeploy.sh
