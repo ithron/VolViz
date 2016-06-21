@@ -10,3 +10,9 @@
 [submodule "Dependencies/GSL"]
 	path = Dependencies/GSL
 	url = https://github.com/Microsoft/GSL.git
+[submodule "Dependencies/boost-1.6.0"]
+	path = Dependencies/boost-1.6.0
+	url = https://github.com/boostorg/boost.git
+[submodule "Dependencies/boost-1.61.0"]
+	path = Dependencies/boost-1.61.0
+	url = https://github.com/boostorg/boost.git
