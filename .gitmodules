@@ -10,18 +10,6 @@
 [submodule "Dependencies/GSL"]
 	path = Dependencies/GSL
 	url = https://github.com/Microsoft/GSL.git
-[submodule "Dependencies/boost-1.6.0"]
-	path = Dependencies/boost-1.6.0
-	url = https://github.com/boostorg/boost.git
-[submodule "Dependencies/boost-1.61.0"]
-	path = Dependencies/boost-1.61.0
-	url = https://github.com/boostorg/boost.git
-[submodule "Dependencies/boost-units"]
-	path = Dependencies/boost-units
-	url = https://github.com/boostorg/units.git
-[submodule "Dependencies/simpleunit"]
-	path = Dependencies/simpleunit
-	url = https://github.com/wardw/simpleunit.git
 [submodule "Dependencies/PhysUnits"]
 	path = Dependencies/PhysUnits
 	url = https://github.com/martinmoene/PhysUnits-CT-Cpp11.git
