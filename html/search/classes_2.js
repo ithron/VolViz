@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['glfw',['GLFW',['../classVolViz_1_1GL_1_1GLFW.html',1,'VolViz::GL']]]
+  ['framebuffer',['Framebuffer',['../structVolViz_1_1GL_1_1Framebuffer.html',1,'VolViz::GL']]]
 ];
