@@ -98,6 +98,7 @@ target_link_libraries(VolViz
   PUBLIC
     Eigen
     GSL
+    simpleunit
   PRIVATE
     glfw
     ${OPENGL_LIBRARIES}

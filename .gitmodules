@@ -16,3 +16,9 @@
 [submodule "Dependencies/boost-1.61.0"]
 	path = Dependencies/boost-1.61.0
 	url = https://github.com/boostorg/boost.git
+[submodule "Dependencies/boost-units"]
+	path = Dependencies/boost-units
+	url = https://github.com/boostorg/units.git
+[submodule "Dependencies/simpleunit"]
+	path = Dependencies/simpleunit
+	url = https://github.com/wardw/simpleunit.git

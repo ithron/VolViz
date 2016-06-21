@@ -21,6 +21,7 @@ include(ImportEigen)
 include(ImportGSL)
 include(ImportGLFW)
 include(ImportMKL)
+include(ImportSimpleunit)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
