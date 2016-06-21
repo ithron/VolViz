@@ -5,6 +5,10 @@ compiler:
  - clang
  - gcc
 
+branches:
+  except:
+    - gh-pages
+
 addons:
   apt:
     sources:
@@ -18,6 +22,9 @@ addons:
       - xorg-dev
       - libglu1-mesa-dev
       - mesa-common-dev
+      - doxygen
+      - doxygen-doc
+      - graphviz
 
 os:
   - linux
@@ -27,6 +34,10 @@ env:
     - CLANG_VERSION=3.8.0
     - CLANG_ARCHIVE=$HOME/clang+llvm.tar.xz
     - CLANG_DIR=$HOME/clang-$CLANG_VERSION
+    - GH_REPO_NAME: VolViz
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - GH_REPO_REF: github.com/ithron/VolViz.git
+
 
   matrix:
     - BUILD_TYPE=Debug
@@ -48,3 +59,8 @@ before_script:
 
 script:
   - make all
+
+after_sucess:
+  - cd $TRAVIS_BUILD_DIR
+  - chmod +x generateDocumentationAndDeploy.sh
+  - ./generateDocumentationAndDeploy.sh
