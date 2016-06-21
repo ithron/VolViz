@@ -36,9 +36,8 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   setupShaders();
   setupFBOs();
-  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
-    handleKeyInput(k, s, a, m);
-  };
+  glfw_.keyInputHandler =
+      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
@@ -87,8 +86,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
         if (angle > 1e-3) {
           cameraOrientation_ *=
               Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis))
-                  .inverse();
+                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
           cameraOrientation_.normalize();
         }
         break;
@@ -107,9 +105,9 @@ void VisualizerImpl::setupShaders() {
   auto quadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::simpleTextureFragShaderSrc))
           .link());
@@ -117,9 +115,9 @@ void VisualizerImpl::setupShaders() {
   auto hdrQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::hdrTextureFragShaderSrc))
           .link());
@@ -138,9 +136,9 @@ void VisualizerImpl::setupShaders() {
   auto depthQuadProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
@@ -159,9 +157,9 @@ void VisualizerImpl::setupShaders() {
   auto ambientPassProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
@@ -193,14 +191,14 @@ void VisualizerImpl::setupShaders() {
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
           .attachShader(
-              GL::Shader(GL_FRAGMENT_SHADER,
-                         GL::Shaders::deferredPassthroughFragShaderSrc))
+               GL::Shader(GL_FRAGMENT_SHADER,
+                          GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
   auto gridProg = std::move(
       GL::ShaderProgram()
           .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -550,7 +548,8 @@ void VisualizerImpl::renderFinalPass() {
   // glDisable(GL_FRAMEBUFFER_SRGB);
   glEnable(GL_FRAMEBUFFER_SRGB);
   //  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
-  auto readBinding = GL::binding(finalFbo_, GL_READ_FRAMEBUFFER);
+  auto readBinding =
+      GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
   auto const w = static_cast<GLint>(glfw_.width());
   auto const h = static_cast<GLint>(glfw_.height());
   glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
