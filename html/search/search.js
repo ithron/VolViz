@@ -7,16 +7,20 @@
 
 var indexSectionsWithContent =
 {
-  0: "cpsv",
-  1: "v",
-  2: "cps"
+  0: "abcfghiklmpstuvw",
+  1: "abfglstuv",
+  2: "bfghimsvw",
+  3: "ackmpsw",
+  4: "cps"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "groups"
+  2: "functions",
+  3: "variables",
+  4: "groups"
 };
 
 function convertToId(search)

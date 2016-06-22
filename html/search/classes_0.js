@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['visualizerimpl',['VisualizerImpl',['../classVolViz_1_1Private___1_1VisualizerImpl.html',1,'VolViz::Private_']]]
+  ['atomicwrapper',['AtomicWrapper',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
+  ['atomicwrapper_3c_20length_20_3e',['AtomicWrapper&lt; Length &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]]
 ];
