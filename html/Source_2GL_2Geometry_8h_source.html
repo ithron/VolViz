@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -62,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,30 +90,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Geometry.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VolViz_GL_Geometry_h</span></div>
+<a href="Source_2GL_2Geometry_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VolViz_GL_Geometry_h</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define VolViz_GL_Geometry_h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Types.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Types_8h.html">Types.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>VolViz {</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>Private_ {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>GL {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">enum</span> MoveMask : uint8_t {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  None = 0x00,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  X = 0x01,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  Y = 0x02,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  Z = 0x04,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  All = 0x07</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242">   10</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242">MoveMask</a> : uint8_t {</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a50deef94aa23b3e6cbbb49610d496506">   11</a></span>&#160;  <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a50deef94aa23b3e6cbbb49610d496506">None</a> = 0x00,</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a295959b4fb8daee691a84d8915541522">   12</a></span>&#160;  <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a295959b4fb8daee691a84d8915541522">X</a> = 0x01,</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a2e95fa3ff1922ac982f292b588691ff7">   13</a></span>&#160;  <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a2e95fa3ff1922ac982f292b588691ff7">Y</a> = 0x02,</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a182293dbcb28ccbf8af29c6577c76f6a">   14</a></span>&#160;  <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a182293dbcb28ccbf8af29c6577c76f6a">Z</a> = 0x04,</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a0bb18e7ad6bc59a714df136a0ada2c99">   15</a></span>&#160;  <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a0bb18e7ad6bc59a714df136a0ada2c99">All</a> = 0x07</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html">   18</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html">Geometry</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  Position position{Position::Zero()};</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  Orientation orientation{Orientation::Identity()};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">bool</span> movable{<span class="keyword">true</span>};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  MoveMask moveMask{All};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  Length scale {1 * milli * meter};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  Color color{Colors::White()};</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a1d9507ed6a1ccaefc0183bc412cbb407">   19</a></span>&#160;  <a class="code" href="namespaceVolViz.html#adb9a559ef5e8c60874a9ce0feda8c553">Position</a> <a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a1d9507ed6a1ccaefc0183bc412cbb407">position</a>{Position::Zero()};</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#ae339d0b0d34b4978db7a6d2b2b2a315b">   20</a></span>&#160;  <a class="code" href="namespaceVolViz.html#ae6633d7c5a3df8f37520171c48bba92f">Orientation</a> <a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#ae339d0b0d34b4978db7a6d2b2b2a315b">orientation</a>{Orientation::Identity()};</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840">   21</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840">movable</a>{<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24">   22</a></span>&#160;  <a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242">MoveMask</a> <a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24">moveMask</a>{<a class="code" href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a0bb18e7ad6bc59a714df136a0ada2c99">All</a>};</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8">   23</a></span>&#160;  <a class="code" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a> <a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8">scale</a> {1 * milli * meter};</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#acc172aa0fb5f4ac5e9636ec3ed9cf43d">   24</a></span>&#160;  <a class="code" href="namespaceVolViz.html#a778f7b9467e7b03851101492554b004b">Color</a> <a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#acc172aa0fb5f4ac5e9636ec3ed9cf43d">color</a>{<a class="code" href="namespaceVolViz_1_1Colors.html#a9fed66481d0a15c48a27931394e465a9">Colors::White</a>()};</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace GL</span></div>
@@ -119,11 +121,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <span class="comment">// namespace VolViz</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif // VolViz_GL_Geometry_h</span></div>
+<div class="ttc" id="namespaceVolViz_1_1Private___1_1GL_html_af68bf6b5e7fcceb464312728fb53b242a50deef94aa23b3e6cbbb49610d496506"><div class="ttname"><a href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a50deef94aa23b3e6cbbb49610d496506">VolViz::Private_::GL::None</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:11</div></div>
+<div class="ttc" id="Types_8h_html"><div class="ttname"><a href="Types_8h.html">Types.h</a></div></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html_a0b5ba30445e11a049812e8fcd7467840"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840">VolViz::Private_::GL::Geometry::movable</a></div><div class="ttdeci">bool movable</div><div class="ttdef"><b>Definition:</b> Geometry.h:21</div></div>
+<div class="ttc" id="namespaceVolViz_html_ae6633d7c5a3df8f37520171c48bba92f"><div class="ttname"><a href="namespaceVolViz.html#ae6633d7c5a3df8f37520171c48bba92f">VolViz::Orientation</a></div><div class="ttdeci">Eigen::Quaternionf Orientation</div><div class="ttdoc">6-DOF orientation, represented as a quaternion </div><div class="ttdef"><b>Definition:</b> Types.h:31</div></div>
+<div class="ttc" id="namespaceVolViz_1_1Colors_html_a9fed66481d0a15c48a27931394e465a9"><div class="ttname"><a href="namespaceVolViz_1_1Colors.html#a9fed66481d0a15c48a27931394e465a9">VolViz::Colors::White</a></div><div class="ttdeci">auto White() noexcept</div><div class="ttdef"><b>Definition:</b> Types.h:21</div></div>
+<div class="ttc" id="namespaceVolViz_html_adb9a559ef5e8c60874a9ce0feda8c553"><div class="ttname"><a href="namespaceVolViz.html#adb9a559ef5e8c60874a9ce0feda8c553">VolViz::Position</a></div><div class="ttdeci">Eigen::Vector3f Position</div><div class="ttdoc">Position in 3D euclidean space. </div><div class="ttdef"><b>Definition:</b> Types.h:12</div></div>
+<div class="ttc" id="namespaceVolViz_1_1Private___1_1GL_html_af68bf6b5e7fcceb464312728fb53b242a0bb18e7ad6bc59a714df136a0ada2c99"><div class="ttname"><a href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a0bb18e7ad6bc59a714df136a0ada2c99">VolViz::Private_::GL::All</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:15</div></div>
+<div class="ttc" id="namespaceVolViz_1_1Private___1_1GL_html_af68bf6b5e7fcceb464312728fb53b242"><div class="ttname"><a href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242">VolViz::Private_::GL::MoveMask</a></div><div class="ttdeci">MoveMask</div><div class="ttdef"><b>Definition:</b> Geometry.h:10</div></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html_ae339d0b0d34b4978db7a6d2b2b2a315b"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#ae339d0b0d34b4978db7a6d2b2b2a315b">VolViz::Private_::GL::Geometry::orientation</a></div><div class="ttdeci">Orientation orientation</div><div class="ttdef"><b>Definition:</b> Geometry.h:20</div></div>
+<div class="ttc" id="namespaceVolViz_html_a778f7b9467e7b03851101492554b004b"><div class="ttname"><a href="namespaceVolViz.html#a778f7b9467e7b03851101492554b004b">VolViz::Color</a></div><div class="ttdeci">Eigen::Vector3f Color</div><div class="ttdoc">Normalized RGB color. </div><div class="ttdef"><b>Definition:</b> Types.h:17</div></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html_a1d9507ed6a1ccaefc0183bc412cbb407"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a1d9507ed6a1ccaefc0183bc412cbb407">VolViz::Private_::GL::Geometry::position</a></div><div class="ttdeci">Position position</div><div class="ttdef"><b>Definition:</b> Geometry.h:19</div></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html_a968f81bcda23957623036193f4db4a24"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24">VolViz::Private_::GL::Geometry::moveMask</a></div><div class="ttdeci">MoveMask moveMask</div><div class="ttdef"><b>Definition:</b> Geometry.h:22</div></div>
+<div class="ttc" id="namespaceVolViz_1_1Private___1_1GL_html_af68bf6b5e7fcceb464312728fb53b242a295959b4fb8daee691a84d8915541522"><div class="ttname"><a href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a295959b4fb8daee691a84d8915541522">VolViz::Private_::GL::X</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:12</div></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html_acc172aa0fb5f4ac5e9636ec3ed9cf43d"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#acc172aa0fb5f4ac5e9636ec3ed9cf43d">VolViz::Private_::GL::Geometry::color</a></div><div class="ttdeci">Color color</div><div class="ttdef"><b>Definition:</b> Geometry.h:24</div></div>
+<div class="ttc" id="namespaceVolViz_1_1Private___1_1GL_html_af68bf6b5e7fcceb464312728fb53b242a2e95fa3ff1922ac982f292b588691ff7"><div class="ttname"><a href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a2e95fa3ff1922ac982f292b588691ff7">VolViz::Private_::GL::Y</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:13</div></div>
 <div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html">VolViz::Private_::GL::Geometry</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:18</div></div>
+<div class="ttc" id="namespaceVolViz_html_a192fba37d6d1df2742d3c3373e82629d"><div class="ttname"><a href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">VolViz::Length</a></div><div class="ttdeci">phys::units::quantity&lt; phys::units::length_d &gt; Length</div><div class="ttdef"><b>Definition:</b> Types.h:37</div></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html_a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8">VolViz::Private_::GL::Geometry::scale</a></div><div class="ttdeci">Length scale</div><div class="ttdef"><b>Definition:</b> Geometry.h:23</div></div>
+<div class="ttc" id="namespaceVolViz_1_1Private___1_1GL_html_af68bf6b5e7fcceb464312728fb53b242a182293dbcb28ccbf8af29c6577c76f6a"><div class="ttname"><a href="namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a182293dbcb28ccbf8af29c6577c76f6a">VolViz::Private_::GL::Z</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 15:25:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:29:50 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

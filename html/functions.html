@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -71,6 +72,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
+      <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
+      <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li class="current"><a href="functions.html#index_:"><span>:</span></a></li>
+      <li><a href="functions_a.html#index_a"><span>a</span></a></li>
+      <li><a href="functions_b.html#index_b"><span>b</span></a></li>
+      <li><a href="functions_c.html#index_c"><span>c</span></a></li>
+      <li><a href="functions_d.html#index_d"><span>d</span></a></li>
+      <li><a href="functions_e.html#index_e"><span>e</span></a></li>
+      <li><a href="functions_f.html#index_f"><span>f</span></a></li>
+      <li><a href="functions_g.html#index_g"><span>g</span></a></li>
+      <li><a href="functions_h.html#index_h"><span>h</span></a></li>
+      <li><a href="functions_i.html#index_i"><span>i</span></a></li>
+      <li><a href="functions_k.html#index_k"><span>k</span></a></li>
+      <li><a href="functions_l.html#index_l"><span>l</span></a></li>
+      <li><a href="functions_m.html#index_m"><span>m</span></a></li>
+      <li><a href="functions_n.html#index_n"><span>n</span></a></li>
+      <li><a href="functions_o.html#index_o"><span>o</span></a></li>
+      <li><a href="functions_p.html#index_p"><span>p</span></a></li>
+      <li><a href="functions_q.html#index_q"><span>q</span></a></li>
+      <li><a href="functions_r.html#index_r"><span>r</span></a></li>
+      <li><a href="functions_s.html#index_s"><span>s</span></a></li>
+      <li><a href="functions_t.html#index_t"><span>t</span></a></li>
+      <li><a href="functions_u.html#index_u"><span>u</span></a></li>
+      <li><a href="functions_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_w.html#index_w"><span>w</span></a></li>
+      <li><a href="functions_~.html#index_~"><span>~</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -79,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,66 +122,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="contents">
-<div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div><ul>
-<li>ambientFactor
-: <a class="el" href="classVolViz_1_1Light.html#a622fe5e054edf6e84b089fa02f192c23">VolViz::Light</a>
-</li>
-<li>Buffer()
-: <a class="el" href="structVolViz_1_1Private___1_1GL_1_1Buffer.html#aaec276218f9211486e4504cc3b337529">VolViz::Private_::GL::Buffer</a>
-</li>
-<li>color
-: <a class="el" href="classVolViz_1_1Light.html#afc07313a19259db316b48fb66848dbf8">VolViz::Light</a>
-</li>
-<li>Framebuffer()
-: <a class="el" href="structVolViz_1_1Private___1_1GL_1_1Framebuffer.html#a7d6add011e21f9f66c089f185bebcd54">VolViz::Private_::GL::Framebuffer</a>
-</li>
-<li>GLFW()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a6295dc3726b4eeb91355194d03a44a2c">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>height()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a2254de6656779aa124982e8b5ee9a6c4">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>hide()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#aded2603b8cf581abd82c66e2cc2d22a0">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>isHidden()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a921dc0cbc892916e003c472b4c1d24a4">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>keyInputHandler
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#aac01b85e536a6cc3837c8e5913561cfe">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>makeCurrent()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a67deca851f61f0e718a11dd0fa0f941a">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>mouseButtonCallback
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a9877a6fdd95a63c3ab15a127f08df185">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>mouseMoveCallback
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a00b54cb9731f63b285b9a0ae65a9cd45">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>position
-: <a class="el" href="classVolViz_1_1Light.html#a07ed4fa7f8a7ad6acb994be554480dd3">VolViz::Light</a>
-</li>
-<li>scrollWheelInputHandler
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a4d219ec5b4367e19501c6a91c9479632">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>show()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a01c7ae52f32c891ab313dfdba2d4d4de">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>VertexArray()
-: <a class="el" href="structVolViz_1_1Private___1_1GL_1_1VertexArray.html#a01cbf09f0a3d74d13ffa8ade08390b42">VolViz::Private_::GL::VertexArray</a>
-</li>
-<li>width()
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a158728e290719abc797150d00fa7debe">VolViz::Private_::GL::GLFW</a>
-</li>
-<li>windowResizeCallback
-: <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a3cb1c04ea4e44ed1d9d547128986f1cd">VolViz::Private_::GL::GLFW</a>
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a class="anchor" id="index_:"></a>- : -</h3><ul>
+<li>::VolViz::Visualizer
+: <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a1c20232016f843917bdcf96951eb7b56">VolViz::Private_::VisualizerImpl</a>
 </li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 15:25:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:29:50 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

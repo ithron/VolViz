@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -71,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>VolViz</b></li><li class="navelem"><a class="el" href="classVolViz_1_1AtomicWrapper.html">AtomicWrapper</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceVolViz.html">VolViz</a></li><li class="navelem"><a class="el" href="classVolViz_1_1AtomicWrapper.html">AtomicWrapper</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -93,17 +94,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>AtomicWrapper</b>(T const &amp;obj) (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>AtomicWrapper</b>(T &amp;&amp;obj) (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>AtomicWrapper</b>(AtomicWrapper const &amp;)=delete (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator T</b>() const  (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator=</b>(AtomicWrapper const &amp;)=delete (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator=</b>(T const &amp;rhs) (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator=</b>(T &amp;&amp;rhs) (defined in <a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#ae447c4b21f9413cf25c2a0f2cf1c2c21">AtomicWrapper</a>(T const &amp;obj)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#a36561ceb07ba4d59605a7c88e2075fb4">AtomicWrapper</a>(T &amp;&amp;obj)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#aeeca9015005bc20c245dd19163810943">AtomicWrapper</a>(AtomicWrapper const &amp;)=delete</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#a86185258afa1af292f93aba23286f8ce">mutex_</a></td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#a7729c02f7e43511fee070bd0f042c35c">obj_</a></td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#a50c5cceb3d3d2e0b4a4eb3402cad6ca7">operator T</a>() const </td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#a4f3221eb46509002e7475007f95f0b6f">operator=</a>(AtomicWrapper const &amp;)=delete</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#aac763b627e87d27f554cbcfb0d02ebf0">operator=</a>(T const &amp;rhs)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html#a959f04bff7cb65555d832e896b1a9b9b">operator=</a>(T &amp;&amp;rhs)</td><td class="entry"><a class="el" href="classVolViz_1_1AtomicWrapper.html">VolViz::AtomicWrapper&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 15:25:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:29:50 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

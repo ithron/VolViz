@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -71,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>VolViz</b></li><li class="navelem"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceVolViz.html">VolViz</a></li><li class="navelem"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -91,88 +92,450 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classVolViz_1_1Visualizer-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">VolViz::Visualizer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for VolViz::Visualizer:</div>
-<div class="dyncontent">
+
+<p><code>#include &lt;<a class="el" href="Visualizer_8h_source.html">Visualizer.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for VolViz::Visualizer:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classVolViz_1_1Visualizer__coll__graph.png" border="0" usemap="#VolViz_1_1Visualizer_coll__map" alt="Collaboration graph"/></div>
 <map name="VolViz_1_1Visualizer_coll__map" id="VolViz_1_1Visualizer_coll__map">
-<area shape="rect" id="node2" href="classVolViz_1_1AtomicWrapper.html" title="VolViz::AtomicWrapper\l\&lt; Length \&gt;" alt="" coords="5,6,163,47"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<area shape="rect" id="node3" href="classVolViz_1_1Private___1_1VisualizerImpl.html" title="{VolViz::Private_::VisualizerImpl\n|&#45; hdrQuadProgram_\l&#45; geomInitQueueMutex_\l&#45; Scene3D\l&#45; lightMutex_\l&#45; moveState_\l&#45; lastMousePos_\l&#45; fov\l&#45; cameraPosition_\l&#45; cameraOrientation_\l|+ VisualizerImpl()\l+ start()\l+ renderOneFrame()\l+ operator bool()\l+ setMesh()\l+ addGeometry()\l&#45; setupShaders()\l&#45; setupFBOs()\l&#45; projectionMatrix()\l&#45; viewMatrix()\l&#45; handleKeyInput()\l&#45; renderMeshes()\l&#45; renderGeometry()\l&#45; renderGrid()\l&#45; renderQuad()\l&#45; renderFullscreenQuad()\land 9 more...\l}" alt="" coords="749,1488,955,1917"/><area shape="rect" id="node4" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html" title="Data required to render a mesh. " alt="" coords="761,944,943,1051"/><area shape="rect" id="node5" href="structVolViz_1_1Private___1_1GL_1_1VertexArray.html" title="RAII wrapper for OpenGL vertex arrays. " alt="" coords="958,461,1137,656"/><area shape="rect" id="node19" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html" title="{VolViz::Private_::Visualizer\lImpl::SingleVertData\n||}" alt="" coords="967,951,1148,1043"/><area shape="rect" id="node6" href="structVolViz_1_1Private___1_1GL_1_1Buffer.html" title="RAII wrapper for OpenGL buffers. " alt="" coords="773,454,913,663"/><area shape="rect" id="node7" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html" title="RAII wrapper for OpenGL shader programs objects. " alt="" coords="396,871,536,1124"/><area shape="rect" id="node9" href="classVolViz_1_1Private___1_1GL_1_1UniformProxy.html" title="{VolViz::Private_::GL\l::UniformProxy\n|&#45; location_\l|+ UniformProxy()\l+ UniformProxy()\l+ UniformProxy()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l}" alt="" coords="396,150,536,389"/><area shape="rect" id="node10" title="STL class. " alt="" coords="976,231,1055,308"/><area shape="rect" id="node11" title="STL class. " alt="" coords="953,6,1079,98"/><area shape="rect" id="node14" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html" title="RAII wrapper for GLFW. " alt="" coords="561,819,737,1175"/><area shape="rect" id="node16" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html" title="Auxiliary textures use in the deferred shading process. " alt="" coords="1300,951,1481,1043"/><area shape="rect" id="node17" href="structVolViz_1_1Private___1_1GL_1_1Textures.html" title="{VolViz::Private_::GL\l::Textures\&lt; 5 \&gt;\n||+ Textures()\l+ Textures()\l+ Textures()\l+ ~Textures()\l+ operator=()\l}" alt="" coords="1320,483,1460,634"/><area shape="rect" id="node21" href="classVolViz_1_1Light.html" title="Directional light. " alt="" coords="1696,505,1812,612"/><area shape="rect" id="node22" href="structVolViz_1_1Private___1_1GL_1_1Framebuffer.html" title="RAII wrapper for OpenGL framebuffer objects. " alt="" coords="1505,907,1645,1087"/><area shape="rect" id="node23" href="classVolViz_1_1AtomicWrapper.html" title="{VolViz::AtomicWrapper\l\&lt; Length \&gt;\n|&#45; obj_\l&#45; mutex_\l|+ AtomicWrapper()\l+ AtomicWrapper()\l+ AtomicWrapper()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator Length()\l}" alt="" coords="5,461,163,656"/></map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a62f4e6d35bc8479d8cd6c9711fb2d787"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62f4e6d35bc8479d8cd6c9711fb2d787"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>LightName</b> = std::uint16_t</td></tr>
+<tr class="memitem:a62f4e6d35bc8479d8cd6c9711fb2d787"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a62f4e6d35bc8479d8cd6c9711fb2d787">LightName</a> = std::uint16_t</td></tr>
 <tr class="separator:a62f4e6d35bc8479d8cd6c9711fb2d787"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf05297d058856738d892a5d44153f59"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf05297d058856738d892a5d44153f59"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>GeometryName</b> = std::string</td></tr>
+<tr class="memitem:aaf05297d058856738d892a5d44153f59"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#aaf05297d058856738d892a5d44153f59">GeometryName</a> = std::string</td></tr>
 <tr class="separator:aaf05297d058856738d892a5d44153f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2c49194aef4366d70be0eba45ecd98be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c49194aef4366d70be0eba45ecd98be"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Visualizer</b> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> const &amp;)=delete</td></tr>
+<tr class="memitem:acdd8f280cebe4aadafc1f62081f28db8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#acdd8f280cebe4aadafc1f62081f28db8">Visualizer</a> ()</td></tr>
+<tr class="separator:acdd8f280cebe4aadafc1f62081f28db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe712597139726f790f31c6ed327612c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#afe712597139726f790f31c6ed327612c">~Visualizer</a> ()</td></tr>
+<tr class="separator:afe712597139726f790f31c6ed327612c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c49194aef4366d70be0eba45ecd98be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a2c49194aef4366d70be0eba45ecd98be">Visualizer</a> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> const &amp;)=delete</td></tr>
 <tr class="separator:a2c49194aef4366d70be0eba45ecd98be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04f3fdce20733fddc60c6ce8f8a67de0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04f3fdce20733fddc60c6ce8f8a67de0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Visualizer</b> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&amp;)</td></tr>
+<tr class="memitem:a04f3fdce20733fddc60c6ce8f8a67de0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a04f3fdce20733fddc60c6ce8f8a67de0">Visualizer</a> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&amp;)</td></tr>
 <tr class="separator:a04f3fdce20733fddc60c6ce8f8a67de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d718672559411898696515cb884c3b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d718672559411898696515cb884c3b8"></a>
-<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> const &amp;)=delete</td></tr>
+<tr class="memitem:a5d718672559411898696515cb884c3b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a5d718672559411898696515cb884c3b8">operator=</a> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> const &amp;)=delete</td></tr>
 <tr class="separator:a5d718672559411898696515cb884c3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb1d9be8450a56bf2e6d92b190b55a2a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb1d9be8450a56bf2e6d92b190b55a2a"></a>
-<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&amp;)</td></tr>
+<tr class="memitem:acb1d9be8450a56bf2e6d92b190b55a2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#acb1d9be8450a56bf2e6d92b190b55a2a">operator=</a> (<a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&amp;)</td></tr>
 <tr class="separator:acb1d9be8450a56bf2e6d92b190b55a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e43fe16c39b2b05fbf7b6e039ad41f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e43fe16c39b2b05fbf7b6e039ad41f5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+<tr class="memitem:a8e43fe16c39b2b05fbf7b6e039ad41f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a8e43fe16c39b2b05fbf7b6e039ad41f5">start</a> ()</td></tr>
 <tr class="separator:a8e43fe16c39b2b05fbf7b6e039ad41f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3607e76c69bf6def6b508770ee0e504"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3607e76c69bf6def6b508770ee0e504"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>renderOneFrame</b> ()</td></tr>
+<tr class="memitem:aa3607e76c69bf6def6b508770ee0e504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#aa3607e76c69bf6def6b508770ee0e504">renderOneFrame</a> ()</td></tr>
 <tr class="separator:aa3607e76c69bf6def6b508770ee0e504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5041fa585ccd1582e3d659a9eb2b94bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5041fa585ccd1582e3d659a9eb2b94bc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const noexcept</td></tr>
+<tr class="memitem:a5041fa585ccd1582e3d659a9eb2b94bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a5041fa585ccd1582e3d659a9eb2b94bc">operator bool</a> () const noexcept</td></tr>
 <tr class="separator:a5041fa585ccd1582e3d659a9eb2b94bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f9044fb04c76a16111afe92ae0118e8"><td class="memTemplParams" colspan="2"><a class="anchor" id="a4f9044fb04c76a16111afe92ae0118e8"></a>
-template&lt;class VertBase , class IdxBase &gt; </td></tr>
-<tr class="memitem:a4f9044fb04c76a16111afe92ae0118e8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>setMesh</b> (Eigen::MatrixBase&lt; VertBase &gt; const &amp;V, Eigen::MatrixBase&lt; IdxBase &gt; const &amp;I)</td></tr>
+<tr class="memitem:a4f9044fb04c76a16111afe92ae0118e8"><td class="memTemplParams" colspan="2">template&lt;class VertBase , class IdxBase &gt; </td></tr>
+<tr class="memitem:a4f9044fb04c76a16111afe92ae0118e8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a4f9044fb04c76a16111afe92ae0118e8">setMesh</a> (Eigen::MatrixBase&lt; VertBase &gt; const &amp;V, Eigen::MatrixBase&lt; IdxBase &gt; const &amp;I)</td></tr>
 <tr class="separator:a4f9044fb04c76a16111afe92ae0118e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e9d97d6127d08d69276a1f75f52b0e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e9d97d6127d08d69276a1f75f52b0e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addLight</b> (LightName name, <a class="el" href="classVolViz_1_1Light.html">Light</a> const &amp;light)</td></tr>
+<tr class="memitem:a8e9d97d6127d08d69276a1f75f52b0e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a8e9d97d6127d08d69276a1f75f52b0e1">addLight</a> (<a class="el" href="classVolViz_1_1Visualizer.html#a62f4e6d35bc8479d8cd6c9711fb2d787">LightName</a> name, <a class="el" href="classVolViz_1_1Light.html">Light</a> const &amp;light)</td></tr>
 <tr class="separator:a8e9d97d6127d08d69276a1f75f52b0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22994e2bd4f066e0a30b19996714c495"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22994e2bd4f066e0a30b19996714c495"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addGeometry</b> (GeometryName name, <a class="el" href="structVolViz_1_1AxisAlignedPlane.html">AxisAlignedPlane</a> const &amp;plane)</td></tr>
+<tr class="memitem:a22994e2bd4f066e0a30b19996714c495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a22994e2bd4f066e0a30b19996714c495">addGeometry</a> (<a class="el" href="classVolViz_1_1Visualizer.html#aaf05297d058856738d892a5d44153f59">GeometryName</a> name, <a class="el" href="structVolViz_1_1AxisAlignedPlane.html">AxisAlignedPlane</a> const &amp;plane)</td></tr>
 <tr class="separator:a22994e2bd4f066e0a30b19996714c495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a780e15acd00a6f76fcc814789f681401"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a780e15acd00a6f76fcc814789f681401"></a>
-std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>showGrid</b> {true}</td></tr>
+<tr class="memitem:a780e15acd00a6f76fcc814789f681401"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a780e15acd00a6f76fcc814789f681401">showGrid</a> {true}</td></tr>
 <tr class="separator:a780e15acd00a6f76fcc814789f681401"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7da95ab4fa60f9e9d3613e339e879480"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7da95ab4fa60f9e9d3613e339e879480"></a>
-<a class="el" href="classVolViz_1_1AtomicWrapper.html">AtomicWrapper</a>&lt; Length &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> {1 * milli * meter}</td></tr>
+<tr class="memitem:a7da95ab4fa60f9e9d3613e339e879480"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1AtomicWrapper.html">AtomicWrapper</a>&lt; <a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a7da95ab4fa60f9e9d3613e339e879480">scale</a> {1 * milli * meter}</td></tr>
 <tr class="separator:a7da95ab4fa60f9e9d3613e339e879480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a9cb77d0cc58f0ee8dd79bbea5d4e99df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9cb77d0cc58f0ee8dd79bbea5d4e99df"></a>
-static auto constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>kDefaultFOV</b> = 110</td></tr>
+<tr class="memitem:a9cb77d0cc58f0ee8dd79bbea5d4e99df"><td class="memItemLeft" align="right" valign="top">static auto constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a9cb77d0cc58f0ee8dd79bbea5d4e99df">kDefaultFOV</a> = 110</td></tr>
 <tr class="separator:a9cb77d0cc58f0ee8dd79bbea5d4e99df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1979b097c0a2be9c5116d4df915cc3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1979b097c0a2be9c5116d4df915cc3a"></a>
-static auto constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>kTitle</b> = &quot;Volume <a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a>&quot;</td></tr>
+<tr class="memitem:ac1979b097c0a2be9c5116d4df915cc3a"><td class="memItemLeft" align="right" valign="top">static auto constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#ac1979b097c0a2be9c5116d4df915cc3a">kTitle</a> = &quot;Volume <a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a>&quot;</td></tr>
 <tr class="separator:ac1979b097c0a2be9c5116d4df915cc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a0b7613085a844bb5b4a6841e1d896c82"><td class="memItemLeft" align="right" valign="top">std::unique_ptr<br class="typebreak"/>
+&lt; <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html">Private_::VisualizerImpl</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Visualizer.html#a0b7613085a844bb5b4a6841e1d896c82">impl_</a></td></tr>
+<tr class="separator:a0b7613085a844bb5b4a6841e1d896c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a class="anchor" id="aaf05297d058856738d892a5d44153f59"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classVolViz_1_1Visualizer.html#aaf05297d058856738d892a5d44153f59">VolViz::Visualizer::GeometryName</a> =  std::string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a62f4e6d35bc8479d8cd6c9711fb2d787"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classVolViz_1_1Visualizer.html#a62f4e6d35bc8479d8cd6c9711fb2d787">VolViz::Visualizer::LightName</a> =  std::uint16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acdd8f280cebe4aadafc1f62081f28db8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolViz::Visualizer::Visualizer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afe712597139726f790f31c6ed327612c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolViz::Visualizer::~Visualizer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2c49194aef4366d70be0eba45ecd98be"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolViz::Visualizer::Visualizer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a04f3fdce20733fddc60c6ce8f8a67de0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolViz::Visualizer::Visualizer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a22994e2bd4f066e0a30b19996714c495"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VolViz::Visualizer::addGeometry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Visualizer.html#aaf05297d058856738d892a5d44153f59">GeometryName</a>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structVolViz_1_1AxisAlignedPlane.html">AxisAlignedPlane</a> const &amp;&#160;</td>
+          <td class="paramname"><em>plane</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8e9d97d6127d08d69276a1f75f52b0e1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VolViz::Visualizer::addLight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Visualizer.html#a62f4e6d35bc8479d8cd6c9711fb2d787">LightName</a>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Light.html">Light</a> const &amp;&#160;</td>
+          <td class="paramname"><em>light</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5041fa585ccd1582e3d659a9eb2b94bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolViz::Visualizer::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5d718672559411898696515cb884c3b8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a>&amp; VolViz::Visualizer::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acb1d9be8450a56bf2e6d92b190b55a2a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp; VolViz::Visualizer::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa3607e76c69bf6def6b508770ee0e504"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VolViz::Visualizer::renderOneFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4f9044fb04c76a16111afe92ae0118e8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class VertBase , class IdxBase &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">template void VolViz::Visualizer::setMesh </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixBase&lt; VertBase &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>V</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::MatrixBase&lt; IdxBase &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>I</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8e43fe16c39b2b05fbf7b6e039ad41f5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VolViz::Visualizer::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a0b7613085a844bb5b4a6841e1d896c82"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html">Private_::VisualizerImpl</a>&gt; VolViz::Visualizer::impl_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9cb77d0cc58f0ee8dd79bbea5d4e99df"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto constexpr VolViz::Visualizer::kDefaultFOV = 110</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac1979b097c0a2be9c5116d4df915cc3a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto constexpr VolViz::Visualizer::kTitle = &quot;Volume <a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a>&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7da95ab4fa60f9e9d3613e339e879480"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVolViz_1_1AtomicWrapper.html">AtomicWrapper</a>&lt;<a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a>&gt; VolViz::Visualizer::scale {1 * milli * meter}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a780e15acd00a6f76fcc814789f681401"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;bool&gt; VolViz::Visualizer::showGrid {true}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/ithron/VolViz/include/VolViz/src/<a class="el" href="Visualizer_8h_source.html">Visualizer.h</a></li>
-<li>/home/travis/build/ithron/VolViz/Source/Visualizer.cpp</li>
+<li>/home/travis/build/ithron/VolViz/Source/<a class="el" href="Visualizer_8cpp.html">Visualizer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 15:25:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:29:50 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

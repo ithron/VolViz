@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -65,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -75,24 +76,185 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Camera related variables<div class="ingroups"><a class="el" href="group__privateMembers.html">Private member variables</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for Camera related variables:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Camera related variables:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <center><table><tr><td><img src="group__cameraRelated.png" border="0" alt="" usemap="#group____cameraRelated"/>
 <map name="group____cameraRelated" id="group____cameraRelated">
 <area shape="rect" id="node2" href="group__privateMembers.html" title="Private member variables" alt="" coords="5,5,176,32"/></map>
 </td></tr></table></center>
 </div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga10d6654b81efdf637f50ffa2ecbaa294"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga10d6654b81efdf637f50ffa2ecbaa294">VolViz::Private_::VisualizerImpl::MoveState</a> { <a class="el" href="group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a6adf97f83acf6453d4a6a4b1070f3754">VolViz::Private_::VisualizerImpl::MoveState::None</a>, 
+<a class="el" href="group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6">VolViz::Private_::VisualizerImpl::MoveState::Rotating</a>
+ }</td></tr>
+<tr class="separator:ga10d6654b81efdf637f50ffa2ecbaa294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gabfabf1dedcedc08fa39c5bc231dd915f"><td class="memItemLeft" align="right" valign="top">enum <br class="typebreak"/>
+<a class="el" href="group__cameraRelated.html#ga10d6654b81efdf637f50ffa2ecbaa294">VolViz::Private_::VisualizerImpl::MoveState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#gabfabf1dedcedc08fa39c5bc231dd915f">VolViz::Private_::VisualizerImpl::moveState_</a> = MoveState::None</td></tr>
+<tr class="separator:gabfabf1dedcedc08fa39c5bc231dd915f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga440e737185a28af70618f5395bfae18b"><td class="memItemLeft" align="right" valign="top">Eigen::Vector2d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga440e737185a28af70618f5395bfae18b">VolViz::Private_::VisualizerImpl::lastMousePos_</a> = Eigen::Vector2d::Zero()</td></tr>
+<tr class="memdesc:ga440e737185a28af70618f5395bfae18b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last position of the mouse cursor, used in the camera control code.  <a href="#ga440e737185a28af70618f5395bfae18b">More...</a><br/></td></tr>
+<tr class="separator:ga440e737185a28af70618f5395bfae18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa9de504cf4c535c169c5f254f8a5491"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#gafa9de504cf4c535c169c5f254f8a5491">VolViz::Private_::VisualizerImpl::fov</a> = Visualizer::kDefaultFOV</td></tr>
+<tr class="memdesc:gafa9de504cf4c535c169c5f254f8a5491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Camera field of view.  <a href="#gafa9de504cf4c535c169c5f254f8a5491">More...</a><br/></td></tr>
+<tr class="separator:gafa9de504cf4c535c169c5f254f8a5491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga37d660b85c544a15f1d0715796845c0e"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga37d660b85c544a15f1d0715796845c0e">VolViz::Private_::VisualizerImpl::cameraPosition_</a> = Eigen::Vector3f::Zero()</td></tr>
+<tr class="separator:ga37d660b85c544a15f1d0715796845c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga10fc25e61bcb7f5b3f96eaa65c77ab37"><td class="memItemLeft" align="right" valign="top">Eigen::Quaternionf&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga10fc25e61bcb7f5b3f96eaa65c77ab37">VolViz::Private_::VisualizerImpl::cameraOrientation_</a> = Eigen::Quaternionf::Identity()</td></tr>
+<tr class="separator:ga10fc25e61bcb7f5b3f96eaa65c77ab37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Camera state </p>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="ga10d6654b81efdf637f50ffa2ecbaa294"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__cameraRelated.html#ga10d6654b81efdf637f50ffa2ecbaa294">VolViz::Private_::VisualizerImpl::MoveState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="gga10d6654b81efdf637f50ffa2ecbaa294a6adf97f83acf6453d4a6a4b1070f3754"></a>None</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6"></a>Rotating</em>&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ga10fc25e61bcb7f5b3f96eaa65c77ab37"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Quaternionf VolViz::Private_::VisualizerImpl::cameraOrientation_ = Eigen::Quaternionf::Identity()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga37d660b85c544a15f1d0715796845c0e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Vector3f VolViz::Private_::VisualizerImpl::cameraPosition_ = Eigen::Vector3f::Zero()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gafa9de504cf4c535c169c5f254f8a5491"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VolViz::Private_::VisualizerImpl::fov = Visualizer::kDefaultFOV</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Camera field of view. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga440e737185a28af70618f5395bfae18b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Vector2d VolViz::Private_::VisualizerImpl::lastMousePos_ = Eigen::Vector2d::Zero()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Last position of the mouse cursor, used in the camera control code. </p>
+
+</div>
+</div>
+<a class="anchor" id="gabfabf1dedcedc08fa39c5bc231dd915f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__cameraRelated.html#ga10d6654b81efdf637f50ffa2ecbaa294">VolViz::Private_::VisualizerImpl::MoveState</a>  VolViz::Private_::VisualizerImpl::moveState_ = MoveState::None</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 15:25:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:29:50 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

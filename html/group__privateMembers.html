@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -65,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -77,14 +78,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#groups">Modules</a> &#124;
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Private member variables</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for Private member variables:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Private member variables:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <center><table><tr><td><img src="group__privateMembers.png" border="0" alt="" usemap="#group____privateMembers"/>
 <map name="group____privateMembers" id="group____privateMembers">
 <area shape="rect" id="node1" href="group__cameraRelated.html" title="Camera related variables" alt="" coords="225,5,391,32"/><area shape="rect" id="node2" href="group__geomGroup.html" title="Geometry processing\l related variables" alt="" coords="235,57,381,98"/><area shape="rect" id="node3" href="group__shaders.html" title="Shader Programs" alt="" coords="247,123,369,149"/></map>
@@ -99,12 +104,269 @@ Modules</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__cameraRelated"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html">Camera related variables</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html">VolViz::Private_::VisualizerImpl::TextureWrapper</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auxiliary textures use in the deferred shading process.  <a href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html">VolViz::Private_::VisualizerImpl::MeshData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data required to render a mesh.  <a href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html">VolViz::Private_::VisualizerImpl::SingleVertData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga5ddcc241d09fbe3fe2c96d799ef1c01f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f">VolViz::Private_::VisualizerImpl::ViewState</a> { <a class="el" href="group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa3cb31aacdc075941366cad3aba75b636">VolViz::Private_::VisualizerImpl::ViewState::Scene3D</a>, 
+<a class="el" href="group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa1fdcbb6e6fe00b3ad988f0b16a88c999">VolViz::Private_::VisualizerImpl::ViewState::LightingComponents</a>
+ }</td></tr>
+<tr class="separator:ga5ddcc241d09fbe3fe2c96d799ef1c01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga595de467893116a98635a02e0802e118"><td class="memItemLeft" align="right" valign="top">Visualizer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga595de467893116a98635a02e0802e118">VolViz::Private_::VisualizerImpl::visualizer_</a> = nullptr</td></tr>
+<tr class="separator:ga595de467893116a98635a02e0802e118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad1660086070e64dae44b9df701a0a487"><td class="memItemLeft" align="right" valign="top">struct <br class="typebreak"/>
+<a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html">VolViz::Private_::VisualizerImpl::TextureWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#gad1660086070e64dae44b9df701a0a487">VolViz::Private_::VisualizerImpl::textures_</a></td></tr>
+<tr class="separator:gad1660086070e64dae44b9df701a0a487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7806b8439078ab675a192696a3c21ac8"><td class="memItemLeft" align="right" valign="top">GL::Framebuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga7806b8439078ab675a192696a3c21ac8">VolViz::Private_::VisualizerImpl::lightingFbo_</a> {0}</td></tr>
+<tr class="memdesc:ga7806b8439078ab675a192696a3c21ac8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frabebuffer used for the deferred shading.  <a href="#ga7806b8439078ab675a192696a3c21ac8">More...</a><br/></td></tr>
+<tr class="separator:ga7806b8439078ab675a192696a3c21ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64eacb156ad8dd06604a5e9012811be4"><td class="memItemLeft" align="right" valign="top">GL::Framebuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga64eacb156ad8dd06604a5e9012811be4">VolViz::Private_::VisualizerImpl::finalFbo_</a> {0}</td></tr>
+<tr class="separator:ga64eacb156ad8dd06604a5e9012811be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga34ccffe3a2479dbf2ac90004cce63e64"><td class="memItemLeft" align="right" valign="top">struct <br class="typebreak"/>
+<a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html">VolViz::Private_::VisualizerImpl::MeshData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga34ccffe3a2479dbf2ac90004cce63e64">VolViz::Private_::VisualizerImpl::mesh_</a></td></tr>
+<tr class="separator:ga34ccffe3a2479dbf2ac90004cce63e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f85a104e6b684b49ed3b3a77e2b4ca4"><td class="memItemLeft" align="right" valign="top">struct <br class="typebreak"/>
+<a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html">VolViz::Private_::VisualizerImpl::SingleVertData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga6f85a104e6b684b49ed3b3a77e2b4ca4">VolViz::Private_::VisualizerImpl::singleVertexData_</a></td></tr>
+<tr class="separator:ga6f85a104e6b684b49ed3b3a77e2b4ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3c07b4ab76735e055fb6a24da5e90f48"><td class="memItemLeft" align="right" valign="top">enum <br class="typebreak"/>
+<a class="el" href="group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f">VolViz::Private_::VisualizerImpl::ViewState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga3c07b4ab76735e055fb6a24da5e90f48">VolViz::Private_::VisualizerImpl::Scene3D</a></td></tr>
+<tr class="separator:ga3c07b4ab76735e055fb6a24da5e90f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga755b9d552d3c07426167c76a308ad706"><td class="memItemLeft" align="right" valign="top">Lights&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga755b9d552d3c07426167c76a308ad706">VolViz::Private_::VisualizerImpl::lights_</a></td></tr>
+<tr class="memdesc:ga755b9d552d3c07426167c76a308ad706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lights.  <a href="#ga755b9d552d3c07426167c76a308ad706">More...</a><br/></td></tr>
+<tr class="separator:ga755b9d552d3c07426167c76a308ad706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacebde9a9c64d3f169dc79d4ffcfd9544"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#gacebde9a9c64d3f169dc79d4ffcfd9544">VolViz::Private_::VisualizerImpl::lightMutex_</a></td></tr>
+<tr class="separator:gacebde9a9c64d3f169dc79d4ffcfd9544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="ga5ddcc241d09fbe3fe2c96d799ef1c01f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f">VolViz::Private_::VisualizerImpl::ViewState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="gga5ddcc241d09fbe3fe2c96d799ef1c01fa3cb31aacdc075941366cad3aba75b636"></a>Scene3D</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="gga5ddcc241d09fbe3fe2c96d799ef1c01fa1fdcbb6e6fe00b3ad988f0b16a88c999"></a>LightingComponents</em>&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ga64eacb156ad8dd06604a5e9012811be4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GL::Framebuffer VolViz::Private_::VisualizerImpl::finalFbo_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga7806b8439078ab675a192696a3c21ac8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GL::Framebuffer VolViz::Private_::VisualizerImpl::lightingFbo_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Frabebuffer used for the deferred shading. </p>
+
+</div>
+</div>
+<a class="anchor" id="gacebde9a9c64d3f169dc79d4ffcfd9544"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex VolViz::Private_::VisualizerImpl::lightMutex_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga755b9d552d3c07426167c76a308ad706"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Lights VolViz::Private_::VisualizerImpl::lights_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lights. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga34ccffe3a2479dbf2ac90004cce63e64"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html">VolViz::Private_::VisualizerImpl::MeshData</a>  VolViz::Private_::VisualizerImpl::mesh_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga3c07b4ab76735e055fb6a24da5e90f48"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f">VolViz::Private_::VisualizerImpl::ViewState</a> VolViz::Private_::VisualizerImpl::Scene3D</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga6f85a104e6b684b49ed3b3a77e2b4ca4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html">VolViz::Private_::VisualizerImpl::SingleVertData</a>  VolViz::Private_::VisualizerImpl::singleVertexData_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gad1660086070e64dae44b9df701a0a487"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html">VolViz::Private_::VisualizerImpl::TextureWrapper</a>  VolViz::Private_::VisualizerImpl::textures_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga595de467893116a98635a02e0802e118"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Visualizer* VolViz::Private_::VisualizerImpl::visualizer_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 15:25:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:29:50 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
