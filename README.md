@@ -36,7 +36,7 @@ int main(int, char **) {
   
   auto visualizer = VolViz::Visualizer{};
   
-  // Set the physical scale you like to visualizer, e.g. 1 unit equals 1cm
+  // Set the physical scale you like to visualize, e.g. 1 unit equals 1cm
   visualizer.scale = 1_cm;
   
   // set volume
