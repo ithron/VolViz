@@ -15,6 +15,8 @@ Warning: ignoring unsupported tag `MAN_SUBDIR             =' at line 1782, file 
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:54: warning: include file Shaders/diffuseLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:58: warning: include file Shaders/specularLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:62: warning: include file Shaders/specularVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:66: warning: include file Shaders/plane.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:70: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 Searching for include files...
 Searching for example files...
 Searching for images...
@@ -39,6 +41,8 @@ Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Error.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Error.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h...
+Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
+Parsing file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/GL.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/GL.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/GLdefs.h...
@@ -75,13 +79,13 @@ Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
-Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
-Parsing file /home/travis/build/ithron/VolViz/include/VolViz/VolViz./home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.h:47: warning: Compound VolViz::Private_::GL::UniformProxy is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:19: warning: Compound VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:8: warning: Compound VolViz::Geometry is not documented.
+P/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:18: warning: Compound VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.h:47: warning: Compound VolViz::Private_::GL::UniformProxy is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:20: warning: Compound VolViz::Visualizer is not documented.
 /home/travis/build/ithron/VolViz/Source/GL/Binding.h:27: warning: Compound VolViz::Private_::GL::Binding2 is not documented.
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:8: warning: Compound VolViz::AtomicWrapper is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:17: warning: Compound VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:18: warning: Compound VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:8: warning: Compound VolViz::AxisAlignedPlane is not documented.
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:10: warning: Member AtomicWrapper(T const &obj) (function) of class VolViz::AtomicWrapper is not documented.
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:11: warning: Member AtomicWrapper(T &&obj) (function) of class VolViz::AtomicWrapper is not documented.
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:13: warning: Member AtomicWrapper(AtomicWrapper const &)=delete (function) of class VolViz::AtomicWrapper is not documented.
@@ -89,45 +93,37 @@ Parsing file /home/travis/build/ithron/VolViz/include/VolViz/VolViz./home/travis
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:16: warning: Member operator T() const  (function) of class VolViz::AtomicWrapper is not documented.
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:22: warning: Member operator=(T const &rhs) (function) of class VolViz::AtomicWrapper is not documented.
 /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h:30: warning: Member operator=(T &&rhs) (function) of class VolViz::AtomicWrapper is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:11: warning: Member position (variable) of class VolViz::Geometry is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:12: warning: Member orientation (variable) of class VolViz::Geometry is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:21: warning: Member LightName (typedef) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:30: warning: Member Visualizer(Visualizer const &)=delete (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:31: warning: Member Visualizer(Visualizer &&) (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:33: warning: Member operator=(Visualizer const &)=delete (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:34: warning: Member operator=(Visualizer &&) (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:36: warning: Member start() (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:38: warning: Member renderOneFrame() (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:40: warning: Member operator bool() const noexcept (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:43: warning: Member setMesh(Eigen::MatrixBase< VertBase > const &V, Eigen::MatrixBase< IdxBase > const &I) (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:46: warning: Member addLight(LightName name, Light const &light) (function) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:48: warning: Member showGrid (variable) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:49: warning: Member scale (variable) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:23: warning: Member kDefaultFOV (variable) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:24: warning: Member kTitle (variable) of class VolViz::Visualizer is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:19: warning: Member Point2 (typedef) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:20: warning: Member Size2 (typedef) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:21: warning: Member Lights (typedef) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:23: warning: Member VisualizerImpl(Visualizer *vis) (function) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:25: warning: Member start() (function) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:27: warning: Member renderOneFrame() (function) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:29: warning: Member operator bool() const noexcept (function) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:32: warning: Member setMesh(Eigen::MatrixBase< VertBase > const &V, Eigen::MatrixBase< IdxBase > const &I) (function) of class VolViz::Private_::VisualizerImpl is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Binding.h:19: warning: Member Binding(T &&obj) noexcept (function) of class VolViz::Private_::GL::Binding is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Binding.h:29: warning: Member Binding2(T &&obj, Arg arg) noexcept (function) of class VolViz::Private_::GL::Binding2 is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:26: warning: Member Buffer(Buffer const &)=delete (function) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:27: warning: Member Buffer(Buffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:29: warning: Member operator=(Buffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:35: warning: Member bind(GLenum target) const noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:43: warning: Member upload(GLenum target, std::size_t size, T const *data, GLbitfield flags) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:40: warning: Member unbind(GLenum target) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:50: warning: Member name (variable) of class VolViz::Private_::GL::Buffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:21: warning: Member Framebuffer(Framebuffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:26: warning: Member operator=(Framebuffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:32: warning: Member bind(GLenum target) const noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:37: warning: Member unbind(GLenum target) noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
-/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:41: warning: Member name (variable) of class VolViz::Private_::GL::Framebuffer is not documented.
-h...
+/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:9: warning: Member intercept (variable) of class VolViz::AxisAlignedPlane is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:10: warning: Member axis (variable) of class VolViz::AxisAlignedPlane is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:11: warning: Member movable (variable) of class VolViz::AxisAlignedPlane is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h:12: warning: Member color (variable) of class VolViz::AxisAlignedPlane is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:22: warning: Member LightName (typedef) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:23: warning: Member GeometryName (typedef) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:32: warning: Member Visualizer(Visualizer const &)=delete (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:33: warning: Member Visualizer(Visualizer &&) (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:35: warning: Member operator=(Visualizer const &)=delete (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:36: warning: Member operator=(Visualizer &&) (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:38: warning: Member start() (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:40: warning: Member renderOneFrame() (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:42: warning: Member operator bool() const noexcept (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:45: warning: Member setMesh(Eigen::MatrixBase< VertBase > const &V, Eigen::MatrixBase< IdxBase > const &I) (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:48: warning: Member addLight(LightName name, Light const &light) (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:50: warning: Member addGeometry(GeometryName name, AxisAlignedPlane const &plane) (function) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:52: warning: Member showGrid (variable) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:53: warning: Member scale (variable) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:25: warning: Member kDefaultFOV (variable) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h:26: warning: Member kTitle (variable) of class VolViz::Visualizer is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:27: warning: Member Point2 (typedef) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:28: warning: Member Size2 (typedef) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:29: warning: Member Lights (typedef) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:31: warning: Member VisualizerImpl(Visualizer *vis) (function) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:33: warning: Member start() (function) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:35: warning: Member renderOneFrame() (function) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:37: warning: Member operator bool() const noexcept (function) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:40: warning: Member setMesh(Eigen::MatrixBase< VertBase > const &V, Eigen::MatrixBase< IdxBase > const &I) (function) of class VolViz::Private_::VisualizerImpl is not documented.
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h:43: warning: Member addGeometry(Visualizer::GeometryName name, AxisAlignedPlane const &plane) (function) of class VolViz::Private_::VisualizerImpl is not documented.
+reprocessing /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
+Parsing file /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
 Building group list...
 Building directory list...
 Building namespace list...
@@ -181,7 +177,6 @@ Generating search indices...
 Generating example documentation...
 Generating file sources...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
-Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Light.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
@@ -190,6 +185,8 @@ Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Binding.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Buffer.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Error.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
+Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/GL.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/GLdefs.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/GLFW.h...
@@ -203,19 +200,36 @@ Generating page documentation...
 Generating group documentation...
 Generating dependency graph for group privateMembers
 Generating dependency graph for group shaders
+Generating dependency graph for group geomGroup
 Generating dependency graph for group cameraRelated
 Generating class documentation...
 Generating namespace index...
 Generating docs for compound VolViz::AtomicWrapper...
-Generating docs for compound VolViz::Geometry...
+Generating docs for compound VolViz::AxisAlignedPlane...
 Generating docs for compound VolViz::Light...
 Generating docs for compound VolViz::Visualizer...
 Generating docs for compound VolViz::Private_::VisualizerImpl...
-Generating docs for compound VolViz::Private_::GL::Binding...
-Generating docs for compound VolViz::Private_::GL::Binding2...
-Generating docs for compound VolViz::Private_::GL::Buffer...
-Generating docs for compound VolViz::Private_::GL::Framebuffer...
-Generating docs for compound VolViz::Privat/home/travis/build/ithron/VolViz/Source/GL/GLFW.h:24: warning: Member GLFW(std::string title, std::size_t width, std::size_t height) (function) of class VolViz::Private_::GL::GLFW is not documented.
+Generating docs /home/travis/build/ithron/VolViz/Source/GL/Binding.h:19: warning: Member Binding(T &&obj) noexcept (function) of class VolViz::Private_::GL::Binding is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Binding.h:29: warning: Member Binding2(T &&obj, Arg arg) noexcept (function) of class VolViz::Private_::GL::Binding2 is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:26: warning: Member Buffer(Buffer const &)=delete (function) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:27: warning: Member Buffer(Buffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:29: warning: Member operator=(Buffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:35: warning: Member bind(GLenum target) const noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:43: warning: Member upload(GLenum target, std::size_t size, T const *data, GLbitfield flags) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:40: warning: Member unbind(GLenum target) noexcept (function) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Buffer.h:50: warning: Member name (variable) of class VolViz::Private_::GL::Buffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:21: warning: Member Framebuffer(Framebuffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:26: warning: Member operator=(Framebuffer &&rhs) noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:32: warning: Member bind(GLenum target) const noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:37: warning: Member unbind(GLenum target) noexcept (function) of class VolViz::Private_::GL::Framebuffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h:41: warning: Member name (variable) of class VolViz::Private_::GL::Framebuffer is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:19: warning: Member position (variable) of class VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:20: warning: Member orientation (variable) of class VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:21: warning: Member movable (variable) of class VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:22: warning: Member moveMask (variable) of class VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:23: warning: Member scale (variable) of class VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/Geometry.h:24: warning: Member color (variable) of class VolViz::Private_::GL::Geometry is not documented.
+/home/travis/build/ithron/VolViz/Source/GL/GLFW.h:24: warning: Member GLFW(std::string title, std::size_t width, std::size_t height) (function) of class VolViz::Private_::GL::GLFW is not documented.
 /home/travis/build/ithron/VolViz/Source/GL/GLFW.h:25: warning: Member GLFW(GLFW const &)=delete (function) of class VolViz::Private_::GL::GLFW is not documented.
 /home/travis/build/ithron/VolViz/Source/GL/GLFW.h:26: warning: Member GLFW(GLFW &&rhs) (function) of class VolViz::Private_::GL::GLFW is not documented.
 /home/travis/build/ithron/VolViz/Source/GL/GLFW.h:41: warning: Member operator bool() const noexcept (function) of class VolViz::Private_::GL::GLFW is not documented.
@@ -260,7 +274,12 @@ Generating docs for compound VolViz::Privat/home/travis/build/ithron/VolViz/Sour
 /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h:40: warning: Member enableVertexAttribArray(GLuint idx) noexcept (function) of class VolViz::Private_::GL::VertexArray is not documented.
 /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h:38: warning: Member unbind() noexcept (function) of class VolViz::Private_::GL::VertexArray is not documented.
 /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h:47: warning: Member name (variable) of class VolViz::Private_::GL::VertexArray is not documented.
-e_::GL::GLFW...
+for compound VolViz::Private_::GL::Binding...
+Generating docs for compound VolViz::Private_::GL::Binding2...
+Generating docs for compound VolViz::Private_::GL::Buffer...
+Generating docs for compound VolViz::Private_::GL::Framebuffer...
+Generating docs for compound VolViz::Private_::GL::Geometry...
+Generating docs for compound VolViz::Private_::GL::GLFW...
 Generating docs for compound VolViz::Private_::GL::Shader...
 Generating docs for compound VolViz::Private_::GL::UniformProxy...
 Generating docs for compound VolViz::Private_::GL::ShaderProgram...
@@ -289,28 +308,30 @@ Generating example index...
 finalizing index lists...
 Running dot...
 Generating dot graphs using 3 parallel threads...
-Running dot for graph 1/12
-Running dot for graph 2/12
-Running dot for graph 3/12
-Running dot for graph 4/12
-Running dot for graph 5/12
-Running dot for graph 6/12
-Running dot for graph 7/12
-Running dot for graph 8/12
-Running dot for graph 9/12
-Running dot for graph 10/12
-Running dot for graph 11/12
-Running dot for graph 12/12
-Patching output file 1/11
-Patching output file 2/11
-Patching output file 3/11
-Patching output file 4/11
-Patching output file 5/11
-Patching output file 6/11
-Patching output file 7/11
-Patching output file 8/11
-Patching output file 9/11
-Patching output file 10/11
-Patching output file 11/11
-lookup cache used 510/65536 hits=2442 misses=652
+Running dot for graph 1/13
+Running dot for graph 2/13
+Running dot for graph 3/13
+Running dot for graph 4/13
+Running dot for graph 5/13
+Running dot for graph 6/13
+Running dot for graph 7/13
+Running dot for graph 8/13
+Running dot for graph 9/13
+Running dot for graph 10/13
+Running dot for graph 11/13
+Running dot for graph 12/13
+Running dot for graph 13/13
+Patching output file 1/12
+Patching output file 2/12
+Patching output file 3/12
+Patching output file 4/12
+Patching output file 5/12
+Patching output file 6/12
+Patching output file 7/12
+Patching output file 8/12
+Patching output file 9/12
+Patching output file 10/12
+Patching output file 11/12
+Patching output file 12/12
+lookup cache used 579/65536 hits=2682 misses=735
 finished...

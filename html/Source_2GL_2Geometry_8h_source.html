@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>VolViz: /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h Source File</title>
+<title>VolViz: /home/travis/build/ithron/VolViz/Source/GL/Geometry.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_23a06ad5763f218faa71d7a871a2684a.html">VolViz</a></li><li class="navelem"><a class="el" href="dir_a538e9890f9f97daa574c4de5a3fafbe.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_c8f47d9b1d30fcb27e4bf47d0b757136.html">GL</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -88,32 +88,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Geometry.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VolViz_Geometry_h</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define VolViz_Geometry_h</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VolViz_GL_Geometry_h</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define VolViz_GL_Geometry_h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Types.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>VolViz {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classVolViz_1_1Geometry.html">    8</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classVolViz_1_1Geometry.html">Geometry</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;      Position position{Position::Zero()};</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;      Orientation orientation{Orientation::Identity()};</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classVolViz_1_1Geometry.html">Geometry</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  };</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace VolViz</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif // VolViz_Geometry_h</span></div>
-<div class="ttc" id="classVolViz_1_1Geometry_html"><div class="ttname"><a href="classVolViz_1_1Geometry.html">VolViz::Geometry</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:8</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>Private_ {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>GL {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">enum</span> MoveMask : uint8_t {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  None = 0x00,</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  X = 0x01,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  Y = 0x02,</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  Z = 0x04,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  All = 0x07</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html">   18</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html">Geometry</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  Position position{Position::Zero()};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  Orientation orientation{Orientation::Identity()};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">bool</span> movable{<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  MoveMask moveMask{All};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  Length scale {1 * milli * meter};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  Color color{Colors::White()};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace GL</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace Private_</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <span class="comment">// namespace VolViz</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif // VolViz_GL_Geometry_h</span></div>
+<div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1Geometry_html"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1Geometry.html">VolViz::Private_::GL::Geometry</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 12:42:22 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:23:07 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

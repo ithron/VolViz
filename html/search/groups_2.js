@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shader_20programs',['Shader Programs',['../group__shaders.html',1,'']]]
+  ['private_20member_20variables',['Private member variables',['../group__privateMembers.html',1,'']]]
 ];

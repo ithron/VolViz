@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['private_20member_20variables',['Private member variables',['../group__privateMembers.html',1,'']]]
+  ['geometry_20processing_20related_20variables',['Geometry processing related variables',['../group__geomGroup.html',1,'']]]
 ];

@@ -106,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">operator</span> T()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">auto</span> cpy = obj_;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">return</span> obj_;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">return</span> cpy;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  }</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="classVolViz_1_1AtomicWrapper.html">AtomicWrapper</a> &amp;operator=(T <span class="keyword">const</span> &amp;rhs) {</div>
@@ -127,7 +127,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  T obj_;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  std::mutex mutex_;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">mutable</span> std::mutex mutex_;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <span class="comment">// namespace VolViz</span></div>
@@ -137,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 22 2016 12:42:22 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 22 2016 15:23:07 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
