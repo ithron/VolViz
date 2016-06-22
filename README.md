@@ -2,6 +2,13 @@
 Volumetric image visualization tool, e.g. for CT images
 
 # Build Instruction
+## Requirements
+- cmake 3.2 or newer
+- A compiler that supports C++14, e.g.
+  * gcc-5 or newer
+  * clang-3.6 or newer
+
+## Build
 ```shell
 git clone git@github.com:ithron/VolViz.git
 cd VolViz
