@@ -141,7 +141,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz
 install(DIRECTORY ${DEPENDENCIES_DIR}/Eigen-3.2.8/Eigen
   DESTINATION include/VolViz/src
 )
-install(DIRECTORY ${DEPENDENCIES_DIR}/GLS/include
+install(DIRECTORY ${DEPENDENCIES_DIR}/GSL/include
   DESTINATION include/VolViz/src/GSL
 )
 install(DIRECTORY ${DEPENDENCIES_DIR}/PhysUnits/phys
