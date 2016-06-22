@@ -1,8 +1,9 @@
 #ifndef VolViz_Visualizer_h
 #define VolViz_Visualizer_h
 
-#include "Types.h"
 #include "AtomicWrapper.h"
+#include "Light.h"
+#include "Types.h"
 
 #include <Eigen/Core>
 
@@ -14,27 +15,6 @@ namespace VolViz {
 namespace Private_ {
 class VisualizerImpl;
 } // namespace Private_
-
-/// Normalized RGB color
-using Color = Eigen::Vector3f;
-/// Position in 3D euclidean space
-using Position = Eigen::Vector3f;
-/// Position in homogenous coordinates
-using PositionH = Eigen::Vector4f;
-
-/// Point or directional light
-class Light {
-public:
-  /// Color of the light
-  Color color{Color::Ones()};
-  /// Position of the light source. Since only directional light are supported,
-  /// the light is at an infinite position, therefore the position equals the
-  /// direction to the light source
-  PositionH position{PositionH::Zero()};
-
-  /// Factor that specifies how the light contributes to the ambient lighting
-  float ambientFactor = 0.f;
-};
 
 class Visualizer {
 public:

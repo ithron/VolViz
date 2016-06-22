@@ -8,9 +8,15 @@
 
 namespace VolViz {
 
+/// Position in 3D euclidean space
 using Position = Eigen::Vector3f;
+/// Position in homogenous coordinates
 using PositionH = Eigen::Vector4f;
 
+/// Normalized RGB color
+using Color = Eigen::Vector3f;
+
+/// 6-DOF orientation, represented as a quaternion
 using Orientation = Eigen::Quaternionf;
 
 using Scale = float;
