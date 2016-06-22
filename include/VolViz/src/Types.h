@@ -25,7 +25,7 @@ inline auto Blue() noexcept { return Color::UnitZ(); }
 inline auto Yellow() noexcept { return Red() + Green(); }
 inline auto Magenta() noexcept { return Red() + Blue(); }
 inline auto Cyan() noexcept { return Blue() + Green(); }
-};
+}
 
 /// 6-DOF orientation, represented as a quaternion
 using Orientation = Eigen::Quaternionf;
