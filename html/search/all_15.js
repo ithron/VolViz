@@ -6,8 +6,8 @@ var searchData=
   ['shaders',['Shaders',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html',1,'VolViz::Private_::GL']]],
   ['vao',['vao',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#afd7b6f7ee0edd58558328afdf1f6cac6',1,'VolViz::Private_::VisualizerImpl::MeshData::vao()'],['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html#a7ee56f269c15f07fb183e439126d7a0a',1,'VolViz::Private_::VisualizerImpl::SingleVertData::vao()']]],
   ['vbuff',['vBuff',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html#a746fb3bc6899d0c800f3ba291671e6ab',1,'VolViz::Private_::VisualizerImpl::SingleVertData']]],
-  ['vertexarray',['VertexArray',['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html',1,'VolViz::Private_::GL']]],
   ['vertexarray',['VertexArray',['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html#a01cbf09f0a3d74d13ffa8ade08390b42',1,'VolViz::Private_::GL::VertexArray::VertexArray(int) noexcept'],['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html#a30bfd788a3d3b6ddd571c3f761082e65',1,'VolViz::Private_::GL::VertexArray::VertexArray() noexcept'],['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html#a3ee3bc6c08d33a9aacde6b0204989b84',1,'VolViz::Private_::GL::VertexArray::VertexArray(VertexArray &amp;&amp;rhs) noexcept']]],
+  ['vertexarray',['VertexArray',['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html',1,'VolViz::Private_::GL']]],
   ['vertexarray_2eh',['VertexArray.h',['../VertexArray_8h.html',1,'']]],
   ['vertices',['vertices',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#aa1bd4e19fb45d642c542e20665bc9e78',1,'VolViz::Private_::VisualizerImpl::MeshData']]],
   ['viewmatrix',['viewMatrix',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a2a9433bb8389bf353fa64f89e2200908',1,'VolViz::Private_::VisualizerImpl']]],
@@ -21,6 +21,10 @@ var searchData=
   ['visualizerimpl',['VisualizerImpl',['../classVolViz_1_1Private___1_1VisualizerImpl.html',1,'VolViz::Private_']]],
   ['visualizerimpl_2ecpp',['VisualizerImpl.cpp',['../VisualizerImpl_8cpp.html',1,'']]],
   ['visualizerimpl_2eh',['VisualizerImpl.h',['../VisualizerImpl_8h.html',1,'']]],
+  ['volume_2eh',['Volume.h',['../Volume_8h.html',1,'']]],
+  ['volumedescriptor',['VolumeDescriptor',['../structVolViz_1_1VolumeDescriptor.html',1,'VolViz']]],
+  ['volumetype',['VolumeType',['../namespaceVolViz.html#ad208471555239219028c0bb4fd84858d',1,'VolViz']]],
   ['volviz',['VolViz',['../namespaceVolViz.html',1,'']]],
-  ['volviz_2eh',['VolViz.h',['../VolViz_8h.html',1,'']]]
+  ['volviz_2eh',['VolViz.h',['../VolViz_8h.html',1,'']]],
+  ['voxelsize',['voxelSize',['../structVolViz_1_1VolumeDescriptor.html#a0501c1cc886177e2b3b769d82a9a8329',1,'VolViz::VolumeDescriptor::voxelSize()'],['../namespaceVolViz.html#a77e773db79ffbf3b25c535b4e8e6ffd1',1,'VolViz::VoxelSize()']]]
 ];

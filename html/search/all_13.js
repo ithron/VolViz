@@ -7,5 +7,6 @@ var searchData=
   ['textures_3c_205_20_3e',['Textures&lt; 5 &gt;',['../structVolViz_1_1Private___1_1GL_1_1Textures.html',1,'VolViz::Private_::GL']]],
   ['textures_5f',['textures_',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html#aa807b5e20c8e62e42e7184f217367408',1,'VolViz::Private_::VisualizerImpl::TextureWrapper::textures_()'],['../group__privateMembers.html#gad1660086070e64dae44b9df701a0a487',1,'VolViz::Private_::VisualizerImpl::textures_()']]],
   ['texturewrapper',['TextureWrapper',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html',1,'VolViz::Private_::VisualizerImpl']]],
+  ['type',['type',['../structVolViz_1_1VolumeDescriptor.html#a75b328190f26d54da8b7ae98f310e0db',1,'VolViz::VolumeDescriptor']]],
   ['types_2eh',['Types.h',['../Types_8h.html',1,'']]]
 ];

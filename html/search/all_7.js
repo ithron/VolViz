@@ -21,6 +21,7 @@ var searchData=
   ['glfw_5f',['glfw_',['../group__shaders.html#ga29d82ff3888930b7f3d8a0f5b3c7c782',1,'VolViz::Private_::VisualizerImpl']]],
   ['glfw_5finclude_5fglcorearb',['GLFW_INCLUDE_GLCOREARB',['../GLdefs_8h.html#a7737bc5535f188b6f1ffffa9f9f4146c',1,'GLdefs.h']]],
   ['glfw_5finclude_5fglext',['GLFW_INCLUDE_GLEXT',['../GLdefs_8h.html#a2b9565e626144ca0f30bab5b0467a4d0',1,'GLdefs.h']]],
+  ['grayscale',['GrayScale',['../namespaceVolViz.html#ad208471555239219028c0bb4fd84858da4f90b9cafa6fec5c0bd8cb1df7281693',1,'VolViz']]],
   ['green',['Green',['../namespaceVolViz_1_1Colors.html#abe5f514da8451e0e6e750a5e59e75aa7',1,'VolViz::Colors']]],
   ['gridgeometryshadersrc',['gridGeometryShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a084a8e44063559cd9eceb82a1ae90a8e',1,'VolViz::Private_::GL::Shaders']]],
   ['gridprogram_5f',['gridProgram_',['../group__shaders.html#ga8439e9523ab51ea4a988ef15aad4ec11',1,'VolViz::Private_::VisualizerImpl']]]

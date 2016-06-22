@@ -6,6 +6,7 @@ var searchData=
   ['setmesh',['setMesh',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a760116aa58ff31f0cae362c6c55b0683',1,'VolViz::Private_::VisualizerImpl::setMesh()'],['../classVolViz_1_1Visualizer.html#a4f9044fb04c76a16111afe92ae0118e8',1,'VolViz::Visualizer::setMesh()']]],
   ['setupfbos',['setupFBOs',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a03566172e5638ec1520a5da0be686128',1,'VolViz::Private_::VisualizerImpl']]],
   ['setupshaders',['setupShaders',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a16fa1b1f048399ad840055b83f9f392c',1,'VolViz::Private_::VisualizerImpl']]],
+  ['setvolume',['setVolume',['../classVolViz_1_1Visualizer.html#a1bed37b0fd453a1dbc1fd971c2550110',1,'VolViz::Visualizer']]],
   ['shader',['Shader',['../classVolViz_1_1Private___1_1GL_1_1Shader.html',1,'VolViz::Private_::GL']]],
   ['shader',['Shader',['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a4f5325a3929d52516b6491aaa91c8511',1,'VolViz::Private_::GL::Shader::Shader(GLenum type, std::string const &amp;source)'],['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a16fed33fae9d3abca36f76bd464121cd',1,'VolViz::Private_::GL::Shader::Shader(Shader const &amp;)=delete'],['../classVolViz_1_1Private___1_1GL_1_1Shader.html#ad519937b1428e12f9d501fedea6f53f0',1,'VolViz::Private_::GL::Shader::Shader(Shader &amp;&amp;rhs) noexcept']]],
   ['shader_5f',['shader_',['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a031caadf068ab5ca1fcc04204f6c1c80',1,'VolViz::Private_::GL::Shader']]],
@@ -23,11 +24,14 @@ var searchData=
   ['simplevertshadersrc',['simpleVertShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ae78ea4d04fc254717e0b0a961950a49a',1,'VolViz::Private_::GL::Shaders']]],
   ['singlevertdata',['SingleVertData',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html',1,'VolViz::Private_::VisualizerImpl']]],
   ['singlevertexdata_5f',['singleVertexData_',['../group__privateMembers.html#ga6f85a104e6b684b49ed3b3a77e2b4ca4',1,'VolViz::Private_::VisualizerImpl']]],
-  ['size2',['Size2',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a65c662421ff278c7e358d3468d4be5b0',1,'VolViz::Private_::VisualizerImpl']]],
+  ['size',['size',['../structVolViz_1_1VolumeDescriptor.html#a809045e07319637d8810dcc36f3f8fc7',1,'VolViz::VolumeDescriptor']]],
+  ['size2',['Size2',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a65c662421ff278c7e358d3468d4be5b0',1,'VolViz::Private_::VisualizerImpl::Size2()'],['../namespaceVolViz.html#a523c4cc78fa92776fba053d8a2f0fcdf',1,'VolViz::Size2()']]],
+  ['size3',['Size3',['../namespaceVolViz.html#a30b616bf5ad51a57fba8b04275c7db3b',1,'VolViz']]],
   ['specularlightingpassfragshadersrc',['specularLightingPassFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#aa66841d9f619fb92e1a566649a2d8e01',1,'VolViz::Private_::GL::Shaders']]],
   ['specularlightingpassprogram_5f',['specularLightingPassProgram_',['../group__shaders.html#gab442edcca339c229bd17acb742103cbe',1,'VolViz::Private_::VisualizerImpl']]],
   ['specularquadprogram_5f',['specularQuadProgram_',['../group__shaders.html#gaa92a81c3f898e7d68bf81e7e074363ea',1,'VolViz::Private_::VisualizerImpl']]],
   ['specularvisualizationfragshadersrc',['specularVisualizationFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a4be4262ba3ee85a5591f1546e8c1fbc7',1,'VolViz::Private_::GL::Shaders']]],
   ['start',['start',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a9bff815cf3021c4e91f1e6f28a7b2067',1,'VolViz::Private_::VisualizerImpl::start()'],['../classVolViz_1_1Visualizer.html#a8e43fe16c39b2b05fbf7b6e039ad41f5',1,'VolViz::Visualizer::start()']]],
+  ['stride',['stride',['../structVolViz_1_1VolumeDescriptor.html#a3836b7514a8dd7ba5c157cc6ffca2ae4',1,'VolViz::VolumeDescriptor']]],
   ['swapbuffers',['swapBuffers',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a1ef7fecf88513981ce746b1f7f308c59',1,'VolViz::Private_::GL::GLFW']]]
 ];

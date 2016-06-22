@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lightingcomponents',['LightingComponents',['../group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa1fdcbb6e6fe00b3ad988f0b16a88c999',1,'VolViz::Private_::VisualizerImpl']]]
+  ['finaldepth',['FinalDepth',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaaac9c8d1557f04764faad6d1b0af02d47',1,'VolViz::Private_::VisualizerImpl']]]
 ];

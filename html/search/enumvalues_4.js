@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['none',['None',['../group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a6adf97f83acf6453d4a6a4b1070f3754',1,'VolViz::Private_::VisualizerImpl::None()'],['../namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a50deef94aa23b3e6cbbb49610d496506',1,'VolViz::Private_::GL::None()']]],
-  ['normalsandspecular',['NormalsAndSpecular',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaaf5aa374983aa7f4b1cb528886a2e19f5',1,'VolViz::Private_::VisualizerImpl']]]
+  ['grayscale',['GrayScale',['../namespaceVolViz.html#ad208471555239219028c0bb4fd84858da4f90b9cafa6fec5c0bd8cb1df7281693',1,'VolViz']]]
 ];
