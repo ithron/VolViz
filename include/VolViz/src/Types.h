@@ -6,12 +6,17 @@
 #include <gsl.h>
 #include <phys/units/quantity.hpp>
 
+#include <array>
+
 namespace VolViz {
 
 /// Position in 3D euclidean space
 using Position = Eigen::Vector3f;
 /// Position in homogenous coordinates
 using PositionH = Eigen::Vector4f;
+
+using Size2 = Eigen::Matrix<std::size_t, 2, 1>;
+using Size3 = Eigen::Matrix<std::size_t, 3, 1>;
 
 /// Normalized RGB color
 using Color = Eigen::Vector3f;
@@ -46,6 +51,8 @@ using phys::units::nano;
 using phys::units::abs;
 
 namespace literals = phys::units::literals;
+
+using VoxelSize = std::array<Length, 3>;
 
 } // namespace VolViz
 

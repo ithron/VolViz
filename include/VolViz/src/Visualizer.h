@@ -5,8 +5,10 @@
 #include "Geometry.h"
 #include "Light.h"
 #include "Types.h"
+#include "Volume.h"
 
 #include <Eigen/Core>
+#include <gsl.h>
 
 #include <atomic>
 #include <memory>
@@ -40,6 +42,10 @@ public:
   void renderOneFrame();
 
   operator bool() const noexcept;
+
+  template <class T>
+  void setVolume(VolumeDescriptor const &descriptor,
+                 gsl::not_null<T const *> data);
 
   template <class VertBase, class IdxBase>
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
