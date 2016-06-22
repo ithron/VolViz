@@ -2,6 +2,7 @@
 #define VolViz_Visualizer_h
 
 #include "AtomicWrapper.h"
+#include "Geometry.h"
 #include "Light.h"
 #include "Types.h"
 
@@ -19,6 +20,7 @@ class VisualizerImpl;
 class Visualizer {
 public:
   using LightName = std::uint16_t;
+  using GeometryName = std::string;
 
   static auto constexpr kDefaultFOV = 110;
   static auto constexpr kTitle = "Volume Visualizer";
@@ -44,6 +46,8 @@ public:
                Eigen::MatrixBase<IdxBase> const &I);
 
   void addLight(LightName name, Light const &light);
+
+  void addGeometry(GeometryName name, AxisAlignedPlane const &plane);
 
   std::atomic<bool> showGrid{true};
   AtomicWrapper<Length> scale{1 * milli * meter};

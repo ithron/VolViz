@@ -62,6 +62,14 @@ std::string const specularVisualizationFragShaderSrc =
 #include "Shaders/specularVisualization.frag"
     ;
 
+extern std::string const planeGeomShaderSrc =
+#include "Shaders/plane.geom"
+    ;
+
+extern std::string const coloredQuadFragmentShaderSrc =
+#include "Shaders/coloredQuad.frag"
+    ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders

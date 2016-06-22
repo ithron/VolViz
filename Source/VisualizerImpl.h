@@ -9,12 +9,20 @@
 
 #include <atomic>
 #include <mutex>
+#include <queue>
 #include <unordered_map>
 
 namespace VolViz {
 namespace Private_ {
 
 class VisualizerImpl {
+  using RenderCommand = std::function<void()>;
+  using InitCommand = std::function<RenderCommand()>;
+  using InitQueueEntry = std::pair<Visualizer::GeometryName, InitCommand>;
+  using GeometryList =
+      std::unordered_map<Visualizer::GeometryName, RenderCommand>;
+  using GeometryInitQueue = std::queue<InitQueueEntry>;
+
 public:
   using Point2 = Eigen::Vector2f;
   using Size2 = Eigen::Vector2f;
@@ -31,6 +39,9 @@ public:
   template <class VertBase, class IdxBase>
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
+
+  void addGeometry(Visualizer::GeometryName name,
+                   AxisAlignedPlane const &plane);
 
 private:
   friend class ::VolViz::Visualizer;
@@ -61,6 +72,9 @@ private:
 
   /// Renders the set mesh if any
   void renderMeshes();
+
+  /// Renders the geometry
+  void renderGeometry();
 
   /// Renders a grid
   void renderGrid();
@@ -109,6 +123,7 @@ private:
   GL::ShaderProgram ambientPassProgram_;
   GL::ShaderProgram diffuseLightingPassProgram_;
   GL::ShaderProgram specularLightingPassProgram_;
+  GL::ShaderProgram planeProgram_;
   /// @}
 
   /// Auxiliary textures use in the deferred shading process.
@@ -137,6 +152,13 @@ private:
     /// The shininess of the mesh surface
     float shininess = 10.f;
   } mesh_;
+
+  /// @defgroup geomGroup Geometry processing related variables
+  /// @{
+  GeometryList geometries_;
+  GeometryInitQueue geometryInitQueue_;
+  std::mutex geomInitQueueMutex_;
+  ///@}
 
   /// Data representing a single vertex, required by the grid and fullscreen
   /// quad renderer

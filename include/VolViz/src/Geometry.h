@@ -5,16 +5,12 @@
 
 namespace VolViz {
 
-  class Geometry {
-    public:
-
-      Position position{Position::Zero()};
-      Orientation orientation{Orientation::Identity()};
-
-      virtual ~Geometry() = default;
-    protected:
-
-  };
+struct AxisAlignedPlane {
+  Length intercept{0 * meter};
+  Axis axis{Axis::X};
+  bool movable{true};
+  Color color{Colors::White()};
+};
 
 } // namespace VolViz
 

@@ -205,6 +205,17 @@ void VisualizerImpl::setupShaders() {
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
 
+  auto planeProg =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::planeGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::deferredPassthroughFragShaderSrc))
+                    .link());
+
   geometryStageProgram_ = std::move(geomProg);
   quadProgram_ = std::move(quadProg);
   gridProgram_ = std::move(gridProg);
@@ -215,6 +226,7 @@ void VisualizerImpl::setupShaders() {
   specularLightingPassProgram_ = std::move(specLightingPassProg);
   specularQuadProgram_ = std::move(specularQuadProg);
   hdrQuadProgram_ = std::move(hdrQuadProg);
+  planeProgram_ = std::move(planeProg);
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -344,6 +356,76 @@ void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
   lights_.emplace(name, light);
 }
 
+void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
+                                 AxisAlignedPlane const &plane) {
+  using GL::MoveMask;
+  using Eigen::AngleAxisf;
+  using std::abs;
+  Length const refScale = visualizer_->scale;
+  auto geom = GL::Geometry{};
+  auto constexpr d90 = static_cast<float>(M_PI / 2.0);
+
+  float intercept = 1.f;
+
+  if (abs(plane.intercept / refScale) < 1e-6) {
+    geom.scale = refScale;
+    intercept = 0.f;
+  } else { geom.scale = plane.intercept; }
+
+  geom.movable = plane.movable;
+  geom.color = plane.color;
+
+  switch (plane.axis) {
+    case Axis::X:
+      geom.position = intercept * Position::UnitX();
+      geom.moveMask = MoveMask::X;
+      geom.orientation = AngleAxisf(d90, -Position::UnitY());
+      break;
+    case Axis::Y:
+      geom.position = intercept * Position::UnitY();
+      geom.moveMask = MoveMask::Y;
+      geom.orientation = AngleAxisf(d90, -Position::UnitX());
+      break;
+    case Axis::Z:
+      geom.position = intercept * Position::UnitZ();
+      geom.moveMask = MoveMask::Z;
+      geom.orientation = Orientation::Identity();
+      break;
+  }
+
+  auto init = [geom, this]() {
+
+    std::cout << "Orientation: " << geom.orientation.toRotationMatrix() << std::endl;
+    return [geom, this]() {
+      Length const rScale = visualizer_->scale;
+      auto const viewMat = viewMatrix();
+      auto const scale = static_cast<float>(geom.scale / rScale);
+      auto const modelMat =
+          (Eigen::Scaling(scale) * Eigen::Translation3f(geom.position) *
+           geom.orientation).matrix();
+
+      auto const modelViewMat = (viewMat * modelMat).eval();
+      auto const inverseModelViewMatrix =
+          modelViewMat.block<3, 3>(0, 0).inverse().eval();
+
+      planeProgram_.use();
+      planeProgram_["shininess"] = 10.f;
+      planeProgram_["color"] = geom.color;
+      planeProgram_["modelViewProjectionMatrix"] =
+          (projectionMatrix() * modelViewMat).eval();
+      planeProgram_["modelViewMatrix"] = modelViewMat;
+      planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
+
+      auto boundVao = GL::binding(singleVertexData_.vao);
+      glDrawArrays(GL_POINTS, 0, 1);
+      assertGL("glDrawArrays failed");
+    };
+  };
+
+  std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
+  geometryInitQueue_.emplace(name, init);
+}
+
 template <class VertBase, class IdxBase>
 void VisualizerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
                              Eigen::MatrixBase<IdxBase> const &I) {
@@ -441,7 +523,26 @@ void VisualizerImpl::renderOneFrame() {
 
   glfw_.makeCurrent();
 
+  // Init all new geometry
+  {
+    InitQueueEntry entry;
+    {
+      std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
+      if (!geometryInitQueue_.empty()) {
+        entry = geometryInitQueue_.front();
+        geometryInitQueue_.pop();
+      }
+    } // release lock
+    // Init and add geometry if queue was not empty
+    if (entry.second) {
+      std::cout << "Init geometry '" << entry.first << "'" << std::endl;
+      geometries_.emplace(entry.first, entry.second());
+    }
+  }
+
   assertGL("OpenGL Error stack not clear");
+
+  renderGeometry();
 
   renderMeshes();
 
@@ -476,11 +577,11 @@ void VisualizerImpl::renderMeshes() {
   assertGL("Failed to bind framebuffer");
   glDrawBuffers(attachments.size(), attachments.data());
 
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
-  glClearStencil(0);
-  glDisable(GL_FRAMEBUFFER_SRGB);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  // glClearColor(0.f, 0.f, 0.f, 0.f);
+  // glClearDepth(1.0);
+  // glClearStencil(0);
+  // glDisable(GL_FRAMEBUFFER_SRGB);
+  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
   glDepthMask(true);
   glColorMask(true, true, true, true);
@@ -503,6 +604,31 @@ void VisualizerImpl::renderMeshes() {
   glDrawBuffers(1, attachments.data());
 }
 
+void VisualizerImpl::renderGeometry() {
+  constexpr std::array<GLuint, 3> attachments{
+      {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2}};
+
+  // Bind FBO and set it up for MRT
+  auto fboBinding = binding(lightingFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+  assertGL("Failed to bind framebuffer");
+  glDrawBuffers(attachments.size(), attachments.data());
+
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+  glClearDepth(1.0);
+  glClearStencil(0);
+  glDisable(GL_FRAMEBUFFER_SRGB);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  glEnable(GL_DEPTH_TEST);
+  glDepthMask(true);
+  glColorMask(true, true, true, true);
+
+  // call render commands
+  for (auto const &geom : geometries_) geom.second();
+
+  // switch back to single render target
+  glDrawBuffers(1, attachments.data());
+}
+
 void VisualizerImpl::renderGrid() {
 
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
@@ -511,7 +637,7 @@ void VisualizerImpl::renderGrid() {
   auto const vMatrix = viewMatrix();
 
   gridProgram_.use();
-  gridProgram_["scale"] = 2.f;
+  gridProgram_["scale"] = 1.f;
   gridProgram_["viewProjectionMatrix"] = (pMatrix * vMatrix).eval();
 
   auto boundVao = binding(singleVertexData_.vao);

@@ -79,6 +79,21 @@ int main(int argc, char **argv) {
 
   viewer.scale = 1_cm;
 
+  AxisAlignedPlane plane;
+  plane.axis = Axis::X;
+  plane.color = Colors::Red();
+  plane.intercept = 0_cm;
+
+  viewer.addGeometry("X-Plane", plane);
+
+  plane.axis = Axis::Y;
+  plane.color = Colors::Green();
+  viewer.addGeometry("Y-Plane", plane);
+
+  plane.axis = Axis::Z;
+  plane.color = Colors::Blue();
+  viewer.addGeometry("Z-Plane", plane);
+
   while (viewer) { viewer.renderOneFrame(); }
 
   return EXIT_SUCCESS;

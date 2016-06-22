@@ -38,6 +38,10 @@ extern std::string const specularLightingPassFragShaderSrc;
 
 extern std::string const specularVisualizationFragShaderSrc;
 
+extern std::string const planeGeomShaderSrc;
+
+extern std::string const coloredQuadFragmentShaderSrc;
+
 } // namespace Shaders
 } // namespace GL
 } // namespace Private_

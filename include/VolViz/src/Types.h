@@ -16,8 +16,21 @@ using PositionH = Eigen::Vector4f;
 /// Normalized RGB color
 using Color = Eigen::Vector3f;
 
+namespace Colors {
+inline auto Black() noexcept { return Color::Zero(); }
+inline auto White() noexcept { return Color::Ones(); }
+inline auto Red() noexcept { return Color::UnitX(); }
+inline auto Green() noexcept { return Color::UnitY(); }
+inline auto Blue() noexcept { return Color::UnitZ(); }
+inline auto Yellow() noexcept { return Red() + Green(); }
+inline auto Magenta() noexcept { return Red() + Blue(); }
+inline auto Cyan() noexcept { return Blue() + Green(); }
+};
+
 /// 6-DOF orientation, represented as a quaternion
 using Orientation = Eigen::Quaternionf;
+
+enum class Axis { X, Y, Z };
 
 using Scale = float;
 
@@ -29,6 +42,8 @@ using phys::units::centi;
 using phys::units::milli;
 using phys::units::micro;
 using phys::units::nano;
+
+using phys::units::abs;
 
 namespace literals = phys::units::literals;
 

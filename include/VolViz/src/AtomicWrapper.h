@@ -16,7 +16,7 @@ public:
   operator T() const {
     std::lock_guard<std::mutex> lock(mutex_);
     auto cpy = obj_;
-    return obj_;
+    return cpy;
   }
 
   AtomicWrapper &operator=(T const &rhs) {
@@ -37,7 +37,7 @@ public:
 
 private:
   T obj_;
-  std::mutex mutex_;
+  mutable std::mutex mutex_;
 };
 
 } // namespace VolViz

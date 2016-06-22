@@ -3,6 +3,7 @@
 #include "Error.h"
 #include "Framebuffer.h"
 #include "GLFW.h"
+#include "Geometry.h"
 #include "ShaderProgram.h"
 #include "Shaders.h"
 #include "Textures.h"

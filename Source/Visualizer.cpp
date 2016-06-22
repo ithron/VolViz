@@ -35,6 +35,10 @@ void Visualizer::addLight(LightName name, Light const &light) {
   impl_->addLight(name, light);
 }
 
+void Visualizer::addGeometry(GeometryName name, AxisAlignedPlane const &plane) {
+  impl_->addGeometry(name, plane);
+}
+
 template <class VertBase, class IdxBase>
 void Visualizer::setMesh(Eigen::MatrixBase<VertBase> const &V,
                          Eigen::MatrixBase<IdxBase> const &I) {
