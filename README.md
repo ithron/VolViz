@@ -22,7 +22,7 @@ target_link_libraries(MyTarget PRIVATE MyDep1 MyDep2 VolViz::Visualizer)
 
 ## Example Code
 ```C++
-#include <VolViz/Visualizer.h>
+#include <VolViz/VolViz.h>
 
 int main(int, char **) {
   // For physical units
