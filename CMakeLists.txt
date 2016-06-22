@@ -46,6 +46,11 @@ configure_file(
 )
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+option(BUILD_EXAMPLES "Build examples" ON)
+
 add_subdirectory(Source VolViz)
+if (BUILD_EXAMPLES)
+  add_subdirectory(Examples Examples)
+endif()
 
 

@@ -1,6 +1,7 @@
 #include "Shaders.h"
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 namespace Shaders {
 
@@ -65,5 +66,6 @@ std::string const specularVisualizationFragShaderSrc =
 
 } // namespace Shaders
 } // namespace GL
+} // namespace Private_
 
 } // namespace VolViz

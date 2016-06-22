@@ -1,18 +1,11 @@
 #ifndef VolViz_VisualizerImpl_h
 #define VolViz_VisualizerImpl_h
 
-#include "Binding.h"
-#include "Buffer.h"
-#include "Framebuffer.h"
-#include "GLFW.h"
-#include "ShaderProgram.h"
-#include "Shaders.h"
-#include "Textures.h"
-#include "VertexArray.h"
-#include "Visualizer.h"
+#include "GL/GL.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
+#include <VolViz/VolViz.h>
 
 #include <atomic>
 #include <mutex>

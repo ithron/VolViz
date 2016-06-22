@@ -1,8 +1,8 @@
 #ifndef VolViz_ShaderProgram_h
 #define VolViz_ShaderProgram_h
 
+#include "GLdefs.h"
 #include "Error.h"
-#include "GL.h"
 
 #include <Eigen/Core>
 
@@ -11,6 +11,7 @@
 #include <vector>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 class ShaderProgram;
@@ -194,6 +195,7 @@ public:
 #pragma clang diagnostic pop
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_ShaderProgram_h

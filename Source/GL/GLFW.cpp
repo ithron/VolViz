@@ -1,9 +1,9 @@
-#include "Error.h"
 #include "GLFW.h"
 
 #include <cassert>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {
@@ -103,4 +103,5 @@ std::size_t GLFW::height() const noexcept {
   return VOLVIZ_DEFAULT_WINDOW_HEIGHT;
 }
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz

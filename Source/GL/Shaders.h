@@ -4,6 +4,7 @@
 #include <string>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 namespace Shaders {
 
@@ -39,6 +40,7 @@ extern std::string const specularVisualizationFragShaderSrc;
 
 } // namespace Shaders
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_Shaders_h

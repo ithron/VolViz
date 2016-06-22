@@ -1,10 +1,10 @@
 #ifndef VolViz_Framebuffer_h
 #define VolViz_Framebuffer_h
 
-#include "Error.h"
-#include "GLFW.h"
+#include "GLdefs.h"
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 /// RAII wrapper for OpenGL framebuffer objects
@@ -42,6 +42,7 @@ struct Framebuffer {
 };
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_Framebuffer_h

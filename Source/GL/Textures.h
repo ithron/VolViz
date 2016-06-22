@@ -1,12 +1,12 @@
 #ifndef VolViz_Texture_h
 #define VolViz_Texture_h
 
-#include "Error.h"
-#include "GL.h"
+#include "GLdefs.h"
 
 #include <array>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 /// RAII wrapper for arrays of OpenGL texture objects
@@ -35,6 +35,7 @@ template <std::size_t N> struct Textures {
 };
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_Texture_h

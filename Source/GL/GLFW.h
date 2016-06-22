@@ -2,12 +2,13 @@
 #define VolViz_GLFW_h
 
 #include "config.h"
-#include "GL.h"
+#include "GLdefs.h"
 
 #include <functional>
 #include <string>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 #pragma clang diagnostic push
@@ -67,6 +68,7 @@ private:
 #pragma clang diagnostic pop
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_GLFW_h

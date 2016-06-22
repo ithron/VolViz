@@ -1,4 +1,4 @@
-#include "Visualizer.h"
+#include <VolViz/VolViz.h>
 
 #include <Eigen/Core>
 #include <igl/readOBJ.h>
