@@ -70,6 +70,10 @@ extern std::string const coloredQuadFragmentShaderSrc =
 #include "Shaders/coloredQuad.frag"
     ;
 
+extern std::string const bboxGeometryShaderSrc =
+#include "Shaders/bbox.geom"
+    ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders

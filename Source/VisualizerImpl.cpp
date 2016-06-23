@@ -102,7 +102,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 #pragma mark Setup Code
 
 void VisualizerImpl::setupShaders() {
-  auto quadProg = std::move(
+  quadProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
                GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
@@ -112,7 +112,7 @@ void VisualizerImpl::setupShaders() {
                                    GL::Shaders::simpleTextureFragShaderSrc))
           .link());
 
-  auto hdrQuadProg = std::move(
+  hdrQuadProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
                GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
@@ -122,7 +122,7 @@ void VisualizerImpl::setupShaders() {
                                    GL::Shaders::hdrTextureFragShaderSrc))
           .link());
 
-  auto normalQuadProg =
+  normalQuadProgram_ =
       std::move(GL::ShaderProgram()
                     .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                              GL::Shaders::nullVertShaderSrc))
@@ -133,7 +133,7 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::normalVisualizationFragShaderSrc))
                     .link());
 
-  auto depthQuadProg = std::move(
+  depthQuadProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
                GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
@@ -143,7 +143,7 @@ void VisualizerImpl::setupShaders() {
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
 
-  auto specularQuadProg =
+  specularQuadProgram_ =
       std::move(GL::ShaderProgram()
                     .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                              GL::Shaders::nullVertShaderSrc))
@@ -154,7 +154,7 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::specularVisualizationFragShaderSrc))
                     .link());
 
-  auto ambientPassProg = std::move(
+  ambientPassProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
                GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
@@ -164,7 +164,7 @@ void VisualizerImpl::setupShaders() {
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
 
-  auto diffLightingPassProg =
+  diffuseLightingPassProgram_ =
       std::move(GL::ShaderProgram()
                     .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                              GL::Shaders::nullVertShaderSrc))
@@ -175,7 +175,7 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::diffuseLightingPassFragShaderSrc))
                     .link());
 
-  auto specLightingPassProg =
+  specularLightingPassProgram_ =
       std::move(GL::ShaderProgram()
                     .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                              GL::Shaders::nullVertShaderSrc))
@@ -186,7 +186,7 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::specularLightingPassFragShaderSrc))
                     .link());
 
-  auto geomProg = std::move(
+  geometryStageProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
@@ -195,7 +195,7 @@ void VisualizerImpl::setupShaders() {
                           GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
-  auto gridProg = std::move(
+  gridProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
                GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
@@ -205,7 +205,7 @@ void VisualizerImpl::setupShaders() {
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
 
-  auto planeProg =
+  planeProgram_ =
       std::move(GL::ShaderProgram()
                     .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                              GL::Shaders::nullVertShaderSrc))
@@ -216,17 +216,15 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::deferredPassthroughFragShaderSrc))
                     .link());
 
-  geometryStageProgram_ = std::move(geomProg);
-  quadProgram_ = std::move(quadProg);
-  gridProgram_ = std::move(gridProg);
-  normalQuadProgram_ = std::move(normalQuadProg);
-  depthQuadProgram_ = std::move(depthQuadProg);
-  ambientPassProgram_ = std::move(ambientPassProg);
-  diffuseLightingPassProgram_ = std::move(diffLightingPassProg);
-  specularLightingPassProgram_ = std::move(specLightingPassProg);
-  specularQuadProgram_ = std::move(specularQuadProg);
-  hdrQuadProgram_ = std::move(hdrQuadProg);
-  planeProgram_ = std::move(planeProg);
+  bboxProgram_ = std::move(
+      GL::ShaderProgram()
+          .attachShader(
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+          .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                   GL::Shaders::bboxGeometryShaderSrc))
+          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
+                                   GL::Shaders::passThroughFragShaderSrc))
+          .link());
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -350,6 +348,62 @@ void VisualizerImpl::start() { glfw_.show(); }
 
 VisualizerImpl::operator bool() const noexcept { return glfw_; }
 
+template <>
+void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
+                               gsl::span<float const> data) {
+  auto const nVoxels =
+      descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
+  auto const width = static_cast<GLsizei>(descriptor.size(0));
+  auto const height = static_cast<GLsizei>(descriptor.size(1));
+  auto const depth = static_cast<GLsizei>(descriptor.size(2));
+
+  Expects(width > 0 && height > 0 && depth > 0);
+
+  glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
+
+  GLenum internalFormat = 0;
+
+  switch (descriptor.type) {
+    case VolumeType::GrayScale:
+      internalFormat = GL_R32F;
+      Expects(data.size() == nVoxels);
+      break;
+    case VolumeType::ColorRGB:
+      internalFormat = GL_RGB32F;
+      Expects(data.size() == 3 * nVoxels);
+      break;
+  }
+
+  glTexStorage3D(GL_TEXTURE_3D, 1, internalFormat, width, height, depth);
+  assertGL("Failed to allocate texture storage");
+
+  // upload texture data
+  glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, width, height, depth, GL_RED,
+                  GL_FLOAT, data.data());
+  assertGL("Failed to upload texture data");
+
+  currentVolume_ = descriptor;
+}
+
+template <>
+void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
+                               gsl::span<Color const> data) {
+  auto const nVoxels =
+      descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
+
+  Expects(descriptor.type == VolumeType::ColorRGB);
+  Expects(nVoxels == data.size());
+
+  auto const *ptr = reinterpret_cast<float const *>(data.data());
+  auto const size = static_cast<std::ptrdiff_t>(3 * data.size());
+  setVolume(descriptor, gsl::as_span(ptr, size));
+}
+
+template void VisualizerImpl::setVolume(VolumeDescriptor const &,
+                                        gsl::span<float const>);
+template void VisualizerImpl::setVolume(VolumeDescriptor const &,
+                                        gsl::span<Color const>);
+
 void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
@@ -395,7 +449,8 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
 
   auto init = [geom, this]() {
 
-    std::cout << "Orientation: " << geom.orientation.toRotationMatrix() << std::endl;
+    std::cout << "Orientation: " << geom.orientation.toRotationMatrix()
+              << std::endl;
     return [geom, this]() {
       Length const rScale = visualizer_->scale;
       auto const viewMat = viewMatrix();
@@ -557,6 +612,8 @@ void VisualizerImpl::renderOneFrame() {
       break;
   }
 
+  if (currentVolume_.size(0) > 0) renderVolumeBBox();
+
   renderFinalPass();
 
   glfw_.swapBuffers();
@@ -680,6 +737,43 @@ void VisualizerImpl::renderFinalPass() {
   auto const h = static_cast<GLint>(glfw_.height());
   glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
   assertGL("Failed to blit framebuffer");
+}
+
+void VisualizerImpl::renderBoundingBox(Position const &position,
+                                       Orientation const &orientation,
+                                       Size3f const &size, Color const &color) {
+
+  auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+
+  auto const modelMat = (Eigen::Translation3f(position) * orientation *
+                         size.asDiagonal()).matrix();
+  auto const mvpMatrix = (projectionMatrix() * viewMatrix() * modelMat).eval();
+
+  bboxProgram_.use();
+  bboxProgram_["lineColor"] = color;
+  bboxProgram_["modelViewProjectionMatrix"] = mvpMatrix;
+
+  // draw quad using the geometry shader
+  auto boundVao = GL::binding(singleVertexData_.vao);
+  glEnable(GL_DEPTH_TEST);
+  glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+  glDepthMask(GL_TRUE);
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+}
+
+void VisualizerImpl::renderVolumeBBox() {
+  auto const vol = currentVolume_;
+  Length const scale = visualizer_->scale;
+
+  auto const voxelSize = Size3f(static_cast<float>(vol.voxelSize[0] / scale),
+                                static_cast<float>(vol.voxelSize[1] / scale),
+                                static_cast<float>(vol.voxelSize[2] / scale));
+
+  auto const size = vol.size.cast<float>().cwiseProduct(voxelSize);
+
+  renderBoundingBox(Size3f::Zero(), Orientation::Identity(), size,
+                    Colors::Cyan());
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,

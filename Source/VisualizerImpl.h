@@ -36,6 +36,9 @@ public:
 
   operator bool() const noexcept;
 
+  template <class T>
+  void setVolume(VolumeDescriptor const &descriptor, gsl::span<T> data);
+
   template <class VertBase, class IdxBase>
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
@@ -52,7 +55,8 @@ private:
     Albedo = 1,
     Depth = 2,
     RenderedImage = 3,
-    FinalDepth = 4
+    FinalDepth = 4,
+    VolumeTexture = 5
   };
 
   /// Compiles and links all shader programs
@@ -103,6 +107,13 @@ private:
   /// Renders the final image to screen
   void renderFinalPass();
 
+  /// Renders a bounding box
+  void renderBoundingBox(Position const &position,
+                         Orientation const &orientation, Size3f const &size,
+                         Color const &color);
+
+  void renderVolumeBBox();
+
   void addLight(Visualizer::LightName name, Light const &light);
 
   /// @defgroup privateMembers Private member variables
@@ -113,17 +124,18 @@ private:
   /// @defgroup shaders Shader Programs
   /// @{
   GL::GLFW glfw_;
+  GL::ShaderProgram ambientPassProgram_;
+  GL::ShaderProgram bboxProgram_;
+  GL::ShaderProgram depthQuadProgram_;
+  GL::ShaderProgram diffuseLightingPassProgram_;
   GL::ShaderProgram geometryStageProgram_;
-  GL::ShaderProgram quadProgram_;
+  GL::ShaderProgram gridProgram_;
   GL::ShaderProgram hdrQuadProgram_;
   GL::ShaderProgram normalQuadProgram_;
-  GL::ShaderProgram depthQuadProgram_;
-  GL::ShaderProgram specularQuadProgram_;
-  GL::ShaderProgram gridProgram_;
-  GL::ShaderProgram ambientPassProgram_;
-  GL::ShaderProgram diffuseLightingPassProgram_;
-  GL::ShaderProgram specularLightingPassProgram_;
   GL::ShaderProgram planeProgram_;
+  GL::ShaderProgram quadProgram_;
+  GL::ShaderProgram specularLightingPassProgram_;
+  GL::ShaderProgram specularQuadProgram_;
   /// @}
 
   /// Auxiliary textures use in the deferred shading process.
@@ -133,7 +145,7 @@ private:
     }
 
   private:
-    GL::Textures<5> textures_;
+    GL::Textures<6> textures_;
   } textures_;
   /// Frabebuffer used for the deferred shading
   GL::Framebuffer lightingFbo_{0};
@@ -189,6 +201,8 @@ private:
   Eigen::Vector3f cameraPosition_ = Eigen::Vector3f::Zero();
   Eigen::Quaternionf cameraOrientation_ = Eigen::Quaternionf::Identity();
   //@}
+
+  VolumeDescriptor currentVolume_;
 
   //@}
 };

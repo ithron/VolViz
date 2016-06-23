@@ -29,6 +29,17 @@ void Visualizer::start() { impl_->start(); }
 
 Visualizer::operator bool() const noexcept { return *impl_; }
 
+template <class T>
+void Visualizer::setVolume(VolumeDescriptor const &descriptor,
+                           gsl::span<T> data) {
+  impl_->setVolume(descriptor, data);
+}
+
+template void Visualizer::setVolume(VolumeDescriptor const &,
+                                    gsl::span<float const>);
+template void Visualizer::setVolume(VolumeDescriptor const &,
+                                    gsl::span<Color const>);
+
 void Visualizer::renderOneFrame() { impl_->renderOneFrame(); }
 
 void Visualizer::addLight(LightName name, Light const &light) {

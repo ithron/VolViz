@@ -18,6 +18,8 @@ using PositionH = Eigen::Vector4f;
 using Size2 = Eigen::Matrix<std::size_t, 2, 1>;
 using Size3 = Eigen::Matrix<std::size_t, 3, 1>;
 
+using Size3f = Eigen::Vector3f;
+
 /// Normalized RGB color
 using Color = Eigen::Vector3f;
 
