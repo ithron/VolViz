@@ -17,6 +17,7 @@ Warning: ignoring unsupported tag `MAN_SUBDIR             =' at line 1782, file 
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:62: warning: include file Shaders/specularVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:66: warning: include file Shaders/plane.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:70: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:74: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 Searching for include files...
 Searching for example files...
 Searching for images...
@@ -79,7 +80,27 @@ Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
-Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Volume.h...
+P/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:402: warning: no matching class member found for 
+  template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< float >)
+Possible candidates:
+  'template < T >
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< T > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< float const  > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
+
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:404: warning: no matching class member found for 
+  template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< Eigen::Vector3f >)
+Possible candidates:
+  'template < T >
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< T > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< float const  > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
+
+reprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Volume.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Volume.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
@@ -366,5 +387,5 @@ Patching output file 51/54
 Patching output file 52/54
 Patching output file 53/54
 Patching output file 54/54
-lookup cache used 782/65536 hits=3333 misses=943
+lookup cache used 813/65536 hits=3509 misses=976
 finished...

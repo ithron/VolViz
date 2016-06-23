@@ -2,6 +2,7 @@ var searchData=
 [
   ['red',['Red',['../namespaceVolViz_1_1Colors.html#a370df267aa54299c68cc263634fe56cd',1,'VolViz::Colors']]],
   ['renderambientlighting',['renderAmbientLighting',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a9ae7a35f8ec2afd564222e2011980af9',1,'VolViz::Private_::VisualizerImpl']]],
+  ['renderboundingbox',['renderBoundingBox',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a27bca9f2b0f01a82010f54f100a690ba',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderdiffuselighting',['renderDiffuseLighting',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a3240fc7cc670b77abf3a5340ddcd607b',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderfinalpass',['renderFinalPass',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a41f08ae5d6e8bc31b3180fe3748ddb56',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderfullscreenquad',['renderFullscreenQuad',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a9f75b3fc1dd3684f2e24222ba578d51d',1,'VolViz::Private_::VisualizerImpl']]],
@@ -14,5 +15,6 @@ var searchData=
   ['rendermeshes',['renderMeshes',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a03577212c51aa5e2169261d82c701204',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderoneframe',['renderOneFrame',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a506e70398325a7411f6776729f75213b',1,'VolViz::Private_::VisualizerImpl::renderOneFrame()'],['../classVolViz_1_1Visualizer.html#aa3607e76c69bf6def6b508770ee0e504',1,'VolViz::Visualizer::renderOneFrame()']]],
   ['renderquad',['renderQuad',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a211dbfaffcbf062b1dcb7c0fb1b4a3c4',1,'VolViz::Private_::VisualizerImpl']]],
-  ['renderspecularlighting',['renderSpecularLighting',['../classVolViz_1_1Private___1_1VisualizerImpl.html#aa742d4f41e7eec295049e8402cd9792c',1,'VolViz::Private_::VisualizerImpl']]]
+  ['renderspecularlighting',['renderSpecularLighting',['../classVolViz_1_1Private___1_1VisualizerImpl.html#aa742d4f41e7eec295049e8402cd9792c',1,'VolViz::Private_::VisualizerImpl']]],
+  ['rendervolumebbox',['renderVolumeBBox',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a85ccba665aee41f8ae2d38de8144d8ee',1,'VolViz::Private_::VisualizerImpl']]]
 ];

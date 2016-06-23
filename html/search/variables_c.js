@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['passthroughfragshadersrc',['passThroughFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#adc70066ee3c826f9a12e096b313c10c5',1,'VolViz::Private_::GL::Shaders']]],
-  ['planegeomshadersrc',['planeGeomShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a36e365662a7a99ad8885cbb30bf4d85e',1,'VolViz::Private_::GL::Shaders']]],
-  ['planeprogram_5f',['planeProgram_',['../group__shaders.html#ga31b4c09a14c3512f57ecbe08441db56b',1,'VolViz::Private_::VisualizerImpl']]],
-  ['position',['position',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a1d9507ed6a1ccaefc0183bc412cbb407',1,'VolViz::Private_::GL::Geometry::position()'],['../classVolViz_1_1Light.html#a07ed4fa7f8a7ad6acb994be554480dd3',1,'VolViz::Light::position()']]],
-  ['program_5f',['program_',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a84c76245d83e061741e37e1c42dc5f73',1,'VolViz::Private_::GL::ShaderProgram']]]
+  ['obj_5f',['obj_',['../classVolViz_1_1Private___1_1GL_1_1Binding.html#a7d951c78514471168733ee4e640d4811',1,'VolViz::Private_::GL::Binding::obj_()'],['../classVolViz_1_1Private___1_1GL_1_1Binding2.html#aa1300b2a685ffea8b402265af1cbf11a',1,'VolViz::Private_::GL::Binding2::obj_()'],['../classVolViz_1_1AtomicWrapper.html#a7729c02f7e43511fee070bd0f042c35c',1,'VolViz::AtomicWrapper::obj_()']]],
+  ['orientation',['orientation',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#ae339d0b0d34b4978db7a6d2b2b2a315b',1,'VolViz::Private_::GL::Geometry']]]
 ];

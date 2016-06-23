@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['deferredpassthroughfragshadersrc',['deferredPassthroughFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a8d625048e051789d1d3128988efee617',1,'VolViz::Private_::GL::Shaders']]],
-  ['deferredvertexshadersrc',['deferredVertexShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a335e382edeb73f3f2b725821920c8c6d',1,'VolViz::Private_::GL::Shaders']]],
-  ['depthquadprogram_5f',['depthQuadProgram_',['../group__shaders.html#ga09091bcd5b365cdfffcbcfb03c90b9c9',1,'VolViz::Private_::VisualizerImpl']]],
-  ['depthvisualizationfragshadersrc',['depthVisualizationFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ad9ecd7322a8994930e84df42b95a3b19',1,'VolViz::Private_::GL::Shaders']]],
-  ['diffuselightingpassfragshadersrc',['diffuseLightingPassFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a9868699d5517713a094eff2b85f6fed5',1,'VolViz::Private_::GL::Shaders']]],
-  ['diffuselightingpassprogram_5f',['diffuseLightingPassProgram_',['../group__shaders.html#ga15f2b5649defad661c47a7a6b8eb6eab',1,'VolViz::Private_::VisualizerImpl']]]
+  ['cameraorientation_5f',['cameraOrientation_',['../group__cameraRelated.html#ga10fc25e61bcb7f5b3f96eaa65c77ab37',1,'VolViz::Private_::VisualizerImpl']]],
+  ['cameraposition_5f',['cameraPosition_',['../group__cameraRelated.html#ga37d660b85c544a15f1d0715796845c0e',1,'VolViz::Private_::VisualizerImpl']]],
+  ['color',['color',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#acc172aa0fb5f4ac5e9636ec3ed9cf43d',1,'VolViz::Private_::GL::Geometry::color()'],['../structVolViz_1_1AxisAlignedPlane.html#a129c2a918a0178f27e76bc4bef44e3ef',1,'VolViz::AxisAlignedPlane::color()'],['../classVolViz_1_1Light.html#afc07313a19259db316b48fb66848dbf8',1,'VolViz::Light::color()']]],
+  ['coloredquadfragmentshadersrc',['coloredQuadFragmentShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ad781e486d91e35573f6fadefc976a79c',1,'VolViz::Private_::GL::Shaders']]],
+  ['currentvolume_5f',['currentVolume_',['../group__privateMembers.html#gaefc39474fa2e792682a52be46f3f4cd1',1,'VolViz::Private_::VisualizerImpl']]]
 ];

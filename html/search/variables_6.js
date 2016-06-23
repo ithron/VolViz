@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['impl_5f',['impl_',['../classVolViz_1_1Visualizer.html#a0b7613085a844bb5b4a6841e1d896c82',1,'VolViz::Visualizer']]],
-  ['indices',['indices',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#abacd3dfc2fbf546fdb7bba825c9b640f',1,'VolViz::Private_::VisualizerImpl::MeshData']]],
-  ['intercept',['intercept',['../structVolViz_1_1AxisAlignedPlane.html#a308f6693a645aa8953641016fb97cfd2',1,'VolViz::AxisAlignedPlane']]]
+  ['hdrquadprogram_5f',['hdrQuadProgram_',['../group__shaders.html#ga8c97fdef715be7198b776e28c82ab257',1,'VolViz::Private_::VisualizerImpl']]],
+  ['hdrtexturefragshadersrc',['hdrTextureFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a651e0cac31ef93a80286caa53758579a',1,'VolViz::Private_::GL::Shaders']]]
 ];
