@@ -204,6 +204,8 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a2a9433bb8389bf353fa64f89e2200908"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a2a9433bb8389bf353fa64f89e2200908">viewMatrix</a> () const noexcept</td></tr>
 <tr class="memdesc:a2a9433bb8389bf353fa64f89e2200908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the view matrix (i.e. inverse camera transformation)  <a href="#a2a9433bb8389bf353fa64f89e2200908">More...</a><br/></td></tr>
 <tr class="separator:a2a9433bb8389bf353fa64f89e2200908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa78007fbfff82282e6cd2c6e32274fa"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#afa78007fbfff82282e6cd2c6e32274fa">textureTransformationMatrix</a> () const noexcept</td></tr>
+<tr class="separator:afa78007fbfff82282e6cd2c6e32274fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad95a5adda92899cab6a7cd7e5b233a73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#ad95a5adda92899cab6a7cd7e5b233a73">handleKeyInput</a> (int key, int scancode, int action, int mode)</td></tr>
 <tr class="memdesc:ad95a5adda92899cab6a7cd7e5b233a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key input handler.  <a href="#ad95a5adda92899cab6a7cd7e5b233a73">More...</a><br/></td></tr>
 <tr class="separator:ad95a5adda92899cab6a7cd7e5b233a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1290,6 +1292,30 @@ template&lt;&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="afa78007fbfff82282e6cd2c6e32274fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Matrix4f VolViz::Private_::VisualizerImpl::textureTransformationMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns a matrix that transforms world coordinates into texture coordinates </p>
+
+</div>
+</div>
 <a class="anchor" id="a2a9433bb8389bf353fa64f89e2200908"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1343,7 +1369,7 @@ template&lt;&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 24 2016 09:54:15 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 24 2016 13:57:11 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

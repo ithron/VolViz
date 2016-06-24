@@ -6,6 +6,7 @@ var searchData=
   ['textures_2eh',['Textures.h',['../Textures_8h.html',1,'']]],
   ['textures_3c_206_20_3e',['Textures&lt; 6 &gt;',['../structVolViz_1_1Private___1_1GL_1_1Textures.html',1,'VolViz::Private_::GL']]],
   ['textures_5f',['textures_',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html#a98838606a212cf2e21a3e179a9252511',1,'VolViz::Private_::VisualizerImpl::TextureWrapper::textures_()'],['../group__privateMembers.html#gad1660086070e64dae44b9df701a0a487',1,'VolViz::Private_::VisualizerImpl::textures_()']]],
+  ['texturetransformationmatrix',['textureTransformationMatrix',['../classVolViz_1_1Private___1_1VisualizerImpl.html#afa78007fbfff82282e6cd2c6e32274fa',1,'VolViz::Private_::VisualizerImpl']]],
   ['texturewrapper',['TextureWrapper',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html',1,'VolViz::Private_::VisualizerImpl']]],
   ['type',['type',['../structVolViz_1_1VolumeDescriptor.html#a75b328190f26d54da8b7ae98f310e0db',1,'VolViz::VolumeDescriptor']]],
   ['types_2eh',['Types.h',['../Types_8h.html',1,'']]]
