@@ -366,11 +366,11 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
   switch (descriptor.type) {
     case VolumeType::GrayScale:
       internalFormat = GL_R32F;
-      Expects(data.size() == nVoxels);
+      Expects(static_cast<std::size_t>(data.size()) == nVoxels);
       break;
     case VolumeType::ColorRGB:
       internalFormat = GL_RGB32F;
-      Expects(data.size() == 3 * nVoxels);
+      Expects(static_cast<std::size_t>(data.size()) == 3 * nVoxels);
       break;
   }
 
@@ -392,7 +392,7 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
 
   Expects(descriptor.type == VolumeType::ColorRGB);
-  Expects(nVoxels == data.size());
+  Expects(nVoxels == static_cast<std::size_t>(data.size()));
 
   auto const *ptr = reinterpret_cast<float const *>(data.data());
   auto const size = static_cast<std::ptrdiff_t>(3 * data.size());

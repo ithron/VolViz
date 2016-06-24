@@ -20,11 +20,11 @@ auto generateVolume() {
   std::vector<Color> data;
   data.reserve(3 * nVoxels);
   Color c = Colors::Black();
-  for (auto z = 0; z < size(2); ++z) {
+  for (unsigned int z = 0; z < size(2); ++z) {
     c(2) = (static_cast<float>(z) / static_cast<float>(size(2)));
-    for (auto y = 0; y < size(1); ++y) {
+    for (unsigned int y = 0; y < size(1); ++y) {
       c(1) = (static_cast<float>(y) / static_cast<float>(size(1)));
-      for (auto x = 0; x < size(0); ++x) {
+      for (unsigned int x = 0; x < size(0); ++x) {
         c(0) = (static_cast<float>(x) / static_cast<float>(size(0)));
         data.push_back(c);
       }
