@@ -15,7 +15,7 @@ layout(location = 1) out vec4 gAlbedo;
 
 void main() {
   gNormalAndSpecular = vec4(normalize(normal).xy, specular, gShininess);
-  gAlbedo = albedo .* texture(volume, texcoord);
+  gAlbedo = vec4(albedo * texture(volume, texcoord).rgb, 1.0);
 }
 
 )"

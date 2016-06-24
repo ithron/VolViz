@@ -4,9 +4,10 @@ R"(
 layout(points) in;
 layout(triangle_strip, max_vertices = 4) out;
 
+uniform mat4 modelMatrix;
 uniform mat4 modelViewProjectionMatrix;
-uniform mat4 modelViewMatrix;
 uniform mat3 inverseModelViewMatrix;
+uniform mat4 textureTransformMatrix;
 uniform vec3 color;
 uniform float shininess;
 
@@ -26,24 +27,24 @@ void main() {
   const vec3 normZ = vec3(0.0, 0.0, 1.0);
 
   normal = normalize(inverseModelViewMatrix * normZ);
-  albedo = color;
+  albedo = 0.00001 * color + vec3(1.0);
   specular = 1.0;
   gShininess = shininess;
 
   gl_Position = modelViewProjectionMatrix * points[0];
-  texcoord = (modelViewMatrix * points[0]).xyz;
+  texcoord = (textureTransformMatrix * modelMatrix * points[0]).xyz;
   EmitVertex();
 
   gl_Position = modelViewProjectionMatrix * points[1];
-  texcoord = (modelViewMatrix * points[1]).xyz;
+  texcoord = (textureTransformMatrix * modelMatrix * points[1]).xyz;
   EmitVertex();
 
   gl_Position = modelViewProjectionMatrix * points[2];
-  texcoord = (modelViewMatrix * points[2]).xyz;
+  texcoord = (textureTransformMatrix * modelMatrix * points[2]).xyz;
   EmitVertex();
 
   gl_Position = modelViewProjectionMatrix * points[3];
-  texcoord = (modelViewMatrix * points[3]).xyz;
+  texcoord = (textureTransformMatrix * modelMatrix * points[3]).xyz;
   EmitVertex();
 
   EndPrimitive();

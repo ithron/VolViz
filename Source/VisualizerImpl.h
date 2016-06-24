@@ -71,6 +71,10 @@ private:
   /// Returns the view matrix (i.e. inverse camera transformation)
   Eigen::Matrix4f viewMatrix() const noexcept;
 
+  /// Returns a matrix that transforms world coordinates into texture
+  /// coordinates
+  Eigen::Matrix4f textureTransformationMatrix() const noexcept;
+
   /// Key input handler
   void handleKeyInput(int key, int scancode, int action, int mode);
 

@@ -342,6 +342,20 @@ Eigen::Matrix4f VisualizerImpl::viewMatrix() const noexcept {
   return camTrans.matrix();
 }
 
+Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
+  Length const refScale = visualizer_->scale;
+  auto const invScale =
+      (Size3f(static_cast<float>(refScale / currentVolume_.voxelSize[0]),
+              static_cast<float>(refScale / currentVolume_.voxelSize[1]),
+              static_cast<float>(refScale / currentVolume_.voxelSize[2]))
+           .cwiseQuotient(currentVolume_.size.cast<float>())).eval();
+
+  Eigen::Matrix4f const t = (Eigen::Translation3f(Position::Ones() / 2) *
+                             invScale.asDiagonal()).matrix();
+
+  return t;
+}
+
 #pragma mark Interface Methods
 
 void VisualizerImpl::start() { glfw_.show(); }
@@ -362,23 +376,36 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
   glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 
   GLenum internalFormat = 0;
+  GLenum format = 0;
 
   switch (descriptor.type) {
     case VolumeType::GrayScale:
       internalFormat = GL_R32F;
+      format = GL_RED;
       Expects(static_cast<std::size_t>(data.size()) == nVoxels);
       break;
     case VolumeType::ColorRGB:
       internalFormat = GL_RGB32F;
+      format = GL_RGB;
       Expects(static_cast<std::size_t>(data.size()) == 3 * nVoxels);
       break;
   }
 
   glTexStorage3D(GL_TEXTURE_3D, 1, internalFormat, width, height, depth);
   assertGL("Failed to allocate texture storage");
+  glActiveTexture(GL_TEXTURE0);
+  assertGL("Failed to activate volume texte");
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+  glTexParameterfv(GL_TEXTURE_3D, GL_TEXTURE_BORDER_COLOR,
+                   Colors::Cyan().eval().data());
+  assertGL("Failed to set texture parameters");
 
   // upload texture data
-  glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, width, height, depth, GL_RED,
+  glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, width, height, depth, format,
                   GL_FLOAT, data.data());
   assertGL("Failed to upload texture data");
 
@@ -448,28 +475,38 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
   }
 
   auto init = [geom, this]() {
-
-    std::cout << "Orientation: " << geom.orientation.toRotationMatrix()
-              << std::endl;
     return [geom, this]() {
       Length const rScale = visualizer_->scale;
       auto const viewMat = viewMatrix();
       auto const scale = static_cast<float>(geom.scale / rScale);
-      auto const modelMat =
-          (Eigen::Scaling(scale) * Eigen::Translation3f(geom.position) *
-           geom.orientation).matrix();
+      auto const volSize =
+          (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
+                  static_cast<float>(currentVolume_.voxelSize[1] / rScale),
+                  static_cast<float>(currentVolume_.voxelSize[2] / rScale))
+               .cwiseProduct(currentVolume_.size.cast<float>()) /
+           2.f).eval();
+
+      auto const modelMat = (Eigen::Translation3f(geom.position * scale) *
+                             geom.orientation * volSize.asDiagonal()).matrix();
 
       auto const modelViewMat = (viewMat * modelMat).eval();
       auto const inverseModelViewMatrix =
           modelViewMat.block<3, 3>(0, 0).inverse().eval();
 
+      // bind volume texture
+      glActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
+
       planeProgram_.use();
+      planeProgram_["volume"] = 0;
+      planeProgram_["modelMatrix"] = modelMat;
       planeProgram_["shininess"] = 10.f;
-      planeProgram_["color"] = geom.color;
+      // planeProgram_["color"] = geom.color;
+      planeProgram_["color"] = Colors::White().eval();
       planeProgram_["modelViewProjectionMatrix"] =
           (projectionMatrix() * modelViewMat).eval();
-      planeProgram_["modelViewMatrix"] = modelViewMat;
       planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
+      planeProgram_["textureTransformMatrix"] = textureTransformationMatrix();
 
       auto boundVao = GL::binding(singleVertexData_.vao);
       glDrawArrays(GL_POINTS, 0, 1);
@@ -612,7 +649,7 @@ void VisualizerImpl::renderOneFrame() {
       break;
   }
 
-  if (currentVolume_.size(0) > 0) renderVolumeBBox();
+  // if (currentVolume_.size(0) > 0) renderVolumeBBox();
 
   renderFinalPass();
 
@@ -647,9 +684,16 @@ void VisualizerImpl::renderMeshes() {
   geometryStageProgram_.use();
   assertGL("OpenGL Error stack not clean");
 
+  // bind volume texture
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
+
+  geometryStageProgram_["volume"] = 0;
   geometryStageProgram_["shininess"] = mesh_.shininess;
   geometryStageProgram_["modelViewProjectionMatrix"] = MVP;
   geometryStageProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
+  geometryStageProgram_["textureTransformMatrix"] =
+      textureTransformationMatrix();
   if (mesh_.vao.name != 0) {
     auto boundVao = GL::binding(mesh_.vao);
     glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
@@ -718,7 +762,7 @@ void VisualizerImpl::renderLightingTextures() {
              normalQuadProgram_);
   renderQuad(Point2::Zero() + Point2(halfWindowSize(0), 0), halfWindowSize,
              TextureID::Depth, depthQuadProgram_);
-  glEnable(GL_FRAMEBUFFER_SRGB);
+  // glEnable(GL_FRAMEBUFFER_SRGB);
   renderQuad(Point2::Zero() + Point2(0, halfWindowSize(1)), halfWindowSize,
              TextureID::Albedo, quadProgram_);
   renderQuad(Point2::Zero() + halfWindowSize, halfWindowSize,
@@ -729,7 +773,7 @@ void VisualizerImpl::renderFinalPass() {
   // Render FBA color attachment to screen
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
-  glEnable(GL_FRAMEBUFFER_SRGB);
+  // glEnable(GL_FRAMEBUFFER_SRGB);
   //  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
   auto readBinding =
       GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
