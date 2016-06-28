@@ -11,6 +11,7 @@ var searchData=
   ['geometrystageprogram_5f',['geometryStageProgram_',['../group__shaders.html#ga1146ddc09ad09ed7a0fad4cb5ce215ee',1,'VolViz::Private_::VisualizerImpl']]],
   ['geometry_20processing_20related_20variables',['Geometry processing related variables',['../group__geomGroup.html',1,'']]],
   ['geominitqueuemutex_5f',['geomInitQueueMutex_',['../group__geomGroup.html#ga61735e8ba2b9908b010dbf98dc2c5d40',1,'VolViz::Private_::VisualizerImpl']]],
+  ['getgeometryundercursor',['getGeometryUnderCursor',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a868077046c7e91869bc532d0795c794c',1,'VolViz::Private_::VisualizerImpl']]],
   ['gl_2eh',['GL.h',['../GL_8h.html',1,'']]],
   ['gl_5fglext_5fprototypes',['GL_GLEXT_PROTOTYPES',['../GLdefs_8h.html#a120fb070bddb21f0bd899f50252c4cb5',1,'GLdefs.h']]],
   ['gldefs_2eh',['GLdefs.h',['../GLdefs_8h.html',1,'']]],

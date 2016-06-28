@@ -2,6 +2,7 @@ var searchData=
 [
   ['magenta',['Magenta',['../namespaceVolViz_1_1Colors.html#a806eac1a8c75e5bf3425e0f9e633ad21',1,'VolViz::Colors']]],
   ['makecurrent',['makeCurrent',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a67deca851f61f0e718a11dd0fa0f941a',1,'VolViz::Private_::GL::GLFW']]],
+  ['material',['Material',['../group__privateMembers.html#ggaad8a0441b61deb44c48d7bed38865f13ad92a8333dd3ccb895cc65f7455b71206',1,'VolViz::Private_::VisualizerImpl']]],
   ['mesh_5f',['mesh_',['../group__privateMembers.html#ga34ccffe3a2479dbf2ac90004cce63e64',1,'VolViz::Private_::VisualizerImpl']]],
   ['meshdata',['MeshData',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html',1,'VolViz::Private_::VisualizerImpl']]],
   ['mousebuttoncallback',['mouseButtonCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a9877a6fdd95a63c3ab15a127f08df185',1,'VolViz::Private_::GL::GLFW']]],
