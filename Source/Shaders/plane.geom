@@ -27,7 +27,7 @@ void main() {
   const vec3 normZ = vec3(0.0, 0.0, 1.0);
 
   normal = normalize(inverseModelViewMatrix * normZ);
-  albedo = 0.00001 * color + vec3(1.0);
+  albedo = color;
   specular = 1.0;
   gShininess = shininess;
 

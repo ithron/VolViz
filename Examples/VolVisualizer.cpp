@@ -20,16 +20,13 @@ auto generateVolume() {
   std::vector<Color> data;
   data.reserve(3 * nVoxels);
   Color c = Colors::Black();
-  for (unsigned int z = 0; z < size(2); ++z) {
-    c(2) = 0.f;//(static_cast<float>(z) / static_cast<float>(size(2) - 1));
-    for (unsigned int y = 0; y < size(1); ++y) {
-      c(1) = 0.f;//(static_cast<float>(y) / static_cast<float>(size(1) - 1));
-      for (unsigned int x = 0; x < size(0); ++x) {
+  for(unsigned int z = 0; z < size(2); ++z) {
+    c(2) = (static_cast<float>(z) / static_cast<float>(size(2) - 1));
+    for(unsigned int y = 0; y < size(1); ++y) {
+      c(1) = (static_cast<float>(y) / static_cast<float>(size(1) - 1));
+      for(unsigned int x = 0; x < size(0); ++x) {
         c(0) = (static_cast<float>(x) / static_cast<float>(size(0) - 1));
-        c(1) = (static_cast<float>(x) / static_cast<float>(size(0) - 1));
-        c(2) = (static_cast<float>(x) / static_cast<float>(size(0) - 1));
-        // data.push_back(c);
-        data.push_back(Colors::White());
+        data.push_back(c);
       }
     }
   }
@@ -49,7 +46,7 @@ int main(int argc, char **argv) {
   using Vertices = Eigen::MatrixXd;
   using Triangles = Eigen::MatrixXi;
 
-  if (argc != 2) {
+  if(argc != 2) {
     std::cerr << "Usage: " << argv[0] << " meshFile" << std::endl;
     return EXIT_FAILURE;
   }
@@ -60,14 +57,14 @@ int main(int argc, char **argv) {
   std::cout << "Loading mesh " << argv[1] << "... " << std::flush;
   Vertices V;
   Triangles T;
-  if (ext == "off")
+  if(ext == "off")
     igl::readOFF(filename, V, T);
-  else if (ext == "ply")
+  else if(ext == "ply")
     igl::readPLY(filename, V, T);
-  else if (ext == "stl") {
+  else if(ext == "stl") {
     Vertices N;
     igl::readSTL(filename, V, T, N);
-  } else if (ext == "obj")
+  } else if(ext == "obj")
     igl::readOBJ(filename, V, T);
   else {
     std::cerr << std::endl
@@ -97,41 +94,38 @@ int main(int argc, char **argv) {
   viewer.showGrid = true;
 
   Light light;
-  light.ambientFactor = 1.f;
+  light.ambientFactor = 1.0f;
   light.color = Colors::White();
   light.position = PositionH(1, 1, 1, 0);
 
   viewer.addLight(0, light);
 
-  // light.color = Color::UnitX();
-  // light.position = PositionH(2, 1, 1, 0);
-  // viewer.addLight(1, light);
-  //
-  // light.color = Color::UnitZ();
-  // light.position = PositionH(1, 2, 1, 0);
-  // viewer.addLight(2, light);
+  light.position = PositionH(2, 1, 1, 0);
+  viewer.addLight(1, light);
+
+  light.position = PositionH(1, 2, 1, 0);
+  viewer.addLight(2, light);
 
   viewer.scale = 1_mm;
 
   AxisAlignedPlane plane;
   plane.axis = Axis::X;
-  // plane.color = Colors::Red();
-  plane.color = Colors::White();
-  plane.intercept = -12.8_mm;
-
-  // viewer.addGeometry("X-Plane", plane);
-
-  plane.axis = Axis::Y;
   // plane.color = Colors::Green();
   plane.color = Colors::White();
-  plane.intercept = -12.8_mm;
-  // viewer.addGeometry("Y-Plane", plane);
+  plane.intercept = 0_mm;
 
-  plane.axis = Axis::Z;
+  viewer.addGeometry("X-Plane", plane);
+
+  plane.axis = Axis::Y;
   // plane.color = Colors::Blue();
   plane.color = Colors::White();
-  plane.intercept = -12.8_mm;
-  // plane.intercept = 12.8_mm;
+  plane.intercept = 0_mm;
+  viewer.addGeometry("Y-Plane", plane);
+
+  plane.axis = Axis::Z;
+  // plane.color = Colors::Red();
+  plane.color = Colors::White();
+  plane.intercept = 0_mm;
   viewer.addGeometry("Z-Plane", plane);
 
   std::cout << "Generating volume... " << std::flush;
@@ -140,7 +134,7 @@ int main(int argc, char **argv) {
 
   viewer.setVolume(vol.first, gsl::as_span(vol.second));
 
-  while (viewer) { viewer.renderOneFrame(); }
+  while(viewer) { viewer.renderOneFrame(); }
 
   return EXIT_SUCCESS;
 }

@@ -394,20 +394,21 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
   glTexStorage3D(GL_TEXTURE_3D, 1, internalFormat, width, height, depth);
   assertGL("Failed to allocate texture storage");
   glActiveTexture(GL_TEXTURE0);
-  assertGL("Failed to activate volume texte");
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
-  glTexParameterfv(GL_TEXTURE_3D, GL_TEXTURE_BORDER_COLOR,
-                   Colors::Cyan().eval().data());
-  assertGL("Failed to set texture parameters");
 
   // upload texture data
   glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, width, height, depth, format,
                   GL_FLOAT, data.data());
   assertGL("Failed to upload texture data");
+
+  assertGL("Failed to activate volume texte");
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+  glTexParameterfv(GL_TEXTURE_3D, GL_TEXTURE_BORDER_COLOR,
+                   Colors::Black().eval().data());
+  assertGL("Failed to set texture parameters");
 
   currentVolume_ = descriptor;
 }
@@ -501,8 +502,7 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
       planeProgram_["volume"] = 0;
       planeProgram_["modelMatrix"] = modelMat;
       planeProgram_["shininess"] = 10.f;
-      // planeProgram_["color"] = geom.color;
-      planeProgram_["color"] = Colors::White().eval();
+      planeProgram_["color"] = geom.color;
       planeProgram_["modelViewProjectionMatrix"] =
           (projectionMatrix() * modelViewMat).eval();
       planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
@@ -605,6 +605,10 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_G:
         visualizer_->showGrid = !visualizer_->showGrid;
         break;
+      case GLFW_KEY_B:
+        visualizer_->showVolumeBoundingBox =
+            !visualizer_->showVolumeBoundingBox;
+        break;
     }
   }
 }
@@ -642,14 +646,14 @@ void VisualizerImpl::renderOneFrame() {
     case ViewState::Scene3D: {
       renderLights();
       if (visualizer_->showGrid) renderGrid();
+      if (visualizer_->showVolumeBoundingBox && currentVolume_.size(0) > 0)
+        renderVolumeBBox();
       break;
     }
     case ViewState::LightingComponents:
       renderLightingTextures();
       break;
   }
-
-  // if (currentVolume_.size(0) > 0) renderVolumeBBox();
 
   renderFinalPass();
 
@@ -774,12 +778,12 @@ void VisualizerImpl::renderFinalPass() {
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
   // glEnable(GL_FRAMEBUFFER_SRGB);
-  //  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
-  auto readBinding =
-      GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
-  auto const w = static_cast<GLint>(glfw_.width());
-  auto const h = static_cast<GLint>(glfw_.height());
-  glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  // auto readBinding =
+  //     GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
+  // auto const w = static_cast<GLint>(glfw_.width());
+  // auto const h = static_cast<GLint>(glfw_.height());
+  // glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
   assertGL("Failed to blit framebuffer");
 }
 

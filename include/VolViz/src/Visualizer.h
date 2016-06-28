@@ -56,6 +56,7 @@ public:
   void addGeometry(GeometryName name, AxisAlignedPlane const &plane);
 
   std::atomic<bool> showGrid{true};
+  std::atomic<bool> showVolumeBoundingBox{true};
   AtomicWrapper<Length> scale{1 * milli * meter};
 
 private:
