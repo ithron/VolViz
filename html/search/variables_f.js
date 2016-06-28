@@ -6,6 +6,7 @@ var searchData=
   ['shader_5f',['shader_',['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a031caadf068ab5ca1fcc04204f6c1c80',1,'VolViz::Private_::GL::Shader']]],
   ['shininess',['shininess',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#abe164acb93c85acc32878187dc067a90',1,'VolViz::Private_::VisualizerImpl::MeshData']]],
   ['showgrid',['showGrid',['../classVolViz_1_1Visualizer.html#a780e15acd00a6f76fcc814789f681401',1,'VolViz::Visualizer']]],
+  ['showvolumeboundingbox',['showVolumeBoundingBox',['../classVolViz_1_1Visualizer.html#ad2e7e99474ae1f8c126898792270abc1',1,'VolViz::Visualizer']]],
   ['simpletexturefragshadersrc',['simpleTextureFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a43d5aa7df74e5d1a802db1367f4ee8a6',1,'VolViz::Private_::GL::Shaders']]],
   ['simplevertshadersrc',['simpleVertShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ae78ea4d04fc254717e0b0a961950a49a',1,'VolViz::Private_::GL::Shaders']]],
   ['singlevertexdata_5f',['singleVertexData_',['../group__privateMembers.html#ga6f85a104e6b684b49ed3b3a77e2b4ca4',1,'VolViz::Private_::VisualizerImpl']]],
