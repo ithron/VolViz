@@ -16,7 +16,7 @@ namespace VolViz {
 namespace Private_ {
 
 class VisualizerImpl {
-  using RenderCommand = std::function<void()>;
+  using RenderCommand = std::function<void(std::uint32_t)>;
   using InitCommand = std::function<RenderCommand()>;
   using InitQueueEntry = std::pair<Visualizer::GeometryName, InitCommand>;
   using GeometryList =
@@ -56,7 +56,8 @@ private:
     Depth = 2,
     RenderedImage = 3,
     FinalDepth = 4,
-    VolumeTexture = 5
+    VolumeTexture = 5,
+    SelectionTexture = 6
   };
 
   /// Compiles and links all shader programs
@@ -108,6 +109,8 @@ private:
 
   void renderLightSpecular(Light const &light);
 
+  Visualizer::GeometryName getGeometryUnderCursor();
+
   /// Renders the final image to screen
   void renderFinalPass();
 
@@ -137,6 +140,7 @@ private:
   GL::ShaderProgram hdrQuadProgram_;
   GL::ShaderProgram normalQuadProgram_;
   GL::ShaderProgram planeProgram_;
+  GL::ShaderProgram planeSelectionProgram_;
   GL::ShaderProgram quadProgram_;
   GL::ShaderProgram specularLightingPassProgram_;
   GL::ShaderProgram specularQuadProgram_;
@@ -149,11 +153,12 @@ private:
     }
 
   private:
-    GL::Textures<6> textures_;
+    GL::Textures<7> textures_;
   } textures_;
   /// Frabebuffer used for the deferred shading
-  GL::Framebuffer lightingFbo_{0};
   GL::Framebuffer finalFbo_{0};
+  GL::Framebuffer lightingFbo_{0};
+  GL::Framebuffer selectionFbo_{0};
 
   /// Data required to render a mesh
   struct MeshData {
@@ -188,6 +193,13 @@ private:
     LightingComponents
   } viewState_{ViewState::Scene3D};
 
+  enum class RenderPass {
+    Material,
+    Selection,
+    Lighting,
+    Final
+  } currentRenderPass_{RenderPass::Final};
+
   /// Lights
   Lights lights_;
   std::mutex lightMutex_;
@@ -198,7 +210,7 @@ private:
   enum class MoveState { None, Rotating } moveState_ = MoveState::None;
 
   /// Last position of the mouse cursor, used in the camera control code
-  Eigen::Vector2d lastMousePos_ = Eigen::Vector2d::Zero();
+  Position2 lastMousePos_ = Position2::Zero();
 
   /// Camera field of view
   float fov = Visualizer::kDefaultFOV;

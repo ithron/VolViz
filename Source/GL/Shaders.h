@@ -9,6 +9,7 @@ namespace GL {
 namespace Shaders {
 
 extern std::string const ambientPassFragShaderSrc;
+extern std::string const bboxGeometryShaderSrc;
 extern std::string const coloredQuadFragmentShaderSrc;
 extern std::string const deferredPassthroughFragShaderSrc;
 extern std::string const deferredVertexShaderSrc;
@@ -21,11 +22,11 @@ extern std::string const nullVertShaderSrc;
 extern std::string const passThroughFragShaderSrc;
 extern std::string const planeGeomShaderSrc;
 extern std::string const quadGeomShaderSrc;
+extern std::string const selectionFragShaderSrc;
 extern std::string const simpleTextureFragShaderSrc;
 extern std::string const simpleVertShaderSrc;
 extern std::string const specularLightingPassFragShaderSrc;
 extern std::string const specularVisualizationFragShaderSrc;
-extern std::string const bboxGeometryShaderSrc;
 
 } // namespace Shaders
 } // namespace GL

@@ -74,6 +74,10 @@ extern std::string const bboxGeometryShaderSrc =
 #include "Shaders/bbox.geom"
     ;
 
+extern std::string const selectionFragShaderSrc =
+#include "Shaders/selection.frag"
+  ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders
