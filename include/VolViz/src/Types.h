@@ -15,6 +15,9 @@ using Position = Eigen::Vector3f;
 /// Position in homogenous coordinates
 using PositionH = Eigen::Vector4f;
 
+/// Position in 2D space
+using Position2 = Eigen::Vector2f;
+
 using Size2 = Eigen::Matrix<std::size_t, 2, 1>;
 using Size3 = Eigen::Matrix<std::size_t, 3, 1>;
 
