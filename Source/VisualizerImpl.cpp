@@ -605,6 +605,10 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_G:
         visualizer_->showGrid = !visualizer_->showGrid;
         break;
+      case GLFW_KEY_B:
+        visualizer_->showVolumeBoundingBox =
+            !visualizer_->showVolumeBoundingBox;
+        break;
     }
   }
 }
@@ -642,14 +646,14 @@ void VisualizerImpl::renderOneFrame() {
     case ViewState::Scene3D: {
       renderLights();
       if (visualizer_->showGrid) renderGrid();
+      if (visualizer_->showVolumeBoundingBox && currentVolume_.size(0) > 0)
+        renderVolumeBBox();
       break;
     }
     case ViewState::LightingComponents:
       renderLightingTextures();
       break;
   }
-
-  if (currentVolume_.size(0) > 0) renderVolumeBBox();
 
   renderFinalPass();
 
