@@ -16,8 +16,8 @@ var searchData=
   ['renderlightspecular',['renderLightSpecular',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a543876f506d397ce44e589cf4faec84a',1,'VolViz::Private_::VisualizerImpl']]],
   ['rendermeshes',['renderMeshes',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a03577212c51aa5e2169261d82c701204',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderoneframe',['renderOneFrame',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a506e70398325a7411f6776729f75213b',1,'VolViz::Private_::VisualizerImpl::renderOneFrame()'],['../classVolViz_1_1Visualizer.html#aa3607e76c69bf6def6b508770ee0e504',1,'VolViz::Visualizer::renderOneFrame()']]],
-  ['renderpass',['RenderPass',['../group__privateMembers.html#gaad8a0441b61deb44c48d7bed38865f13',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderquad',['renderQuad',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a211dbfaffcbf062b1dcb7c0fb1b4a3c4',1,'VolViz::Private_::VisualizerImpl']]],
+  ['renderselectionindextexture',['renderSelectionIndexTexture',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a6fcfa1bdac32b527ec2dd0ad93f43e83',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderspecularlighting',['renderSpecularLighting',['../classVolViz_1_1Private___1_1VisualizerImpl.html#aa742d4f41e7eec295049e8402cd9792c',1,'VolViz::Private_::VisualizerImpl']]],
   ['rendervolumebbox',['renderVolumeBBox',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a85ccba665aee41f8ae2d38de8144d8ee',1,'VolViz::Private_::VisualizerImpl']]],
   ['rotating',['Rotating',['../group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6',1,'VolViz::Private_::VisualizerImpl']]]

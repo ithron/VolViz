@@ -19,6 +19,7 @@ Warning: ignoring unsupported tag `MAN_SUBDIR             =' at line 1782, file 
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:70: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:74: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:78: warning: include file Shaders/selection.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:82: warning: include file Shaders/selectionIndexVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 Searching for include files...
 Searching for example files...
 Searching for images...
@@ -81,7 +82,7 @@ Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
-P/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:465: warning: no matching class member found for 
+P/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:451: warning: no matching class member found for 
   template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< float >)
 Possible candidates:
   'template < T >
@@ -91,7 +92,7 @@ Possible candidates:
   'template <>
   void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
 
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:467: warning: no matching class member found for 
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:453: warning: no matching class member found for 
   template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< Eigen::Vector3f >)
 Possible candidates:
   'template < T >
@@ -388,5 +389,5 @@ Patching output file 51/54
 Patching output file 52/54
 Patching output file 53/54
 Patching output file 54/54
-lookup cache used 840/65536 hits=3630 misses=1004
+lookup cache used 834/65536 hits=3596 misses=997
 finished...
