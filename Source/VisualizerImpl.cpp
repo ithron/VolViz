@@ -886,13 +886,15 @@ Visualizer::GeometryName VisualizerImpl::getGeometryUnderCursor() {
 
   std::cout << "p: " << pos.transpose() << std::endl;
 
-  // std::uint32_t indexUnderCursor;
-  glFlush();
-  glFinish();
+  std::uint32_t indexUnderCursor[4];
+  // glFlush();
+  // glFinish();
   glReadBuffer(GL_COLOR_ATTACHMENT2);
   assertGL("Dirty openGL error stack");
-  // glReadPixels(pos(0), pos(1), 1, 1, GL_RED, GL_UNSIGNED_INT,
-  //              &indexUnderCursor);
+  glPixelStorei(GL_PACK_ALIGNMENT, 4);
+  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT,
+               indexUnderCursor);
+  std::cout << static_cast<int>(indexUnderCursor[0]) << std::endl;
   assertGL("Failed to read pixel value under cursor");
 
   return "";
