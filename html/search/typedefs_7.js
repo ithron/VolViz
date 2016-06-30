@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['scale',['Scale',['../namespaceVolViz.html#a4fda4180376c21464201b4442eb1f923',1,'VolViz']]],
-  ['size2',['Size2',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a65c662421ff278c7e358d3468d4be5b0',1,'VolViz::Private_::VisualizerImpl::Size2()'],['../namespaceVolViz.html#a523c4cc78fa92776fba053d8a2f0fcdf',1,'VolViz::Size2()']]],
-  ['size3',['Size3',['../namespaceVolViz.html#a30b616bf5ad51a57fba8b04275c7db3b',1,'VolViz']]],
-  ['size3f',['Size3f',['../namespaceVolViz.html#ac7d52458d468b72e23194368a476386c',1,'VolViz']]]
+  ['point2',['Point2',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a2625886480ca8edca95521226701775c',1,'VolViz::Private_::VisualizerImpl']]],
+  ['position',['Position',['../namespaceVolViz.html#adb9a559ef5e8c60874a9ce0feda8c553',1,'VolViz']]],
+  ['position2',['Position2',['../namespaceVolViz.html#a45c02a646f8c477ff8ef5986d522551a',1,'VolViz']]],
+  ['positionh',['PositionH',['../namespaceVolViz.html#ae63124d80adb678801719b5f03ebcf0e',1,'VolViz']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['initcommand',['InitCommand',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a66ea63489ec1e4ffd5cd3b18d6057cda',1,'VolViz::Private_::VisualizerImpl']]],
-  ['initqueueentry',['InitQueueEntry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#abc4d83fe2719a0f13ac26f3a15d3e7ae',1,'VolViz::Private_::VisualizerImpl']]]
+  ['geometryinitqueue',['GeometryInitQueue',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a9f9e6dafacaed9341d341ed0811318c1',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometrylist',['GeometryList',['../classVolViz_1_1Private___1_1VisualizerImpl.html#af79fe51a4abceba0533892ff8b9d43d1',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometryname',['GeometryName',['../classVolViz_1_1Visualizer.html#aaf05297d058856738d892a5d44153f59',1,'VolViz::Visualizer']]],
+  ['geometrynameandposition',['GeometryNameAndPosition',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a082394fdeab1fac25a61704ad8aea8b0',1,'VolViz::Private_::VisualizerImpl']]]
 ];
