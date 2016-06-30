@@ -8,6 +8,7 @@
 #include <VolViz/VolViz.h>
 
 #include <atomic>
+#include <chrono>
 #include <mutex>
 #include <queue>
 #include <unordered_map>
@@ -49,6 +50,10 @@ public:
 private:
   friend class ::VolViz::Visualizer;
 
+  using Clock = std::chrono::steady_clock;
+  using TimePoint = std::chrono::time_point<Clock>;
+  using GeometryNameAndPosition = std::pair<Visualizer::GeometryName, Position>;
+
   /// IDs for the auxiliary textures used for the deferred rendering
   enum class TextureID : std::size_t {
     NormalsAndSpecular = 0,
@@ -65,6 +70,9 @@ private:
 
   /// Setup the required textures and frabebuffer objects for rendering
   void setupFBOs();
+
+  /// Setup selection buffers
+  void setupSelectionBuffers();
 
   /// Returns the projection matrix
   Eigen::Matrix4f projectionMatrix() const noexcept;
@@ -111,7 +119,7 @@ private:
 
   void renderSelectionIndexTexture();
 
-  Visualizer::GeometryName getGeometryUnderCursor();
+  GeometryNameAndPosition getGeometryUnderCursor();
 
   /// Renders the final image to screen
   void renderFinalPass();
@@ -160,6 +168,19 @@ private:
   /// Frabebuffer used for the deferred shading
   GL::Framebuffer finalFbo_{0};
   GL::Framebuffer lightingFbo_{0};
+
+  /// Pixel buffers used for mouse picking
+  struct SelectionBuffer {
+    using Buffers = std::array<GL::Buffer, 2>;
+    using Handle = Buffers::iterator;
+
+    Buffers buffers;
+    Handle readBuffer{buffers.begin()}, writeBuffer{buffers.begin() + 1};
+    inline void swap() noexcept {
+      using std::swap;
+      swap(readBuffer, writeBuffer);
+    }
+  } selectionBuffer_;
 
   /// Data required to render a mesh
   struct MeshData {

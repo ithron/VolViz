@@ -36,6 +36,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
 
   setupShaders();
   setupFBOs();
+  setupSelectionBuffers();
   glfw_.keyInputHandler =
       [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
@@ -339,6 +340,14 @@ void VisualizerImpl::setupFBOs() {
     singleVertexData_.vBuff = std::move(vb);
     singleVertexData_.vao = std::move(vao);
   }
+}
+
+void VisualizerImpl::setupSelectionBuffers() {
+  for (auto &buffer : selectionBuffer_.buffers) {
+    buffer.upload(GL_PIXEL_PACK_BUFFER, sizeof(std::uint32_t) + sizeof(float),
+                  static_cast<void *>(nullptr), GL_STREAM_READ);
+  }
+  GL::Buffer::unbind(GL_PIXEL_PACK_BUFFER);
 }
 
 #pragma mark Matrix Computation
@@ -685,7 +694,10 @@ void VisualizerImpl::renderOneFrame() {
 
   renderFinalPass();
 
-  std::cout << getGeometryUnderCursor() << std::endl;
+  auto const geomNameAndPos = getGeometryUnderCursor();
+  if (!geomNameAndPos.first.empty())
+    std::cout << geomNameAndPos.first << " at "
+              << geomNameAndPos.second.transpose() << std::endl;
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
@@ -870,12 +882,13 @@ void VisualizerImpl::renderVolumeBBox() {
                     Colors::Cyan());
 }
 
-Visualizer::GeometryName VisualizerImpl::getGeometryUnderCursor() {
+VisualizerImpl::GeometryNameAndPosition
+VisualizerImpl::getGeometryUnderCursor() {
   using std::swap;
   // Bind FBO
   auto fboBinding =
       binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
-  assertGL("Failed to bind framebuffer");
+  // assertGL("Failed to bind framebuffer");
 
   // convert mouse position to texture screen coordinates
   auto const windowSize = Size2(glfw_.width(), glfw_.height()).cast<double>();
@@ -884,20 +897,43 @@ Visualizer::GeometryName VisualizerImpl::getGeometryUnderCursor() {
                        .cast<GLint>()
                        .eval();
 
-  std::cout << "p: " << pos.transpose() << std::endl;
-
-  std::uint32_t indexUnderCursor[4];
-  // glFlush();
-  // glFinish();
-  glReadBuffer(GL_COLOR_ATTACHMENT2);
-  assertGL("Dirty openGL error stack");
+  // Copy index and depth to selection(back) buffer
+  auto const writeBinding = GL::binding(
+      *selectionBuffer_.writeBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
   glPixelStorei(GL_PACK_ALIGNMENT, 4);
-  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT,
-               indexUnderCursor);
-  std::cout << static_cast<int>(indexUnderCursor[0]) << std::endl;
-  assertGL("Failed to read pixel value under cursor");
+  assertGL("Dirty openGL error stack");
+  glReadBuffer(GL_COLOR_ATTACHMENT2);
+  assertGL("Failed to select color attachment 2");
+  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, 0);
+  assertGL("Failed to read index value under cursor");
+  glReadPixels(pos(0), pos(1), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
+               reinterpret_cast<void *>(sizeof(std::uint32_t)));
+  assertGL("Failed to read depth value under cursor");
 
-  return "";
+  // map selection (front) buffer and read index and depth value
+  auto const readBinding = GL::binding(
+      *selectionBuffer_.readBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
+  void const *mappedMemory = glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+  assertGL("Failed to map memory");
+  Expects(mappedMemory != nullptr);
+
+  auto const index = *reinterpret_cast<std::uint32_t const *>(mappedMemory);
+  auto const depth = *reinterpret_cast<float const *>(
+                         reinterpret_cast<std::uint8_t const *>(mappedMemory) +
+                         sizeof(std::uint32_t));
+  glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+  selectionBuffer_.swap();
+
+  // retrieve geometry name
+  Visualizer::GeometryName name;
+  if (index > 0) {
+    auto const entry = std::next(geometries_.cbegin(), index - 1);
+    name = entry->first;
+  }
+
+  // TODO: Compute 3D position using window coordinates and depth
+
+  return GeometryNameAndPosition(name, Position(0.0, 0.0, depth));
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,
