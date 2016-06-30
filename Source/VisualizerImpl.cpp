@@ -218,16 +218,6 @@ void VisualizerImpl::setupShaders() {
                         GL::Shaders::deferredPassthroughFragShaderSrc))
                     .link());
 
-  planeSelectionProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::planeGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::selectionFragShaderSrc))
-          .link());
-
   bboxProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
@@ -237,6 +227,17 @@ void VisualizerImpl::setupShaders() {
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
+
+  selectionIndexVisualizationProgam_ =
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::quadGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::selectionIndexVisualizationFragShaderSrc))
+                    .link());
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -264,6 +265,12 @@ void VisualizerImpl::setupFBOs() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+    // Selection index texture
+    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, width, height);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
     // setup FBO
     GL::Framebuffer fbo;
     glBindFramebuffer(GL_FRAMEBUFFER, fbo.name);
@@ -271,6 +278,8 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::NormalsAndSpecular], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D,
                            textures_[TextureID::Albedo], 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D,
+                           textures_[TextureID::SelectionTexture], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::Depth], 0);
     // check FBO
@@ -311,29 +320,6 @@ void VisualizerImpl::setupFBOs() {
     }
 
     finalFbo_ = std::move(fbo);
-  }
-
-  { // setup fbo for mouse picking
-    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, width, height);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // setup FBO
-    GL::Framebuffer fbo;
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo.name);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                           textures_[TextureID::SelectionTexture], 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
-                           textures_[TextureID::FinalDepth], 0);
-    // check FBO
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-      throw std::runtime_error(
-          "Incomplete FBO: " +
-          std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
-    }
-
-    selectionFbo_ = std::move(fbo);
   }
 
   // create dummy VAO for single single point rendering
@@ -529,35 +515,20 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
       auto const inverseModelViewMatrix =
           modelViewMat.block<3, 3>(0, 0).inverse().eval();
 
-      if (currentRenderPass_ == RenderPass::Material) {
-        // bind volume texture
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
+      // bind volume texture
+      glActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 
-        planeProgram_.use();
-        planeProgram_["volume"] = 0;
-        planeProgram_["modelMatrix"] = modelMat;
-        planeProgram_["shininess"] = 10.f;
-        planeProgram_["color"] = geom.color;
-        planeProgram_["modelViewProjectionMatrix"] =
-            (projectionMatrix() * modelViewMat).eval();
-        planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
-        planeProgram_["textureTransformMatrix"] = textureTransformationMatrix();
-      } else {
-        Expects(currentRenderPass_ == RenderPass::Selection);
-
-        planeSelectionProgram_.use();
-        planeSelectionProgram_["modelMatrix"] = modelMat;
-        planeSelectionProgram_["shininess"] = 10.f;
-        planeSelectionProgram_["color"] = geom.color;
-        planeSelectionProgram_["modelViewProjectionMatrix"] =
-            (projectionMatrix() * modelViewMat).eval();
-        planeSelectionProgram_["inverseModelViewMatrix"] =
-            inverseModelViewMatrix;
-        planeSelectionProgram_["textureTransformMatrix"] =
-            textureTransformationMatrix();
-        planeSelectionProgram_["index"] = index;
-      }
+      planeProgram_.use();
+      planeProgram_["index"] = index;
+      planeProgram_["volume"] = 0;
+      planeProgram_["modelMatrix"] = modelMat;
+      planeProgram_["shininess"] = 10.f;
+      planeProgram_["color"] = geom.color;
+      planeProgram_["modelViewProjectionMatrix"] =
+          (projectionMatrix() * modelViewMat).eval();
+      planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
+      planeProgram_["textureTransformMatrix"] = textureTransformationMatrix();
 
       auto boundVao = GL::binding(singleVertexData_.vao);
       glDrawArrays(GL_POINTS, 0, 1);
@@ -653,6 +624,9 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_2:
         viewState_ = ViewState::LightingComponents;
         break;
+      case GLFW_KEY_3:
+        viewState_ = ViewState::SelectionIndices;
+        break;
       case GLFW_KEY_G:
         visualizer_->showGrid = !visualizer_->showGrid;
         break;
@@ -689,30 +663,29 @@ void VisualizerImpl::renderOneFrame() {
 
   assertGL("OpenGL Error stack not clear");
 
-  currentRenderPass_ = RenderPass::Material;
   renderGeometry();
 
   renderMeshes();
 
   switch (viewState_) {
     case ViewState::Scene3D: {
-      currentRenderPass_ = RenderPass::Lighting;
       renderLights();
-      currentRenderPass_ = RenderPass::Final;
       if (visualizer_->showGrid) renderGrid();
       if (visualizer_->showVolumeBoundingBox && currentVolume_.size(0) > 0)
         renderVolumeBBox();
       break;
     }
     case ViewState::LightingComponents:
-      currentRenderPass_ = RenderPass::Final;
       renderLightingTextures();
+      break;
+    case ViewState::SelectionIndices:
+      renderSelectionIndexTexture();
       break;
   }
 
-  std::cout << getGeometryUnderCursor() << std::endl;
-
   renderFinalPass();
+
+  std::cout << getGeometryUnderCursor() << std::endl;
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
@@ -785,7 +758,8 @@ void VisualizerImpl::renderGeometry() {
   glColorMask(true, true, true, true);
 
   // call render commands
-  for (auto const &geom : geometries_) geom.second(0);
+  std::uint32_t idx = 0;
+  for (auto const &geom : geometries_) geom.second(++idx);
 
   // switch back to single render target
   glDrawBuffers(1, attachments.data());
@@ -830,12 +804,27 @@ void VisualizerImpl::renderLightingTextures() {
              TextureID::NormalsAndSpecular, specularQuadProgram_);
 }
 
+void VisualizerImpl::renderSelectionIndexTexture() {
+  auto boundFBO =
+      GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
+
+  glDisable(GL_FRAMEBUFFER_SRGB);
+  glDisable(GL_DEPTH_TEST);
+
+  selectionIndexVisualizationProgam_.use();
+  selectionIndexVisualizationProgam_["nObjects"] =
+      static_cast<std::uint32_t>(geometries_.size());
+  renderFullscreenQuad(TextureID::SelectionTexture,
+                       selectionIndexVisualizationProgam_);
+}
+
 void VisualizerImpl::renderFinalPass() {
   // Render FBA color attachment to screen
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
   // glEnable(GL_FRAMEBUFFER_SRGB);
-  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  // renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
   // auto readBinding =
   //     GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
   // auto const w = static_cast<GLint>(glfw_.width());
@@ -884,23 +873,9 @@ void VisualizerImpl::renderVolumeBBox() {
 Visualizer::GeometryName VisualizerImpl::getGeometryUnderCursor() {
   using std::swap;
   // Bind FBO
-  auto fboBinding = binding(selectionFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
+  auto fboBinding =
+      binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
   assertGL("Failed to bind framebuffer");
-
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
-  glDisable(GL_FRAMEBUFFER_SRGB);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glEnable(GL_DEPTH_TEST);
-  glDepthMask(true);
-  glColorMask(false, false, false, false);
-
-  RenderPass renderPass = RenderPass::Selection;
-  swap(currentRenderPass_, renderPass);
-
-  // call render commands
-  std::uint32_t idx{0};
-  for (auto const &geom : geometries_) geom.second(++idx);
 
   // convert mouse position to texture screen coordinates
   auto const windowSize = Size2(glfw_.width(), glfw_.height()).cast<double>();
@@ -911,13 +886,15 @@ Visualizer::GeometryName VisualizerImpl::getGeometryUnderCursor() {
 
   std::cout << "p: " << pos.transpose() << std::endl;
 
-  std::uint32_t indexUnderCursor[1024];
-  assertGL("Dirsty openGL error stack");
-  glReadPixels(pos(0), pos(1), 1, 1, GL_RED, GL_UNSIGNED_INT,
-               indexUnderCursor);
+  // std::uint32_t indexUnderCursor;
+  glFlush();
+  glFinish();
+  glReadBuffer(GL_COLOR_ATTACHMENT2);
+  assertGL("Dirty openGL error stack");
+  // glReadPixels(pos(0), pos(1), 1, 1, GL_RED, GL_UNSIGNED_INT,
+  //              &indexUnderCursor);
   assertGL("Failed to read pixel value under cursor");
 
-  swap(currentRenderPass_, renderPass);
   return "";
 }
 

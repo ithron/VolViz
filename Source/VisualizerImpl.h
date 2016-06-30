@@ -109,6 +109,8 @@ private:
 
   void renderLightSpecular(Light const &light);
 
+  void renderSelectionIndexTexture();
+
   Visualizer::GeometryName getGeometryUnderCursor();
 
   /// Renders the final image to screen
@@ -140,8 +142,8 @@ private:
   GL::ShaderProgram hdrQuadProgram_;
   GL::ShaderProgram normalQuadProgram_;
   GL::ShaderProgram planeProgram_;
-  GL::ShaderProgram planeSelectionProgram_;
   GL::ShaderProgram quadProgram_;
+  GL::ShaderProgram selectionIndexVisualizationProgam_;
   GL::ShaderProgram specularLightingPassProgram_;
   GL::ShaderProgram specularQuadProgram_;
   /// @}
@@ -158,7 +160,6 @@ private:
   /// Frabebuffer used for the deferred shading
   GL::Framebuffer finalFbo_{0};
   GL::Framebuffer lightingFbo_{0};
-  GL::Framebuffer selectionFbo_{0};
 
   /// Data required to render a mesh
   struct MeshData {
@@ -190,15 +191,9 @@ private:
 
   enum class ViewState {
     Scene3D,
-    LightingComponents
+    LightingComponents,
+    SelectionIndices
   } viewState_{ViewState::Scene3D};
-
-  enum class RenderPass {
-    Material,
-    Selection,
-    Lighting,
-    Final
-  } currentRenderPass_{RenderPass::Final};
 
   /// Lights
   Lights lights_;
