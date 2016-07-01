@@ -84,6 +84,10 @@ private:
   /// coordinates
   Eigen::Matrix4f textureTransformationMatrix() const noexcept;
 
+  /// Unprojects a point in screen coordinates and a given depth to a 3D point
+  /// in world space
+  Position unproject(Position2 const &screenPoint, float depth) const noexcept;
+
   /// Key input handler
   void handleKeyInput(int key, int scancode, int action, int mode);
 

@@ -1,6 +1,7 @@
 #include "VisualizerImpl.h"
 
 #include "GL/GL.h"
+#include "GL/GLdefs.h"
 #include "Visualizer.h"
 
 #include <Eigen/Core>
@@ -37,6 +38,11 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
   setupShaders();
   setupFBOs();
   setupSelectionBuffers();
+
+  glDepthRange(0.0, 1.0);
+  glDepthFunc(GL_GREATER);
+  glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);
+
   glfw_.keyInputHandler =
       [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
 
@@ -246,7 +252,6 @@ void VisualizerImpl::setupFBOs() {
   auto const width = static_cast<GLsizei>(glfw_.width());
   auto const height = static_cast<GLsizei>(glfw_.height());
   // set up FBO
-
   { // textures and FBO for the geometry stage
     // normal and specular texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -262,7 +267,7 @@ void VisualizerImpl::setupFBOs() {
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -302,7 +307,7 @@ void VisualizerImpl::setupFBOs() {
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::FinalDepth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -356,11 +361,11 @@ Eigen::Matrix4f VisualizerImpl::projectionMatrix() const noexcept {
   auto const width = glfw_.width();
   auto const height = glfw_.height();
   auto constexpr pi = static_cast<float>(M_PI);
-  auto const fovy = 1.f / std::tan(fov * pi / 360.f);
+  auto const f = 1.f / std::tan(fov * pi / 360.f);
   auto const aspect = static_cast<float>(width) / static_cast<float>(height);
 
   auto P = Eigen::Matrix4f();
-  P << fovy / aspect, 0, 0, 0, 0, fovy, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0;
+  P << f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, 0, f, 0, 0, -1, f;
 
   return P;
 }
@@ -384,6 +389,17 @@ Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
                              invScale.asDiagonal()).matrix();
 
   return t;
+}
+
+Position VisualizerImpl::unproject(Position2 const &screenCoord,
+                                   float depth) const noexcept {
+  auto constexpr pi = static_cast<float>(M_PI);
+  auto const f = 1.f / std::tan(fov * pi / 360.f);
+  auto const w = f / depth;
+  auto const p =
+      PositionH(screenCoord(0), screenCoord(1), depth, 1) * w;
+
+  return ((projectionMatrix() * viewMatrix()).inverse() * p).head<3>();
 }
 
 #pragma mark Interface Methods
@@ -761,7 +777,7 @@ void VisualizerImpl::renderGeometry() {
   glDrawBuffers(attachments.size(), attachments.data());
 
   glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
+  glClearDepth(0.0);
   glClearStencil(0);
   glDisable(GL_FRAMEBUFFER_SRGB);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -890,10 +906,11 @@ VisualizerImpl::getGeometryUnderCursor() {
       binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
   // assertGL("Failed to bind framebuffer");
 
+  auto const mousePos = lastMousePos_;
   // convert mouse position to texture screen coordinates
   auto const windowSize = Size2(glfw_.width(), glfw_.height()).cast<double>();
-  auto const pos = Position2((lastMousePos_(0) + 1.0) * windowSize(0) / 2.0,
-                             (lastMousePos_(1) + 1.0) * windowSize(1) / 2.0)
+  auto const pos = Position2((mousePos(0) + 1.0) * windowSize(0) / 2.0,
+                             (mousePos(1) + 1.0) * windowSize(1) / 2.0)
                        .cast<GLint>()
                        .eval();
 
@@ -901,11 +918,8 @@ VisualizerImpl::getGeometryUnderCursor() {
   auto const writeBinding = GL::binding(
       *selectionBuffer_.writeBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
   glPixelStorei(GL_PACK_ALIGNMENT, 4);
-  assertGL("Dirty openGL error stack");
   glReadBuffer(GL_COLOR_ATTACHMENT2);
-  assertGL("Failed to select color attachment 2");
   glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, 0);
-  assertGL("Failed to read index value under cursor");
   glReadPixels(pos(0), pos(1), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
                reinterpret_cast<void *>(sizeof(std::uint32_t)));
   assertGL("Failed to read depth value under cursor");
@@ -931,9 +945,10 @@ VisualizerImpl::getGeometryUnderCursor() {
     name = entry->first;
   }
 
-  // TODO: Compute 3D position using window coordinates and depth
+  // Compute 3D position using window coordinates and depth
+  auto const posInWorld = unproject(mousePos, depth);
 
-  return GeometryNameAndPosition(name, Position(0.0, 0.0, depth));
+  return GeometryNameAndPosition(name, posInWorld);
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,
