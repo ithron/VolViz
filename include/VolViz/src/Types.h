@@ -10,6 +10,9 @@
 
 namespace VolViz {
 
+using Matrix3 = Eigen::Matrix3f;
+using Matrix4 = Eigen::Matrix4f;
+
 /// Position in 3D euclidean space
 using Position = Eigen::Vector3f;
 /// Position in homogenous coordinates
@@ -45,8 +48,12 @@ enum class Axis { X, Y, Z };
 using Scale = float;
 
 using Length = phys::units::quantity<phys::units::length_d>;
+using Angle = double;
+using PhysicalPosition = Eigen::Matrix<Length, 3, 1>;
 
 using phys::units::meter;
+using phys::units::rad;
+using phys::units::degree_angle;
 
 using phys::units::centi;
 using phys::units::milli;
