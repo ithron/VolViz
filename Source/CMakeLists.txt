@@ -77,6 +77,7 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
 endif()
 
 add_library(VolViz
+  Camera.cpp
   GL/GLFW.cpp
   GL/ShaderProgram.cpp
   GL/Shaders.cpp
