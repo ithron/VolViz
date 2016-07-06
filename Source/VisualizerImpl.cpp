@@ -51,10 +51,17 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
                        // otherwise, although it's perectly standard conformant
     glViewport(0, 0, static_cast<GLsizei>(glfw_.width()),
                static_cast<GLsizei>(glfw_.height()));
+    float const FOV =
+        static_cast<float>(glfw_.width()) / static_cast<float>(glfw_.height());
+    camera().verticalFieldOfView = FOV;
   };
 
   glfw_.scrollWheelInputHandler = [this](double, double y) {
-    cameraPosition_(2) -= 2 * static_cast<float>(y);
+    Length const scale = cachedScale_;
+    PhysicalPosition pos = camera().position;
+    pos(2) -= 2 * gsl::narrow_cast<float>(y) * scale;
+
+    camera().position = pos;
   };
 
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
@@ -93,10 +100,10 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
             2;
         Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
         if (angle > 1e-3) {
-          cameraOrientation_ *=
-              Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
-          cameraOrientation_.normalize();
+          Orientation o = camera().orientation;
+          o *= Eigen::Quaternionf(Eigen::AngleAxisf(static_cast<float>(angle),
+                                                    axis)).inverse();
+          camera().orientation = o.normalized();
         }
         break;
       }
@@ -357,28 +364,8 @@ void VisualizerImpl::setupSelectionBuffers() {
 
 #pragma mark Matrix Computation
 
-Eigen::Matrix4f VisualizerImpl::projectionMatrix() const noexcept {
-  auto const width = glfw_.width();
-  auto const height = glfw_.height();
-  auto constexpr pi = static_cast<float>(M_PI);
-  auto const f = 1.f / std::tan(fov * pi / 360.f);
-  auto const aspect = static_cast<float>(width) / static_cast<float>(height);
-
-  auto P = Eigen::Matrix4f();
-  P << f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, 0, f, 0, 0, -1, f;
-
-  return P;
-}
-
-Eigen::Matrix4f VisualizerImpl::viewMatrix() const noexcept {
-  Eigen::Transform<float, 3, Eigen::Affine> camTrans =
-      (cameraOrientation_ * Eigen::Translation3f(cameraPosition_)).inverse();
-
-  return camTrans.matrix();
-}
-
 Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
-  Length const refScale = visualizer_->scale;
+  Length const refScale = cachedScale_;
   auto const invScale =
       (Size3f(static_cast<float>(refScale / currentVolume_.voxelSize[0]),
               static_cast<float>(refScale / currentVolume_.voxelSize[1]),
@@ -389,17 +376,6 @@ Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
                              invScale.asDiagonal()).matrix();
 
   return t;
-}
-
-Position VisualizerImpl::unproject(Position2 const &screenCoord,
-                                   float depth) const noexcept {
-  auto constexpr pi = static_cast<float>(M_PI);
-  auto const f = 1.f / std::tan(fov * pi / 360.f);
-  auto const w = f / depth;
-  auto const p =
-      PositionH(screenCoord(0), screenCoord(1), depth, 1) * w;
-
-  return ((projectionMatrix() * viewMatrix()).inverse() * p).head<3>();
 }
 
 #pragma mark Interface Methods
@@ -489,7 +465,7 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
   using GL::MoveMask;
   using Eigen::AngleAxisf;
   using std::abs;
-  Length const refScale = visualizer_->scale;
+  Length const refScale = cachedScale_;
   auto geom = GL::Geometry{};
   auto constexpr d90 = static_cast<float>(M_PI / 2.0);
 
@@ -523,8 +499,8 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
 
   auto init = [geom, this]() {
     return [geom, this](std::uint32_t index) {
-      Length const rScale = visualizer_->scale;
-      auto const viewMat = viewMatrix();
+      Length const rScale = cachedScale_;
+      auto const viewMat = camera().client().viewMatrix(rScale);
       auto const scale = static_cast<float>(geom.scale / rScale);
       auto const volSize =
           (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
@@ -551,7 +527,7 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
       planeProgram_["shininess"] = 10.f;
       planeProgram_["color"] = geom.color;
       planeProgram_["modelViewProjectionMatrix"] =
-          (projectionMatrix() * modelViewMat).eval();
+          (camera().client().projectionMatrix() * modelViewMat).eval();
       planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
       planeProgram_["textureTransformMatrix"] = textureTransformationMatrix();
 
@@ -720,9 +696,9 @@ void VisualizerImpl::renderOneFrame() {
 }
 
 void VisualizerImpl::renderMeshes() {
-  auto const pMatrix = projectionMatrix();
-  auto const vMatrix = viewMatrix();
-  auto const MVP = (pMatrix * vMatrix).eval();
+  Length const scale = cachedScale_;
+  auto const vMatrix = camera().client().viewMatrix(scale);
+  auto const MVP = camera().client().viewProjectionMatrix(scale);
   auto const inverseModelViewMatrix =
       vMatrix.block<3, 3>(0, 0).inverse().eval();
   constexpr std::array<GLuint, 3> attachments{
@@ -795,14 +771,13 @@ void VisualizerImpl::renderGeometry() {
 
 void VisualizerImpl::renderGrid() {
 
+  Length const scale = cachedScale_;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
-
-  auto const pMatrix = projectionMatrix();
-  auto const vMatrix = viewMatrix();
 
   gridProgram_.use();
   gridProgram_["scale"] = 1.f;
-  gridProgram_["viewProjectionMatrix"] = (pMatrix * vMatrix).eval();
+  gridProgram_["viewProjectionMatrix"] =
+      camera().client().viewProjectionMatrix(scale);
 
   auto boundVao = binding(singleVertexData_.vao);
 
@@ -865,11 +840,13 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
                                        Orientation const &orientation,
                                        Size3f const &size, Color const &color) {
 
+  Length const scale = cachedScale_;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
   auto const modelMat = (Eigen::Translation3f(position) * orientation *
                          size.asDiagonal()).matrix();
-  auto const mvpMatrix = (projectionMatrix() * viewMatrix() * modelMat).eval();
+  auto const mvpMatrix =
+      (camera().client().viewProjectionMatrix(scale) * modelMat).eval();
 
   bboxProgram_.use();
   bboxProgram_["lineColor"] = color;
@@ -886,7 +863,7 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
 
 void VisualizerImpl::renderVolumeBBox() {
   auto const vol = currentVolume_;
-  Length const scale = visualizer_->scale;
+  Length const scale = cachedScale_;
 
   auto const voxelSize = Size3f(static_cast<float>(vol.voxelSize[0] / scale),
                                 static_cast<float>(vol.voxelSize[1] / scale),
@@ -946,7 +923,8 @@ VisualizerImpl::getGeometryUnderCursor() {
   }
 
   // Compute 3D position using window coordinates and depth
-  auto const posInWorld = unproject(mousePos, depth);
+  auto const posInWorld =
+      camera().client().unproject(mousePos, depth, cachedScale_);
 
   return GeometryNameAndPosition(name, posInWorld);
 }
@@ -1031,7 +1009,8 @@ void VisualizerImpl::renderAmbientLighting() {
 void VisualizerImpl::renderDiffuseLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
-  auto const viewMat = viewMatrix();
+  Length const scale = cachedScale_;
+  auto const viewMat = camera().client().viewMatrix(scale);
 
   diffuseLightingPassProgram_.use();
   diffuseLightingPassProgram_["normalAndSpecularTex"] = 0;
@@ -1067,7 +1046,8 @@ void VisualizerImpl::renderDiffuseLighting() {
 void VisualizerImpl::renderSpecularLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
-  auto const viewMat = viewMatrix();
+  Length const scale = cachedScale_;
+  auto const viewMat = camera().client().viewMatrix(scale);
 
   specularLightingPassProgram_.use();
   specularLightingPassProgram_["normalAndSpecularTex"] = 0;

@@ -7,8 +7,9 @@
 
 namespace VolViz {
 
-class VisualizerImpl;
+namespace Private_ {
 class CameraClient;
+} // namespace Private_
 
 /// Basic camera class.
 /// The camera has a physical location, an orientation and a field of view.
@@ -32,6 +33,7 @@ public:
     };
 
     verticalFieldOfView.afterAction = [this](auto const &) {
+      cachedVerticalFOV_.markAsDirty();
       cachedProjectionMatrix_.markAsDirty();
       cachedViewProjectionMatrix_.markAsDirty();
     };
@@ -61,10 +63,10 @@ public:
   /// @see CameraClient
   /// @note The retunred CameraClient object can only be accesses by
   /// an VisualizerImpl instance to prevent race coditions.
-  CameraClient client() const noexcept;
+  Private_::CameraClient client() const noexcept;
 
 private:
-  friend class CameraClient;
+  friend class Private_::CameraClient;
 
   /// Returns the camera's projection matrix
   Matrix4 projectionMatrix() const noexcept;
@@ -74,6 +76,18 @@ private:
 
   /// Returns the product of projectionMatrix() * viewMatrix(...)
   Matrix4 viewProjectionMatrix() const noexcept;
+
+  /// Unprojectis a point in screen coordinates with known deoth into the 3D
+  /// scene
+  ///
+  /// @param screenPos the source point in screen coordinate system, i.e.
+  /// (-1, -1) is the bottom left, (1, 1) is the top right
+  ///
+  /// @param depth the depth of the pixel at screenPos
+  /// @param ambientLength the physical length of one unit in the target 3D
+  /// space
+  Position unproject(Position2 const &screenPos, float depth,
+                     Length ambientScale) const noexcept;
 
   /// Cached projection matrix
   mutable AtomicCache<Matrix4> cachedProjectionMatrix_{
@@ -87,13 +101,20 @@ private:
   mutable AtomicCache<Matrix4> cachedViewProjectionMatrix_{
       [this]() { return viewProjectionMatrix(); }};
 
+  /// Cached vertical FOV
+  mutable AtomicCache<Angle> cachedVerticalFOV_{
+      [this]() { return static_cast<Angle>(verticalFieldOfView); }};
+
   /// Cached scale of last call to viewMatrix(...)
   mutable Length cachedScale_;
 };
 
+namespace Private_ {
+class VisualizerImpl;
+
 class CameraClient {
   friend class VisualizerImpl;
-  friend class Camera;
+  friend class ::VolViz::Camera;
 
   CameraClient(Camera const &cam) : cam_(cam) {}
 
@@ -107,7 +128,9 @@ class CameraClient {
     using std::abs;
     using namespace literals;
 
-    if (abs(ambientScale - cam_.cachedScale_) < 1e-12_nm) {
+    Expects(ambientScale > 0_mm);
+
+    if (abs(ambientScale - cam_.cachedScale_) > 1e-3_nm) {
       cam_.cachedViewMatrix_.markAsDirty();
       cam_.cachedViewProjectionMatrix_.markAsDirty();
       cam_.cachedScale_ = ambientScale;
@@ -120,7 +143,9 @@ class CameraClient {
     using std::abs;
     using namespace literals;
 
-    if (abs(ambientScale - cam_.cachedScale_) < 1e-12_nm) {
+    Expects(ambientScale > 0_mm);
+
+    if (abs(ambientScale - cam_.cachedScale_) > 1e-3_nm) {
       cam_.cachedViewMatrix_.markAsDirty();
       cam_.cachedViewProjectionMatrix_.markAsDirty();
       cam_.cachedScale_ = ambientScale;
@@ -128,8 +153,24 @@ class CameraClient {
     return cam_.cachedViewProjectionMatrix_;
   }
 
+  /// Unprojectis a point in screen coordinates with known deoth into the 3D
+  /// scene
+  ///
+  /// @param screenPos the source point in screen coordinate system, i.e.
+  /// (-1, -1) is the bottom left, (1, 1) is the top right
+  ///
+  /// @param depth the depth of the pixel at screenPos
+  /// @param ambientLength the physical length of one unit in the target 3D
+  /// space
+  inline Position unproject(Position2 const &screenPos, float depth,
+                            Length ambientScale) const noexcept {
+    return cam_.unproject(screenPos, depth, ambientScale);
+  }
+
   Camera const &cam_;
 };
+
+} // namespace Private_
 
 } // namespace VolViz
 

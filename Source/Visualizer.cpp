@@ -10,7 +10,10 @@
 namespace VolViz {
 
 Visualizer::Visualizer()
-    : impl_(std::make_unique<Private_::VisualizerImpl>(this)) {}
+    : impl_(std::make_unique<Private_::VisualizerImpl>(this)) {
+  scale.afterAction =
+      [this](auto const &) { impl_->cachedScale_.markAsDirty(); };
+}
 
 Visualizer::~Visualizer() = default;
 

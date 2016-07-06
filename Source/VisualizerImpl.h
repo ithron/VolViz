@@ -1,6 +1,7 @@
 #ifndef VolViz_VisualizerImpl_h
 #define VolViz_VisualizerImpl_h
 
+#include "AtomicCache.h"
 #include "GL/GL.h"
 
 #include <Eigen/Core>
@@ -74,12 +75,6 @@ private:
   /// Setup selection buffers
   void setupSelectionBuffers();
 
-  /// Returns the projection matrix
-  Eigen::Matrix4f projectionMatrix() const noexcept;
-
-  /// Returns the view matrix (i.e. inverse camera transformation)
-  Eigen::Matrix4f viewMatrix() const noexcept;
-
   /// Returns a matrix that transforms world coordinates into texture
   /// coordinates
   Eigen::Matrix4f textureTransformationMatrix() const noexcept;
@@ -137,10 +132,20 @@ private:
 
   void addLight(Visualizer::LightName name, Light const &light);
 
+  /// Convenience method for easy camera access
+  inline Camera const &camera() const noexcept { return visualizer_->camera; }
+  inline Camera &camera() noexcept { return visualizer_->camera; }
+
   /// @defgroup privateMembers Private member variables
   /// @{
 
   Visualizer *visualizer_ = nullptr;
+
+  /// Visualizer's scale is cached here, since it is accessed at least once per
+  /// frame and is usually cahnged very rare. Since every access to Visualizer's
+  /// scale property requires thread synchronization, a cache is necessary here.
+  AtomicCache<Length> cachedScale_{
+      [this]() -> Length { return visualizer_->scale; }};
 
   /// @defgroup shaders Shader Programs
   /// @{
@@ -231,11 +236,6 @@ private:
 
   /// Last position of the mouse cursor, used in the camera control code
   Position2 lastMousePos_ = Position2::Zero();
-
-  /// Camera field of view
-  float fov = Visualizer::kDefaultFOV;
-  Eigen::Vector3f cameraPosition_ = Eigen::Vector3f::Zero();
-  Eigen::Quaternionf cameraOrientation_ = Eigen::Quaternionf::Identity();
   //@}
 
   VolumeDescriptor currentVolume_;
