@@ -21,28 +21,7 @@ class Camera {
   template <class T> using Property = AtomicWrapper<T, SetAndNotifyPolicy>;
 
 public:
-  Camera() noexcept {
-    orientation.afterAction = [this](auto const &) {
-      cachedViewMatrix_.markAsDirty();
-      cachedViewProjectionMatrix_.markAsDirty();
-    };
-
-    position.afterAction = [this](auto const &) {
-      cachedViewMatrix_.markAsDirty();
-      cachedViewProjectionMatrix_.markAsDirty();
-    };
-
-    verticalFieldOfView.afterAction = [this](auto const &) {
-      cachedVerticalFOV_.markAsDirty();
-      cachedProjectionMatrix_.markAsDirty();
-      cachedViewProjectionMatrix_.markAsDirty();
-    };
-
-    aspectRatio.afterAction = [this](auto const &) {
-      cachedProjectionMatrix_.markAsDirty();
-      cachedViewProjectionMatrix_.markAsDirty();
-    };
-  }
+  Camera() noexcept;
 
   /// The camera's orientation
   Property<Orientation> orientation{Orientation::Identity()};
@@ -64,6 +43,13 @@ public:
   /// @note The retunred CameraClient object can only be accesses by
   /// an VisualizerImpl instance to prevent race coditions.
   Private_::CameraClient client() const noexcept;
+
+  /// Returns the depth range of the camera projection, i.e. the depth value of
+  /// the nearest possible value (near plane) and the value of the farest
+  /// possible depth value (far plane),
+  inline DepthRange depthRange() const noexcept {
+    return {1.f, 0.f};
+  }
 
 private:
   friend class Private_::CameraClient;

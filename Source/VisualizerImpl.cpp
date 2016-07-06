@@ -7,6 +7,7 @@
 #include <Eigen/Core>
 #include <gsl.h>
 
+#include <algorithm>
 #include <iostream>
 #include <mutex>
 
@@ -34,14 +35,30 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
   if (major < 4 || !(major == 4 && minor >= 1)) {
     throw std::runtime_error("Need at least OpenGL version 4.1");
   }
+  // std::cout << "Extensions: " << std::endl;
+  // for (auto e : glfw_.supportedExtensions())
+  //   std::cout << "\t" << e << std::endl;
 
   setupShaders();
   setupFBOs();
   setupSelectionBuffers();
 
-  glDepthRange(0.0, 1.0);
+  // Check if glClipControl is available
+  if (major > 4 || (major == 4 && minor >= 5) ||
+      glfw_.supportsExtension("GL_ARB_clip_control")) {
+    // glClipControl available, so we can use high precision DirectX like depth
+    // ranges
+    depthRange_.near = 1.f;
+    depthRange_.far = 0.f;
+    glDepthRange(0.0, 1.0);
+    glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);
+  } else {
+    // glClipControl is not available, have to stick to suboptimal depth ranges
+    depthRange_.near = 1.f;
+    depthRange_.far = -1.f;
+    glDepthRange(0.0, 1.0);
+  }
   glDepthFunc(GL_GREATER);
-  glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);
 
   glfw_.keyInputHandler =
       [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
@@ -909,9 +926,10 @@ VisualizerImpl::getGeometryUnderCursor() {
   Expects(mappedMemory != nullptr);
 
   auto const index = *reinterpret_cast<std::uint32_t const *>(mappedMemory);
-  auto const depth = *reinterpret_cast<float const *>(
-                         reinterpret_cast<std::uint8_t const *>(mappedMemory) +
-                         sizeof(std::uint32_t));
+  auto const normalizedDepth =
+      *reinterpret_cast<float const *>(
+          reinterpret_cast<std::uint8_t const *>(mappedMemory) +
+          sizeof(std::uint32_t));
   glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
   selectionBuffer_.swap();
 
@@ -922,9 +940,20 @@ VisualizerImpl::getGeometryUnderCursor() {
     name = entry->first;
   }
 
+  // convert depth into camera depth
+  auto const cameraDepthRange = camera().depthRange();
+  auto const minCamDepth =
+      std::min(cameraDepthRange.near, cameraDepthRange.far);
+  auto const maxCamDepth =
+      std::max(cameraDepthRange.near, cameraDepthRange.far);
+  auto const minDepth = std::min(depthRange_.near, depthRange_.far);
+  auto const maxDepth = std::max(depthRange_.near, depthRange_.far);
+  auto const depthInWorld = normalizedDepth * (maxDepth - minDepth) + minDepth;
+  auto const depthInCamera = std::clamp(depthInWorld, minCamDepth, maxCamDepth);
+
   // Compute 3D position using window coordinates and depth
   auto const posInWorld =
-      camera().client().unproject(mousePos, depth, cachedScale_);
+      camera().client().unproject(mousePos, depthInCamera, cachedScale_);
 
   return GeometryNameAndPosition(name, posInWorld);
 }

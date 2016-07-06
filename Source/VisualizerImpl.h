@@ -147,6 +147,10 @@ private:
   AtomicCache<Length> cachedScale_{
       [this]() -> Length { return visualizer_->scale; }};
 
+  struct DepthRange {
+    float near, far;
+  } depthRange_;
+
   /// @defgroup shaders Shader Programs
   /// @{
   GL::GLFW glfw_;

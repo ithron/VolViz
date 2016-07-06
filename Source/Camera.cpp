@@ -6,6 +6,29 @@ Private_::CameraClient Camera::client() const noexcept {
   return Private_::CameraClient(*this);
 }
 
+Camera::Camera() noexcept {
+  orientation.afterAction = [this](auto const &) {
+    cachedViewMatrix_.markAsDirty();
+    cachedViewProjectionMatrix_.markAsDirty();
+  };
+
+  position.afterAction = [this](auto const &) {
+    cachedViewMatrix_.markAsDirty();
+    cachedViewProjectionMatrix_.markAsDirty();
+  };
+
+  verticalFieldOfView.afterAction = [this](auto const &) {
+    cachedVerticalFOV_.markAsDirty();
+    cachedProjectionMatrix_.markAsDirty();
+    cachedViewProjectionMatrix_.markAsDirty();
+  };
+
+  aspectRatio.afterAction = [this](auto const &) {
+    cachedProjectionMatrix_.markAsDirty();
+    cachedViewProjectionMatrix_.markAsDirty();
+  };
+}
+
 Matrix4 Camera::projectionMatrix() const noexcept {
   float const aspect = aspectRatio;
   Angle const FOV = cachedVerticalFOV_;
