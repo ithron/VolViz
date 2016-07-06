@@ -84,7 +84,7 @@ private:
   /// (-1, -1) is the bottom left, (1, 1) is the top right
   ///
   /// @param depth the depth of the pixel at screenPos
-  /// @param ambientLength the physical length of one unit in the target 3D
+  /// @param ambientScale the physical length of one unit in the target 3D
   /// space
   Position unproject(Position2 const &screenPos, float depth,
                      Length ambientScale) const noexcept;
@@ -160,7 +160,7 @@ class CameraClient {
   /// (-1, -1) is the bottom left, (1, 1) is the top right
   ///
   /// @param depth the depth of the pixel at screenPos
-  /// @param ambientLength the physical length of one unit in the target 3D
+  /// @param ambientScale the physical length of one unit in the target 3D
   /// space
   inline Position unproject(Position2 const &screenPos, float depth,
                             Length ambientScale) const noexcept {
