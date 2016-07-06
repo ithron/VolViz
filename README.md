@@ -8,8 +8,9 @@ Volumetric image visualization tool, e.g. for CT images
   * gcc-5 or newer
   * clang-3.6 or newer
 
+
 ## Build
-```shell
+~~~shell
 git clone git@github.com:ithron/VolViz.git
 cd VolViz
 git submodule init
@@ -18,17 +19,17 @@ mkdir ../VolViz-build
 cd ../VolViz-build
 cmake ../VolViz
 make
-```
+~~~
 # Usage
 ## CMake
 Set `VolViz_DIR` to the build directory,
 in your CMakeLists.txt add `find_package(VolViz)`. And add the `VolViz::Visualizer` to your dependencies, e.g.:
-```cmake
+~~~cmake
 target_link_libraries(MyTarget PRIVATE MyDep1 MyDep2 VolViz::Visualizer)
-```
+~~~
 
 ## Example Code
-```C++
+~~~cpp
 #include <VolViz/VolViz.h>
 
 int main(int, char **) {
@@ -60,7 +61,7 @@ int main(int, char **) {
   
   return EXIT_SUCCESS;
 }
-```
+~~~
 
 # Documentation
 The [API documentation](https://ithron.github.io/VolViz/html) can be found [here](https://ithron.github.io/VolViz/html)
