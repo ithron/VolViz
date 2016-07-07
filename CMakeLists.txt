@@ -47,6 +47,7 @@ configure_file(
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 option(BUILD_EXAMPLES "Build examples" ON)
+option(FORCE_GL_4_1_CORE_PROFILE "Force OpenGL 4.1 core profile without extensions?" OFF)
 
 add_subdirectory(Source VolViz)
 if (BUILD_EXAMPLES)

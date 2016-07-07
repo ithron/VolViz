@@ -55,7 +55,7 @@ install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
 
 before_script:
-  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DFORCE_GL_4_1_CORE_PROFILE=1
 
 script:
   - make all

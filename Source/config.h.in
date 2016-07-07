@@ -10,5 +10,7 @@
 #define VOLVIZ_DEFAULT_WINDOW_WIDTH 1024
 #define VOLVIZ_DEFAULT_WINDOW_HEIGHT 768
 
+#cmakedefine FORCE_GL_4_1_CORE_PROFILE
+
 #endif // VolViz_config_h
 
