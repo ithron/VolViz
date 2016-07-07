@@ -1,7 +1,9 @@
 <map id="/home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h" name="/home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h">
-<area shape="rect" id="node2" href="$Visualizer_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/src/Visualizer.h" alt="" coords="83,109,241,165"/>
-<area shape="rect" id="node3" href="$Visualizer_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Visualizer.cpp" alt="" coords="5,421,149,477"/>
-<area shape="rect" id="node4" href="$VisualizerImpl_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.cpp" alt="" coords="187,421,332,477"/>
-<area shape="rect" id="node5" href="$VolViz_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/VolViz.h" alt="" coords="90,213,235,269"/>
-<area shape="rect" id="node6" href="$VisualizerImpl_8h.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.h" alt="" coords="90,317,235,373"/>
+<area shape="rect" id="node2" href="$Camera_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/src/Camera.h" alt="" coords="69,109,216,165"/>
+<area shape="rect" id="node4" href="$Visualizer_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/src/Visualizer.h" alt="" coords="174,213,332,269"/>
+<area shape="rect" id="node3" href="$Camera_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Camera.cpp" alt="" coords="5,213,149,269"/>
+<area shape="rect" id="node5" href="$Visualizer_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Visualizer.cpp" alt="" coords="95,525,240,581"/>
+<area shape="rect" id="node6" href="$VisualizerImpl_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.cpp" alt="" coords="278,525,423,581"/>
+<area shape="rect" id="node7" href="$VolViz_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/VolViz.h" alt="" coords="181,317,325,373"/>
+<area shape="rect" id="node8" href="$VisualizerImpl_8h.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.h" alt="" coords="181,421,325,477"/>
 </map>

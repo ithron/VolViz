@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li class="current"><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -125,6 +126,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
+<li>value_
+: <a class="el" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">VolViz::AtomicCache&lt; T &gt;</a>
+</li>
 <li>vao
 : <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#afd7b6f7ee0edd58558328afdf1f6cac6">VolViz::Private_::VisualizerImpl::MeshData</a>
 , <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1SingleVertData.html#a7ee56f269c15f07fb183e439126d7a0a">VolViz::Private_::VisualizerImpl::SingleVertData</a>
@@ -135,23 +139,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>VertexArray()
 : <a class="el" href="structVolViz_1_1Private___1_1GL_1_1VertexArray.html#a01cbf09f0a3d74d13ffa8ade08390b42">VolViz::Private_::GL::VertexArray</a>
 </li>
+<li>verticalFieldOfView
+: <a class="el" href="classVolViz_1_1Camera.html#a3aaf035b07e479fd79d3e4847ec517ea">VolViz::Camera</a>
+</li>
 <li>vertices
 : <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#aa1bd4e19fb45d642c542e20665bc9e78">VolViz::Private_::VisualizerImpl::MeshData</a>
 </li>
 <li>viewMatrix()
-: <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a2a9433bb8389bf353fa64f89e2200908">VolViz::Private_::VisualizerImpl</a>
+: <a class="el" href="classVolViz_1_1Camera.html#aa14c9b309c1ad938bfa3da327dd0785f">VolViz::Camera</a>
+, <a class="el" href="classVolViz_1_1Private___1_1CameraClient.html#aa1c5eaca893e4dedee8619bde3f666ab">VolViz::Private_::CameraClient</a>
+</li>
+<li>viewProjectionMatrix()
+: <a class="el" href="classVolViz_1_1Camera.html#a683a36e60b89662cce6c49008fe895c4">VolViz::Camera</a>
+, <a class="el" href="classVolViz_1_1Private___1_1CameraClient.html#a3410dde2df3f1103da1a9c3557fa1f2a">VolViz::Private_::CameraClient</a>
 </li>
 <li>ViewState
 : <a class="el" href="group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f">VolViz::Private_::VisualizerImpl</a>
 </li>
 <li>Visualizer()
-: <a class="el" href="classVolViz_1_1Visualizer.html#acdd8f280cebe4aadafc1f62081f28db8">VolViz::Visualizer</a>
+: <a class="el" href="classVolViz_1_1Visualizer.html#a04f3fdce20733fddc60c6ce8f8a67de0">VolViz::Visualizer</a>
 </li>
 <li>visualizer_
 : <a class="el" href="group__privateMembers.html#ga595de467893116a98635a02e0802e118">VolViz::Private_::VisualizerImpl</a>
 </li>
-<li>VisualizerImpl()
-: <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#abde3d5ef1258f5b026eee0d83e137c42">VolViz::Private_::VisualizerImpl</a>
+<li>VisualizerImpl
+: <a class="el" href="classVolViz_1_1Private___1_1CameraClient.html#aed3c2f76bfdea06f305532ea49dff5d1">VolViz::Private_::CameraClient</a>
+, <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#abde3d5ef1258f5b026eee0d83e137c42">VolViz::Private_::VisualizerImpl</a>
 </li>
 <li>VolumeTexture
 : <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaaa46c96eca05928413b7b5bd3e81e4eae">VolViz::Private_::VisualizerImpl</a>
@@ -163,7 +176,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 30 2016 14:02:05 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 7 2016 12:26:29 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

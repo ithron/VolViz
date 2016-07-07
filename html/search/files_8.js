@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['vertexarray_2eh',['VertexArray.h',['../VertexArray_8h.html',1,'']]],
-  ['visualizer_2ecpp',['Visualizer.cpp',['../Visualizer_8cpp.html',1,'']]],
-  ['visualizer_2eh',['Visualizer.h',['../Visualizer_8h.html',1,'']]],
-  ['visualizerimpl_2ecpp',['VisualizerImpl.cpp',['../VisualizerImpl_8cpp.html',1,'']]],
-  ['visualizerimpl_2eh',['VisualizerImpl.h',['../VisualizerImpl_8h.html',1,'']]],
-  ['volume_2eh',['Volume.h',['../Volume_8h.html',1,'']]],
-  ['volviz_2eh',['VolViz.h',['../VolViz_8h.html',1,'']]]
+  ['shaderprogram_2ecpp',['ShaderProgram.cpp',['../ShaderProgram_8cpp.html',1,'']]],
+  ['shaderprogram_2eh',['ShaderProgram.h',['../ShaderProgram_8h.html',1,'']]],
+  ['shaders_2ecpp',['Shaders.cpp',['../Shaders_8cpp.html',1,'']]],
+  ['shaders_2eh',['Shaders.h',['../Shaders_8h.html',1,'']]]
 ];

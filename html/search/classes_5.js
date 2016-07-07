@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['meshdata',['MeshData',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html',1,'VolViz::Private_::VisualizerImpl']]]
+  ['geometry',['Geometry',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html',1,'VolViz::Private_::GL']]],
+  ['glfw',['GLFW',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html',1,'VolViz::Private_::GL']]]
 ];

@@ -80,10 +80,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">VolViz Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p>Volumetric image visualization tool, e.g. for CT images</p>
+<h1>Build Instruction</h1>
+<h2>Requirements</h2>
+<ul>
+<li>cmake 3.2 or newer</li>
+<li>A compiler that supports C++14, e.g.<ul>
+<li>gcc-5 or newer</li>
+<li>clang-3.6 or newer</li>
+</ul>
+</li>
+</ul>
+<h2>Build</h2>
+<div class="fragment"><div class="line">git clone git@github.com:ithron/VolViz.git</div>
+<div class="line">cd VolViz</div>
+<div class="line">git submodule init</div>
+<div class="line">git submodule update</div>
+<div class="line">mkdir ../VolViz-build</div>
+<div class="line">cd ../VolViz-build</div>
+<div class="line">cmake ../VolViz</div>
+<div class="line">make</div>
+</div><!-- fragment --> <h1>Usage</h1>
+<h2>CMake</h2>
+<p>Set <code>VolViz_DIR</code> to the build directory, in your CMakeLists.txt add <code>find_package(VolViz)</code>. And add the <code><a class="el" href="classVolViz_1_1Visualizer.html">VolViz::Visualizer</a></code> to your dependencies, e.g.: </p>
+<div class="fragment"><div class="line">target_link_libraries(MyTarget PRIVATE MyDep1 MyDep2 <a class="code" href="classVolViz_1_1Visualizer.html">VolViz::Visualizer</a>)</div>
+</div><!-- fragment --><h2>Example Code</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="VolViz_8h.html">VolViz/VolViz.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span>, <span class="keywordtype">char</span> **) {</div>
+<div class="line">  <span class="comment">// For physical units</span></div>
+<div class="line">  <span class="keyword">using namespace </span>VolViz::literals;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// load volume</span></div>
+<div class="line">  ...</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// load mesh into V and T (vertices and triangles)</span></div>
+<div class="line">  ...</div>
+<div class="line"></div>
+<div class="line">  <span class="keyword">auto</span> visualizer = VolViz::Visualizer{};</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Set the physical scale you like to visualize, e.g. 1 unit equals 1cm</span></div>
+<div class="line">  visualizer.scale = 1_cm;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// set volume</span></div>
+<div class="line">  <span class="comment">// TODO: Not implemented, yet</span></div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// set mesh</span></div>
+<div class="line">  visualizer.setMesh(V, T);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Opens the visualization window</span></div>
+<div class="line">  visualizer.start();</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// main update loop</span></div>
+<div class="line">  <span class="keywordflow">while</span> (visualizer) visualizer.renderOneFrame();</div>
+<div class="line"></div>
+<div class="line">  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1>Documentation</h1>
+<p>The <a href="https://ithron.github.io/VolViz/html">API documentation</a> can be found <a href="https://ithron.github.io/VolViz/html">here</a> </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 30 2016 14:02:05 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 7 2016 12:26:29 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['point2',['Point2',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a2625886480ca8edca95521226701775c',1,'VolViz::Private_::VisualizerImpl']]],
-  ['position',['Position',['../namespaceVolViz.html#adb9a559ef5e8c60874a9ce0feda8c553',1,'VolViz']]],
-  ['position2',['Position2',['../namespaceVolViz.html#a45c02a646f8c477ff8ef5986d522551a',1,'VolViz']]],
-  ['positionh',['PositionH',['../namespaceVolViz.html#ae63124d80adb678801719b5f03ebcf0e',1,'VolViz']]]
+  ['matrix3',['Matrix3',['../namespaceVolViz.html#a608b47c3a5e18162d64f1fc0e748940c',1,'VolViz']]],
+  ['matrix4',['Matrix4',['../namespaceVolViz.html#a03b4725e4fa8c265c6ef5f8879c1b0fe',1,'VolViz']]]
 ];

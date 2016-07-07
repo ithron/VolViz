@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['handle',['Handle',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a1225d1b2ab680cfd50722b1cf2d161ce',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer']]]
+  ['geometryinitqueue',['GeometryInitQueue',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a9f9e6dafacaed9341d341ed0811318c1',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometrylist',['GeometryList',['../classVolViz_1_1Private___1_1VisualizerImpl.html#af79fe51a4abceba0533892ff8b9d43d1',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometryname',['GeometryName',['../classVolViz_1_1Visualizer.html#aaf05297d058856738d892a5d44153f59',1,'VolViz::Visualizer']]],
+  ['geometrynameandposition',['GeometryNameAndPosition',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a082394fdeab1fac25a61704ad8aea8b0',1,'VolViz::Private_::VisualizerImpl']]]
 ];

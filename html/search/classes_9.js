@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['vertexarray',['VertexArray',['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html',1,'VolViz::Private_::GL']]],
-  ['visualizer',['Visualizer',['../classVolViz_1_1Visualizer.html',1,'VolViz']]],
-  ['visualizerimpl',['VisualizerImpl',['../classVolViz_1_1Private___1_1VisualizerImpl.html',1,'VolViz::Private_']]],
-  ['volumedescriptor',['VolumeDescriptor',['../structVolViz_1_1VolumeDescriptor.html',1,'VolViz']]]
+  ['textures',['Textures',['../structVolViz_1_1Private___1_1GL_1_1Textures.html',1,'VolViz::Private_::GL']]],
+  ['textures_3c_207_20_3e',['Textures&lt; 7 &gt;',['../structVolViz_1_1Private___1_1GL_1_1Textures.html',1,'VolViz::Private_::GL']]],
+  ['texturewrapper',['TextureWrapper',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html',1,'VolViz::Private_::VisualizerImpl']]]
 ];

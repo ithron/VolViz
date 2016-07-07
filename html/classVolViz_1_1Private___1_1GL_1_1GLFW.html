@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -108,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classVolViz_1_1Private___1_1GL_1_1GLFW__coll__graph.png" border="0" usemap="#VolViz_1_1Private___1_1GL_1_1GLFW_coll__map" alt="Collaboration graph"/></div>
 <map name="VolViz_1_1Private___1_1GL_1_1GLFW_coll__map" id="VolViz_1_1Private___1_1GL_1_1GLFW_coll__map">
-</map>
+<area shape="rect" id="node3" title="STL class. " alt="" coords="53,149,132,227"/><area shape="rect" id="node4" title="STL class. " alt="" coords="30,6,156,98"/></map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -142,6 +143,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1ef7fecf88513981ce746b1f7f308c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5fd8ba5f603974f5c963760afe639ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#ad5fd8ba5f603974f5c963760afe639ce">waitEvents</a> () const noexcept</td></tr>
 <tr class="separator:ad5fd8ba5f603974f5c963760afe639ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a9f8f0401270015ccdbef47245f51a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#ae6a9f8f0401270015ccdbef47245f51a">supportsExtension</a> (std::string name) const noexcept</td></tr>
+<tr class="separator:ae6a9f8f0401270015ccdbef47245f51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e06abb78c10368718794e3057a003c"><td class="memItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a60e06abb78c10368718794e3057a003c">supportedExtensions</a> () const noexcept</td></tr>
+<tr class="separator:a60e06abb78c10368718794e3057a003c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a158728e290719abc797150d00fa7debe"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a158728e290719abc797150d00fa7debe">width</a> () const noexcept</td></tr>
 <tr class="memdesc:a158728e290719abc797150d00fa7debe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the width of the window.  <a href="#a158728e290719abc797150d00fa7debe">More...</a><br/></td></tr>
 <tr class="separator:a158728e290719abc797150d00fa7debe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +180,8 @@ double)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 Private Attributes</h2></td></tr>
 <tr class="memitem:a2937f60656f52f86641d378ccf746645"><td class="memItemLeft" align="right" valign="top">GLFWwindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a2937f60656f52f86641d378ccf746645">window</a> = nullptr</td></tr>
 <tr class="separator:a2937f60656f52f86641d378ccf746645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0ab571b25475896dc68997a0cabe3c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a7e0ab571b25475896dc68997a0cabe3c">supportedExtensions_</a></td></tr>
+<tr class="separator:a7e0ab571b25475896dc68997a0cabe3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>RAII wrapper for <a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html" title="RAII wrapper for GLFW. ">GLFW</a>. </p>
@@ -440,6 +447,53 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a60e06abb78c10368718794e3057a003c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) VolViz::Private_::GL::GLFW::supportedExtensions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae6a9f8f0401270015ccdbef47245f51a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VolViz::Private_::GL::GLFW::supportsExtension </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a1ef7fecf88513981ce746b1f7f308c59"></a>
 <div class="memitem">
 <div class="memproto">
@@ -568,6 +622,26 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7e0ab571b25475896dc68997a0cabe3c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; VolViz::Private_::GL::GLFW::supportedExtensions_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2937f60656f52f86641d378ccf746645"></a>
 <div class="memitem">
 <div class="memproto">
@@ -609,7 +683,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 30 2016 14:02:05 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 7 2016 12:26:29 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

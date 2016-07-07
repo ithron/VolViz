@@ -1,6 +1,7 @@
 var searchData=
 [
   ['readbuffer',['readBuffer',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a1ebc009eefe96634e4a41de591f2b550',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer']]],
+  ['readme_2emd',['README.md',['../README_8md.html',1,'']]],
   ['red',['Red',['../namespaceVolViz_1_1Colors.html#a370df267aa54299c68cc263634fe56cd',1,'VolViz::Colors']]],
   ['renderambientlighting',['renderAmbientLighting',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a9ae7a35f8ec2afd564222e2011980af9',1,'VolViz::Private_::VisualizerImpl']]],
   ['renderboundingbox',['renderBoundingBox',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a27bca9f2b0f01a82010f54f100a690ba',1,'VolViz::Private_::VisualizerImpl']]],

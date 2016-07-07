@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['error_2eh',['Error.h',['../Error_8h.html',1,'']]]
+  ['camera_2ecpp',['Camera.cpp',['../Camera_8cpp.html',1,'']]],
+  ['camera_2eh',['Camera.h',['../Camera_8h.html',1,'']]]
 ];

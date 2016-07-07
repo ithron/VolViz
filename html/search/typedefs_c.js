@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['voxelsize',['VoxelSize',['../namespaceVolViz.html#a77e773db79ffbf3b25c535b4e8e6ffd1',1,'VolViz']]]
+  ['timepoint',['TimePoint',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a41317300ab60d6bc3160b4b5331455e0',1,'VolViz::Private_::VisualizerImpl']]]
 ];

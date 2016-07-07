@@ -107,6 +107,8 @@ Modules</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1DepthRange.html">VolViz::Private_::VisualizerImpl::DepthRange</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html">VolViz::Private_::VisualizerImpl::TextureWrapper</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auxiliary textures use in the deferred shading process.  <a href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,6 +133,11 @@ Enumerations</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:ga595de467893116a98635a02e0802e118"><td class="memItemLeft" align="right" valign="top">Visualizer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga595de467893116a98635a02e0802e118">VolViz::Private_::VisualizerImpl::visualizer_</a> = nullptr</td></tr>
 <tr class="separator:ga595de467893116a98635a02e0802e118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8a23711e74528781b2c9804622538924"><td class="memItemLeft" align="right" valign="top">AtomicCache&lt; Length &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#ga8a23711e74528781b2c9804622538924">VolViz::Private_::VisualizerImpl::cachedScale_</a></td></tr>
+<tr class="separator:ga8a23711e74528781b2c9804622538924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf5efd89d480621df87f3404b1f98dd4c"><td class="memItemLeft" align="right" valign="top">struct <br class="typebreak"/>
+<a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1DepthRange.html">VolViz::Private_::VisualizerImpl::DepthRange</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#gaf5efd89d480621df87f3404b1f98dd4c">VolViz::Private_::VisualizerImpl::depthRange_</a></td></tr>
+<tr class="separator:gaf5efd89d480621df87f3404b1f98dd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad1660086070e64dae44b9df701a0a487"><td class="memItemLeft" align="right" valign="top">struct <br class="typebreak"/>
 <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html">VolViz::Private_::VisualizerImpl::TextureWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__privateMembers.html#gad1660086070e64dae44b9df701a0a487">VolViz::Private_::VisualizerImpl::textures_</a></td></tr>
 <tr class="separator:gad1660086070e64dae44b9df701a0a487"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,6 +197,29 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ga8a23711e74528781b2c9804622538924"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AtomicCache&lt;Length&gt; VolViz::Private_::VisualizerImpl::cachedScale_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">      [<span class="keyword">this</span>]() -&gt; <a class="code" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a> { <span class="keywordflow">return</span> <a class="code" href="group__privateMembers.html#ga595de467893116a98635a02e0802e118">visualizer_</a>-&gt;<a class="code" href="classVolViz_1_1Visualizer.html#a1a79282f8a9c7ffbb126df399f1ee4ba">scale</a>; }}</div>
+</div><!-- fragment --><p><a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a>'s scale is cached here, since it is accessed at least once per frame and is usually cahnged very rare. Since every access to <a class="el" href="classVolViz_1_1Visualizer.html">Visualizer</a>'s scale property requires thread synchronization, a cache is necessary here. </p>
+
+</div>
+</div>
 <a class="anchor" id="gaefc39474fa2e792682a52be46f3f4cd1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -199,6 +229,26 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">VolumeDescriptor VolViz::Private_::VisualizerImpl::currentVolume_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gaf5efd89d480621df87f3404b1f98dd4c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1DepthRange.html">VolViz::Private_::VisualizerImpl::DepthRange</a>  VolViz::Private_::VisualizerImpl::depthRange_</td>
         </tr>
       </table>
   </td>
@@ -417,7 +467,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 30 2016 14:02:05 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 7 2016 12:26:29 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
