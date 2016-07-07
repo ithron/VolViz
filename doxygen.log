@@ -20,6 +20,7 @@ Warning: ignoring unsupported tag `MAN_SUBDIR             =' at line 1782, file 
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:74: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:78: warning: include file Shaders/selection.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:82: warning: include file Shaders/selectionIndexVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:86: warning: include file Shaders/point.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 Searching for include files...
 Searching for example files...
 Searching for images...
@@ -82,7 +83,7 @@ Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicCache.h..
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Camera.h...
-Parsing file /home/travis/build/ithron/VolViz//home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:469: warning: no matching class member found for 
+Parsing file /home/travis/build/ithron/VolViz//home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:488: warning: no matching class member found for 
   template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< float >)
 Possible candidates:
   'template < T >
@@ -92,7 +93,7 @@ Possible candidates:
   'template <>
   void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
 
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:471: warning: no matching class member found for 
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:490: warning: no matching class member found for 
   template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< Eigen::Vector3f >)
 Possible candidates:
   'template < T >
@@ -479,5 +480,5 @@ Patching output file 64/67
 Patching output file 65/67
 Patching output file 66/67
 Patching output file 67/67
-lookup cache used 1101/65536 hits=4793 misses=1305
+lookup cache used 1115/65536 hits=4887 misses=1321
 finished...

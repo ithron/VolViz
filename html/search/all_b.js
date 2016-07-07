@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['lastmousedelta_5f',['lastMouseDelta_',['../group__cameraRelated.html#ga8b534087ab915d4eb54ee6da29b28036',1,'VolViz::Private_::VisualizerImpl']]],
   ['lastmousepos_5f',['lastMousePos_',['../group__cameraRelated.html#ga310230fe35cf5b3dd577152a525c2e41',1,'VolViz::Private_::VisualizerImpl']]],
   ['length',['Length',['../namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d',1,'VolViz']]],
   ['light',['Light',['../classVolViz_1_1Light.html',1,'VolViz']]],

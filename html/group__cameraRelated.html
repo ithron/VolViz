@@ -97,7 +97,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ga10d6654b81efdf637f50ffa2ecbaa294"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga10d6654b81efdf637f50ffa2ecbaa294">VolViz::Private_::VisualizerImpl::MoveState</a> { <a class="el" href="group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a6adf97f83acf6453d4a6a4b1070f3754">VolViz::Private_::VisualizerImpl::MoveState::None</a>, 
-<a class="el" href="group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6">VolViz::Private_::VisualizerImpl::MoveState::Rotating</a>
+<a class="el" href="group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6">VolViz::Private_::VisualizerImpl::MoveState::Rotating</a>, 
+<a class="el" href="group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a7c0a2f343108fd64dbd0b5e97a75f145">VolViz::Private_::VisualizerImpl::MoveState::Dragging</a>
  }</td></tr>
 <tr class="separator:ga10d6654b81efdf637f50ffa2ecbaa294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -109,6 +110,8 @@ Variables</h2></td></tr>
 <tr class="memitem:ga310230fe35cf5b3dd577152a525c2e41"><td class="memItemLeft" align="right" valign="top">Position2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga310230fe35cf5b3dd577152a525c2e41">VolViz::Private_::VisualizerImpl::lastMousePos_</a> = Position2::Zero()</td></tr>
 <tr class="memdesc:ga310230fe35cf5b3dd577152a525c2e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last position of the mouse cursor, used in the camera control code.  <a href="#ga310230fe35cf5b3dd577152a525c2e41">More...</a><br/></td></tr>
 <tr class="separator:ga310230fe35cf5b3dd577152a525c2e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b534087ab915d4eb54ee6da29b28036"><td class="memItemLeft" align="right" valign="top">Position2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cameraRelated.html#ga8b534087ab915d4eb54ee6da29b28036">VolViz::Private_::VisualizerImpl::lastMouseDelta_</a> = Position2::Zero()</td></tr>
+<tr class="separator:ga8b534087ab915d4eb54ee6da29b28036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p><a class="el" href="classVolViz_1_1Camera.html">Camera</a> state </p>
@@ -135,11 +138,33 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6"></a>Rotating</em>&#160;</td><td class="fielddoc">
 </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="gga10d6654b81efdf637f50ffa2ecbaa294a7c0a2f343108fd64dbd0b5e97a75f145"></a>Dragging</em>&#160;</td><td class="fielddoc">
+</td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ga8b534087ab915d4eb54ee6da29b28036"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Position2 VolViz::Private_::VisualizerImpl::lastMouseDelta_ = Position2::Zero()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga310230fe35cf5b3dd577152a525c2e41"></a>
 <div class="memitem">
 <div class="memproto">
@@ -185,7 +210,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 7 2016 12:35:36 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 7 2016 15:44:37 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

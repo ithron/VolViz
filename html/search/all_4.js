@@ -18,5 +18,7 @@ var searchData=
   ['detachshaders',['detachShaders',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a67e2e7b35a77bb9a11612d335e773b93',1,'VolViz::Private_::GL::ShaderProgram']]],
   ['diffuselightingpassfragshadersrc',['diffuseLightingPassFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a9868699d5517713a094eff2b85f6fed5',1,'VolViz::Private_::GL::Shaders']]],
   ['diffuselightingpassprogram_5f',['diffuseLightingPassProgram_',['../group__shaders.html#ga15f2b5649defad661c47a7a6b8eb6eab',1,'VolViz::Private_::VisualizerImpl']]],
-  ['dirtyflag_5f',['dirtyFlag_',['../classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711',1,'VolViz::AtomicCache']]]
+  ['dirtyflag_5f',['dirtyFlag_',['../classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711',1,'VolViz::AtomicCache']]],
+  ['dragging',['Dragging',['../group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a7c0a2f343108fd64dbd0b5e97a75f145',1,'VolViz::Private_::VisualizerImpl']]],
+  ['dragselectedgeometry',['dragSelectedGeometry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a903cc4365a0d6dbd21871d1039a78245',1,'VolViz::Private_::VisualizerImpl']]]
 ];

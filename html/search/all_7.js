@@ -23,7 +23,7 @@ var searchData=
   ['glfw',['GLFW',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a6295dc3726b4eeb91355194d03a44a2c',1,'VolViz::Private_::GL::GLFW::GLFW()'],['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a87b895c607eaed81121dbbe9ccec7c19',1,'VolViz::Private_::GL::GLFW::GLFW(std::string title, std::size_t width, std::size_t height)'],['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a2a56d82afba8662f57788724d92cf570',1,'VolViz::Private_::GL::GLFW::GLFW(GLFW const &amp;)=delete'],['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#ace257bb66abc9c0066efe0d5d16102c7',1,'VolViz::Private_::GL::GLFW::GLFW(GLFW &amp;&amp;rhs)']]],
   ['glfw_2ecpp',['GLFW.cpp',['../GLFW_8cpp.html',1,'']]],
   ['glfw_2eh',['GLFW.h',['../GLFW_8h.html',1,'']]],
-  ['glfw_5f',['glfw_',['../group__shaders.html#ga29d82ff3888930b7f3d8a0f5b3c7c782',1,'VolViz::Private_::VisualizerImpl']]],
+  ['glfw_5f',['glfw_',['../group__privateMembers.html#ga29d82ff3888930b7f3d8a0f5b3c7c782',1,'VolViz::Private_::VisualizerImpl']]],
   ['glfw_5finclude_5fglcorearb',['GLFW_INCLUDE_GLCOREARB',['../GLdefs_8h.html#a7737bc5535f188b6f1ffffa9f9f4146c',1,'GLdefs.h']]],
   ['glfw_5finclude_5fglext',['GLFW_INCLUDE_GLEXT',['../GLdefs_8h.html#a2b9565e626144ca0f30bab5b0467a4d0',1,'GLdefs.h']]],
   ['grayscale',['GrayScale',['../namespaceVolViz.html#ad208471555239219028c0bb4fd84858da4f90b9cafa6fec5c0bd8cb1df7281693',1,'VolViz']]],

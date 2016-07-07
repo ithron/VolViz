@@ -95,8 +95,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga29d82ff3888930b7f3d8a0f5b3c7c782"><td class="memItemLeft" align="right" valign="top">GL::GLFW&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#ga29d82ff3888930b7f3d8a0f5b3c7c782">VolViz::Private_::VisualizerImpl::glfw_</a></td></tr>
-<tr class="separator:ga29d82ff3888930b7f3d8a0f5b3c7c782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa16773101b4038eeeb31841f71bb7cc6"><td class="memItemLeft" align="right" valign="top">GL::ShaderProgram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#gaa16773101b4038eeeb31841f71bb7cc6">VolViz::Private_::VisualizerImpl::ambientPassProgram_</a></td></tr>
 <tr class="separator:gaa16773101b4038eeeb31841f71bb7cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1ecf252e347d6c913e06a9607722505f"><td class="memItemLeft" align="right" valign="top">GL::ShaderProgram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#ga1ecf252e347d6c913e06a9607722505f">VolViz::Private_::VisualizerImpl::bboxProgram_</a></td></tr>
@@ -115,6 +113,8 @@ Variables</h2></td></tr>
 <tr class="separator:ga339107e70e031a354cac6d8e8f881a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga31b4c09a14c3512f57ecbe08441db56b"><td class="memItemLeft" align="right" valign="top">GL::ShaderProgram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#ga31b4c09a14c3512f57ecbe08441db56b">VolViz::Private_::VisualizerImpl::planeProgram_</a></td></tr>
 <tr class="separator:ga31b4c09a14c3512f57ecbe08441db56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga89966a42e5363b414243425a3ab409d5"><td class="memItemLeft" align="right" valign="top">GL::ShaderProgram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#ga89966a42e5363b414243425a3ab409d5">VolViz::Private_::VisualizerImpl::pointProgram_</a></td></tr>
+<tr class="separator:ga89966a42e5363b414243425a3ab409d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga526b350b0ee0ba54794b7194693270d0"><td class="memItemLeft" align="right" valign="top">GL::ShaderProgram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#ga526b350b0ee0ba54794b7194693270d0">VolViz::Private_::VisualizerImpl::quadProgram_</a></td></tr>
 <tr class="separator:ga526b350b0ee0ba54794b7194693270d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga59dc985dd1b8afcbc9a31f2e35795bda"><td class="memItemLeft" align="right" valign="top">GL::ShaderProgram&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__shaders.html#ga59dc985dd1b8afcbc9a31f2e35795bda">VolViz::Private_::VisualizerImpl::selectionIndexVisualizationProgam_</a></td></tr>
@@ -226,26 +226,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga29d82ff3888930b7f3d8a0f5b3c7c782"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GL::GLFW VolViz::Private_::VisualizerImpl::glfw_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga8439e9523ab51ea4a988ef15aad4ec11"></a>
 <div class="memitem">
 <div class="memproto">
@@ -315,6 +295,26 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">GL::ShaderProgram VolViz::Private_::VisualizerImpl::planeProgram_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga89966a42e5363b414243425a3ab409d5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GL::ShaderProgram VolViz::Private_::VisualizerImpl::pointProgram_</td>
         </tr>
       </table>
   </td>
@@ -409,7 +409,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 7 2016 12:35:36 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 7 2016 15:44:37 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
