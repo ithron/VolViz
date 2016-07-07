@@ -81,6 +81,7 @@ add_library(VolViz
   GL/GLFW.cpp
   GL/ShaderProgram.cpp
   GL/Shaders.cpp
+  GL/Workarounds.cpp
   Visualizer.cpp
   VisualizerImpl.cpp
 )
