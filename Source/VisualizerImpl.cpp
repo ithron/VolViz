@@ -84,10 +84,18 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
     switch (moveState_) {
       case MoveState::None:
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-          moveState_ = MoveState::Rotating;
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+          if (!inSelectionMode)
+            moveState_ = MoveState::Rotating;
+          else
+            moveState_ = MoveState::Dragging;
+        }
         break;
       case MoveState::Rotating:
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+          moveState_ = MoveState::None;
+        break;
+      case MoveState::Dragging:
         if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
           moveState_ = MoveState::None;
         break;
@@ -126,8 +134,11 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
       }
       case MoveState::None:
         break;
+      case MoveState::Dragging:
+        break;
     }
 
+    lastMouseDelta_ = pos - lastMousePos_;
     lastMousePos_ = pos;
   };
 }
@@ -269,6 +280,14 @@ void VisualizerImpl::setupShaders() {
                         GL_FRAGMENT_SHADER,
                         GL::Shaders::selectionIndexVisualizationFragShaderSrc))
                     .link());
+
+  pointProgram_ = std::move(
+      GL::ShaderProgram()
+          .attachShader(
+               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::pointVertShaderSrc))
+          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
+                                   GL::Shaders::passThroughFragShaderSrc))
+          .link());
 }
 
 void VisualizerImpl::setupFBOs() {
@@ -515,7 +534,7 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
   }
 
   auto init = [geom, this]() {
-    return [geom, this](std::uint32_t index) {
+    return [geom, this](std::uint32_t index, bool selected) {
       Length const rScale = cachedScale_;
       auto const viewMat = camera().client().viewMatrix(rScale);
       auto const scale = static_cast<float>(geom.scale / rScale);
@@ -542,7 +561,8 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
       planeProgram_["volume"] = 0;
       planeProgram_["modelMatrix"] = modelMat;
       planeProgram_["shininess"] = 10.f;
-      planeProgram_["color"] = geom.color;
+      planeProgram_["color"] =
+          selected ? (geom.color * 1.5f).eval() : geom.color;
       planeProgram_["modelViewProjectionMatrix"] =
           (camera().client().projectionMatrix() * modelViewMat).eval();
       planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
@@ -634,6 +654,7 @@ VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
                           Eigen::MatrixBase<Eigen::MatrixXi> const &);
 
 void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
+
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
       case GLFW_KEY_1:
@@ -651,6 +672,15 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_B:
         visualizer_->showVolumeBoundingBox =
             !visualizer_->showVolumeBoundingBox;
+        break;
+      case GLFW_KEY_LEFT_CONTROL:
+        inSelectionMode = true;
+        break;
+    }
+  } else if (action == GLFW_RELEASE) {
+    switch (key) {
+      case GLFW_KEY_LEFT_CONTROL:
+        inSelectionMode = false;
         break;
     }
   }
@@ -701,12 +731,16 @@ void VisualizerImpl::renderOneFrame() {
       break;
   }
 
+  // auto const geomNameAndPos = getGeometryUnderCursor();
+  // if (!geomNameAndPos.first.empty() && viewState_ == ViewState::Scene3D)
+  //     renderPoint(geomNameAndPos.second, Colors::Cyan(), 2.5f);
+
   renderFinalPass();
 
-  auto const geomNameAndPos = getGeometryUnderCursor();
-  if (!geomNameAndPos.first.empty())
-    std::cout << geomNameAndPos.first << " at "
-              << geomNameAndPos.second.transpose() << std::endl;
+  if (inSelectionMode && moveState_ != MoveState::Dragging) {
+    auto const geomNameAndPos = getGeometryUnderCursor();
+    selectedGeometry = geomNameAndPos.first;
+  } else if (moveState_ != MoveState::Dragging) { selectedGeometry.clear(); }
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
@@ -780,7 +814,8 @@ void VisualizerImpl::renderGeometry() {
 
   // call render commands
   std::uint32_t idx = 0;
-  for (auto const &geom : geometries_) geom.second(++idx);
+  for (auto const &geom : geometries_)
+    geom.second(++idx, geom.first == selectedGeometry);
 
   // switch back to single render target
   glDrawBuffers(1, attachments.data());
@@ -802,6 +837,31 @@ void VisualizerImpl::renderGrid() {
   glDepthMask(GL_TRUE);
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
+}
+
+void VisualizerImpl::renderPoint(Position const &position, Color const &color,
+                                 float size) {
+
+  Length const scale = cachedScale_;
+  auto fboBinding =
+      binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
+
+  auto const viewProjMat = camera().client().viewProjectionMatrix(scale);
+  PositionH projPos = viewProjMat * position.homogeneous();
+
+  pointProgram_.use();
+  pointProgram_["size"] = size;
+  pointProgram_["position"] = projPos;
+  pointProgram_["pointColor"] = color;
+
+  auto boundVao = binding(singleVertexData_.vao);
+  glDisable(GL_DEPTH_TEST);
+  glDepthMask(GL_FALSE);
+  glEnable(GL_PROGRAM_POINT_SIZE);
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+  glDepthMask(GL_TRUE);
+  glDisable(GL_PROGRAM_POINT_SIZE);
 }
 
 void VisualizerImpl::renderLightingTextures() {
@@ -842,9 +902,9 @@ void VisualizerImpl::renderFinalPass() {
   // Render FBA color attachment to screen
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
-  // glEnable(GL_FRAMEBUFFER_SRGB);
-  // renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
-  renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
+  glEnable(GL_FRAMEBUFFER_SRGB);
+  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  // renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
   // auto readBinding =
   //     GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
   // auto const w = static_cast<GLint>(glfw_.width());
@@ -956,6 +1016,24 @@ VisualizerImpl::getGeometryUnderCursor() {
       camera().client().unproject(mousePos, depthInCamera, cachedScale_);
 
   return GeometryNameAndPosition(name, posInWorld);
+}
+
+void VisualizerImpl::dragSelectedGeometry() {
+  if (selectedGeometry.empty()) return;
+
+  Position const mousePos{lastMousePos_.x(), lastMousePos_.y(), 0};
+  Position const mouseDelta{lastMouseDelta_.x(), lastMouseDelta_.y(), 0};
+  Position const mouseDir = mouseDelta.normalized();
+  auto const movedDistance = mouseDir.norm();
+  Length const scale = visualizer_->scale;
+  Matrix4 const invViewMat = camera().client().viewMatrix(scale).inverse();
+
+  PositionH const moveDirectionInWorld =
+      invViewMat * PositionH{mouseDir.x(), mouseDir.y(), mouseDir.z(), 0} *
+      movedDistance;
+
+  (void)&moveDirectionInWorld;
+  // TODO: get geometry and move it along
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,

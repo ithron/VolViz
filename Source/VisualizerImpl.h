@@ -18,7 +18,7 @@ namespace VolViz {
 namespace Private_ {
 
 class VisualizerImpl {
-  using RenderCommand = std::function<void(std::uint32_t)>;
+  using RenderCommand = std::function<void(std::uint32_t, bool)>;
   using InitCommand = std::function<RenderCommand()>;
   using InitQueueEntry = std::pair<Visualizer::GeometryName, InitCommand>;
   using GeometryList =
@@ -95,6 +95,9 @@ private:
   /// Renders a grid
   void renderGrid();
 
+  /// Renders a point
+  void renderPoint(Position const &position, Color const &color, float size);
+
   /// Renderes a textured quad
   void renderQuad(Point2 const &topLeft, Size2 const &size, TextureID texture,
                   GL::ShaderProgram &prog);
@@ -119,6 +122,8 @@ private:
   void renderSelectionIndexTexture();
 
   GeometryNameAndPosition getGeometryUnderCursor();
+
+  void dragSelectedGeometry();
 
   /// Renders the final image to screen
   void renderFinalPass();
@@ -151,9 +156,10 @@ private:
     float near, far;
   } depthRange_;
 
+  GL::GLFW glfw_;
+
   /// @defgroup shaders Shader Programs
   /// @{
-  GL::GLFW glfw_;
   GL::ShaderProgram ambientPassProgram_;
   GL::ShaderProgram bboxProgram_;
   GL::ShaderProgram depthQuadProgram_;
@@ -163,6 +169,7 @@ private:
   GL::ShaderProgram hdrQuadProgram_;
   GL::ShaderProgram normalQuadProgram_;
   GL::ShaderProgram planeProgram_;
+  GL::ShaderProgram pointProgram_;
   GL::ShaderProgram quadProgram_;
   GL::ShaderProgram selectionIndexVisualizationProgam_;
   GL::ShaderProgram specularLightingPassProgram_;
@@ -229,6 +236,9 @@ private:
     SelectionIndices
   } viewState_{ViewState::Scene3D};
 
+  bool inSelectionMode{false};
+  Visualizer::GeometryName selectedGeometry;
+
   /// Lights
   Lights lights_;
   std::mutex lightMutex_;
@@ -236,10 +246,15 @@ private:
   ///@defgroup cameraRelated Camera related variables
   /// @{
   /// Camera state
-  enum class MoveState { None, Rotating } moveState_ = MoveState::None;
+  enum class MoveState {
+    None,
+    Rotating,
+    Dragging
+  } moveState_ = MoveState::None;
 
   /// Last position of the mouse cursor, used in the camera control code
   Position2 lastMousePos_ = Position2::Zero();
+  Position2 lastMouseDelta_ = Position2::Zero();
   //@}
 
   VolumeDescriptor currentVolume_;
