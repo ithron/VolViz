@@ -25,7 +25,7 @@ std::vector<std::string> queryExtensions() {
   }
 
   return extensions;
-};
+}
 } // namespace
 
 GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {

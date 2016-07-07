@@ -70,7 +70,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
                static_cast<GLsizei>(glfw_.height()));
     float const FOV =
         static_cast<float>(glfw_.width()) / static_cast<float>(glfw_.height());
-    camera().verticalFieldOfView = FOV;
+    this->camera().verticalFieldOfView = FOV;
   };
 
   glfw_.scrollWheelInputHandler = [this](double, double y) {
