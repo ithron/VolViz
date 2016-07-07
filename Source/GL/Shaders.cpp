@@ -82,6 +82,10 @@ std::string const selectionIndexVisualizationFragShaderSrc =
 #include "Shaders/selectionIndexVisualization.frag"
   ;
 
+std::string const pointVertShaderSrc =
+#include "Shaders/point.vert"
+  ;
+
 #pragma clang diagnostic pop
 
 } // namespace Shaders

@@ -21,6 +21,7 @@ extern std::string const normalVisualizationFragShaderSrc;
 extern std::string const nullVertShaderSrc;
 extern std::string const passThroughFragShaderSrc;
 extern std::string const planeGeomShaderSrc;
+extern std::string const pointVertShaderSrc;
 extern std::string const quadGeomShaderSrc;
 extern std::string const selectionFragShaderSrc;
 extern std::string const selectionIndexVisualizationFragShaderSrc;
