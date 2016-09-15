@@ -9,7 +9,7 @@ var searchData=
   ['meshdata',['MeshData',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html',1,'VolViz::Private_::VisualizerImpl']]],
   ['mousebuttoncallback',['mouseButtonCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a9877a6fdd95a63c3ab15a127f08df185',1,'VolViz::Private_::GL::GLFW']]],
   ['mousemovecallback',['mouseMoveCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a00b54cb9731f63b285b9a0ae65a9cd45',1,'VolViz::Private_::GL::GLFW']]],
-  ['movable',['movable',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840',1,'VolViz::Private_::GL::Geometry::movable()'],['../structVolViz_1_1AxisAlignedPlane.html#a135b663cdeffb512daef9c0f592420cd',1,'VolViz::AxisAlignedPlane::movable()']]],
+  ['movable',['movable',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840',1,'VolViz::Private_::GL::Geometry::movable()'],['../structVolViz_1_1Geometry.html#a9c59f7f7fbe7bb82332deed14d4889f1',1,'VolViz::Geometry::movable()']]],
   ['movemask',['moveMask',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24',1,'VolViz::Private_::GL::Geometry::moveMask()'],['../namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242',1,'VolViz::Private_::GL::MoveMask()']]],
   ['movestate',['MoveState',['../group__cameraRelated.html#ga10d6654b81efdf637f50ffa2ecbaa294',1,'VolViz::Private_::VisualizerImpl']]],
   ['movestate_5f',['moveState_',['../group__cameraRelated.html#gabfabf1dedcedc08fa39c5bc231dd915f',1,'VolViz::Private_::VisualizerImpl']]],
