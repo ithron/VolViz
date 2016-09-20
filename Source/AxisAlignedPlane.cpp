@@ -1,43 +1,46 @@
 #include "AxisAlignedPlane.h"
+#include "Visualizer.h"
 
 namespace VolViz {
 namespace Private_ {
 
-AxisAlignedPlane::AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor)
-    : descriptor_(descriptor) {
+AxisAlignedPlane::AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
+                                   Visualizer &visualizer)
+    : visualizer_(visualizer) {
 
+  Length const refScale = visualizer_.scale;
   float intercept = 1.f;
 
   if (abs(descriptor.intercept / refScale) < 1e-6) {
-    geom.scale = refScale;
+    scale = refScale;
     intercept = 0.f;
   } else {
-    geom.scale = plane.intercept;
+    scale = descriptor.intercept;
   }
 
   // set dependent properties
   switch (descriptor.axis) {
     case Axis::X:
       position = intercept * Position::UnitX();
-      geom.moveMask = MoveMask::X;
-      geom.orientation = AngleAxisf(d90, -Position::UnitY());
+      moveMask = MoveMask::X;
+      orientation = AngleAxisf(d90, -Position::UnitY());
       break;
     case Axis::Y:
-      geom.position = intercept * Position::UnitY();
-      geom.moveMask = MoveMask::Y;
-      geom.orientation = AngleAxisf(d90, -Position::UnitX());
+      position = intercept * Position::UnitY();
+      moveMask = MoveMask::Y;
+      orientation = AngleAxisf(d90, -Position::UnitX());
       break;
     case Axis::Z:
-      geom.position = intercept * Position::UnitZ();
-      geom.moveMask = MoveMask::Z;
-      geom.orientation = Orientation::Identity();
+      position = intercept * Position::UnitZ();
+      moveMask = MoveMask::Z;
+      orientation = Orientation::Identity();
       break;
   }
+
+  color = descriptor.color;
 }
 
-void AxisAlignedPlane::doInit() {
-  // TODO: implement
-}
+void AxisAlignedPlane::doInit() {}
 
 void AxisAlignedPlane::doRender() {
   // TODO: implement

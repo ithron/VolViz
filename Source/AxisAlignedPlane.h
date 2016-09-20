@@ -4,6 +4,8 @@
 
 namespace VolViz {
 
+class Visualizer;
+
 namespace Private_ {
 
 class AxisAlignedPlane : public Geometry {
@@ -15,9 +17,10 @@ protected:
 private:
   friend class GeometryFactory;
 
-  AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor);
+  AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
+                   Visualizer &visualizer);
 
-  AxisAlignedPlaneDescriptor descriptor_;
+  Visualizer &visualizer_;
 };
 
 } // namespace Private_

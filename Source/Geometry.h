@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GeometryDescriptor.h"
+
 namespace VolViz {
 namespace Private_ {
 
@@ -9,6 +11,9 @@ public:
 
   Position position{Position::Zero()};
   Orientation orientation{Orientation::Identity()};
+  Length scale{1_mm};
+  MoveMask moveMask{MoveMask::All};
+  Color color{Color::White()};
 
   virtual ~Geometry() = default;
 
