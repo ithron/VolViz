@@ -24,7 +24,7 @@ class VisualizerImpl {
   using InitQueueEntry =
       std::pair<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryList =
-      std::unordered_map<Visualizer::GeometryName, RenderCommand>;
+      std::unordered_map<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryInitQueue = std::queue<InitQueueEntry>;
 
 public:
@@ -43,6 +43,8 @@ public:
   template <class T>
   void setVolume(VolumeDescriptor const &descriptor, gsl::span<T> data);
 
+  Size3f volumeSize() const noexcept;
+
   template <class VertBase, class IdxBase>
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
@@ -54,6 +56,21 @@ public:
                           Descriptor const &descriptor) {
     initQueue_.emplace_back(name, geomFactory_.create(descriptor_));
   }
+
+  /// Convenience method for easy camera access
+  inline Camera const &camera() const noexcept { return visualizer_->camera; }
+  inline Camera &camera() noexcept { return visualizer_->camera; }
+
+  inline Shaders &shaders() noexcept { return shaders_; }
+
+  /// Bind the volume texture to texture unit i
+  void bindVolume(GLint unitIdx = 0) const noexcept;
+
+  /// Visualizer's scale is cached here, since it is accessed at least once per
+  /// frame and is usually cahnged very rare. Since every access to Visualizer's
+  /// scale property requires thread synchronization, a cache is necessary here.
+  AtomicCache<Length> cachedScale{
+      [this]() -> Length { return visualizer_->scale; }};
 
 private:
   friend class ::VolViz::Visualizer;
@@ -141,21 +158,11 @@ private:
 
   void addLight(Visualizer::LightName name, Light const &light);
 
-  /// Convenience method for easy camera access
-  inline Camera const &camera() const noexcept { return visualizer_->camera; }
-  inline Camera &camera() noexcept { return visualizer_->camera; }
-
   /// @defgroup privateMembers Private member variables
   /// @{
 
   Visualizer *visualizer_ = nullptr;
   GeometryFactory geomFactory_;
-
-  /// Visualizer's scale is cached here, since it is accessed at least once per
-  /// frame and is usually cahnged very rare. Since every access to Visualizer's
-  /// scale property requires thread synchronization, a cache is necessary here.
-  AtomicCache<Length> cachedScale_{
-      [this]() -> Length { return visualizer_->scale; }};
 
   struct DepthRange {
     float near, far;

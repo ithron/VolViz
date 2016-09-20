@@ -5,7 +5,9 @@ namespace Private_ {
 
 void Geometry::init() { doInit(); }
 
-void Geometry::render() { doRender(); }
+void Geometry::render(std::uint32_t index, bool selected) {
+  doRender(index, selected);
+}
 
 void Geometry::doInit() {}
 

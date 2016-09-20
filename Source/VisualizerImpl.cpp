@@ -76,7 +76,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
   };
 
   glfw_.scrollWheelInputHandler = [this](double, double y) {
-    Length const scale = cachedScale_;
+    Length const scale = cachedScale;
     PhysicalPosition pos = camera().position;
     pos(2) -= 2 * gsl::narrow_cast<float>(y) * scale;
 
@@ -259,7 +259,7 @@ void VisualizerImpl::setupSelectionBuffers() {
 #pragma mark Matrix Computation
 
 Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
-  Length const refScale = cachedScale_;
+  Length const refScale = cachedScale;
   auto const invScale =
       (Size3f(static_cast<float>(refScale / currentVolume_.voxelSize[0]),
               static_cast<float>(refScale / currentVolume_.voxelSize[1]),
@@ -331,6 +331,14 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
   currentVolume_ = descriptor;
 }
 
+Size3f VisualizerImpl::volumeSize() const noexcept {
+  return (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
+                 static_cast<float>(currentVolume_.voxelSize[1] / rScale),
+                 static_cast<float>(currentVolume_.voxelSize[2] / rScale))
+              .cwiseProduct(currentVolume_.size.cast<float>()) /
+          2.f);
+}
+
 template <>
 void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
                                gsl::span<Color const> data) {
@@ -354,93 +362,6 @@ void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
   lights_.emplace(name, light);
-}
-
-void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
-                                 AxisAlignedPlane const &plane) {
-  using GL::MoveMask;
-  using Eigen::AngleAxisf;
-  using std::abs;
-  Length const refScale = cachedScale_;
-  auto geom = GL::Geometry{};
-  auto constexpr d90 = static_cast<float>(M_PI / 2.0);
-
-  float intercept = 1.f;
-
-  if (abs(plane.intercept / refScale) < 1e-6) {
-    geom.scale = refScale;
-    intercept = 0.f;
-  } else {
-    geom.scale = plane.intercept;
-  }
-
-  geom.movable = plane.movable;
-  geom.color = plane.color;
-
-  switch (plane.axis) {
-    case Axis::X:
-      geom.position = intercept * Position::UnitX();
-      geom.moveMask = MoveMask::X;
-      geom.orientation = AngleAxisf(d90, -Position::UnitY());
-      break;
-    case Axis::Y:
-      geom.position = intercept * Position::UnitY();
-      geom.moveMask = MoveMask::Y;
-      geom.orientation = AngleAxisf(d90, -Position::UnitX());
-      break;
-    case Axis::Z:
-      geom.position = intercept * Position::UnitZ();
-      geom.moveMask = MoveMask::Z;
-      geom.orientation = Orientation::Identity();
-      break;
-  }
-
-  auto init = [geom, this]() {
-    return [geom, this](std::uint32_t index, bool selected) {
-      Length const rScale = cachedScale_;
-      auto const viewMat = camera().client().viewMatrix(rScale);
-      auto const scale = static_cast<float>(geom.scale / rScale);
-      auto const volSize =
-          (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
-                  static_cast<float>(currentVolume_.voxelSize[1] / rScale),
-                  static_cast<float>(currentVolume_.voxelSize[2] / rScale))
-               .cwiseProduct(currentVolume_.size.cast<float>()) /
-           2.f)
-              .eval();
-
-      auto const modelMat = (Eigen::Translation3f(geom.position * scale) *
-                             geom.orientation * volSize.asDiagonal())
-                                .matrix();
-
-      auto const modelViewMat = (viewMat * modelMat).eval();
-      auto const inverseModelViewMatrix =
-          modelViewMat.block<3, 3>(0, 0).inverse().eval();
-
-      // bind volume texture
-      glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
-
-      shaders_["plane"].use();
-      shaders_["plane"]["index"] = index;
-      shaders_["plane"]["volume"] = 0;
-      shaders_["plane"]["modelMatrix"] = modelMat;
-      shaders_["plane"]["shininess"] = 10.f;
-      shaders_["plane"]["color"] =
-          selected ? (geom.color * 1.5f).eval() : geom.color;
-      shaders_["plane"]["modelViewProjectionMatrix"] =
-          (camera().client().projectionMatrix() * modelViewMat).eval();
-      shaders_["plane"]["inverseModelViewMatrix"] = inverseModelViewMatrix;
-      shaders_["plane"]["textureTransformMatrix"] =
-          textureTransformationMatrix();
-
-      auto boundVao = GL::binding(singleVertexData_.vao);
-      glDrawArrays(GL_POINTS, 0, 1);
-      assertGL("glDrawArrays failed");
-    };
-  };
-
-  std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
-  geometryInitQueue_.emplace(name, init);
 }
 
 template <class VertBase, class IdxBase>
@@ -518,6 +439,11 @@ template void
 VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
                           Eigen::MatrixBase<Eigen::MatrixXi> const &);
 
+void VisualizerImpl::bindVolume(GLint unit) const noexcept {
+  glActiveTexture(GL_TEXTURE0 + unit);
+  glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
+}
+
 void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
 
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
@@ -563,14 +489,15 @@ void VisualizerImpl::renderOneFrame() {
     {
       std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
       if (!geometryInitQueue_.empty()) {
-        entry = geometryInitQueue_.front();
+        entry = std::move(geometryInitQueue_.front);
         geometryInitQueue_.pop();
       }
     } // release lock
     // Init and add geometry if queue was not empty
     if (entry.second) {
       std::cout << "Init geometry '" << entry.first << "'" << std::endl;
-      geometries_.emplace(entry.first, entry.second());
+      entry.second->init();
+      geometries_.emplace(entry.first, std::move(entry.second));
     }
   }
 
@@ -614,7 +541,7 @@ void VisualizerImpl::renderOneFrame() {
 }
 
 void VisualizerImpl::renderMeshes() {
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
   auto const vMatrix = camera().client().viewMatrix(scale);
   auto const MVP = camera().client().viewProjectionMatrix(scale);
   auto const inverseModelViewMatrix =
@@ -682,7 +609,7 @@ void VisualizerImpl::renderGeometry() {
   // call render commands
   std::uint32_t idx = 0;
   for (auto const &geom : geometries_)
-    geom.second(++idx, geom.first == selectedGeometry);
+    geom.second->render(++idx, geom.first == selectedGeometry);
 
   // switch back to single render target
   glDrawBuffers(1, attachments.data());
@@ -690,7 +617,7 @@ void VisualizerImpl::renderGeometry() {
 
 void VisualizerImpl::renderGrid() {
 
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
   shaders_["grid"].use();
@@ -709,7 +636,7 @@ void VisualizerImpl::renderGrid() {
 void VisualizerImpl::renderPoint(Position const &position, Color const &color,
                                  float size) {
 
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
   auto fboBinding =
       binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
 
@@ -784,7 +711,7 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
                                        Orientation const &orientation,
                                        Size3f const &size, Color const &color) {
 
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
   auto const modelMat =
@@ -808,7 +735,7 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
 
 void VisualizerImpl::renderVolumeBBox() {
   auto const vol = currentVolume_;
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
 
   auto const voxelSize = Size3f(static_cast<float>(vol.voxelSize[0] / scale),
                                 static_cast<float>(vol.voxelSize[1] / scale),
@@ -880,7 +807,7 @@ VisualizerImpl::getGeometryUnderCursor() {
 
   // Compute 3D position using window coordinates and depth
   auto const posInWorld =
-      camera().client().unproject(mousePos, depthInCamera, cachedScale_);
+      camera().client().unproject(mousePos, depthInCamera, cachedScale);
 
   return GeometryNameAndPosition(name, posInWorld);
 }
@@ -983,7 +910,7 @@ void VisualizerImpl::renderAmbientLighting() {
 void VisualizerImpl::renderDiffuseLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
   auto const viewMat = camera().client().viewMatrix(scale);
 
   shaders_["diffuseLightingPass"].use();
@@ -1021,7 +948,7 @@ void VisualizerImpl::renderDiffuseLighting() {
 void VisualizerImpl::renderSpecularLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
-  Length const scale = cachedScale_;
+  Length const scale = cachedScale;
   auto const viewMat = camera().client().viewMatrix(scale);
 
   shaders_["specularLightingPass"].use();

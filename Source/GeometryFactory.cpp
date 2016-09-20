@@ -1,11 +1,11 @@
 #include "GeometryFactory.h"
 
-#include "Visualizer.h"
+#include "VisualizerImpl.h"
 
 namespace VolViz {
 namespace Private_ {
 
-GeometryFactory::GeometryFactory(Visualizer &visualizer)
+GeometryFactory::GeometryFactory(VisualizerImpl &visualizer)
     : visualizer_(visualizer) {}
 
 GeometryFactory::GeometryPtr

@@ -19,14 +19,14 @@ public:
 
   void init();
 
-  void render();
+  void render(std::uint32_t index, bool selected);
 
 protected:
   Geometry() = default;
 
   virtual void doInit();
 
-  virtual void doRender() = 0;
+  virtual void doRender(std::uint32_t index, bool selected) = 0;
 };
 
 } // namespace VolViz

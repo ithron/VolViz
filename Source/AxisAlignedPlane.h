@@ -3,22 +3,21 @@
 #include "Geometry.h"
 
 namespace VolViz {
-
-class Visualizer;
-
 namespace Private_ {
+
+class VisualizerImpl;
 
 class AxisAlignedPlane : public Geometry {
 protected:
   virtual void doInit() override;
 
-  virtual void doRender() override;
+  virtual void doRender(std::uint32_t index, bool selected) override;
 
 private:
   friend class GeometryFactory;
 
   AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
-                   Visualizer &visualizer);
+                   VisualizerImpl &visualizer);
 
   Visualizer &visualizer_;
 };

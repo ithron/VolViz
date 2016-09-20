@@ -5,13 +5,13 @@
 namespace VolViz {
 namespace Private_ {
 
-class Visualizer;
+class VisualizerImpl;
 
 class GeometryFactory {
 public:
   using GeometryPtr = Geometry::UniquePtr;
 
-  GeometryFactory(Visualizer &visualizer);
+  GeometryFactory(VisualizerImpl &visualizer);
 
   GeometryPtr create(AxisAlignedPlaneDescriptor const &descriptor);
 
