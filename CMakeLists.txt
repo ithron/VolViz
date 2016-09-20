@@ -16,7 +16,11 @@ endif()
 
 # import dependencies
 include_directories(SYSTEM ${DEPENDENCIES_DIR}/GLHeaders)
+
+set(PATH_TO_GL_LIBS "/usr/lib" CACHE PATH "Path to OpenGL libraries")
+set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${PATH_TO_GL_LIBS})
 find_package(OpenGL REQUIRED 4.5)
+message(STATUS "Found OpenGL libraries: ${OPENGL_LIBRARIES}")
 include(ImportEigen)
 include(ImportGSL)
 include(ImportGLFW)
