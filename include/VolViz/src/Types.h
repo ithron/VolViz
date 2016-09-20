@@ -10,6 +10,8 @@
 
 namespace VolViz {
 
+using Vector3f = Eigen::Vector3f;
+
 using Matrix3 = Eigen::Matrix3f;
 using Matrix4 = Eigen::Matrix4f;
 
