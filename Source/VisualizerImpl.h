@@ -3,6 +3,7 @@
 
 #include "AtomicCache.h"
 #include "GL/GL.h"
+#include "GeometryFactory.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
@@ -20,7 +21,8 @@ namespace Private_ {
 class VisualizerImpl {
   using RenderCommand = std::function<void(std::uint32_t, bool)>;
   using InitCommand = std::function<RenderCommand()>;
-  using InitQueueEntry = std::pair<Visualizer::GeometryName, InitCommand>;
+  using InitQueueEntry =
+      std::pair<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryList =
       std::unordered_map<Visualizer::GeometryName, RenderCommand>;
   using GeometryInitQueue = std::queue<InitQueueEntry>;
@@ -45,8 +47,13 @@ public:
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
 
-  void addGeometry(Visualizer::GeometryName name,
-                   AxisAlignedPlane const &plane);
+  template <class Descriptor,
+            typename = std::enable_if_t<std::is_base_of<
+                GeometryDescriptor, std::decay_t<Descriptor>::value>>>
+  inline void addGeometry(Visualizer::GeometryName name,
+                          Descriptor const &descriptor) {
+    initQueue_.emplace_back(name, geomFactory_.create(descriptor_));
+  }
 
 private:
   friend class ::VolViz::Visualizer;
@@ -145,6 +152,7 @@ private:
   /// @{
 
   Visualizer *visualizer_ = nullptr;
+  GeometryFactory geomFactory_;
 
   /// Visualizer's scale is cached here, since it is accessed at least once per
   /// frame and is usually cahnged very rare. Since every access to Visualizer's

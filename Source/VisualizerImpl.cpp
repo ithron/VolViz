@@ -22,7 +22,8 @@ namespace VolViz {
 namespace Private_ {
 
 #pragma mark Constructor
-VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
+VisualizerImpl::VisualizerImpl(Visualizer *vis)
+    : visualizer_(vis), geomFactory_(*this) {
 
   glfw_.makeCurrent();
 
@@ -60,8 +61,9 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
   }
   glDepthFunc(GL_GREATER);
 
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
@@ -126,8 +128,9 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
         Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
         if (angle > 1e-3) {
           Orientation o = camera().orientation;
-          o *= Eigen::Quaternionf(Eigen::AngleAxisf(static_cast<float>(angle),
-                                                    axis)).inverse();
+          o *= Eigen::Quaternionf(
+                   Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                   .inverse();
           camera().orientation = o.normalized();
         }
         break;
@@ -149,9 +152,9 @@ void VisualizerImpl::setupShaders() {
   quadProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::simpleTextureFragShaderSrc))
           .link());
@@ -159,9 +162,9 @@ void VisualizerImpl::setupShaders() {
   hdrQuadProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::hdrTextureFragShaderSrc))
           .link());
@@ -180,9 +183,9 @@ void VisualizerImpl::setupShaders() {
   depthQuadProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(
               GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
           .link());
@@ -201,9 +204,9 @@ void VisualizerImpl::setupShaders() {
   ambientPassProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
+              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::ambientPassFragShaderSrc))
           .link());
@@ -235,14 +238,14 @@ void VisualizerImpl::setupShaders() {
           .attachShader(GL::Shader(GL_VERTEX_SHADER,
                                    GL::Shaders::deferredVertexShaderSrc))
           .attachShader(
-               GL::Shader(GL_FRAGMENT_SHADER,
-                          GL::Shaders::deferredPassthroughFragShaderSrc))
+              GL::Shader(GL_FRAGMENT_SHADER,
+                         GL::Shaders::deferredPassthroughFragShaderSrc))
           .link());
 
   gridProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::gridGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -263,7 +266,7 @@ void VisualizerImpl::setupShaders() {
   bboxProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
           .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
                                    GL::Shaders::bboxGeometryShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
@@ -284,7 +287,7 @@ void VisualizerImpl::setupShaders() {
   pointProgram_ = std::move(
       GL::ShaderProgram()
           .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::pointVertShaderSrc))
+              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::pointVertShaderSrc))
           .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
                                    GL::Shaders::passThroughFragShaderSrc))
           .link());
@@ -406,10 +409,12 @@ Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
       (Size3f(static_cast<float>(refScale / currentVolume_.voxelSize[0]),
               static_cast<float>(refScale / currentVolume_.voxelSize[1]),
               static_cast<float>(refScale / currentVolume_.voxelSize[2]))
-           .cwiseQuotient(currentVolume_.size.cast<float>())).eval();
+           .cwiseQuotient(currentVolume_.size.cast<float>()))
+          .eval();
 
-  Eigen::Matrix4f const t = (Eigen::Translation3f(Position::Ones() / 2) *
-                             invScale.asDiagonal()).matrix();
+  Eigen::Matrix4f const t =
+      (Eigen::Translation3f(Position::Ones() / 2) * invScale.asDiagonal())
+          .matrix();
 
   return t;
 }
@@ -510,7 +515,9 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
   if (abs(plane.intercept / refScale) < 1e-6) {
     geom.scale = refScale;
     intercept = 0.f;
-  } else { geom.scale = plane.intercept; }
+  } else {
+    geom.scale = plane.intercept;
+  }
 
   geom.movable = plane.movable;
   geom.color = plane.color;
@@ -543,10 +550,12 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
                   static_cast<float>(currentVolume_.voxelSize[1] / rScale),
                   static_cast<float>(currentVolume_.voxelSize[2] / rScale))
                .cwiseProduct(currentVolume_.size.cast<float>()) /
-           2.f).eval();
+           2.f)
+              .eval();
 
       auto const modelMat = (Eigen::Translation3f(geom.position * scale) *
-                             geom.orientation * volSize.asDiagonal()).matrix();
+                             geom.orientation * volSize.asDiagonal())
+                                .matrix();
 
       auto const modelViewMat = (viewMat * modelMat).eval();
       auto const inverseModelViewMatrix =
@@ -740,7 +749,9 @@ void VisualizerImpl::renderOneFrame() {
   if (inSelectionMode && moveState_ != MoveState::Dragging) {
     auto const geomNameAndPos = getGeometryUnderCursor();
     selectedGeometry = geomNameAndPos.first;
-  } else if (moveState_ != MoveState::Dragging) { selectedGeometry.clear(); }
+  } else if (moveState_ != MoveState::Dragging) {
+    selectedGeometry.clear();
+  }
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
@@ -920,8 +931,9 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
   Length const scale = cachedScale_;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
-  auto const modelMat = (Eigen::Translation3f(position) * orientation *
-                         size.asDiagonal()).matrix();
+  auto const modelMat =
+      (Eigen::Translation3f(position) * orientation * size.asDiagonal())
+          .matrix();
   auto const mvpMatrix =
       (camera().client().viewProjectionMatrix(scale) * modelMat).eval();
 
@@ -986,10 +998,9 @@ VisualizerImpl::getGeometryUnderCursor() {
   Expects(mappedMemory != nullptr);
 
   auto const index = *reinterpret_cast<std::uint32_t const *>(mappedMemory);
-  auto const normalizedDepth =
-      *reinterpret_cast<float const *>(
-          reinterpret_cast<std::uint8_t const *>(mappedMemory) +
-          sizeof(std::uint32_t));
+  auto const normalizedDepth = *reinterpret_cast<float const *>(
+      reinterpret_cast<std::uint8_t const *>(mappedMemory) +
+      sizeof(std::uint32_t));
   glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
   selectionBuffer_.swap();
 
