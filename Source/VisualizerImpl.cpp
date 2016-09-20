@@ -40,7 +40,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
   // for (auto e : glfw_.supportedExtensions())
   //   std::cout << "\t" << e << std::endl;
 
-  setupShaders();
+  shaders_.init();
   setupFBOs();
   setupSelectionBuffers();
 
@@ -147,151 +147,6 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
 }
 
 #pragma mark Setup Code
-
-void VisualizerImpl::setupShaders() {
-  quadProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::simpleTextureFragShaderSrc))
-          .link());
-
-  hdrQuadProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::hdrTextureFragShaderSrc))
-          .link());
-
-  normalQuadProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::normalVisualizationFragShaderSrc))
-                    .link());
-
-  depthQuadProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(
-              GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
-          .link());
-
-  specularQuadProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::specularVisualizationFragShaderSrc))
-                    .link());
-
-  ambientPassProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-              GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::ambientPassFragShaderSrc))
-          .link());
-
-  diffuseLightingPassProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::diffuseLightingPassFragShaderSrc))
-                    .link());
-
-  specularLightingPassProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::specularLightingPassFragShaderSrc))
-                    .link());
-
-  geometryStageProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                   GL::Shaders::deferredVertexShaderSrc))
-          .attachShader(
-              GL::Shader(GL_FRAGMENT_SHADER,
-                         GL::Shaders::deferredPassthroughFragShaderSrc))
-          .link());
-
-  gridProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                   GL::Shaders::gridGeometryShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::passThroughFragShaderSrc))
-          .link());
-
-  planeProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::planeGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::deferredPassthroughFragShaderSrc))
-                    .link());
-
-  bboxProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                   GL::Shaders::bboxGeometryShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::passThroughFragShaderSrc))
-          .link());
-
-  selectionIndexVisualizationProgam_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::selectionIndexVisualizationFragShaderSrc))
-                    .link());
-
-  pointProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-              GL::Shader(GL_VERTEX_SHADER, GL::Shaders::pointVertShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::passThroughFragShaderSrc))
-          .link());
-}
 
 void VisualizerImpl::setupFBOs() {
 
@@ -565,17 +420,18 @@ void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
       glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 
-      planeProgram_.use();
-      planeProgram_["index"] = index;
-      planeProgram_["volume"] = 0;
-      planeProgram_["modelMatrix"] = modelMat;
-      planeProgram_["shininess"] = 10.f;
-      planeProgram_["color"] =
+      shaders_["plane"].use();
+      shaders_["plane"]["index"] = index;
+      shaders_["plane"]["volume"] = 0;
+      shaders_["plane"]["modelMatrix"] = modelMat;
+      shaders_["plane"]["shininess"] = 10.f;
+      shaders_["plane"]["color"] =
           selected ? (geom.color * 1.5f).eval() : geom.color;
-      planeProgram_["modelViewProjectionMatrix"] =
+      shaders_["plane"]["modelViewProjectionMatrix"] =
           (camera().client().projectionMatrix() * modelViewMat).eval();
-      planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
-      planeProgram_["textureTransformMatrix"] = textureTransformationMatrix();
+      shaders_["plane"]["inverseModelViewMatrix"] = inverseModelViewMatrix;
+      shaders_["plane"]["textureTransformMatrix"] =
+          textureTransformationMatrix();
 
       auto boundVao = GL::binding(singleVertexData_.vao);
       glDrawArrays(GL_POINTS, 0, 1);
@@ -781,18 +637,18 @@ void VisualizerImpl::renderMeshes() {
   glColorMask(true, true, true, true);
 
   // Render geometry to FBO
-  geometryStageProgram_.use();
+  shaders_["geometryStage"].use();
   assertGL("OpenGL Error stack not clean");
 
   // bind volume texture
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 
-  geometryStageProgram_["volume"] = 0;
-  geometryStageProgram_["shininess"] = mesh_.shininess;
-  geometryStageProgram_["modelViewProjectionMatrix"] = MVP;
-  geometryStageProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
-  geometryStageProgram_["textureTransformMatrix"] =
+  shaders_["geometryStage"]["volume"] = 0;
+  shaders_["geometryStage"]["shininess"] = mesh_.shininess;
+  shaders_["geometryStage"]["modelViewProjectionMatrix"] = MVP;
+  shaders_["geometryStage"]["inverseModelViewMatrix"] = inverseModelViewMatrix;
+  shaders_["geometryStage"]["textureTransformMatrix"] =
       textureTransformationMatrix();
   if (mesh_.vao.name != 0) {
     auto boundVao = GL::binding(mesh_.vao);
@@ -837,9 +693,9 @@ void VisualizerImpl::renderGrid() {
   Length const scale = cachedScale_;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
-  gridProgram_.use();
-  gridProgram_["scale"] = 1.f;
-  gridProgram_["viewProjectionMatrix"] =
+  shaders_["grid"].use();
+  shaders_["grid"]["scale"] = 1.f;
+  shaders_["grid"]["viewProjectionMatrix"] =
       camera().client().viewProjectionMatrix(scale);
 
   auto boundVao = binding(singleVertexData_.vao);
@@ -860,10 +716,10 @@ void VisualizerImpl::renderPoint(Position const &position, Color const &color,
   auto const viewProjMat = camera().client().viewProjectionMatrix(scale);
   PositionH projPos = viewProjMat * position.homogeneous();
 
-  pointProgram_.use();
-  pointProgram_["size"] = size;
-  pointProgram_["position"] = projPos;
-  pointProgram_["pointColor"] = color;
+  shaders_["point"].use();
+  shaders_["point"]["size"] = size;
+  shaders_["point"]["position"] = projPos;
+  shaders_["point"]["pointColor"] = color;
 
   auto boundVao = binding(singleVertexData_.vao);
   glDisable(GL_DEPTH_TEST);
@@ -885,14 +741,14 @@ void VisualizerImpl::renderLightingTextures() {
   glDisable(GL_DEPTH_TEST);
 
   renderQuad(Point2::Zero(), halfWindowSize, TextureID::NormalsAndSpecular,
-             normalQuadProgram_);
+             shaders_["normalQuad"]);
   renderQuad(Point2::Zero() + Point2(halfWindowSize(0), 0), halfWindowSize,
-             TextureID::Depth, depthQuadProgram_);
+             TextureID::Depth, shaders_["depthQuad"]);
   // glEnable(GL_FRAMEBUFFER_SRGB);
   renderQuad(Point2::Zero() + Point2(0, halfWindowSize(1)), halfWindowSize,
-             TextureID::Albedo, quadProgram_);
+             TextureID::Albedo, shaders_["quad"]);
   renderQuad(Point2::Zero() + halfWindowSize, halfWindowSize,
-             TextureID::NormalsAndSpecular, specularQuadProgram_);
+             TextureID::NormalsAndSpecular, shaders_["specularQuad"]);
 }
 
 void VisualizerImpl::renderSelectionIndexTexture() {
@@ -914,7 +770,7 @@ void VisualizerImpl::renderFinalPass() {
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
   glEnable(GL_FRAMEBUFFER_SRGB);
-  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  renderFullscreenQuad(TextureID::RenderedImage, shaders_["hdrQuad"]);
   // renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
   // auto readBinding =
   //     GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
@@ -937,9 +793,9 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
   auto const mvpMatrix =
       (camera().client().viewProjectionMatrix(scale) * modelMat).eval();
 
-  bboxProgram_.use();
-  bboxProgram_["lineColor"] = color;
-  bboxProgram_["modelViewProjectionMatrix"] = mvpMatrix;
+  shaders_["bbox"].use();
+  shaders_["bbox"]["lineColor"] = color;
+  shaders_["bbox"]["modelViewProjectionMatrix"] = mvpMatrix;
 
   // draw quad using the geometry shader
   auto boundVao = GL::binding(singleVertexData_.vao);
@@ -1118,10 +974,10 @@ void VisualizerImpl::renderAmbientLighting() {
   }
 
   // Ambient pass
-  ambientPassProgram_.use();
-  ambientPassProgram_["lightColor"] = ambientColor;
+  shaders_["ambientPass"].use();
+  shaders_["ambientPass"]["lightColor"] = ambientColor;
 
-  renderFullscreenQuad(TextureID::Albedo, ambientPassProgram_);
+  renderFullscreenQuad(TextureID::Albedo, shaders_["ambientPass"]);
 }
 
 void VisualizerImpl::renderDiffuseLighting() {
@@ -1130,11 +986,12 @@ void VisualizerImpl::renderDiffuseLighting() {
   Length const scale = cachedScale_;
   auto const viewMat = camera().client().viewMatrix(scale);
 
-  diffuseLightingPassProgram_.use();
-  diffuseLightingPassProgram_["normalAndSpecularTex"] = 0;
-  diffuseLightingPassProgram_["albedoTex"] = 1;
-  diffuseLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
-  diffuseLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
+  shaders_["diffuseLightingPass"].use();
+  shaders_["diffuseLightingPass"]["normalAndSpecularTex"] = 0;
+  shaders_["diffuseLightingPass"]["albedoTex"] = 1;
+  shaders_["diffuseLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
+  shaders_["diffuseLightingPass"]["size"] =
+      (2 * Eigen::Vector2f::Ones()).eval();
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -1151,9 +1008,9 @@ void VisualizerImpl::renderDiffuseLighting() {
 
     PositionH const lightPosition = (viewMat * light.position);
 
-    diffuseLightingPassProgram_["lightPosition"] =
+    shaders_["diffuseLightingPass"]["lightPosition"] =
         lightPosition.head<3>().eval();
-    diffuseLightingPassProgram_["lightColor"] = light.color;
+    shaders_["diffuseLightingPass"]["lightColor"] = light.color;
 
     // draw quad using the geometry shader
     glDrawArrays(GL_POINTS, 0, 1);
@@ -1167,11 +1024,12 @@ void VisualizerImpl::renderSpecularLighting() {
   Length const scale = cachedScale_;
   auto const viewMat = camera().client().viewMatrix(scale);
 
-  specularLightingPassProgram_.use();
-  specularLightingPassProgram_["normalAndSpecularTex"] = 0;
-  specularLightingPassProgram_["albedoTex"] = 1;
-  specularLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
-  specularLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
+  shaders_["specularLightingPass"].use();
+  shaders_["specularLightingPass"]["normalAndSpecularTex"] = 0;
+  shaders_["specularLightingPass"]["albedoTex"] = 1;
+  shaders_["specularLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
+  shaders_["specularLightingPass"]["size"] =
+      (2 * Eigen::Vector2f::Ones()).eval();
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -1188,9 +1046,9 @@ void VisualizerImpl::renderSpecularLighting() {
 
     PositionH const lightPosition = (viewMat * light.position);
 
-    specularLightingPassProgram_["lightPosition"] =
+    shaders_["specularLightingPass"]["lightPosition"] =
         lightPosition.head<3>().eval();
-    specularLightingPassProgram_["lightColor"] = light.color;
+    shaders_["specularLightingPass"]["lightColor"] = light.color;
 
     // draw quad using the geometry shader
     glDrawArrays(GL_POINTS, 0, 1);

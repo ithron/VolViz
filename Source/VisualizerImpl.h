@@ -73,9 +73,6 @@ private:
     SelectionTexture = 6
   };
 
-  /// Compiles and links all shader programs
-  void setupShaders();
-
   /// Setup the required textures and frabebuffer objects for rendering
   void setupFBOs();
 
@@ -166,23 +163,8 @@ private:
 
   GL::GLFW glfw_;
 
-  /// @defgroup shaders Shader Programs
-  /// @{
-  GL::ShaderProgram ambientPassProgram_;
-  GL::ShaderProgram bboxProgram_;
-  GL::ShaderProgram depthQuadProgram_;
-  GL::ShaderProgram diffuseLightingPassProgram_;
-  GL::ShaderProgram geometryStageProgram_;
-  GL::ShaderProgram gridProgram_;
-  GL::ShaderProgram hdrQuadProgram_;
-  GL::ShaderProgram normalQuadProgram_;
-  GL::ShaderProgram planeProgram_;
-  GL::ShaderProgram pointProgram_;
-  GL::ShaderProgram quadProgram_;
-  GL::ShaderProgram selectionIndexVisualizationProgam_;
-  GL::ShaderProgram specularLightingPassProgram_;
-  GL::ShaderProgram specularQuadProgram_;
-  /// @}
+  /// Shader programs
+  Shaders shaders_;
 
   /// Auxiliary textures use in the deferred shading process.
   struct TextureWrapper {
