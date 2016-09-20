@@ -13,6 +13,22 @@ enum MoveMask : uint8_t {
   All = 0x07
 };
 
+inline Vector3f maskToUnitVector(MoveMask mask) noexcept {
+  Vector3f v = Vector3f::Zero();
+  auto maskRep = static_cast<uint8_t>(mask);
+
+  Expects(maskRep <= 0x07);
+
+  int idx{0};
+  while (maskRep != 0) {
+    if (maskRep & 0x01) v(idx) = 1.f;
+    maskRep >>= 1;
+    ++idx;
+  }
+
+  return v;
+}
+
 struct GeometryDescriptor {
   bool movable{true};
   Color color{Colors::White()};
