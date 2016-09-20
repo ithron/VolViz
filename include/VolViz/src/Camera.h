@@ -47,9 +47,7 @@ public:
   /// Returns the depth range of the camera projection, i.e. the depth value of
   /// the nearest possible value (near plane) and the value of the farest
   /// possible depth value (far plane),
-  inline DepthRange depthRange() const noexcept {
-    return {1.f, 0.f};
-  }
+  inline DepthRange depthRange() const noexcept { return {1.f, 0.f}; }
 
 private:
   friend class Private_::CameraClient;
@@ -97,10 +95,15 @@ private:
 
 namespace Private_ {
 class VisualizerImpl;
+class AxisAlignedPlane;
 
 class CameraClient {
   friend class VisualizerImpl;
   friend class ::VolViz::Camera;
+
+  // All geometry subclasses should also have access. This smells like a dirty
+  // workaround. TODO: find a better solution
+  friend class AxisAlignedPlane;
 
   CameraClient(Camera const &cam) : cam_(cam) {}
 

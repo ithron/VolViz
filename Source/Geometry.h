@@ -5,15 +5,17 @@
 namespace VolViz {
 namespace Private_ {
 
+class VisualizerImpl;
+
 class Geometry {
 public:
   using UniquePtr = std::unique_ptr<Geometry>;
 
   Position position{Position::Zero()};
   Orientation orientation{Orientation::Identity()};
-  Length scale{1_mm};
+  Length scale{1 * milli * meter};
   MoveMask moveMask{MoveMask::All};
-  Color color{Color::White()};
+  Color color{Colors::White()};
 
   virtual ~Geometry() = default;
 
@@ -22,11 +24,13 @@ public:
   void render(std::uint32_t index, bool selected);
 
 protected:
-  Geometry() = default;
+  Geometry(VisualizerImpl &visualizer);
 
   virtual void doInit();
 
   virtual void doRender(std::uint32_t index, bool selected) = 0;
+
+  VisualizerImpl &visualizer_;
 };
 
 } // namespace VolViz

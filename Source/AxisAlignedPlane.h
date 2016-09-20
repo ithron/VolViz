@@ -8,18 +8,14 @@ namespace Private_ {
 class VisualizerImpl;
 
 class AxisAlignedPlane : public Geometry {
+public:
+  AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
+                   VisualizerImpl &visualizer);
+
 protected:
   virtual void doInit() override;
 
   virtual void doRender(std::uint32_t index, bool selected) override;
-
-private:
-  friend class GeometryFactory;
-
-  AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
-                   VisualizerImpl &visualizer);
-
-  Visualizer &visualizer_;
 };
 
 } // namespace Private_

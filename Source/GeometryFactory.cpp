@@ -1,5 +1,6 @@
 #include "GeometryFactory.h"
 
+#include "AxisAlignedPlane.h"
 #include "VisualizerImpl.h"
 
 namespace VolViz {

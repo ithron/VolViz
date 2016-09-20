@@ -1,7 +1,10 @@
 #include "Geometry.h"
+#include "VisualizerImpl.h"
 
 namespace VolViz {
 namespace Private_ {
+
+Geometry::Geometry(VisualizerImpl &visualizer) : visualizer_(visualizer) {}
 
 void Geometry::init() { doInit(); }
 

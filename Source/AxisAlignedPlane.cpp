@@ -1,14 +1,20 @@
 #include "AxisAlignedPlane.h"
+#include "Types.h"
 #include "VisualizerImpl.h"
+
+#include <Eigen/Geometry>
 
 namespace VolViz {
 namespace Private_ {
 
 AxisAlignedPlane::AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
                                    VisualizerImpl &visualizer)
-    : visualizer_(visualizer) {
+    : Geometry(visualizer) {
+  using std::abs;
+  using namespace Eigen;
 
-  Length const refScale = visualizer_.scale;
+  auto constexpr d90 = static_cast<float>(M_PI / 2);
+  Length const refScale = visualizer_.cachedScale;
   float intercept = 1.f;
 
   if (abs(descriptor.intercept / refScale) < 1e-6) {
@@ -42,16 +48,16 @@ AxisAlignedPlane::AxisAlignedPlane(AxisAlignedPlaneDescriptor const &descriptor,
 
 void AxisAlignedPlane::doInit() {}
 
-void AxisAlignedPlane::doRender(std::uint32_t index, bool /*selected*/) {
-  auto const &camera = visualizer_.camera();
+void AxisAlignedPlane::doRender(std::uint32_t index, bool selected) {
+  auto const &cameraClient = visualizer_.cameraClient();
   Length const rScale = visualizer_.cachedScale;
 
-  auto const viewMat = camera.client().viewMatrix(rScale);
-  auto const scale = static_cast<float>(scale / rScale);
+  auto const viewMat = cameraClient.viewMatrix(rScale);
+  auto const destScale = static_cast<float>(scale / rScale);
   auto const volSize = visualizer_.volumeSize();
 
-  auto const modelMat = (Eigen::Translation3f(position * scale) * orientation *
-                         volSize.asDiagonal())
+  auto const modelMat = (Eigen::Translation3f(position * destScale) *
+                         orientation * volSize.asDiagonal())
                             .matrix();
 
   auto const modelViewMat = (viewMat * modelMat).eval();
@@ -67,13 +73,12 @@ void AxisAlignedPlane::doRender(std::uint32_t index, bool /*selected*/) {
   shaders["plane"]["shininess"] = 10.f;
   shaders["plane"]["color"] = selected ? (color * 1.5f).eval() : color;
   shaders["plane"]["modelViewProjectionMatrix"] =
-      (camera().client().projectionMatrix() * modelViewMat).eval();
+      (cameraClient.projectionMatrix() * modelViewMat).eval();
   shaders["plane"]["inverseModelViewMatrix"] = inverseModelViewMatrix;
-  shaders["plane"]["textureTransformMatrix"] = textureTransformationMatrix();
+  shaders["plane"]["textureTransformMatrix"] =
+      visualizer_.textureTransformationMatrix();
 
-  auto boundVao = GL::binding(singleVertexData_.vao);
-  glDrawArrays(GL_POINTS, 0, 1);
-  assertGL("glDrawArrays failed");
+  visualizer_.drawSingleVertex();
 }
 
 } // namespace Private_

@@ -1,5 +1,10 @@
 #pragma once
 
+#include "GL/ShaderProgram.h"
+#include "Types.h"
+
+#include <unordered_map>
+
 namespace VolViz {
 namespace Private_ {
 

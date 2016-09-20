@@ -4,6 +4,7 @@
 #include "AtomicCache.h"
 #include "GL/GL.h"
 #include "GeometryFactory.h"
+#include "Shaders.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
@@ -19,8 +20,6 @@ namespace VolViz {
 namespace Private_ {
 
 class VisualizerImpl {
-  using RenderCommand = std::function<void(std::uint32_t, bool)>;
-  using InitCommand = std::function<RenderCommand()>;
   using InitQueueEntry =
       std::pair<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryList =
@@ -51,20 +50,31 @@ public:
 
   template <class Descriptor,
             typename = std::enable_if_t<std::is_base_of<
-                GeometryDescriptor, std::decay_t<Descriptor>::value>>>
+                GeometryDescriptor, std::decay_t<Descriptor>>::value>>
   inline void addGeometry(Visualizer::GeometryName name,
                           Descriptor const &descriptor) {
-    initQueue_.emplace_back(name, geomFactory_.create(descriptor_));
+    std::lock_guard<std::mutex> const lock{geomInitQueueMutex_};
+    geometryInitQueue_.emplace(name, geomFactory_.create(descriptor));
   }
 
   /// Convenience method for easy camera access
   inline Camera const &camera() const noexcept { return visualizer_->camera; }
   inline Camera &camera() noexcept { return visualizer_->camera; }
 
+  inline auto cameraClient() const noexcept { return camera().client(); }
+
   inline Shaders &shaders() noexcept { return shaders_; }
 
+  /// Issues an OpenGL draw call with a single vertex.
+  /// This comes in handy if all the geometry is created by a geometry shader
+  void drawSingleVertex() const noexcept;
+
   /// Bind the volume texture to texture unit i
-  void bindVolume(GLint unitIdx = 0) const noexcept;
+  void bindVolume(GLuint unitIdx = 0) const noexcept;
+
+  /// Returns a matrix that transforms world coordinates into texture
+  /// coordinates
+  Eigen::Matrix4f textureTransformationMatrix() const noexcept;
 
   /// Visualizer's scale is cached here, since it is accessed at least once per
   /// frame and is usually cahnged very rare. Since every access to Visualizer's
@@ -95,10 +105,6 @@ private:
 
   /// Setup selection buffers
   void setupSelectionBuffers();
-
-  /// Returns a matrix that transforms world coordinates into texture
-  /// coordinates
-  Eigen::Matrix4f textureTransformationMatrix() const noexcept;
 
   /// Unprojects a point in screen coordinates and a given depth to a 3D point
   /// in world space

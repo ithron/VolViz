@@ -332,6 +332,7 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
 }
 
 Size3f VisualizerImpl::volumeSize() const noexcept {
+  Length const rScale = cachedScale;
   return (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
                  static_cast<float>(currentVolume_.voxelSize[1] / rScale),
                  static_cast<float>(currentVolume_.voxelSize[2] / rScale))
@@ -439,7 +440,13 @@ template void
 VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
                           Eigen::MatrixBase<Eigen::MatrixXi> const &);
 
-void VisualizerImpl::bindVolume(GLint unit) const noexcept {
+void VisualizerImpl::drawSingleVertex() const noexcept {
+  auto boundVao = GL::binding(singleVertexData_.vao);
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+}
+
+void VisualizerImpl::bindVolume(GLuint unit) const noexcept {
   glActiveTexture(GL_TEXTURE0 + unit);
   glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 }
@@ -489,7 +496,7 @@ void VisualizerImpl::renderOneFrame() {
     {
       std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
       if (!geometryInitQueue_.empty()) {
-        entry = std::move(geometryInitQueue_.front);
+        entry = std::move(geometryInitQueue_.front());
         geometryInitQueue_.pop();
       }
     } // release lock
@@ -542,8 +549,8 @@ void VisualizerImpl::renderOneFrame() {
 
 void VisualizerImpl::renderMeshes() {
   Length const scale = cachedScale;
-  auto const vMatrix = camera().client().viewMatrix(scale);
-  auto const MVP = camera().client().viewProjectionMatrix(scale);
+  auto const vMatrix = cameraClient().viewMatrix(scale);
+  auto const MVP = cameraClient().viewProjectionMatrix(scale);
   auto const inverseModelViewMatrix =
       vMatrix.block<3, 3>(0, 0).inverse().eval();
   constexpr std::array<GLuint, 3> attachments{
@@ -623,7 +630,7 @@ void VisualizerImpl::renderGrid() {
   shaders_["grid"].use();
   shaders_["grid"]["scale"] = 1.f;
   shaders_["grid"]["viewProjectionMatrix"] =
-      camera().client().viewProjectionMatrix(scale);
+      cameraClient().viewProjectionMatrix(scale);
 
   auto boundVao = binding(singleVertexData_.vao);
 
@@ -640,7 +647,7 @@ void VisualizerImpl::renderPoint(Position const &position, Color const &color,
   auto fboBinding =
       binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
 
-  auto const viewProjMat = camera().client().viewProjectionMatrix(scale);
+  auto const viewProjMat = cameraClient().viewProjectionMatrix(scale);
   PositionH projPos = viewProjMat * position.homogeneous();
 
   shaders_["point"].use();
@@ -685,11 +692,11 @@ void VisualizerImpl::renderSelectionIndexTexture() {
   glDisable(GL_FRAMEBUFFER_SRGB);
   glDisable(GL_DEPTH_TEST);
 
-  selectionIndexVisualizationProgam_.use();
-  selectionIndexVisualizationProgam_["nObjects"] =
+  shaders_["selectionIndexVisualization"].use();
+  shaders_["selectionIndexVisualization"]["nObjects"] =
       static_cast<std::uint32_t>(geometries_.size());
   renderFullscreenQuad(TextureID::SelectionTexture,
-                       selectionIndexVisualizationProgam_);
+                       shaders_["selectionIndexVisualization"]);
 }
 
 void VisualizerImpl::renderFinalPass() {
@@ -718,7 +725,7 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
       (Eigen::Translation3f(position) * orientation * size.asDiagonal())
           .matrix();
   auto const mvpMatrix =
-      (camera().client().viewProjectionMatrix(scale) * modelMat).eval();
+      (cameraClient().viewProjectionMatrix(scale) * modelMat).eval();
 
   shaders_["bbox"].use();
   shaders_["bbox"]["lineColor"] = color;
@@ -807,7 +814,7 @@ VisualizerImpl::getGeometryUnderCursor() {
 
   // Compute 3D position using window coordinates and depth
   auto const posInWorld =
-      camera().client().unproject(mousePos, depthInCamera, cachedScale);
+      cameraClient().unproject(mousePos, depthInCamera, cachedScale);
 
   return GeometryNameAndPosition(name, posInWorld);
 }
@@ -820,7 +827,7 @@ void VisualizerImpl::dragSelectedGeometry() {
   Position const mouseDir = mouseDelta.normalized();
   auto const movedDistance = mouseDir.norm();
   Length const scale = visualizer_->scale;
-  Matrix4 const invViewMat = camera().client().viewMatrix(scale).inverse();
+  Matrix4 const invViewMat = cameraClient().viewMatrix(scale).inverse();
 
   PositionH const moveDirectionInWorld =
       invViewMat * PositionH{mouseDir.x(), mouseDir.y(), mouseDir.z(), 0} *
@@ -911,7 +918,7 @@ void VisualizerImpl::renderDiffuseLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
   Length const scale = cachedScale;
-  auto const viewMat = camera().client().viewMatrix(scale);
+  auto const viewMat = cameraClient().viewMatrix(scale);
 
   shaders_["diffuseLightingPass"].use();
   shaders_["diffuseLightingPass"]["normalAndSpecularTex"] = 0;
@@ -949,7 +956,7 @@ void VisualizerImpl::renderSpecularLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
   Length const scale = cachedScale;
-  auto const viewMat = camera().client().viewMatrix(scale);
+  auto const viewMat = cameraClient().viewMatrix(scale);
 
   shaders_["specularLightingPass"].use();
   shaders_["specularLightingPass"]["normalAndSpecularTex"] = 0;

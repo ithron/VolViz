@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
 
   viewer.scale = 1_mm;
 
-  AxisAlignedPlane plane;
+  AxisAlignedPlaneDescriptor plane;
   plane.axis = Axis::X;
   // plane.color = Colors::Green();
   plane.color = Colors::White();

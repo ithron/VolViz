@@ -57,7 +57,7 @@ public:
 
   template <class Descriptor,
             typename = std::enable_if_t<std::is_base_of<
-                GeometryDescriptor, std::decay_t<Descriptor>::value>>>
+                GeometryDescriptor, std::decay_t<Descriptor>>::value>>
   void addGeometry(GeometryName name, Descriptor const &geom);
 
   std::atomic<bool> showGrid{true};
