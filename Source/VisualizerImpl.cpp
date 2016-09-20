@@ -539,6 +539,8 @@ void VisualizerImpl::renderOneFrame() {
   if (inSelectionMode && moveState_ != MoveState::Dragging) {
     auto const geomNameAndPos = getGeometryUnderCursor();
     selectedGeometry = geomNameAndPos.first;
+  } else if (inSelectionMode && moveState_ == MoveState::Dragging) {
+    dragSelectedGeometry();
   } else if (moveState_ != MoveState::Dragging) {
     selectedGeometry.clear();
   }
@@ -822,19 +824,27 @@ VisualizerImpl::getGeometryUnderCursor() {
 void VisualizerImpl::dragSelectedGeometry() {
   if (selectedGeometry.empty()) return;
 
-  Position const mousePos{lastMousePos_.x(), lastMousePos_.y(), 0};
-  Position const mouseDelta{lastMouseDelta_.x(), lastMouseDelta_.y(), 0};
-  Position const mouseDir = mouseDelta.normalized();
-  auto const movedDistance = mouseDir.norm();
+  // Position const mousePos{lastMousePos_.x(), lastMousePos_.y(), 1};
+  PositionH const mouseDelta{lastMouseDelta_.x(), lastMouseDelta_.y(), 0, 0};
+  // Position const mouseDir = mouseDelta.normalized();
+  // auto const movedDistance = mouseDelta.norm();
   Length const scale = visualizer_->scale;
   Matrix4 const invViewMat = cameraClient().viewMatrix(scale).inverse();
 
-  PositionH const moveDirectionInWorld =
-      invViewMat * PositionH{mouseDir.x(), mouseDir.y(), mouseDir.z(), 0} *
-      movedDistance;
+  // PositionH moveDirectionInWorld =
+  //     invViewMat * PositionH{mouseDir.x(), mouseDir.y(), mouseDir.z(), 0} *
+  //     movedDistance;
+  PositionH moveDirectionInWorld = invViewMat * mouseDelta;
 
-  (void)&moveDirectionInWorld;
-  // TODO: get geometry and move it along
+  auto &geometry = *geometries_[selectedGeometry];
+  auto const maskVector = maskToUnitVector(geometry.moveMask);
+  moveDirectionInWorld =
+      moveDirectionInWorld.cwiseProduct(maskVector.homogeneous());
+
+  std::cout << "Drag '" << selectedGeometry << "' in dir "
+            << moveDirectionInWorld.head<3>().transpose() << std::endl;
+
+  geometry.position += moveDirectionInWorld.head<3>();
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,
