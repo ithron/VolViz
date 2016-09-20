@@ -127,7 +127,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>scale
-: <a class="el" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8">VolViz::Private_::GL::Geometry</a>
+: <a class="el" href="classVolViz_1_1Private___1_1Geometry.html#a51e8771aca8310184c40c823799f2ddf">VolViz::Private_::Geometry</a>
+, <a class="el" href="structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8">VolViz::Private_::GL::Geometry</a>
 , <a class="el" href="classVolViz_1_1Visualizer.html#a1a79282f8a9c7ffbb126df399f1ee4ba">VolViz::Visualizer</a>
 </li>
 <li>Scene3D
@@ -141,9 +142,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>selectionBuffer_
 : <a class="el" href="group__privateMembers.html#ga22b815932e4d968cb2152d29776e40f0">VolViz::Private_::VisualizerImpl</a>
-</li>
-<li>selectionIndexVisualizationProgam_
-: <a class="el" href="group__shaders.html#ga59dc985dd1b8afcbc9a31f2e35795bda">VolViz::Private_::VisualizerImpl</a>
 </li>
 <li>SelectionIndices
 : <a class="el" href="group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa64ccb78fd630d5419e1a2e457420e775">VolViz::Private_::VisualizerImpl</a>
@@ -168,9 +166,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setupSelectionBuffers()
 : <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#ac7ce4ee61f48a62d91c651e94518edfd">VolViz::Private_::VisualizerImpl</a>
 </li>
-<li>setupShaders()
-: <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a16fa1b1f048399ad840055b83f9f392c">VolViz::Private_::VisualizerImpl</a>
-</li>
 <li>setVolume()
 : <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a44293d662b6596449d9d23df3bd52c42">VolViz::Private_::VisualizerImpl</a>
 , <a class="el" href="classVolViz_1_1Visualizer.html#ae8667041fd0ca5fa9f08b77eb76586fc">VolViz::Visualizer</a>
@@ -183,7 +178,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>ShaderProgram
 : <a class="el" href="classVolViz_1_1Private___1_1GL_1_1Shader.html#aef20119bde6aff11ffd23f3ea2131b86">VolViz::Private_::GL::Shader</a>
-, <a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a8d54cb8f3307dfe49c5a4b7cb210b655">VolViz::Private_::GL::ShaderProgram</a>
+, <a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a81efbb6cee962df55e47dd58e8131d07">VolViz::Private_::GL::ShaderProgram</a>
+</li>
+<li>ShaderProgramTable
+: <a class="el" href="classVolViz_1_1Private___1_1Shaders.html#a3b489d9c436b30f18168fa5b7e3e0f48">VolViz::Private_::Shaders</a>
+</li>
+<li>shaders()
+: <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a5e9ec72d04e2f5d55a6adb9ffe95a4c5">VolViz::Private_::VisualizerImpl</a>
+</li>
+<li>shaders_
+: <a class="el" href="classVolViz_1_1Private___1_1Shaders.html#a6fb1aa71a254e864d026eb8fadf0a59a">VolViz::Private_::Shaders</a>
+, <a class="el" href="group__privateMembers.html#gaa8554500c8789dd5f3432a4aecaf2758">VolViz::Private_::VisualizerImpl</a>
 </li>
 <li>shininess
 : <a class="el" href="structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#abe164acb93c85acc32878187dc067a90">VolViz::Private_::VisualizerImpl::MeshData</a>
@@ -205,12 +210,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>Size2
 : <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a65c662421ff278c7e358d3468d4be5b0">VolViz::Private_::VisualizerImpl</a>
-</li>
-<li>specularLightingPassProgram_
-: <a class="el" href="group__shaders.html#gab442edcca339c229bd17acb742103cbe">VolViz::Private_::VisualizerImpl</a>
-</li>
-<li>specularQuadProgram_
-: <a class="el" href="group__shaders.html#gaa92a81c3f898e7d68bf81e7e074363ea">VolViz::Private_::VisualizerImpl</a>
 </li>
 <li>start()
 : <a class="el" href="classVolViz_1_1Private___1_1VisualizerImpl.html#a9bff815cf3021c4e91f1e6f28a7b2067">VolViz::Private_::VisualizerImpl</a>
@@ -235,7 +234,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 15 2016 16:47:12 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 20 2016 14:01:35 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

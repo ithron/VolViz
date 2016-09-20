@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['timepoint',['TimePoint',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a41317300ab60d6bc3160b4b5331455e0',1,'VolViz::Private_::VisualizerImpl']]]
+  ['uniformtable',['UniformTable',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f',1,'VolViz::Private_::GL::ShaderProgram']]],
+  ['uniqueptr',['UniquePtr',['../classVolViz_1_1Private___1_1Geometry.html#a93e3ce21daca1d4b45452f1b2cd96f67',1,'VolViz::Private_::Geometry']]]
 ];

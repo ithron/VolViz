@@ -38,8 +38,20 @@ Searching for files in directory /home/travis/build/ithron/VolViz/include/VolViz
 Reading and parsing tag files
 Parsing files
 Reading /home/travis/build/ithron/VolViz/README.md...
+Preprocessing /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.cpp...
+Parsing file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
+Parsing file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/Camera.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/Camera.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/Geometry.cpp...
+Parsing file /home/travis/build/ithron/VolViz/Source/Geometry.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/Geometry.h...
+Parsing file /home/travis/build/ithron/VolViz/Source/Geometry.h...
+Preprocessing /home/travis/build/ithron/VolViz/Source/GeometryFactory.cpp...
+Parsing file /home/travis/build/ithron/VolViz/Source/GeometryFactory.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/GeometryFactory.h...
+Parsing file /home/travis/build/ithron/VolViz/Source/GeometryFactory.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Binding.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Binding.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Buffer.h...
@@ -72,6 +84,30 @@ Preprocessing /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Workarounds.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Workarounds.cpp...
+Preprocessing /ho/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:357: warning: no matching class member found for 
+  template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< float >)
+Possible candidates:
+  'template < T >
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< T > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< float const  > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
+
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:359: warning: no matching class member found for 
+  template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< Eigen::Vector3f >)
+Possible candidates:
+  'template < T >
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< T > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< float const  > data)
+  'template <>
+  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
+
+me/travis/build/ithron/VolViz/Source/Shaders.cpp...
+Parsing file /home/travis/build/ithron/VolViz/Source/Shaders.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/Shaders.h...
+Parsing file /home/travis/build/ithron/VolViz/Source/Shaders.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/Visualizer.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/Visualizer.cpp...
 Preprocessing /home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp...
@@ -83,29 +119,9 @@ Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicCache.h..
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Camera.h...
-Parsing file /home/travis/build/ithron/VolViz//home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:488: warning: no matching class member found for 
-  template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< float >)
-Possible candidates:
-  'template < T >
-  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< T > data)
-  'template <>
-  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< float const  > data)
-  'template <>
-  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
-
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:490: warning: no matching class member found for 
-  template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< Eigen::Vector3f >)
-Possible candidates:
-  'template < T >
-  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< T > data)
-  'template <>
-  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< float const  > data)
-  'template <>
-  void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
-
-include/VolViz/src/Camera.h...
-Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h...
-Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h...
+Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Camera.h...
+Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/GeometryDescriptor.h...
+Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/GeometryDescriptor.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Light.h...
 Parsing file /home/travis/build/ithron/VolViz/include/VolViz/src/Light.h...
 Preprocessing /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
@@ -171,22 +187,26 @@ Generating file sources...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicCache.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Camera.h...
+Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/GeometryDescriptor.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Light.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Volume.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/Geometry.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/GeometryFactory.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Binding.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Buffer.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Error.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h...
-Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
-Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/GL.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/GLdefs.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/GLFW.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Shaders.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/Shaders.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Textures.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/VisualizerImpl.h...
@@ -194,19 +214,25 @@ Generating file documentation...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicCache.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/AtomicWrapper.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/Camera.h...
+Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/GeometryDescriptor.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/Light.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/Types.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/Volume.h...
 Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
 Generating docs for file /home/travis/build/ithron/VolViz/README.md...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/Camera.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/Geometry.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/Geometry.h...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/GeometryFactory.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/GeometryFactory.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Binding.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Buffer.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Error.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Framebuffer.h...
-Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
-Generating docs for file /home/travis/build/ithron/VolViz/include/VolViz/src/Geometry.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/GL.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/GLdefs.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/GLFW.cpp...
@@ -214,7 +240,9 @@ Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/GLFW.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.cpp...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/Shaders.cpp...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Shaders.h...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/Shaders.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Textures.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Workarounds.cpp...
@@ -224,7 +252,6 @@ Generating docs for file /home/travis/build/ithron/VolViz/Source/VisualizerImpl.
 Generating page documentation...
 Generating group documentation...
 Generating dependency graph for group privateMembers
-Generating dependency graph for group shaders
 Generating dependency graph for group geomGroup
 Generating dependency graph for group cameraRelated
 Generating class documentation...
@@ -235,14 +262,18 @@ Generating docs for compound VolViz::DefaultSetPolicy...
 Generating docs for compound VolViz::SetAndNotifyPolicy...
 Generating docs for compound VolViz::AtomicWrapper...
 Generating docs for compound VolViz::Camera...
-Generating docs for compound VolViz::Geometry...
-Generating docs for compound VolViz::AxisAlignedPlane...
+Generating docs for compound VolViz::GeometryDescriptor...
+Generating docs for compound VolViz::AxisAlignedPlaneDescriptor...
 Generating docs for compound VolViz::Light...
 Generating docs for compound VolViz::DepthRange...
 Generating docs for compound VolViz::Visualizer...
 Generating docs for compound VolViz::VolumeDescriptor...
 Generating docs for namespace VolViz::Colors
 Generating docs for namespace VolViz::Private_
+Generating docs for compound VolViz::Private_::AxisAlignedPlane...
+Generating docs for compound VolViz::Private_::Geometry...
+Generating docs for compound VolViz::Private_::GeometryFactory...
+Generating docs for compound VolViz::Private_::Shaders...
 Generating docs for compound VolViz::Private_::VisualizerImpl...
 Generating docs for nested compound VolViz::Private_::VisualizerImpl::DepthRange...
 Generating docs for nested compound VolViz::Private_::VisualizerImpl::MeshData...
@@ -286,204 +317,235 @@ Generating example index...
 finalizing index lists...
 Running dot...
 Generating dot graphs using 3 parallel threads...
-Running dot for graph 1/131
-Running dot for graph 2/131
-Running dot for graph 3/131
-Running dot for graph 4/131
-Running dot for graph 5/131
-Running dot for graph 6/131
-Running dot for graph 7/131
-Running dot for graph 8/131
-Running dot for graph 9/131
-Running dot for graph 10/131
-Running dot for graph 11/131
-Running dot for graph 12/131
-Running dot for graph 13/131
-Running dot for graph 14/131
-Running dot for graph 15/131
-Running dot for graph 16/131
-Running dot for graph 17/131
-Running dot for graph 18/131
-Running dot for graph 19/131
-Running dot for graph 20/131
-Running dot for graph 21/131
-Running dot for graph 22/131
-Running dot for graph 23/131
-Running dot for graph 24/131
-Running dot for graph 25/131
-Running dot for graph 26/131
-Running dot for graph 27/131
-Running dot for graph 28/131
-Running dot for graph 29/131
-Running dot for graph 30/131
-Running dot for graph 31/131
-Running dot for graph 32/131
-Running dot for graph 33/131
-Running dot for graph 34/131
-Running dot for graph 35/131
-Running dot for graph 36/131
-Running dot for graph 37/131
-Running dot for graph 38/131
-Running dot for graph 39/131
-Running dot for graph 40/131
-Running dot for graph 41/131
-Running dot for graph 42/131
-Running dot for graph 43/131
-Running dot for graph 44/131
-Running dot for graph 45/131
-Running dot for graph 46/131
-Running dot for graph 47/131
-Running dot for graph 48/131
-Running dot for graph 49/131
-Running dot for graph 50/131
-Running dot for graph 51/131
-Running dot for graph 52/131
-Running dot for graph 53/131
-Running dot for graph 54/131
-Running dot for graph 55/131
-Running dot for graph 56/131
-Running dot for graph 57/131
-Running dot for graph 58/131
-Running dot for graph 59/131
-Running dot for graph 60/131
-Running dot for graph 61/131
-Running dot for graph 62/131
-Running dot for graph 63/131
-Running dot for graph 64/131
-Running dot for graph 65/131
-Running dot for graph 66/131
-Running dot for graph 67/131
-Running dot for graph 68/131
-Running dot for graph 69/131
-Running dot for graph 70/131
-Running dot for graph 71/131
-Running dot for graph 72/131
-Running dot for graph 73/131
-Running dot for graph 74/131
-Running dot for graph 75/131
-Running dot for graph 76/131
-Running dot for graph 77/131
-Running dot for graph 78/131
-Running dot for graph 79/131
-Running dot for graph 80/131
-Running dot for graph 81/131
-Running dot for graph 82/131
-Running dot for graph 83/131
-Running dot for graph 84/131
-Running dot for graph 85/131
-Running dot for graph 86/131
-Running dot for graph 87/131
-Running dot for graph 88/131
-Running dot for graph 89/131
-Running dot for graph 90/131
-Running dot for graph 91/131
-Running dot for graph 92/131
-Running dot for graph 93/131
-Running dot for graph 94/131
-Running dot for graph 95/131
-Running dot for graph 96/131
-Running dot for graph 97/131
-Running dot for graph 98/131
-Running dot for graph 99/131
-Running dot for graph 100/131
-Running dot for graph 101/131
-Running dot for graph 102/131
-Running dot for graph 103/131
-Running dot for graph 104/131
-Running dot for graph 105/131
-Running dot for graph 106/131
-Running dot for graph 107/131
-Running dot for graph 108/131
-Running dot for graph 109/131
-Running dot for graph 110/131
-Running dot for graph 111/131
-Running dot for graph 112/131
-Running dot for graph 113/131
-Running dot for graph 114/131
-Running dot for graph 115/131
-Running dot for graph 116/131
-Running dot for graph 117/131
-Running dot for graph 118/131
-Running dot for graph 119/131
-Running dot for graph 120/131
-Running dot for graph 121/131
-Running dot for graph 122/131
-Running dot for graph 123/131
-Running dot for graph 124/131
-Running dot for graph 125/131
-Running dot for graph 126/131
-Running dot for graph 127/131
-Running dot for graph 128/131
-Running dot for graph 129/131
-Running dot for graph 130/131
-Running dot for graph 131/131
-Patching output file 1/68
-Patching output file 2/68
-Patching output file 3/68
-Patching output file 4/68
-Patching output file 5/68
-Patching output file 6/68
-Patching output file 7/68
-Patching output file 8/68
-Patching output file 9/68
-Patching output file 10/68
-Patching output file 11/68
-Patching output file 12/68
-Patching output file 13/68
-Patching output file 14/68
-Patching output file 15/68
-Patching output file 16/68
-Patching output file 17/68
-Patching output file 18/68
-Patching output file 19/68
-Patching output file 20/68
-Patching output file 21/68
-Patching output file 22/68
-Patching output file 23/68
-Patching output file 24/68
-Patching output file 25/68
-Patching output file 26/68
-Patching output file 27/68
-Patching output file 28/68
-Patching output file 29/68
-Patching output file 30/68
-Patching output file 31/68
-Patching output file 32/68
-Patching output file 33/68
-Patching output file 34/68
-Patching output file 35/68
-Patching output file 36/68
-Patching output file 37/68
-Patching output file 38/68
-Patching output file 39/68
-Patching output file 40/68
-Patching output file 41/68
-Patching output file 42/68
-Patching output file 43/68
-Patching output file 44/68
-Patching output file 45/68
-Patching output file 46/68
-Patching output file 47/68
-Patching output file 48/68
-Patching output file 49/68
-Patching output file 50/68
-Patching output file 51/68
-Patching output file 52/68
-Patching output file 53/68
-Patching output file 54/68
-Patching output file 55/68
-Patching output file 56/68
-Patching output file 57/68
-Patching output file 58/68
-Patching output file 59/68
-Patching output file 60/68
-Patching output file 61/68
-Patching output file 62/68
-Patching output file 63/68
-Patching output file 64/68
-Patching output file 65/68
-Patching output file 66/68
-Patching output file 67/68
-Patching output file 68/68
-lookup cache used 1115/65536 hits=4894 misses=1321
+Running dot for graph 1/151
+Running dot for graph 2/151
+Running dot for graph 3/151
+Running dot for graph 4/151
+Running dot for graph 5/151
+Running dot for graph 6/151
+Running dot for graph 7/151
+Running dot for graph 8/151
+Running dot for graph 9/151
+Running dot for graph 10/151
+Running dot for graph 11/151
+Running dot for graph 12/151
+Running dot for graph 13/151
+Running dot for graph 14/151
+Running dot for graph 15/151
+Running dot for graph 16/151
+Running dot for graph 17/151
+Running dot for graph 18/151
+Running dot for graph 19/151
+Running dot for graph 20/151
+Running dot for graph 21/151
+Running dot for graph 22/151
+Running dot for graph 23/151
+Running dot for graph 24/151
+Running dot for graph 25/151
+Running dot for graph 26/151
+Running dot for graph 27/151
+Running dot for graph 28/151
+Running dot for graph 29/151
+Running dot for graph 30/151
+Running dot for graph 31/151
+Running dot for graph 32/151
+Running dot for graph 33/151
+Running dot for graph 34/151
+Running dot for graph 35/151
+Running dot for graph 36/151
+Running dot for graph 37/151
+Running dot for graph 38/151
+Running dot for graph 39/151
+Running dot for graph 40/151
+Running dot for graph 41/151
+Running dot for graph 42/151
+Running dot for graph 43/151
+Running dot for graph 44/151
+Running dot for graph 45/151
+Running dot for graph 46/151
+Running dot for graph 47/151
+Running dot for graph 48/151
+Running dot for graph 49/151
+Running dot for graph 50/151
+Running dot for graph 51/151
+Running dot for graph 52/151
+Running dot for graph 53/151
+Running dot for graph 54/151
+Running dot for graph 55/151
+Running dot for graph 56/151
+Running dot for graph 57/151
+Running dot for graph 58/151
+Running dot for graph 59/151
+Running dot for graph 60/151
+Running dot for graph 61/151
+Running dot for graph 62/151
+Running dot for graph 63/151
+Running dot for graph 64/151
+Running dot for graph 65/151
+Running dot for graph 66/151
+Running dot for graph 67/151
+Running dot for graph 68/151
+Running dot for graph 69/151
+Running dot for graph 70/151
+Running dot for graph 71/151
+Running dot for graph 72/151
+Running dot for graph 73/151
+Running dot for graph 74/151
+Running dot for graph 75/151
+Running dot for graph 76/151
+Running dot for graph 77/151
+Running dot for graph 78/151
+Running dot for graph 79/151
+Running dot for graph 80/151
+Running dot for graph 81/151
+Running dot for graph 82/151
+Running dot for graph 83/151
+Running dot for graph 84/151
+Running dot for graph 85/151
+Running dot for graph 86/151
+Running dot for graph 87/151
+Running dot for graph 88/151
+Running dot for graph 89/151
+Running dot for graph 90/151
+Running dot for graph 91/151
+Running dot for graph 92/151
+Running dot for graph 93/151
+Running dot for graph 94/151
+Running dot for graph 95/151
+Running dot for graph 96/151
+Running dot for graph 97/151
+Running dot for graph 98/151
+Running dot for graph 99/151
+Running dot for graph 100/151
+Running dot for graph 101/151
+Running dot for graph 102/151
+Running dot for graph 103/151
+Running dot for graph 104/151
+Running dot for graph 105/151
+Running dot for graph 106/151
+Running dot for graph 107/151
+Running dot for graph 108/151
+Running dot for graph 109/151
+Running dot for graph 110/151
+Running dot for graph 111/151
+Running dot for graph 112/151
+Running dot for graph 113/151
+Running dot for graph 114/151
+Running dot for graph 115/151
+Running dot for graph 116/151
+Running dot for graph 117/151
+Running dot for graph 118/151
+Running dot for graph 119/151
+Running dot for graph 120/151
+Running dot for graph 121/151
+Running dot for graph 122/151
+Running dot for graph 123/151
+Running dot for graph 124/151
+Running dot for graph 125/151
+Running dot for graph 126/151
+Running dot for graph 127/151
+Running dot for graph 128/151
+Running dot for graph 129/151
+Running dot for graph 130/151
+Running dot for graph 131/151
+Running dot for graph 132/151
+Running dot for graph 133/151
+Running dot for graph 134/151
+Running dot for graph 135/151
+Running dot for graph 136/151
+Running dot for graph 137/151
+Running dot for graph 138/151
+Running dot for graph 139/151
+Running dot for graph 140/151
+Running dot for graph 141/151
+Running dot for graph 142/151
+Running dot for graph 143/151
+Running dot for graph 144/151
+Running dot for graph 145/151
+Running dot for graph 146/151
+Running dot for graph 147/151
+Running dot for graph 148/151
+Running dot for graph 149/151
+Running dot for graph 150/151
+Running dot for graph 151/151
+Patching output file 1/79
+Patching output file 2/79
+Patching output file 3/79
+Patching output file 4/79
+Patching output file 5/79
+Patching output file 6/79
+Patching output file 7/79
+Patching output file 8/79
+Patching output file 9/79
+Patching output file 10/79
+Patching output file 11/79
+Patching output file 12/79
+Patching output file 13/79
+Patching output file 14/79
+Patching output file 15/79
+Patching output file 16/79
+Patching output file 17/79
+Patching output file 18/79
+Patching output file 19/79
+Patching output file 20/79
+Patching output file 21/79
+Patching output file 22/79
+Patching output file 23/79
+Patching output file 24/79
+Patching output file 25/79
+Patching output file 26/79
+Patching output file 27/79
+Patching output file 28/79
+Patching output file 29/79
+Patching output file 30/79
+Patching output file 31/79
+Patching output file 32/79
+Patching output file 33/79
+Patching output file 34/79
+Patching output file 35/79
+Patching output file 36/79
+Patching output file 37/79
+Patching output file 38/79
+Patching output file 39/79
+Patching output file 40/79
+Patching output file 41/79
+Patching output file 42/79
+Patching output file 43/79
+Patching output file 44/79
+Patching output file 45/79
+Patching output file 46/79
+Patching output file 47/79
+Patching output file 48/79
+Patching output file 49/79
+Patching output file 50/79
+Patching output file 51/79
+Patching output file 52/79
+Patching output file 53/79
+Patching output file 54/79
+Patching output file 55/79
+Patching output file 56/79
+Patching output file 57/79
+Patching output file 58/79
+Patching output file 59/79
+Patching output file 60/79
+Patching output file 61/79
+Patching output file 62/79
+Patching output file 63/79
+Patching output file 64/79
+Patching output file 65/79
+Patching output file 66/79
+Patching output file 67/79
+Patching output file 68/79
+Patching output file 69/79
+Patching output file 70/79
+Patching output file 71/79
+Patching output file 72/79
+Patching output file 73/79
+Patching output file 74/79
+Patching output file 75/79
+Patching output file 76/79
+Patching output file 77/79
+Patching output file 78/79
+Patching output file 79/79
+lookup cache used 1194/65536 hits=5053 misses=1419
 finished...

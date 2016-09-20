@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cameraclient',['CameraClient',['../classVolViz_1_1Camera.html#a63957f8009a70abbd5c4dcf2ddba011a',1,'VolViz::Camera']]]
+  ['axisalignedplane',['AxisAlignedPlane',['../classVolViz_1_1Private___1_1CameraClient.html#a634d2e9c06faf8f097b8b1500e8fde40',1,'VolViz::Private_::CameraClient']]]
 ];

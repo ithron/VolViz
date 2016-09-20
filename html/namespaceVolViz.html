@@ -112,9 +112,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html">Camera</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1Geometry.html">Geometry</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1GeometryDescriptor.html">GeometryDescriptor</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1AxisAlignedPlane.html">AxisAlignedPlane</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVolViz_1_1AxisAlignedPlaneDescriptor.html">AxisAlignedPlaneDescriptor</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Light.html">Light</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directional light.  <a href="classVolViz_1_1Light.html#details">More...</a><br/></td></tr>
@@ -166,6 +166,16 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:a0adbcac39b4349d36375250a0e93ad6f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6f">MoveMask</a> : uint8_t { <br/>
+&#160;&#160;<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6fa465cb6d62ee464e5f049832b9a76dcb2">None</a> = 0x00, 
+<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6fae8c22126f756a173765f554cc92b7a5a">X</a> = 0x01, 
+<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6fa95bc67f5e7731cb6be12402a69908f4b">Y</a> = 0x02, 
+<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6faee124c2f1feb5cf8e738b986477a119c">Z</a> = 0x04, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6fa7c71cd7c99bc3270d145a7d27a7d9434">All</a> = 0x07
+<br/>
+ }</td></tr>
+<tr class="separator:a0adbcac39b4349d36375250a0e93ad6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4026a28cbb69255c9125111929b3f5c3"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a4026a28cbb69255c9125111929b3f5c3">Axis</a> { <a class="el" href="namespaceVolViz.html#a4026a28cbb69255c9125111929b3f5c3a02129bb861061d1a052c592e2dc6b383">Axis::X</a>, 
 <a class="el" href="namespaceVolViz.html#a4026a28cbb69255c9125111929b3f5c3a57cec4137b614c87cb4e24a3d003a3e0">Axis::Y</a>, 
 <a class="el" href="namespaceVolViz.html#a4026a28cbb69255c9125111929b3f5c3a21c2e59531c8710156d34a3c30ac81d5">Axis::Z</a>
@@ -396,6 +406,30 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a0adbcac39b4349d36375250a0e93ad6f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6f">VolViz::MoveMask</a> : uint8_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a0adbcac39b4349d36375250a0e93ad6fa465cb6d62ee464e5f049832b9a76dcb2"></a>None</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0adbcac39b4349d36375250a0e93ad6fae8c22126f756a173765f554cc92b7a5a"></a>X</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0adbcac39b4349d36375250a0e93ad6fa95bc67f5e7731cb6be12402a69908f4b"></a>Y</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0adbcac39b4349d36375250a0e93ad6faee124c2f1feb5cf8e738b986477a119c"></a>Z</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0adbcac39b4349d36375250a0e93ad6fa7c71cd7c99bc3270d145a7d27a7d9434"></a>All</em>&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
 <a class="anchor" id="ad208471555239219028c0bb4fd84858d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -425,7 +459,7 @@ Enumerations</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 15 2016 16:47:12 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 20 2016 14:01:35 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

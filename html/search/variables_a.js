@@ -3,8 +3,8 @@ var searchData=
   ['mesh_5f',['mesh_',['../group__privateMembers.html#ga34ccffe3a2479dbf2ac90004cce63e64',1,'VolViz::Private_::VisualizerImpl']]],
   ['mousebuttoncallback',['mouseButtonCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a9877a6fdd95a63c3ab15a127f08df185',1,'VolViz::Private_::GL::GLFW']]],
   ['mousemovecallback',['mouseMoveCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a00b54cb9731f63b285b9a0ae65a9cd45',1,'VolViz::Private_::GL::GLFW']]],
-  ['movable',['movable',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840',1,'VolViz::Private_::GL::Geometry::movable()'],['../structVolViz_1_1Geometry.html#a9c59f7f7fbe7bb82332deed14d4889f1',1,'VolViz::Geometry::movable()']]],
-  ['movemask',['moveMask',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24',1,'VolViz::Private_::GL::Geometry']]],
+  ['movable',['movable',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840',1,'VolViz::Private_::GL::Geometry::movable()'],['../structVolViz_1_1GeometryDescriptor.html#af12a9e274f948d07ed53459cfd8ae52f',1,'VolViz::GeometryDescriptor::movable()']]],
+  ['movemask',['moveMask',['../classVolViz_1_1Private___1_1Geometry.html#a367f61b184576bd6c985f22f2984dbea',1,'VolViz::Private_::Geometry::moveMask()'],['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24',1,'VolViz::Private_::GL::Geometry::moveMask()']]],
   ['movestate_5f',['moveState_',['../group__cameraRelated.html#gabfabf1dedcedc08fa39c5bc231dd915f',1,'VolViz::Private_::VisualizerImpl']]],
   ['mutex_5f',['mutex_',['../classVolViz_1_1AtomicWrapper.html#aa7380b473af78681674bc7b245b581ff',1,'VolViz::AtomicWrapper']]]
 ];

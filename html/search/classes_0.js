@@ -10,5 +10,6 @@ var searchData=
   ['atomicwrapper_3c_20length_20_3e',['AtomicWrapper&lt; Length &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_3c_20orientation_20_3e',['AtomicWrapper&lt; Orientation &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_3c_20physicalposition_20_3e',['AtomicWrapper&lt; PhysicalPosition &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
-  ['axisalignedplane',['AxisAlignedPlane',['../structVolViz_1_1AxisAlignedPlane.html',1,'VolViz']]]
+  ['axisalignedplane',['AxisAlignedPlane',['../classVolViz_1_1Private___1_1AxisAlignedPlane.html',1,'VolViz::Private_']]],
+  ['axisalignedplanedescriptor',['AxisAlignedPlaneDescriptor',['../structVolViz_1_1AxisAlignedPlaneDescriptor.html',1,'VolViz']]]
 ];

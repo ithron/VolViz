@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['scale',['scale',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8',1,'VolViz::Private_::GL::Geometry::scale()'],['../classVolViz_1_1Visualizer.html#a1a79282f8a9c7ffbb126df399f1ee4ba',1,'VolViz::Visualizer::scale()']]],
+  ['scale',['scale',['../classVolViz_1_1Private___1_1Geometry.html#a51e8771aca8310184c40c823799f2ddf',1,'VolViz::Private_::Geometry::scale()'],['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8',1,'VolViz::Private_::GL::Geometry::scale()'],['../classVolViz_1_1Visualizer.html#a1a79282f8a9c7ffbb126df399f1ee4ba',1,'VolViz::Visualizer::scale()']]],
   ['scene3d',['Scene3D',['../group__privateMembers.html#ga3c07b4ab76735e055fb6a24da5e90f48',1,'VolViz::Private_::VisualizerImpl']]],
   ['scrollwheelinputhandler',['scrollWheelInputHandler',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a4d219ec5b4367e19501c6a91c9479632',1,'VolViz::Private_::GL::GLFW']]],
   ['selectedgeometry',['selectedGeometry',['../group__privateMembers.html#ga3ae5793b7f479072a58846f318f0f7b3',1,'VolViz::Private_::VisualizerImpl']]],
   ['selectionbuffer_5f',['selectionBuffer_',['../group__privateMembers.html#ga22b815932e4d968cb2152d29776e40f0',1,'VolViz::Private_::VisualizerImpl']]],
   ['selectionfragshadersrc',['selectionFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ad0dea7e7b8f6a3f943a29722349e9d38',1,'VolViz::Private_::GL::Shaders']]],
   ['selectionindexvisualizationfragshadersrc',['selectionIndexVisualizationFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#afce9ebb9d6c5afb549e578114353f30b',1,'VolViz::Private_::GL::Shaders']]],
-  ['selectionindexvisualizationprogam_5f',['selectionIndexVisualizationProgam_',['../group__shaders.html#ga59dc985dd1b8afcbc9a31f2e35795bda',1,'VolViz::Private_::VisualizerImpl']]],
   ['shader_5f',['shader_',['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a031caadf068ab5ca1fcc04204f6c1c80',1,'VolViz::Private_::GL::Shader']]],
+  ['shaders_5f',['shaders_',['../classVolViz_1_1Private___1_1Shaders.html#a6fb1aa71a254e864d026eb8fadf0a59a',1,'VolViz::Private_::Shaders::shaders_()'],['../group__privateMembers.html#gaa8554500c8789dd5f3432a4aecaf2758',1,'VolViz::Private_::VisualizerImpl::shaders_()']]],
   ['shininess',['shininess',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#abe164acb93c85acc32878187dc067a90',1,'VolViz::Private_::VisualizerImpl::MeshData']]],
   ['showgrid',['showGrid',['../classVolViz_1_1Visualizer.html#a780e15acd00a6f76fcc814789f681401',1,'VolViz::Visualizer']]],
   ['showvolumeboundingbox',['showVolumeBoundingBox',['../classVolViz_1_1Visualizer.html#ad2e7e99474ae1f8c126898792270abc1',1,'VolViz::Visualizer']]],
@@ -17,8 +17,6 @@ var searchData=
   ['singlevertexdata_5f',['singleVertexData_',['../group__privateMembers.html#ga6f85a104e6b684b49ed3b3a77e2b4ca4',1,'VolViz::Private_::VisualizerImpl']]],
   ['size',['size',['../structVolViz_1_1VolumeDescriptor.html#a809045e07319637d8810dcc36f3f8fc7',1,'VolViz::VolumeDescriptor']]],
   ['specularlightingpassfragshadersrc',['specularLightingPassFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#aa66841d9f619fb92e1a566649a2d8e01',1,'VolViz::Private_::GL::Shaders']]],
-  ['specularlightingpassprogram_5f',['specularLightingPassProgram_',['../group__shaders.html#gab442edcca339c229bd17acb742103cbe',1,'VolViz::Private_::VisualizerImpl']]],
-  ['specularquadprogram_5f',['specularQuadProgram_',['../group__shaders.html#gaa92a81c3f898e7d68bf81e7e074363ea',1,'VolViz::Private_::VisualizerImpl']]],
   ['specularvisualizationfragshadersrc',['specularVisualizationFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a4be4262ba3ee85a5591f1546e8c1fbc7',1,'VolViz::Private_::GL::Shaders']]],
   ['supportedextensions_5f',['supportedExtensions_',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a7e0ab571b25475896dc68997a0cabe3c',1,'VolViz::Private_::GL::GLFW']]]
 ];

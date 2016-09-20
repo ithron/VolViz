@@ -1,4 +1,7 @@
 <map id="/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h" name="/home/travis/build/ithron/VolViz/Source/VisualizerImpl.h">
-<area shape="rect" id="node2" href="$Visualizer_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Visualizer.cpp" alt="" coords="5,109,149,165"/>
-<area shape="rect" id="node3" href="$VisualizerImpl_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.cpp" alt="" coords="174,109,319,165"/>
+<area shape="rect" id="node2" href="$AxisAlignedPlane_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/AxisAlignedPlane.cpp" alt="" coords="5,109,157,165"/>
+<area shape="rect" id="node3" href="$Geometry_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Geometry.cpp" alt="" coords="182,109,327,165"/>
+<area shape="rect" id="node4" href="$GeometryFactory_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/GeometryFactory.cpp" alt="" coords="352,109,504,165"/>
+<area shape="rect" id="node5" href="$Visualizer_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Visualizer.cpp" alt="" coords="529,109,673,165"/>
+<area shape="rect" id="node6" href="$VisualizerImpl_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.cpp" alt="" coords="698,109,843,165"/>
 </map>

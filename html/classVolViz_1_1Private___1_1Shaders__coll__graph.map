@@ -1,0 +1,6 @@
+<map id="VolViz::Private_::Shaders" name="VolViz::Private_::Shaders">
+<area shape="rect" id="node3" href="$classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html" title="RAII wrapper for OpenGL shader programs objects. " alt="" coords="120,624,260,877"/>
+<area shape="rect" id="node5" href="$classVolViz_1_1Private___1_1GL_1_1UniformProxy.html" title="{VolViz::Private_::GL\l::UniformProxy\n|&#45; location_\l|+ UniformProxy()\l+ UniformProxy()\l+ UniformProxy()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l}" alt="" coords="313,149,453,403"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="125,237,204,315"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="102,6,228,98"/>
+</map>
