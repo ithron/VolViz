@@ -85,7 +85,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: BUILD_TYPE=Release CLANG_VERSION=3.8.1
+      env: BUILD_TYPE=Release CLANG_VERSION=3.8.1 CREATE_DOC="yes"
       compiler: clang
 
     - os: linux
@@ -134,7 +134,7 @@ before_install:
 before_script:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      cmake -Wno-dev -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+      cmake -Wno-dev -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DBUILD_SHARED_LIBS=ON -DFIX_MISSING_GL_IMPLEMENTATIONS=1
     elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
       brew update
       brew upgrade cmake
@@ -153,8 +153,10 @@ script:
 after_success:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      cd $TRAVIS_BUILD_DIR
-      chmod +x generateDocumentationAndDeploy.sh
-      ./generateDocumentationAndDeploy.sh
+      if [ "$CREATE_DOC" = "yes" ]; then
+        cd $TRAVIS_BUILD_DIR
+        chmod +x generateDocumentationAndDeploy.sh
+        ./generateDocumentationAndDeploy.sh
+      fi
     fi
 
