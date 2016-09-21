@@ -1,8 +1,8 @@
 #ifndef VolViz_ShaderProgram_h
 #define VolViz_ShaderProgram_h
 
+#include "GLdefs.h"
 #include "Error.h"
-#include "GL.h"
 
 #include <Eigen/Core>
 
@@ -11,6 +11,7 @@
 #include <vector>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 class ShaderProgram;
@@ -64,6 +65,34 @@ public:
     return *this;
   }
 
+  UniformProxy const &operator=(GLuint i) const noexcept {
+    assertGL("Precondition violation");
+    glUniform1ui(location_, i);
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &operator=(Eigen::Vector2f const &v) const noexcept {
+    assertGL("Precondition violation");
+    glUniform2fv(location_, 1, v.data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &operator=(Eigen::Vector3f const &v) const noexcept {
+    assertGL("Precondition violation");
+    glUniform3fv(location_, 1, v.data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &operator=(Eigen::Vector4f const &v) const noexcept {
+    assertGL("Precondition violation");
+    glUniform4fv(location_, 1, v.data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
   UniformProxy const &operator=(Eigen::Matrix4f const &m) const noexcept {
     assertGL("Precondition violation");
     glUniformMatrix4fv(location_, 1, false, m.data());
@@ -75,6 +104,13 @@ public:
   operator=(Eigen::Transpose<Eigen::Matrix4f> const &m) const noexcept {
     assertGL("Precondition violation");
     glUniformMatrix4fv(location_, 1, true, m.nestedExpression().data());
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
+  UniformProxy const &operator=(Eigen::Matrix3f const &m) const noexcept {
+    assertGL("Precondition violation");
+    glUniformMatrix3fv(location_, 1, true, m.data());
     assertGL("Failed to upload uniform");
     return *this;
   }
@@ -166,6 +202,7 @@ public:
 #pragma clang diagnostic pop
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_ShaderProgram_h

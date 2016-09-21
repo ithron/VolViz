@@ -1,10 +1,10 @@
 #ifndef VolViz_VertexArray_h
 #define VolViz_VertexArray_h
 
-#include "Error.h"
-#include "GL.h"
+#include "GLdefs.h"
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 /// RAII wrapper for OpenGL vertex arrays
@@ -48,6 +48,7 @@ struct VertexArray {
 };
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_VertexArray_h

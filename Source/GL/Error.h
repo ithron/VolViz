@@ -9,7 +9,7 @@
 #ifndef VolViz_Error_h
 #define VolViz_Error_h
 
-#include "GL.h"
+#include "GLdefs.h"
 
 #include <cassert>
 

@@ -1,26 +1,29 @@
-#ifndef VolViz_Shaders_h
-#define VolViz_Shaders_h
+#pragma once
 
-#include <string>
+#include "GL/ShaderProgram.h"
+#include "Types.h"
+
+#include <unordered_map>
 
 namespace VolViz {
+namespace Private_ {
+
 namespace GL {
-namespace Shaders {
-
-extern std::string const nullVertShaderSrc;
-
-extern std::string const fullscreenQuadGeomShaderSrc;
-
-extern std::string const simpleTextureFragShaderSrc;
-
-extern std::string const simpleVertShaderSrc;
-
-extern std::string const passThroughFragShaderSrc;
-
-extern std::string const gridGeometryShaderSrc;
-
-} // namespace Shaders
+class ShaderProgram;
 } // namespace GL
-} // namespace VolViz
 
-#endif // VolViz_Shaders_h
+class Shaders {
+public:
+  GL::ShaderProgram &operator[](std::string name);
+
+  /// Compiles and links all shaders. Must be called once
+  void init();
+
+private:
+  using ShaderProgramTable = std::unordered_map<std::string, GL::ShaderProgram>;
+
+  ShaderProgramTable shaders_;
+};
+
+} // namespace Private_
+} // namespace VolViz

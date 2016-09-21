@@ -1,10 +1,32 @@
-#include "Error.h"
 #include "GLFW.h"
 
+#include "Error.h"
+
+#include <algorithm>
 #include <cassert>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
+
+namespace {
+std::vector<std::string> queryExtensions() {
+  std::vector<std::string> extensions;
+
+  GLint nExt = 0;
+  glGetIntegerv(GL_NUM_EXTENSIONS, &nExt);
+  assertGL("Failed to query number of available extenions");
+
+  for (auto i = 0; i < nExt; ++i) {
+    auto const ext = reinterpret_cast<char const *>(
+        glGetStringi(GL_EXTENSIONS, static_cast<GLuint>(i)));
+    assert(ext && "Failed to query extension");
+    extensions.emplace_back(ext);
+  }
+
+  return extensions;
+}
+} // namespace
 
 GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {
   if (!glfwInit()) throw(std::runtime_error("Failed to init GLFW"));
@@ -69,6 +91,7 @@ GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {
   });
 
   makeCurrent();
+  supportedExtensions_ = queryExtensions();
   glfwSwapInterval(1);
 }
 
@@ -102,5 +125,11 @@ std::size_t GLFW::height() const noexcept {
   if (!isHidden()) return static_cast<std::size_t>(h);
   return VOLVIZ_DEFAULT_WINDOW_HEIGHT;
 }
+
+bool GLFW::supportsExtension(std::string name) const noexcept {
+  return std::find(supportedExtensions_.begin(), supportedExtensions_.end(),
+                   name) != supportedExtensions_.end();
+}
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz

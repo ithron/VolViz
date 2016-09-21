@@ -2,12 +2,14 @@
 #define VolViz_GLFW_h
 
 #include "config.h"
-#include "GL.h"
+#include "GLdefs.h"
 
 #include <functional>
 #include <string>
+#include <vector>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 #pragma clang diagnostic push
@@ -45,6 +47,12 @@ public:
 
   inline void waitEvents() const noexcept { glfwWaitEvents(); }
 
+  bool supportsExtension(std::string name) const noexcept;
+
+  inline decltype(auto) supportedExtensions() const noexcept {
+    return supportedExtensions_;
+  }
+
   /// Returns the width of the window
   std::size_t width() const noexcept;
   /// Returns the height of the window
@@ -63,10 +71,12 @@ public:
 
 private:
   GLFWwindow *window = nullptr;
+  std::vector<std::string> supportedExtensions_;
 };
 #pragma clang diagnostic pop
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_GLFW_h

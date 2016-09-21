@@ -3,6 +3,10 @@ compiler:
  - clang
  - gcc
 
+branches:
+  except:
+    - gh-pages
+
 addons:
   apt:
     sources:
@@ -16,6 +20,9 @@ addons:
       - xorg-dev
       - libglu1-mesa-dev
       - mesa-common-dev
+      - doxygen
+      - doxygen-doc
+      - graphviz
 
 matrix:
   include:
@@ -32,6 +39,10 @@ env:
     - CLANG_VERSION=3.8.0
     - CLANG_ARCHIVE=$HOME/clang+llvm.tar.xz
     - CLANG_DIR=$HOME/clang-$CLANG_VERSION
+    - GH_REPO_NAME: VolViz
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - GH_REPO_REF: github.com/ithron/VolViz.git
+
 
   matrix:
     - BUILD_TYPE=Debug
@@ -49,9 +60,12 @@ install:
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]] && [[ "$CXX" = "g++" ]]; then export CXX="g++-5" CC="gcc-5"; fi
 
 before_script:
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE}; fi
-  - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then cmake -G Xcode -DCMAKE_BUILD_TYPE=${BUILD_TYPE}; fi
+  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DFIX_MISSING_GL_IMPLEMENTATIONS=1 -DBUILD_SHARED_LIBS=ON
 
 script:
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then make all; fi
-  - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then xcodebuild; fi
+  - make all
+
+after_success:
+  - cd $TRAVIS_BUILD_DIR
+  - chmod +x generateDocumentationAndDeploy.sh
+  - ./generateDocumentationAndDeploy.sh

@@ -1,10 +1,13 @@
 #ifndef VolViz_Binding_h
 #define VolViz_Binding_h
 
+#include "GLdefs.h"
+
 #include <tuple>
 #include <utility>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 /// RAII wrapper for types than can be bound
@@ -46,6 +49,7 @@ inline decltype(auto) binding(T &&obj, A &&arg) noexcept {
 }
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_Binding_h

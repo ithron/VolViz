@@ -1,12 +1,5 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-option(BUILD_APP "Build mesh viewer app?" ON)
-
-if (BUILD_APP)
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${DEPENDENCIES_DIR}/cmake)
-  include(ImportIgl)
-endif()
-
 set(DEFAULT_COMPILE_FEATURES
   cxx_alias_templates
   cxx_alignas
@@ -48,11 +41,6 @@ set(DEFAULT_COMPILE_FEATURES
   cxx_template_template_parameters
 )
 
-set(PUBLIC_HEADERS
-  Visualizer.h
-)
-
-
 if (("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang") OR
   ("${CMAKE_CXX_COMPILER_ID}" MATCHES "AppleClang"))
   set(DEFAULT_COMPILER_OPTIONS
@@ -88,22 +76,50 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   )
 endif()
 
-add_library(VolViz SHARED
-  GLFW.cpp
-  ShaderProgram.cpp
+add_library(VolViz
+  AxisAlignedPlane.cpp
+  Camera.cpp
+  Geometry.cpp
+  GeometryFactory.cpp
   Shaders.cpp
   Visualizer.cpp
+  VisualizerImpl.cpp
+  # GL related sources
+  GL/GLFW.cpp
+  GL/ShaderProgram.cpp
+  GL/Shaders.cpp
+  GL/Workarounds.cpp
 )
-target_link_libraries(VolViz
-  PUBLIC
-    Eigen
-    glfw
-    ${OPENGL_LIBRARIES}
-    ${MKL_TARGET}
-)
+if (BUILD_SHARED_LIBS)
+  target_link_libraries(VolViz
+    PUBLIC
+      Eigen
+      GSL
+      PhysUnits
+    PRIVATE
+      glfw
+      ${OPENGL_gl_LIBRARY}
+      ${MKL_TARGET}
+  )
+else()
+  target_link_libraries(VolViz
+    PUBLIC
+      Eigen
+      GSL
+      PhysUnits
+      glfw
+      ${OPENGL_gl_LIBRARY}
+      ${MKL_TARGET}
+  )
+endif()
 target_include_directories(VolViz PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz/src>
   $<INSTALL_INTERFACE:include/VolViz>
+  $<INSTALL_INTERFACE:include/VolViz/src>
+  $<INSTALL_INTERFACE:include/VolViz/src/GSL>
 )
 target_compile_features(VolViz PUBLIC ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolViz PRIVATE ${DEFAULT_COMPILER_OPTIONS})
@@ -111,18 +127,6 @@ target_compile_options(VolViz PRIVATE ${DEFAULT_COMPILER_OPTIONS})
 set(INSTALL_TARGETS VolViz)
 
 add_library(VolViz::VolViz ALIAS VolViz)
-
-if (BUILD_APP)
-  add_executable(VolVisualizer VolVisualizer.cpp)
-  target_link_libraries(VolVisualizer PRIVATE
-    VolViz::VolViz
-    IGL
-  )
-  target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})
-  target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS})
-
-  set(INSTALL_TARGETS ${INSTALL_TARGETS} VolVisualizer)
-endif()
 
 if (BUILD_TESTING)
 #add test targets here
@@ -147,14 +151,23 @@ install(
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include/VolViz
 )
-#install(EXPORT VolVizExport NAMESPACE VolViz::
-#DESTINATION lib / cmake / VolViz
-#)
-install(FILES ${PUBLIC_HEADERS}
-  DESTINATION include/VolViz
+install(EXPORT VolVizExport NAMESPACE VolViz::
+  DESTINATION lib/cmake/VolViz
+)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz
+  DESTINATION include
+)
+install(DIRECTORY ${DEPENDENCIES_DIR}/Eigen-3.2.8/Eigen
+  DESTINATION include/VolViz/src
+)
+install(DIRECTORY ${DEPENDENCIES_DIR}/GSL/include
+  DESTINATION include/VolViz/src/GSL
+)
+install(DIRECTORY ${DEPENDENCIES_DIR}/PhysUnits/phys
+  DESTINATION include/VolViz/src
 )
 
-#export(EXPORT VolVizExport NAMESPACE VolViz::)
+export(EXPORT VolVizExport NAMESPACE VolViz::)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(VolVizConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake

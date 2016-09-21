@@ -6,7 +6,7 @@ const uint size = 31;
 layout(points) in;
 layout(line_strip, max_vertices = 124 /* 4 * size */) out;
 
-layout(location = 0) out vec4 color;
+layout(location = 0) out vec3 color;
 
 /* layout(location = 0) in vec4 origin; */
 
@@ -24,7 +24,7 @@ void main() {
     // Horizontal grid line
     p = vec4(minCoord, scale * float(i), 0.0, 1.0);
     gl_Position = viewProjectionMatrix * p;
-    color = vec4(1.0, 1.0, 1.0, 1.0);
+    color = vec3(1.0);
     EmitVertex();
 
     p = vec4(maxCoord, scale * float(i), 0.0, 1.0);
@@ -35,12 +35,10 @@ void main() {
     // Vertical grid line
     p = vec4(scale * float(i), minCoord, 0.0, 1.0);
     gl_Position = viewProjectionMatrix * p;
-    color = vec4(1.0, 1.0, 1.0, 1.0);
     EmitVertex();
 
     p = vec4(scale * float(i), maxCoord, 0.0, 1.0);
     gl_Position = viewProjectionMatrix * p;
-    color = vec4(1.0, 1.0, 1.0, 1.0);
     EmitVertex();
     EndPrimitive();
   }

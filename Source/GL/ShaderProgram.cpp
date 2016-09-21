@@ -4,6 +4,7 @@
 #include <iostream>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 #pragma mark Shader
@@ -93,4 +94,5 @@ void ShaderProgram::queryUniforms() {
          "Postcondition violation");
 }
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz

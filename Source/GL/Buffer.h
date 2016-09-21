@@ -1,12 +1,13 @@
 #ifndef VolViz_Buffer_h
 #define VolViz_Buffer_h
 
+#include "GLdefs.h"
 #include "Error.h"
-#include "GL.h"
 
 #include <cstddef>
 
 namespace VolViz {
+namespace Private_ {
 namespace GL {
 
 /// RAII wrapper for OpenGL buffers
@@ -50,6 +51,7 @@ struct Buffer {
 };
 
 } // namespace GL
+} // namespace Private_
 } // namespace VolViz
 
 #endif // VolViz_Buffer_h
