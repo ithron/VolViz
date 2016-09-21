@@ -547,5 +547,5 @@ Patching output file 76/79
 Patching output file 77/79
 Patching output file 78/79
 Patching output file 79/79
-lookup cache used 1209/65536 hits=5225 misses=1440
+lookup cache used 1227/65536 hits=5356 misses=1459
 finished...
