@@ -763,11 +763,11 @@ VisualizerImpl::getGeometryUnderCursor() {
   // Bind FBO
   auto fboBinding =
       binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
-  // assertGL("Failed to bind framebuffer");
 
   auto const mousePos = lastMousePos_;
   // convert mouse position to texture screen coordinates
-  auto const windowSize = Size2(glfw_.width(), glfw_.height()).cast<double>();
+  auto const windowSize =
+      Size2(glfw_.width(), glfw_.height()).cast<double>().eval();
   auto const pos = Position2((mousePos(0) + 1.0) * windowSize(0) / 2.0,
                              (mousePos(1) + 1.0) * windowSize(1) / 2.0)
                        .cast<GLint>()
