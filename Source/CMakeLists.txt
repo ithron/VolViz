@@ -77,22 +77,41 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
 endif()
 
 add_library(VolViz
+  AxisAlignedPlane.cpp
+  Camera.cpp
+  Geometry.cpp
+  GeometryFactory.cpp
+  Shaders.cpp
+  Visualizer.cpp
+  VisualizerImpl.cpp
+  # GL related sources
   GL/GLFW.cpp
   GL/ShaderProgram.cpp
   GL/Shaders.cpp
-  Visualizer.cpp
-  VisualizerImpl.cpp
+  GL/Workarounds.cpp
 )
-target_link_libraries(VolViz
-  PUBLIC
-    Eigen
-    GSL
-    PhysUnits
-  PRIVATE
-    glfw
-    ${OPENGL_LIBRARIES}
-    ${MKL_TARGET}
-)
+if (BUILD_SHARED_LIBS)
+  target_link_libraries(VolViz
+    PUBLIC
+      Eigen
+      GSL
+      PhysUnits
+    PRIVATE
+      glfw
+      ${OPENGL_gl_LIBRARY}
+      ${MKL_TARGET}
+  )
+else()
+  target_link_libraries(VolViz
+    PUBLIC
+      Eigen
+      GSL
+      PhysUnits
+      glfw
+      ${OPENGL_gl_LIBRARY}
+      ${MKL_TARGET}
+  )
+endif()
 target_include_directories(VolViz PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>

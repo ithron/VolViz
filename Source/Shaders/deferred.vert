@@ -25,7 +25,7 @@ void main() {
   // set fixed colors for now
   albedo = vec3(1.0);
   specular = 1.0;
-  
+
   gShininess = shininess;
 
   texcoord = (textureTransformMatrix * positionIn).xyz;

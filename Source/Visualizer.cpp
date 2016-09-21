@@ -1,4 +1,5 @@
 #include "Visualizer.h"
+#include "GeometryDescriptor.h"
 #include "VisualizerImpl.h"
 
 #include <Eigen/Core>
@@ -6,11 +7,16 @@
 
 #include <iostream>
 #include <mutex>
+#include <type_traits>
 
 namespace VolViz {
 
 Visualizer::Visualizer()
-    : impl_(std::make_unique<Private_::VisualizerImpl>(this)) {}
+    : impl_(std::make_unique<Private_::VisualizerImpl>(this)) {
+  scale.afterAction = [this](auto const &) {
+    impl_->cachedScale.markAsDirty();
+  };
+}
 
 Visualizer::~Visualizer() = default;
 
@@ -46,9 +52,13 @@ void Visualizer::addLight(LightName name, Light const &light) {
   impl_->addLight(name, light);
 }
 
-void Visualizer::addGeometry(GeometryName name, AxisAlignedPlane const &plane) {
-  impl_->addGeometry(name, plane);
+template <class Descriptor, typename>
+void Visualizer::addGeometry(GeometryName name, Descriptor const &geom) {
+  impl_->addGeometry(name, geom);
 }
+
+template void Visualizer::addGeometry<AxisAlignedPlaneDescriptor>(
+    GeometryName name, AxisAlignedPlaneDescriptor const &);
 
 template <class VertBase, class IdxBase>
 void Visualizer::setMesh(Eigen::MatrixBase<VertBase> const &V,

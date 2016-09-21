@@ -1,11 +1,13 @@
 #include "VisualizerImpl.h"
 
 #include "GL/GL.h"
+#include "GL/GLdefs.h"
 #include "Visualizer.h"
 
 #include <Eigen/Core>
 #include <gsl.h>
 
+#include <algorithm>
 #include <iostream>
 #include <mutex>
 
@@ -20,7 +22,8 @@ namespace VolViz {
 namespace Private_ {
 
 #pragma mark Constructor
-VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
+VisualizerImpl::VisualizerImpl(Visualizer *vis)
+    : visualizer_(vis), geomFactory_(*this) {
 
   glfw_.makeCurrent();
 
@@ -33,30 +36,68 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
   if (major < 4 || !(major == 4 && minor >= 1)) {
     throw std::runtime_error("Need at least OpenGL version 4.1");
   }
+  // std::cout << "Extensions: " << std::endl;
+  // for (auto e : glfw_.supportedExtensions())
+  //   std::cout << "\t" << e << std::endl;
 
-  setupShaders();
+  shaders_.init();
   setupFBOs();
-  glfw_.keyInputHandler =
-      [this](int k, int s, int a, int m) { handleKeyInput(k, s, a, m); };
+  setupSelectionBuffers();
+
+  // Check if glClipControl is available
+  if (major > 4 || (major == 4 && minor >= 5) ||
+      glfw_.supportsExtension("GL_ARB_clip_control")) {
+    // glClipControl available, so we can use high precision DirectX like depth
+    // ranges
+    depthRange_.near = 1.f;
+    depthRange_.far = 0.f;
+    glDepthRange(0.0, 1.0);
+    glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);
+  } else {
+    // glClipControl is not available, have to stick to suboptimal depth ranges
+    depthRange_.near = 1.f;
+    depthRange_.far = -1.f;
+    glDepthRange(0.0, 1.0);
+  }
+  glDepthFunc(GL_GREATER);
+
+  glfw_.keyInputHandler = [this](int k, int s, int a, int m) {
+    handleKeyInput(k, s, a, m);
+  };
 
   glfw_.windowResizeCallback = [this](auto, auto) {
     this->setupFBOs(); // this is used explicitly here because gcc complains
                        // otherwise, although it's perectly standard conformant
     glViewport(0, 0, static_cast<GLsizei>(glfw_.width()),
                static_cast<GLsizei>(glfw_.height()));
+    float const FOV =
+        static_cast<float>(glfw_.width()) / static_cast<float>(glfw_.height());
+    this->camera().verticalFieldOfView = FOV;
   };
 
   glfw_.scrollWheelInputHandler = [this](double, double y) {
-    cameraPosition_(2) -= 2 * static_cast<float>(y);
+    Length const scale = cachedScale;
+    PhysicalPosition pos = camera().position;
+    pos(2) -= 2 * gsl::narrow_cast<float>(y) * scale;
+
+    camera().position = pos;
   };
 
   glfw_.mouseButtonCallback = [this](int button, int action, int) {
     switch (moveState_) {
       case MoveState::None:
-        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-          moveState_ = MoveState::Rotating;
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+          if (!inSelectionMode)
+            moveState_ = MoveState::Rotating;
+          else
+            moveState_ = MoveState::Dragging;
+        }
         break;
       case MoveState::Rotating:
+        if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+          moveState_ = MoveState::None;
+        break;
+      case MoveState::Dragging:
         if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
           moveState_ = MoveState::None;
         break;
@@ -71,11 +112,13 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
     using std::acos;
     using std::min;
     auto const pos =
-        Vector2d(2 * x / static_cast<double>(glfw_.width()) - 1.0,
-                 -2 * y / static_cast<double>(glfw_.height()) + 1.0);
-    auto const pos3 = Vector3d(pos(0), pos(1), sqrt(1.0 - pos.squaredNorm()));
-    auto const lastPos3 = Vector3d(lastMousePos_(0), lastMousePos_(1),
-                                   sqrt(1.0 - lastMousePos_.squaredNorm()));
+        Position2(2 * x / static_cast<double>(glfw_.width()) - 1.0,
+                  -2 * y / static_cast<double>(glfw_.height()) + 1.0);
+    auto const pos3 = Position(
+        pos(0), pos(1), static_cast<float>(sqrt(1.0 - pos.squaredNorm())));
+    auto const lastPos3 =
+        Position(lastMousePos_(0), lastMousePos_(1),
+                 static_cast<float>(sqrt(1.0 - lastMousePos_.squaredNorm())));
 
     switch (moveState_) {
       case MoveState::Rotating: {
@@ -84,155 +127,32 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis) : visualizer_(vis) {
             2;
         Vector3f const axis = lastPos3.cross(pos3).normalized().cast<float>();
         if (angle > 1e-3) {
-          cameraOrientation_ *=
-              Eigen::Quaternionf(
-                  Eigen::AngleAxisf(static_cast<float>(angle), axis)).inverse();
-          cameraOrientation_.normalize();
+          Orientation o = camera().orientation;
+          o *= Eigen::Quaternionf(
+                   Eigen::AngleAxisf(static_cast<float>(angle), axis))
+                   .inverse();
+          camera().orientation = o.normalized();
         }
         break;
       }
       case MoveState::None:
         break;
+      case MoveState::Dragging:
+        break;
     }
 
+    lastMouseDelta_ = pos - lastMousePos_;
     lastMousePos_ = pos;
   };
 }
 
 #pragma mark Setup Code
 
-void VisualizerImpl::setupShaders() {
-  quadProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::simpleTextureFragShaderSrc))
-          .link());
-
-  hdrQuadProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::hdrTextureFragShaderSrc))
-          .link());
-
-  normalQuadProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::normalVisualizationFragShaderSrc))
-                    .link());
-
-  depthQuadProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(
-              GL_FRAGMENT_SHADER, GL::Shaders::depthVisualizationFragShaderSrc))
-          .link());
-
-  specularQuadProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::specularVisualizationFragShaderSrc))
-                    .link());
-
-  ambientPassProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(
-               GL::Shader(GL_GEOMETRY_SHADER, GL::Shaders::quadGeomShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::ambientPassFragShaderSrc))
-          .link());
-
-  diffuseLightingPassProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::diffuseLightingPassFragShaderSrc))
-                    .link());
-
-  specularLightingPassProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::quadGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::specularLightingPassFragShaderSrc))
-                    .link());
-
-  geometryStageProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                   GL::Shaders::deferredVertexShaderSrc))
-          .attachShader(
-               GL::Shader(GL_FRAGMENT_SHADER,
-                          GL::Shaders::deferredPassthroughFragShaderSrc))
-          .link());
-
-  gridProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                   GL::Shaders::gridGeometryShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::passThroughFragShaderSrc))
-          .link());
-
-  planeProgram_ =
-      std::move(GL::ShaderProgram()
-                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
-                                             GL::Shaders::nullVertShaderSrc))
-                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                             GL::Shaders::planeGeomShaderSrc))
-                    .attachShader(GL::Shader(
-                        GL_FRAGMENT_SHADER,
-                        GL::Shaders::deferredPassthroughFragShaderSrc))
-                    .link());
-
-  bboxProgram_ = std::move(
-      GL::ShaderProgram()
-          .attachShader(
-               GL::Shader(GL_VERTEX_SHADER, GL::Shaders::nullVertShaderSrc))
-          .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
-                                   GL::Shaders::bboxGeometryShaderSrc))
-          .attachShader(GL::Shader(GL_FRAGMENT_SHADER,
-                                   GL::Shaders::passThroughFragShaderSrc))
-          .link());
-}
-
 void VisualizerImpl::setupFBOs() {
 
   auto const width = static_cast<GLsizei>(glfw_.width());
   auto const height = static_cast<GLsizei>(glfw_.height());
   // set up FBO
-
   { // textures and FBO for the geometry stage
     // normal and specular texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -248,7 +168,13 @@ void VisualizerImpl::setupFBOs() {
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    // Selection index texture
+    glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -259,6 +185,8 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::NormalsAndSpecular], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D,
                            textures_[TextureID::Albedo], 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D,
+                           textures_[TextureID::SelectionTexture], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::Depth], 0);
     // check FBO
@@ -280,7 +208,7 @@ void VisualizerImpl::setupFBOs() {
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::FinalDepth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, width, height);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -320,38 +248,28 @@ void VisualizerImpl::setupFBOs() {
   }
 }
 
+void VisualizerImpl::setupSelectionBuffers() {
+  for (auto &buffer : selectionBuffer_.buffers) {
+    buffer.upload(GL_PIXEL_PACK_BUFFER, sizeof(std::uint32_t) + sizeof(float),
+                  static_cast<void *>(nullptr), GL_STREAM_READ);
+  }
+  GL::Buffer::unbind(GL_PIXEL_PACK_BUFFER);
+}
+
 #pragma mark Matrix Computation
 
-Eigen::Matrix4f VisualizerImpl::projectionMatrix() const noexcept {
-  auto const width = glfw_.width();
-  auto const height = glfw_.height();
-  auto constexpr pi = static_cast<float>(M_PI);
-  auto const fovy = 1.f / std::tan(fov * pi / 360.f);
-  auto const aspect = static_cast<float>(width) / static_cast<float>(height);
-
-  auto P = Eigen::Matrix4f();
-  P << fovy / aspect, 0, 0, 0, 0, fovy, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0;
-
-  return P;
-}
-
-Eigen::Matrix4f VisualizerImpl::viewMatrix() const noexcept {
-  Eigen::Transform<float, 3, Eigen::Affine> camTrans =
-      (cameraOrientation_ * Eigen::Translation3f(cameraPosition_)).inverse();
-
-  return camTrans.matrix();
-}
-
 Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
-  Length const refScale = visualizer_->scale;
+  Length const refScale = cachedScale;
   auto const invScale =
       (Size3f(static_cast<float>(refScale / currentVolume_.voxelSize[0]),
               static_cast<float>(refScale / currentVolume_.voxelSize[1]),
               static_cast<float>(refScale / currentVolume_.voxelSize[2]))
-           .cwiseQuotient(currentVolume_.size.cast<float>())).eval();
+           .cwiseQuotient(currentVolume_.size.cast<float>()))
+          .eval();
 
-  Eigen::Matrix4f const t = (Eigen::Translation3f(Position::Ones() / 2) *
-                             invScale.asDiagonal()).matrix();
+  Eigen::Matrix4f const t =
+      (Eigen::Translation3f(Position::Ones() / 2) * invScale.asDiagonal())
+          .matrix();
 
   return t;
 }
@@ -413,6 +331,15 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
   currentVolume_ = descriptor;
 }
 
+Size3f VisualizerImpl::volumeSize() const noexcept {
+  Length const rScale = cachedScale;
+  return (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
+                 static_cast<float>(currentVolume_.voxelSize[1] / rScale),
+                 static_cast<float>(currentVolume_.voxelSize[2] / rScale))
+              .cwiseProduct(currentVolume_.size.cast<float>()) /
+          2.f);
+}
+
 template <>
 void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
                                gsl::span<Color const> data) {
@@ -436,86 +363,6 @@ void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
   lights_.emplace(name, light);
-}
-
-void VisualizerImpl::addGeometry(Visualizer::GeometryName name,
-                                 AxisAlignedPlane const &plane) {
-  using GL::MoveMask;
-  using Eigen::AngleAxisf;
-  using std::abs;
-  Length const refScale = visualizer_->scale;
-  auto geom = GL::Geometry{};
-  auto constexpr d90 = static_cast<float>(M_PI / 2.0);
-
-  float intercept = 1.f;
-
-  if (abs(plane.intercept / refScale) < 1e-6) {
-    geom.scale = refScale;
-    intercept = 0.f;
-  } else { geom.scale = plane.intercept; }
-
-  geom.movable = plane.movable;
-  geom.color = plane.color;
-
-  switch (plane.axis) {
-    case Axis::X:
-      geom.position = intercept * Position::UnitX();
-      geom.moveMask = MoveMask::X;
-      geom.orientation = AngleAxisf(d90, -Position::UnitY());
-      break;
-    case Axis::Y:
-      geom.position = intercept * Position::UnitY();
-      geom.moveMask = MoveMask::Y;
-      geom.orientation = AngleAxisf(d90, -Position::UnitX());
-      break;
-    case Axis::Z:
-      geom.position = intercept * Position::UnitZ();
-      geom.moveMask = MoveMask::Z;
-      geom.orientation = Orientation::Identity();
-      break;
-  }
-
-  auto init = [geom, this]() {
-    return [geom, this]() {
-      Length const rScale = visualizer_->scale;
-      auto const viewMat = viewMatrix();
-      auto const scale = static_cast<float>(geom.scale / rScale);
-      auto const volSize =
-          (Size3f(static_cast<float>(currentVolume_.voxelSize[0] / rScale),
-                  static_cast<float>(currentVolume_.voxelSize[1] / rScale),
-                  static_cast<float>(currentVolume_.voxelSize[2] / rScale))
-               .cwiseProduct(currentVolume_.size.cast<float>()) /
-           2.f).eval();
-
-      auto const modelMat = (Eigen::Translation3f(geom.position * scale) *
-                             geom.orientation * volSize.asDiagonal()).matrix();
-
-      auto const modelViewMat = (viewMat * modelMat).eval();
-      auto const inverseModelViewMatrix =
-          modelViewMat.block<3, 3>(0, 0).inverse().eval();
-
-      // bind volume texture
-      glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
-
-      planeProgram_.use();
-      planeProgram_["volume"] = 0;
-      planeProgram_["modelMatrix"] = modelMat;
-      planeProgram_["shininess"] = 10.f;
-      planeProgram_["color"] = geom.color;
-      planeProgram_["modelViewProjectionMatrix"] =
-          (projectionMatrix() * modelViewMat).eval();
-      planeProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
-      planeProgram_["textureTransformMatrix"] = textureTransformationMatrix();
-
-      auto boundVao = GL::binding(singleVertexData_.vao);
-      glDrawArrays(GL_POINTS, 0, 1);
-      assertGL("glDrawArrays failed");
-    };
-  };
-
-  std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
-  geometryInitQueue_.emplace(name, init);
 }
 
 template <class VertBase, class IdxBase>
@@ -593,7 +440,19 @@ template void
 VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
                           Eigen::MatrixBase<Eigen::MatrixXi> const &);
 
+void VisualizerImpl::drawSingleVertex() const noexcept {
+  auto boundVao = GL::binding(singleVertexData_.vao);
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+}
+
+void VisualizerImpl::bindVolume(GLuint unit) const noexcept {
+  glActiveTexture(GL_TEXTURE0 + unit);
+  glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
+}
+
 void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
+
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     switch (key) {
       case GLFW_KEY_1:
@@ -602,12 +461,24 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
       case GLFW_KEY_2:
         viewState_ = ViewState::LightingComponents;
         break;
+      case GLFW_KEY_3:
+        viewState_ = ViewState::SelectionIndices;
+        break;
       case GLFW_KEY_G:
         visualizer_->showGrid = !visualizer_->showGrid;
         break;
       case GLFW_KEY_B:
         visualizer_->showVolumeBoundingBox =
             !visualizer_->showVolumeBoundingBox;
+        break;
+      case GLFW_KEY_LEFT_CONTROL:
+        inSelectionMode = true;
+        break;
+    }
+  } else if (action == GLFW_RELEASE) {
+    switch (key) {
+      case GLFW_KEY_LEFT_CONTROL:
+        inSelectionMode = false;
         break;
     }
   }
@@ -625,14 +496,15 @@ void VisualizerImpl::renderOneFrame() {
     {
       std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
       if (!geometryInitQueue_.empty()) {
-        entry = geometryInitQueue_.front();
+        entry = std::move(geometryInitQueue_.front());
         geometryInitQueue_.pop();
       }
     } // release lock
     // Init and add geometry if queue was not empty
     if (entry.second) {
       std::cout << "Init geometry '" << entry.first << "'" << std::endl;
-      geometries_.emplace(entry.first, entry.second());
+      entry.second->init();
+      geometries_.emplace(entry.first, std::move(entry.second));
     }
   }
 
@@ -653,18 +525,35 @@ void VisualizerImpl::renderOneFrame() {
     case ViewState::LightingComponents:
       renderLightingTextures();
       break;
+    case ViewState::SelectionIndices:
+      renderSelectionIndexTexture();
+      break;
   }
 
+  // auto const geomNameAndPos = getGeometryUnderCursor();
+  // if (!geomNameAndPos.first.empty() && viewState_ == ViewState::Scene3D)
+  //     renderPoint(geomNameAndPos.second, Colors::Cyan(), 2.5f);
+
   renderFinalPass();
+
+  if (inSelectionMode && moveState_ != MoveState::Dragging) {
+    auto const geomNameAndPos = getGeometryUnderCursor();
+    selectedGeometry_ = geomNameAndPos.name;
+    selectedPoint_ = geomNameAndPos.position;
+  } else if (inSelectionMode && moveState_ == MoveState::Dragging) {
+    dragSelectedGeometry();
+  } else if (moveState_ != MoveState::Dragging) {
+    selectedGeometry_.clear();
+  }
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
 }
 
 void VisualizerImpl::renderMeshes() {
-  auto const pMatrix = projectionMatrix();
-  auto const vMatrix = viewMatrix();
-  auto const MVP = (pMatrix * vMatrix).eval();
+  Length const scale = cachedScale;
+  auto const vMatrix = cameraClient().viewMatrix(scale);
+  auto const MVP = cameraClient().viewProjectionMatrix(scale);
   auto const inverseModelViewMatrix =
       vMatrix.block<3, 3>(0, 0).inverse().eval();
   constexpr std::array<GLuint, 3> attachments{
@@ -685,18 +574,18 @@ void VisualizerImpl::renderMeshes() {
   glColorMask(true, true, true, true);
 
   // Render geometry to FBO
-  geometryStageProgram_.use();
+  shaders_["geometryStage"].use();
   assertGL("OpenGL Error stack not clean");
 
   // bind volume texture
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 
-  geometryStageProgram_["volume"] = 0;
-  geometryStageProgram_["shininess"] = mesh_.shininess;
-  geometryStageProgram_["modelViewProjectionMatrix"] = MVP;
-  geometryStageProgram_["inverseModelViewMatrix"] = inverseModelViewMatrix;
-  geometryStageProgram_["textureTransformMatrix"] =
+  shaders_["geometryStage"]["volume"] = 0;
+  shaders_["geometryStage"]["shininess"] = mesh_.shininess;
+  shaders_["geometryStage"]["modelViewProjectionMatrix"] = MVP;
+  shaders_["geometryStage"]["inverseModelViewMatrix"] = inverseModelViewMatrix;
+  shaders_["geometryStage"]["textureTransformMatrix"] =
       textureTransformationMatrix();
   if (mesh_.vao.name != 0) {
     auto boundVao = GL::binding(mesh_.vao);
@@ -719,7 +608,7 @@ void VisualizerImpl::renderGeometry() {
   glDrawBuffers(attachments.size(), attachments.data());
 
   glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(1.0);
+  glClearDepth(0.0);
   glClearStencil(0);
   glDisable(GL_FRAMEBUFFER_SRGB);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -728,7 +617,9 @@ void VisualizerImpl::renderGeometry() {
   glColorMask(true, true, true, true);
 
   // call render commands
-  for (auto const &geom : geometries_) geom.second();
+  std::uint32_t idx = 0;
+  for (auto const &geom : geometries_)
+    geom.second->render(++idx, geom.first == selectedGeometry_);
 
   // switch back to single render target
   glDrawBuffers(1, attachments.data());
@@ -736,14 +627,13 @@ void VisualizerImpl::renderGeometry() {
 
 void VisualizerImpl::renderGrid() {
 
+  Length const scale = cachedScale;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
-  auto const pMatrix = projectionMatrix();
-  auto const vMatrix = viewMatrix();
-
-  gridProgram_.use();
-  gridProgram_["scale"] = 1.f;
-  gridProgram_["viewProjectionMatrix"] = (pMatrix * vMatrix).eval();
+  shaders_["grid"].use();
+  shaders_["grid"]["scale"] = 1.f;
+  shaders_["grid"]["viewProjectionMatrix"] =
+      cameraClient().viewProjectionMatrix(scale);
 
   auto boundVao = binding(singleVertexData_.vao);
 
@@ -751,6 +641,31 @@ void VisualizerImpl::renderGrid() {
   glDepthMask(GL_TRUE);
   glDrawArrays(GL_POINTS, 0, 1);
   assertGL("glDrawArrays failed");
+}
+
+void VisualizerImpl::renderPoint(Position const &position, Color const &color,
+                                 float size) {
+
+  Length const scale = cachedScale;
+  auto fboBinding =
+      binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
+
+  auto const viewProjMat = cameraClient().viewProjectionMatrix(scale);
+  PositionH projPos = viewProjMat * position.homogeneous();
+
+  shaders_["point"].use();
+  shaders_["point"]["size"] = size;
+  shaders_["point"]["position"] = projPos;
+  shaders_["point"]["pointColor"] = color;
+
+  auto boundVao = binding(singleVertexData_.vao);
+  glDisable(GL_DEPTH_TEST);
+  glDepthMask(GL_FALSE);
+  glEnable(GL_PROGRAM_POINT_SIZE);
+  glDrawArrays(GL_POINTS, 0, 1);
+  assertGL("glDrawArrays failed");
+  glDepthMask(GL_TRUE);
+  glDisable(GL_PROGRAM_POINT_SIZE);
 }
 
 void VisualizerImpl::renderLightingTextures() {
@@ -763,22 +678,37 @@ void VisualizerImpl::renderLightingTextures() {
   glDisable(GL_DEPTH_TEST);
 
   renderQuad(Point2::Zero(), halfWindowSize, TextureID::NormalsAndSpecular,
-             normalQuadProgram_);
+             shaders_["normalQuad"]);
   renderQuad(Point2::Zero() + Point2(halfWindowSize(0), 0), halfWindowSize,
-             TextureID::Depth, depthQuadProgram_);
+             TextureID::Depth, shaders_["depthQuad"]);
   // glEnable(GL_FRAMEBUFFER_SRGB);
   renderQuad(Point2::Zero() + Point2(0, halfWindowSize(1)), halfWindowSize,
-             TextureID::Albedo, quadProgram_);
+             TextureID::Albedo, shaders_["quad"]);
   renderQuad(Point2::Zero() + halfWindowSize, halfWindowSize,
-             TextureID::NormalsAndSpecular, specularQuadProgram_);
+             TextureID::NormalsAndSpecular, shaders_["specularQuad"]);
+}
+
+void VisualizerImpl::renderSelectionIndexTexture() {
+  auto boundFBO =
+      GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
+
+  glDisable(GL_FRAMEBUFFER_SRGB);
+  glDisable(GL_DEPTH_TEST);
+
+  shaders_["selectionIndexVisualization"].use();
+  shaders_["selectionIndexVisualization"]["nObjects"] =
+      static_cast<std::uint32_t>(geometries_.size());
+  renderFullscreenQuad(TextureID::SelectionTexture,
+                       shaders_["selectionIndexVisualization"]);
 }
 
 void VisualizerImpl::renderFinalPass() {
   // Render FBA color attachment to screen
   GL::Framebuffer::unbind(GL_FRAMEBUFFER);
   // glDisable(GL_FRAMEBUFFER_SRGB);
-  // glEnable(GL_FRAMEBUFFER_SRGB);
-  renderFullscreenQuad(TextureID::RenderedImage, hdrQuadProgram_);
+  glEnable(GL_FRAMEBUFFER_SRGB);
+  renderFullscreenQuad(TextureID::RenderedImage, shaders_["hdrQuad"]);
+  // renderFullscreenQuad(TextureID::RenderedImage, quadProgram_);
   // auto readBinding =
   //     GL::binding(finalFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
   // auto const w = static_cast<GLint>(glfw_.width());
@@ -791,15 +721,18 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
                                        Orientation const &orientation,
                                        Size3f const &size, Color const &color) {
 
+  Length const scale = cachedScale;
   auto fboBinding = binding(finalFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
 
-  auto const modelMat = (Eigen::Translation3f(position) * orientation *
-                         size.asDiagonal()).matrix();
-  auto const mvpMatrix = (projectionMatrix() * viewMatrix() * modelMat).eval();
+  auto const modelMat =
+      (Eigen::Translation3f(position) * orientation * size.asDiagonal())
+          .matrix();
+  auto const mvpMatrix =
+      (cameraClient().viewProjectionMatrix(scale) * modelMat).eval();
 
-  bboxProgram_.use();
-  bboxProgram_["lineColor"] = color;
-  bboxProgram_["modelViewProjectionMatrix"] = mvpMatrix;
+  shaders_["bbox"].use();
+  shaders_["bbox"]["lineColor"] = color;
+  shaders_["bbox"]["modelViewProjectionMatrix"] = mvpMatrix;
 
   // draw quad using the geometry shader
   auto boundVao = GL::binding(singleVertexData_.vao);
@@ -812,7 +745,7 @@ void VisualizerImpl::renderBoundingBox(Position const &position,
 
 void VisualizerImpl::renderVolumeBBox() {
   auto const vol = currentVolume_;
-  Length const scale = visualizer_->scale;
+  Length const scale = cachedScale;
 
   auto const voxelSize = Size3f(static_cast<float>(vol.voxelSize[0] / scale),
                                 static_cast<float>(vol.voxelSize[1] / scale),
@@ -824,6 +757,98 @@ void VisualizerImpl::renderVolumeBBox() {
                     Colors::Cyan());
 }
 
+VisualizerImpl::GeometryNameAndPosition
+VisualizerImpl::getGeometryUnderCursor() {
+  using std::swap;
+  // Bind FBO
+  auto fboBinding =
+      binding(lightingFbo_, static_cast<GLenum>(GL_READ_FRAMEBUFFER));
+  // assertGL("Failed to bind framebuffer");
+
+  auto const mousePos = lastMousePos_;
+  // convert mouse position to texture screen coordinates
+  auto const windowSize = Size2(glfw_.width(), glfw_.height()).cast<double>();
+  auto const pos = Position2((mousePos(0) + 1.0) * windowSize(0) / 2.0,
+                             (mousePos(1) + 1.0) * windowSize(1) / 2.0)
+                       .cast<GLint>()
+                       .eval();
+
+  // Copy index and depth to selection(back) buffer
+  auto const writeBinding = GL::binding(
+      *selectionBuffer_.writeBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
+  glPixelStorei(GL_PACK_ALIGNMENT, 4);
+  glReadBuffer(GL_COLOR_ATTACHMENT2);
+  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, 0);
+  glReadPixels(pos(0), pos(1), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
+               reinterpret_cast<void *>(sizeof(std::uint32_t)));
+  assertGL("Failed to read depth value under cursor");
+
+  // map selection (front) buffer and read index and depth value
+  auto const readBinding = GL::binding(
+      *selectionBuffer_.readBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
+  void const *mappedMemory = glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+  assertGL("Failed to map memory");
+  Expects(mappedMemory != nullptr);
+
+  auto const index = *reinterpret_cast<std::uint32_t const *>(mappedMemory);
+  auto const normalizedDepth = *reinterpret_cast<float const *>(
+      reinterpret_cast<std::uint8_t const *>(mappedMemory) +
+      sizeof(std::uint32_t));
+  glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+  selectionBuffer_.swap();
+
+  // retrieve geometry name
+  Visualizer::GeometryName name;
+  if (index > 0) {
+    auto const entry = std::next(geometries_.cbegin(), index - 1);
+    name = entry->first;
+  }
+
+  // convert depth into camera depth
+  auto const cameraDepthRange = camera().depthRange();
+  auto const minCamDepth =
+      std::min(cameraDepthRange.near, cameraDepthRange.far);
+  auto const maxCamDepth =
+      std::max(cameraDepthRange.near, cameraDepthRange.far);
+  auto const minDepth = std::min(depthRange_.near, depthRange_.far);
+  auto const maxDepth = std::max(depthRange_.near, depthRange_.far);
+  auto const depthInWorld = normalizedDepth * (maxDepth - minDepth) + minDepth;
+  auto const depthInCamera = std::clamp(depthInWorld, minCamDepth, maxCamDepth);
+
+  // Compute 3D position using window coordinates and depth
+  auto const posInWorld =
+      cameraClient().unproject(mousePos, depthInCamera, cachedScale);
+
+  return GeometryNameAndPosition{name, posInWorld, depthInCamera};
+}
+
+void VisualizerImpl::dragSelectedGeometry() {
+  if (selectedGeometry_.empty()) return;
+
+  // Get mouse ray
+  Position const pNear =
+      cameraClient().unproject(lastMousePos_, 1.f, cachedScale);
+  Position const pFar =
+      cameraClient().unproject(lastMousePos_, 1e-12f, cachedScale);
+  Position const d = (pFar - pNear).normalized();
+  float const alpha = d.transpose() * (selectedPoint_ - pNear);
+
+  // Compute the intersection point of the ray and a plane that is
+  // perpendicular to d and on which the selected point lies.
+  Position const targetPoint = pNear + alpha * d;
+
+  // Compute movement delta
+  Position const moveDelta = targetPoint - selectedPoint_;
+
+  // Get selected geometry and compute a move mask vector
+  auto &geometry = *geometries_[selectedGeometry_];
+  auto const maskVector = maskToUnitVector(geometry.moveMask);
+  auto const maskedMoveDelta = moveDelta.cwiseProduct(maskVector);
+
+  selectedPoint_ += maskedMoveDelta;
+  geometry.position += maskedMoveDelta;
+}
+
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,
                                           GL::ShaderProgram &prog) {
   renderQuad(Point2::Zero(), Size2(glfw_.width(), glfw_.height()), texture,
@@ -832,6 +857,7 @@ void VisualizerImpl::renderFullscreenQuad(TextureID texture,
 
 void VisualizerImpl::renderQuad(Point2 const &topLeft, Size2 const &size,
                                 TextureID texture, GL::ShaderProgram &prog) {
+  assertGL("Dirty openGL error stack");
   auto const windowSize = Size2(glfw_.width(), glfw_.height());
 
   // convert window coordinates (in pixel) to clip space coordinates
@@ -894,22 +920,24 @@ void VisualizerImpl::renderAmbientLighting() {
   }
 
   // Ambient pass
-  ambientPassProgram_.use();
-  ambientPassProgram_["lightColor"] = ambientColor;
+  shaders_["ambientPass"].use();
+  shaders_["ambientPass"]["lightColor"] = ambientColor;
 
-  renderFullscreenQuad(TextureID::Albedo, ambientPassProgram_);
+  renderFullscreenQuad(TextureID::Albedo, shaders_["ambientPass"]);
 }
 
 void VisualizerImpl::renderDiffuseLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
-  auto const viewMat = viewMatrix();
+  Length const scale = cachedScale;
+  auto const viewMat = cameraClient().viewMatrix(scale);
 
-  diffuseLightingPassProgram_.use();
-  diffuseLightingPassProgram_["normalAndSpecularTex"] = 0;
-  diffuseLightingPassProgram_["albedoTex"] = 1;
-  diffuseLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
-  diffuseLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
+  shaders_["diffuseLightingPass"].use();
+  shaders_["diffuseLightingPass"]["normalAndSpecularTex"] = 0;
+  shaders_["diffuseLightingPass"]["albedoTex"] = 1;
+  shaders_["diffuseLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
+  shaders_["diffuseLightingPass"]["size"] =
+      (2 * Eigen::Vector2f::Ones()).eval();
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -926,9 +954,9 @@ void VisualizerImpl::renderDiffuseLighting() {
 
     PositionH const lightPosition = (viewMat * light.position);
 
-    diffuseLightingPassProgram_["lightPosition"] =
+    shaders_["diffuseLightingPass"]["lightPosition"] =
         lightPosition.head<3>().eval();
-    diffuseLightingPassProgram_["lightColor"] = light.color;
+    shaders_["diffuseLightingPass"]["lightColor"] = light.color;
 
     // draw quad using the geometry shader
     glDrawArrays(GL_POINTS, 0, 1);
@@ -939,13 +967,15 @@ void VisualizerImpl::renderDiffuseLighting() {
 void VisualizerImpl::renderSpecularLighting() {
   std::lock_guard<std::mutex> lock(lightMutex_);
 
-  auto const viewMat = viewMatrix();
+  Length const scale = cachedScale;
+  auto const viewMat = cameraClient().viewMatrix(scale);
 
-  specularLightingPassProgram_.use();
-  specularLightingPassProgram_["normalAndSpecularTex"] = 0;
-  specularLightingPassProgram_["albedoTex"] = 1;
-  specularLightingPassProgram_["topLeft"] = Eigen::Vector2f(-1, 1);
-  specularLightingPassProgram_["size"] = (2 * Eigen::Vector2f::Ones()).eval();
+  shaders_["specularLightingPass"].use();
+  shaders_["specularLightingPass"]["normalAndSpecularTex"] = 0;
+  shaders_["specularLightingPass"]["albedoTex"] = 1;
+  shaders_["specularLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
+  shaders_["specularLightingPass"]["size"] =
+      (2 * Eigen::Vector2f::Ones()).eval();
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
@@ -962,9 +992,9 @@ void VisualizerImpl::renderSpecularLighting() {
 
     PositionH const lightPosition = (viewMat * light.position);
 
-    specularLightingPassProgram_["lightPosition"] =
+    shaders_["specularLightingPass"]["lightPosition"] =
         lightPosition.head<3>().eval();
-    specularLightingPassProgram_["lightColor"] = light.color;
+    shaders_["specularLightingPass"]["lightColor"] = light.color;
 
     // draw quad using the geometry shader
     glDrawArrays(GL_POINTS, 0, 1);

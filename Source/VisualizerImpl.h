@@ -1,13 +1,17 @@
 #ifndef VolViz_VisualizerImpl_h
 #define VolViz_VisualizerImpl_h
 
+#include "AtomicCache.h"
 #include "GL/GL.h"
+#include "GeometryFactory.h"
+#include "Shaders.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 #include <VolViz/VolViz.h>
 
 #include <atomic>
+#include <chrono>
 #include <mutex>
 #include <queue>
 #include <unordered_map>
@@ -16,11 +20,10 @@ namespace VolViz {
 namespace Private_ {
 
 class VisualizerImpl {
-  using RenderCommand = std::function<void()>;
-  using InitCommand = std::function<RenderCommand()>;
-  using InitQueueEntry = std::pair<Visualizer::GeometryName, InitCommand>;
+  using InitQueueEntry =
+      std::pair<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryList =
-      std::unordered_map<Visualizer::GeometryName, RenderCommand>;
+      std::unordered_map<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryInitQueue = std::queue<InitQueueEntry>;
 
 public:
@@ -39,15 +42,56 @@ public:
   template <class T>
   void setVolume(VolumeDescriptor const &descriptor, gsl::span<T> data);
 
+  Size3f volumeSize() const noexcept;
+
   template <class VertBase, class IdxBase>
   void setMesh(Eigen::MatrixBase<VertBase> const &V,
                Eigen::MatrixBase<IdxBase> const &I);
 
-  void addGeometry(Visualizer::GeometryName name,
-                   AxisAlignedPlane const &plane);
+  template <class Descriptor,
+            typename = std::enable_if_t<std::is_base_of<
+                GeometryDescriptor, std::decay_t<Descriptor>>::value>>
+  inline void addGeometry(Visualizer::GeometryName name,
+                          Descriptor const &descriptor) {
+    std::lock_guard<std::mutex> const lock{geomInitQueueMutex_};
+    geometryInitQueue_.emplace(name, geomFactory_.create(descriptor));
+  }
+
+  /// Convenience method for easy camera access
+  inline Camera const &camera() const noexcept { return visualizer_->camera; }
+  inline Camera &camera() noexcept { return visualizer_->camera; }
+
+  inline auto cameraClient() const noexcept { return camera().client(); }
+
+  inline Shaders &shaders() noexcept { return shaders_; }
+
+  /// Issues an OpenGL draw call with a single vertex.
+  /// This comes in handy if all the geometry is created by a geometry shader
+  void drawSingleVertex() const noexcept;
+
+  /// Bind the volume texture to texture unit i
+  void bindVolume(GLuint unitIdx = 0) const noexcept;
+
+  /// Returns a matrix that transforms world coordinates into texture
+  /// coordinates
+  Eigen::Matrix4f textureTransformationMatrix() const noexcept;
+
+  /// Visualizer's scale is cached here, since it is accessed at least once per
+  /// frame and is usually cahnged very rare. Since every access to Visualizer's
+  /// scale property requires thread synchronization, a cache is necessary here.
+  AtomicCache<Length> cachedScale{
+      [this]() -> Length { return visualizer_->scale; }};
 
 private:
   friend class ::VolViz::Visualizer;
+
+  using Clock = std::chrono::steady_clock;
+  using TimePoint = std::chrono::time_point<Clock>;
+  using GeometryNameAndPosition = struct {
+    Visualizer::GeometryName name;
+    Position position;
+    float depth;
+  };
 
   /// IDs for the auxiliary textures used for the deferred rendering
   enum class TextureID : std::size_t {
@@ -56,24 +100,19 @@ private:
     Depth = 2,
     RenderedImage = 3,
     FinalDepth = 4,
-    VolumeTexture = 5
+    VolumeTexture = 5,
+    SelectionTexture = 6
   };
-
-  /// Compiles and links all shader programs
-  void setupShaders();
 
   /// Setup the required textures and frabebuffer objects for rendering
   void setupFBOs();
 
-  /// Returns the projection matrix
-  Eigen::Matrix4f projectionMatrix() const noexcept;
+  /// Setup selection buffers
+  void setupSelectionBuffers();
 
-  /// Returns the view matrix (i.e. inverse camera transformation)
-  Eigen::Matrix4f viewMatrix() const noexcept;
-
-  /// Returns a matrix that transforms world coordinates into texture
-  /// coordinates
-  Eigen::Matrix4f textureTransformationMatrix() const noexcept;
+  /// Unprojects a point in screen coordinates and a given depth to a 3D point
+  /// in world space
+  Position unproject(Position2 const &screenPoint, float depth) const noexcept;
 
   /// Key input handler
   void handleKeyInput(int key, int scancode, int action, int mode);
@@ -86,6 +125,9 @@ private:
 
   /// Renders a grid
   void renderGrid();
+
+  /// Renders a point
+  void renderPoint(Position const &position, Color const &color, float size);
 
   /// Renderes a textured quad
   void renderQuad(Point2 const &topLeft, Size2 const &size, TextureID texture,
@@ -108,6 +150,12 @@ private:
 
   void renderLightSpecular(Light const &light);
 
+  void renderSelectionIndexTexture();
+
+  GeometryNameAndPosition getGeometryUnderCursor();
+
+  void dragSelectedGeometry();
+
   /// Renders the final image to screen
   void renderFinalPass();
 
@@ -124,23 +172,16 @@ private:
   /// @{
 
   Visualizer *visualizer_ = nullptr;
+  GeometryFactory geomFactory_;
 
-  /// @defgroup shaders Shader Programs
-  /// @{
+  struct DepthRange {
+    float near, far;
+  } depthRange_;
+
   GL::GLFW glfw_;
-  GL::ShaderProgram ambientPassProgram_;
-  GL::ShaderProgram bboxProgram_;
-  GL::ShaderProgram depthQuadProgram_;
-  GL::ShaderProgram diffuseLightingPassProgram_;
-  GL::ShaderProgram geometryStageProgram_;
-  GL::ShaderProgram gridProgram_;
-  GL::ShaderProgram hdrQuadProgram_;
-  GL::ShaderProgram normalQuadProgram_;
-  GL::ShaderProgram planeProgram_;
-  GL::ShaderProgram quadProgram_;
-  GL::ShaderProgram specularLightingPassProgram_;
-  GL::ShaderProgram specularQuadProgram_;
-  /// @}
+
+  /// Shader programs
+  Shaders shaders_;
 
   /// Auxiliary textures use in the deferred shading process.
   struct TextureWrapper {
@@ -149,11 +190,24 @@ private:
     }
 
   private:
-    GL::Textures<6> textures_;
+    GL::Textures<7> textures_;
   } textures_;
   /// Frabebuffer used for the deferred shading
-  GL::Framebuffer lightingFbo_{0};
   GL::Framebuffer finalFbo_{0};
+  GL::Framebuffer lightingFbo_{0};
+
+  /// Pixel buffers used for mouse picking
+  struct SelectionBuffer {
+    using Buffers = std::array<GL::Buffer, 2>;
+    using Handle = Buffers::iterator;
+
+    Buffers buffers;
+    Handle readBuffer{buffers.begin()}, writeBuffer{buffers.begin() + 1};
+    inline void swap() noexcept {
+      using std::swap;
+      swap(readBuffer, writeBuffer);
+    }
+  } selectionBuffer_;
 
   /// Data required to render a mesh
   struct MeshData {
@@ -185,8 +239,13 @@ private:
 
   enum class ViewState {
     Scene3D,
-    LightingComponents
+    LightingComponents,
+    SelectionIndices
   } viewState_{ViewState::Scene3D};
+
+  bool inSelectionMode{false};
+  Visualizer::GeometryName selectedGeometry_;
+  Position selectedPoint_{Position::Zero()};
 
   /// Lights
   Lights lights_;
@@ -195,15 +254,15 @@ private:
   ///@defgroup cameraRelated Camera related variables
   /// @{
   /// Camera state
-  enum class MoveState { None, Rotating } moveState_ = MoveState::None;
+  enum class MoveState {
+    None,
+    Rotating,
+    Dragging
+  } moveState_ = MoveState::None;
 
   /// Last position of the mouse cursor, used in the camera control code
-  Eigen::Vector2d lastMousePos_ = Eigen::Vector2d::Zero();
-
-  /// Camera field of view
-  float fov = Visualizer::kDefaultFOV;
-  Eigen::Vector3f cameraPosition_ = Eigen::Vector3f::Zero();
-  Eigen::Quaternionf cameraOrientation_ = Eigen::Quaternionf::Identity();
+  Position2 lastMousePos_ = Position2::Zero();
+  Position2 lastMouseDelta_ = Position2::Zero();
   //@}
 
   VolumeDescriptor currentVolume_;

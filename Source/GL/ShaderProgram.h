@@ -65,6 +65,13 @@ public:
     return *this;
   }
 
+  UniformProxy const &operator=(GLuint i) const noexcept {
+    assertGL("Precondition violation");
+    glUniform1ui(location_, i);
+    assertGL("Failed to upload uniform");
+    return *this;
+  }
+
   UniformProxy const &operator=(Eigen::Vector2f const &v) const noexcept {
     assertGL("Precondition violation");
     glUniform2fv(location_, 1, v.data());

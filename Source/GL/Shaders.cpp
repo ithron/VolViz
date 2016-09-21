@@ -62,17 +62,29 @@ std::string const specularVisualizationFragShaderSrc =
 #include "Shaders/specularVisualization.frag"
     ;
 
-extern std::string const planeGeomShaderSrc =
+std::string const planeGeomShaderSrc =
 #include "Shaders/plane.geom"
     ;
 
-extern std::string const coloredQuadFragmentShaderSrc =
+std::string const coloredQuadFragmentShaderSrc =
 #include "Shaders/coloredQuad.frag"
     ;
 
-extern std::string const bboxGeometryShaderSrc =
+std::string const bboxGeometryShaderSrc =
 #include "Shaders/bbox.geom"
     ;
+
+std::string const selectionFragShaderSrc =
+#include "Shaders/selection.frag"
+  ;
+
+std::string const selectionIndexVisualizationFragShaderSrc =
+#include "Shaders/selectionIndexVisualization.frag"
+  ;
+
+std::string const pointVertShaderSrc =
+#include "Shaders/point.vert"
+  ;
 
 #pragma clang diagnostic pop
 
