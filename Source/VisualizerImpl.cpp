@@ -538,11 +538,12 @@ void VisualizerImpl::renderOneFrame() {
 
   if (inSelectionMode && moveState_ != MoveState::Dragging) {
     auto const geomNameAndPos = getGeometryUnderCursor();
-    selectedGeometry = geomNameAndPos.first;
+    selectedGeometry_ = geomNameAndPos.name;
+    selectedPoint_ = geomNameAndPos.position;
   } else if (inSelectionMode && moveState_ == MoveState::Dragging) {
     dragSelectedGeometry();
   } else if (moveState_ != MoveState::Dragging) {
-    selectedGeometry.clear();
+    selectedGeometry_.clear();
   }
 
   glfw_.swapBuffers();
@@ -618,7 +619,7 @@ void VisualizerImpl::renderGeometry() {
   // call render commands
   std::uint32_t idx = 0;
   for (auto const &geom : geometries_)
-    geom.second->render(++idx, geom.first == selectedGeometry);
+    geom.second->render(++idx, geom.first == selectedGeometry_);
 
   // switch back to single render target
   glDrawBuffers(1, attachments.data());
@@ -818,33 +819,34 @@ VisualizerImpl::getGeometryUnderCursor() {
   auto const posInWorld =
       cameraClient().unproject(mousePos, depthInCamera, cachedScale);
 
-  return GeometryNameAndPosition(name, posInWorld);
+  return GeometryNameAndPosition{name, posInWorld, depthInCamera};
 }
 
 void VisualizerImpl::dragSelectedGeometry() {
-  if (selectedGeometry.empty()) return;
+  if (selectedGeometry_.empty()) return;
 
-  // Position const mousePos{lastMousePos_.x(), lastMousePos_.y(), 1};
-  PositionH const mouseDelta{lastMouseDelta_.x(), lastMouseDelta_.y(), 0, 0};
-  // Position const mouseDir = mouseDelta.normalized();
-  // auto const movedDistance = mouseDelta.norm();
-  Length const scale = visualizer_->scale;
-  Matrix4 const invViewMat = cameraClient().viewMatrix(scale).inverse();
+  // Get mouse ray
+  Position const pNear =
+      cameraClient().unproject(lastMousePos_, 1.f, cachedScale);
+  Position const pFar =
+      cameraClient().unproject(lastMousePos_, 1e-12f, cachedScale);
+  Position const d = (pFar - pNear).normalized();
+  float const alpha = d.transpose() * (selectedPoint_ - pNear);
 
-  // PositionH moveDirectionInWorld =
-  //     invViewMat * PositionH{mouseDir.x(), mouseDir.y(), mouseDir.z(), 0} *
-  //     movedDistance;
-  PositionH moveDirectionInWorld = invViewMat * mouseDelta;
+  // Compute the intersection point of the ray and a plane that is
+  // perpendicular to d and on which the selected point lies.
+  Position const targetPoint = pNear + alpha * d;
 
-  auto &geometry = *geometries_[selectedGeometry];
+  // Compute movement delta
+  Position const moveDelta = targetPoint - selectedPoint_;
+
+  // Get selected geometry and compute a move mask vector
+  auto &geometry = *geometries_[selectedGeometry_];
   auto const maskVector = maskToUnitVector(geometry.moveMask);
-  moveDirectionInWorld =
-      moveDirectionInWorld.cwiseProduct(maskVector.homogeneous());
+  auto const maskedMoveDelta = moveDelta.cwiseProduct(maskVector);
 
-  std::cout << "Drag '" << selectedGeometry << "' in dir "
-            << moveDirectionInWorld.head<3>().transpose() << std::endl;
-
-  geometry.position += moveDirectionInWorld.head<3>();
+  selectedPoint_ += maskedMoveDelta;
+  geometry.position += maskedMoveDelta;
 }
 
 void VisualizerImpl::renderFullscreenQuad(TextureID texture,

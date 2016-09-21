@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
   light.position = PositionH(1, 2, 1, 0);
   viewer.addLight(2, light);
 
-  viewer.scale = 1_mm;
+  viewer.scale = 2_mm;
 
   AxisAlignedPlaneDescriptor plane;
   plane.axis = Axis::X;

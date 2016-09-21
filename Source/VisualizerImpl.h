@@ -87,7 +87,11 @@ private:
 
   using Clock = std::chrono::steady_clock;
   using TimePoint = std::chrono::time_point<Clock>;
-  using GeometryNameAndPosition = std::pair<Visualizer::GeometryName, Position>;
+  using GeometryNameAndPosition = struct {
+    Visualizer::GeometryName name;
+    Position position;
+    float depth;
+  };
 
   /// IDs for the auxiliary textures used for the deferred rendering
   enum class TextureID : std::size_t {
@@ -240,7 +244,8 @@ private:
   } viewState_{ViewState::Scene3D};
 
   bool inSelectionMode{false};
-  Visualizer::GeometryName selectedGeometry;
+  Visualizer::GeometryName selectedGeometry_;
+  Position selectedPoint_{Position::Zero()};
 
   /// Lights
   Lights lights_;

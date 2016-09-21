@@ -69,7 +69,7 @@ Position Camera::unproject(Position2 const &screenPos, float depth,
   Angle const FOV = cachedVerticalFOV_;
   float const f = 1.f / gsl::narrow_cast<float>(std::tan(FOV / 2.0));
   auto const w = f / depth;
-  auto const p = PositionH(screenPos(0), screenPos(1), depth, 1) * w;
+  PositionH const p = PositionH(screenPos(0), screenPos(1), depth, 1) * w;
   cachedScale_ = ambientScale;
 
   return (viewProjectionMatrix().inverse() * p).head<3>();

@@ -61,7 +61,7 @@ private:
   /// Returns the product of projectionMatrix() * viewMatrix(...)
   Matrix4 viewProjectionMatrix() const noexcept;
 
-  /// Unprojectis a point in screen coordinates with known deoth into the 3D
+  /// Unprojects a point in screen coordinates with known depth into the 3D
   /// scene
   ///
   /// @param screenPos the source point in screen coordinate system, i.e.
@@ -142,7 +142,7 @@ class CameraClient {
     return cam_.cachedViewProjectionMatrix_;
   }
 
-  /// Unprojectis a point in screen coordinates with known deoth into the 3D
+  /// Unprojectis a point in screen coordinates with known depth into the 3D
   /// scene
   ///
   /// @param screenPos the source point in screen coordinate system, i.e.
@@ -154,6 +154,23 @@ class CameraClient {
   inline Position unproject(Position2 const &screenPos, float depth,
                             Length ambientScale) const noexcept {
     return cam_.unproject(screenPos, depth, ambientScale);
+  }
+
+  /// Projects a 3D point in world coordinates into the screen coordinate
+  /// system
+  ///
+  /// @param position position in 3D world space
+  /// @param ambientScale the physical length of one unit in the target 3D
+  /// @return projected position including depth
+  inline Position project(Position const &position, Length ambientScale) const
+      noexcept {
+
+    PositionH const projPos =
+        viewProjectionMatrix(ambientScale) * position.homogeneous();
+
+    auto const w = projPos.w();
+
+    return projPos.head<3>() / w;
   }
 
   Camera const &cam_;
