@@ -26,6 +26,7 @@ env:
   global:
     - GH_REPO_NAME: VolViz
     - GH_REPO_REF: github.com/ithron/VolViz.git
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
 
 matrix:
   include:
