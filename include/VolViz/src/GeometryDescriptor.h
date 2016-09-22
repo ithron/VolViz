@@ -44,6 +44,7 @@ struct AxisAlignedPlaneDescriptor : public GeometryDescriptor {
 struct MeshDescriptor : public GeometryDescriptor {
   Eigen::Matrix<float, Eigen::Dynamic, 3> vertices;
   Eigen::Matrix<std::uint32_t, Eigen::Dynamic, 3> indices;
+  Length scale{1 * milli * meter};
 };
 
 } // namespace VolViz

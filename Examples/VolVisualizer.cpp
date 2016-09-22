@@ -77,8 +77,13 @@ int main(int argc, char **argv) {
   Eigen::Vector3d const min = V.colwise().minCoeff();
   Eigen::Vector3d const max = V.colwise().maxCoeff();
 
+  Length meshScale = 5_cm;
+
   std::cout << "bbox: " << min.transpose() << " - " << max.transpose()
             << std::endl;
+  std::cout << "bbox size: "
+            << ((max - min).transpose() * static_cast<double>(meshScale / 1_mm))
+            << " mm" << std::endl;
 
   //  Eigen::MatrixXd V(3, 3);
   //  V << 0, 1, 0, -1, -1, 0, 1, -1, 0;
@@ -92,10 +97,9 @@ int main(int argc, char **argv) {
   mesh.vertices = V.cast<float>();
   mesh.indices = T.cast<std::uint32_t>();
   mesh.movable = true;
+  mesh.scale = 50_mm;
   mesh.color = Colors::White();
   viewer.addGeometry("Mesh", mesh);
-
-  // viewer.setMesh((10 * V).eval(), T);
 
   viewer.start();
   viewer.showGrid = true;

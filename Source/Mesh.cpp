@@ -9,7 +9,9 @@ namespace VolViz {
 namespace Private_ {
 
 Mesh::Mesh(MeshDescriptor const &descriptor, VisualizerImpl &visualizer)
-    : Geometry(descriptor, visualizer), descriptor_(descriptor) {}
+    : Geometry(descriptor, visualizer), descriptor_(descriptor) {
+  scale = descriptor.scale;
+}
 
 void Mesh::doInit() {
   uploadMesh();
@@ -23,11 +25,14 @@ void Mesh::doRender(std::uint32_t index, bool selected) {
 
   auto const viewMat = cameraClient.viewMatrix(rScale);
   auto const destScale = static_cast<float>(scale / rScale);
-  auto const volSize = visualizer_.volumeSize();
+  // auto const volSize = visualizer_.volumeSize();
 
-  Matrix4 const modelMat = (Eigen::Translation3f(position * destScale) *
-                            orientation * volSize.asDiagonal())
-                               .matrix();
+  Matrix4 const modelMat =
+      (Eigen::Translation3f(position) * orientation * Eigen::Scaling(destScale))
+          .matrix();
+  // Matrix4 const modelMat = (Eigen::Translation3f(position * destScale) *
+  //                           orientation * volSize.asDiagonal())
+  //                              .matrix();
   Matrix4 const modelViewMat = (viewMat * modelMat).eval();
   Matrix3 const inverseModelViewMatrix =
       modelViewMat.block<3, 3>(0, 0).inverse();
