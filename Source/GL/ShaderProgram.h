@@ -1,8 +1,8 @@
 #ifndef VolViz_ShaderProgram_h
 #define VolViz_ShaderProgram_h
 
-#include "GLdefs.h"
 #include "Error.h"
+#include "GLdefs.h"
 
 #include <Eigen/Core>
 
@@ -185,7 +185,13 @@ public:
     return uniforms_.begin()->second;
   }
 
-  // private:
+  inline auto activeUniformNames() const {
+    std::vector<std::string> activeUniforms;
+    for (auto const &kv : uniforms_) activeUniforms.push_back(kv.first);
+    return activeUniforms;
+  }
+
+private:
   inline void detachShaders() noexcept {
     for (auto s : attachedShaders_) glDetachShader(program_, s);
     attachedShaders_.clear();

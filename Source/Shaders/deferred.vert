@@ -5,6 +5,7 @@ R"(
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 inverseModelViewMatrix;
 uniform mat4 textureTransformMatrix;
+uniform vec3 color;
 uniform float shininess;
 
 layout(location = 0) in vec4 positionIn;
@@ -23,7 +24,7 @@ void main() {
   // normal = normalize(transpose(inverseModelViewMatrix) * normalIn);
   normal = normalize(inverseModelViewMatrix * normalIn);
   // set fixed colors for now
-  albedo = vec3(1.0);
+  albedo = color;
   specular = 1.0;
 
   gShininess = shininess;

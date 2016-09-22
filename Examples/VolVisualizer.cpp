@@ -67,8 +67,7 @@ int main(int argc, char **argv) {
   } else if (ext == "obj")
     igl::readOBJ(filename, V, T);
   else {
-    std::cerr << std::endl
-              << "Unrecognized mesh format: " << ext << std::endl;
+    std::cerr << std::endl << "Unrecognized mesh format: " << ext << std::endl;
     return EXIT_FAILURE;
   }
   std::cout << "done." << std::endl;
@@ -88,6 +87,14 @@ int main(int argc, char **argv) {
 
   auto viewer = Visualizer{};
 
+  // Add mesh
+  MeshDescriptor mesh;
+  mesh.vertices = V.cast<float>();
+  mesh.indices = T.cast<std::uint32_t>();
+  mesh.movable = true;
+  mesh.color = Colors::White();
+  viewer.addGeometry("Mesh", mesh);
+
   // viewer.setMesh((10 * V).eval(), T);
 
   viewer.start();
@@ -106,7 +113,7 @@ int main(int argc, char **argv) {
   light.position = PositionH(1, 2, 1, 0);
   viewer.addLight(2, light);
 
-  viewer.scale = 2_mm;
+  viewer.scale = 1_mm;
 
   AxisAlignedPlaneDescriptor plane;
   plane.axis = Axis::X;

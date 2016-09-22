@@ -34,9 +34,16 @@ struct GeometryDescriptor {
   Color color{Colors::White()};
 };
 
+/// A geometry descriptor describing a axis aligned plane
 struct AxisAlignedPlaneDescriptor : public GeometryDescriptor {
   Length intercept{0 * meter};
   Axis axis{Axis::X};
+};
+
+/// A geometry descriptor describing an arbitrary triangle mesh
+struct MeshDescriptor : public GeometryDescriptor {
+  Eigen::Matrix<float, Eigen::Dynamic, 3> vertices;
+  Eigen::Matrix<std::uint32_t, Eigen::Dynamic, 3> indices;
 };
 
 } // namespace VolViz

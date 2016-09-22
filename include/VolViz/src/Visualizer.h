@@ -49,10 +49,6 @@ public:
   template <class T>
   void setVolume(VolumeDescriptor const &descriptor, gsl::span<T> data);
 
-  template <class VertBase, class IdxBase>
-  void setMesh(Eigen::MatrixBase<VertBase> const &V,
-               Eigen::MatrixBase<IdxBase> const &I);
-
   void addLight(LightName name, Light const &light);
 
   template <class Descriptor,

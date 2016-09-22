@@ -1,6 +1,7 @@
 #include "GeometryFactory.h"
 
 #include "AxisAlignedPlane.h"
+#include "Mesh.h"
 #include "VisualizerImpl.h"
 
 namespace VolViz {
@@ -12,6 +13,11 @@ GeometryFactory::GeometryFactory(VisualizerImpl &visualizer)
 GeometryFactory::GeometryPtr
 GeometryFactory::create(AxisAlignedPlaneDescriptor const &descriptor) {
   return std::make_unique<AxisAlignedPlane>(descriptor, visualizer_);
+}
+
+GeometryFactory::GeometryPtr
+GeometryFactory::create(MeshDescriptor const &descriptor) {
+  return std::make_unique<Mesh>(descriptor, visualizer_);
 }
 
 } // namespace Private_

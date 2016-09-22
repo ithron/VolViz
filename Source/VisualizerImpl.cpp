@@ -365,81 +365,6 @@ void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
   lights_.emplace(name, light);
 }
 
-template <class VertBase, class IdxBase>
-void VisualizerImpl::setMesh(Eigen::MatrixBase<VertBase> const &V,
-                             Eigen::MatrixBase<IdxBase> const &I) {
-  using Vertex = Eigen::Matrix<float, 8, 1>;
-  using Verts = std::vector<Vertex, Eigen::aligned_allocator<Vertex>>;
-  using Triangle = Eigen::Matrix<std::uint32_t, 3, 1>;
-  using Triangles = std::vector<Triangle>;
-
-  auto verts = Verts();
-  verts.reserve(static_cast<std::size_t>(V.rows()));
-  auto indices = Triangles();
-  indices.reserve(static_cast<std::size_t>(I.rows()));
-
-  for (auto i = 0; i < V.rows(); ++i) {
-    Vertex v = Vertex::Zero();
-    v.head<3>() = V.row(i).template cast<float>();
-    verts.emplace_back(std::move(v));
-  }
-  for (auto i = 0; i < I.rows(); ++i) {
-    Triangle t = I.row(i).template cast<std::uint32_t>();
-
-    // compute normal
-    auto &v0 = verts[t(0)];
-    auto &v1 = verts[t(1)];
-    auto &v2 = verts[t(2)];
-
-    auto const normal =
-        (v1 - v0).head<3>().cross((v2 - v0).head<3>()).normalized().eval();
-
-    v0.block<3, 1>(4, 0) += normal;
-    v1.block<3, 1>(4, 0) += normal;
-    v2.block<3, 1>(4, 0) += normal;
-
-    indices.emplace_back(std::move(t));
-  }
-
-  // normalize normals
-  for (auto &v : verts) v.block<3, 1>(4, 0) = v.block<3, 1>(4, 0).normalized();
-
-  // setup VBO
-  auto vertBuff = GL::Buffer();
-  vertBuff.upload(GL_ARRAY_BUFFER,
-                  verts.size() * sizeof(typename decltype(verts)::value_type),
-                  verts.data(), GL_STATIC_DRAW);
-  auto idxBuff = GL::Buffer();
-  idxBuff.upload(GL_ELEMENT_ARRAY_BUFFER,
-                 indices.size() *
-                     sizeof(typename decltype(indices)::value_type),
-                 indices.data(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-  // setup VAO
-  auto vao = GL::VertexArray();
-  {
-    auto vaoBinding = GL::binding(vao);
-    vao.enableVertexAttribArray(0);
-    vao.enableVertexAttribArray(1);
-    auto vbBinding =
-        GL::binding(vertBuff, static_cast<GLenum>(GL_ARRAY_BUFFER));
-    glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * sizeof(float), nullptr);
-    glVertexAttribPointer(1, 3, GL_FLOAT, false, 8 * sizeof(float),
-                          reinterpret_cast<void const *>(4 * sizeof(float)));
-    idxBuff.bind(GL_ELEMENT_ARRAY_BUFFER);
-  }
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-  mesh_.vertices = std::move(vertBuff);
-  mesh_.indices = std::move(idxBuff);
-  mesh_.vao = std::move(vao);
-  mesh_.nTriangles = indices.size();
-}
-
-template void
-VisualizerImpl::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
-                          Eigen::MatrixBase<Eigen::MatrixXi> const &);
-
 void VisualizerImpl::drawSingleVertex() const noexcept {
   auto boundVao = GL::binding(singleVertexData_.vao);
   glDrawArrays(GL_POINTS, 0, 1);
@@ -512,8 +437,6 @@ void VisualizerImpl::renderOneFrame() {
 
   renderGeometry();
 
-  renderMeshes();
-
   switch (viewState_) {
     case ViewState::Scene3D: {
       renderLights();
@@ -548,54 +471,6 @@ void VisualizerImpl::renderOneFrame() {
 
   glfw_.swapBuffers();
   glfw_.waitEvents();
-}
-
-void VisualizerImpl::renderMeshes() {
-  Length const scale = cachedScale;
-  auto const vMatrix = cameraClient().viewMatrix(scale);
-  auto const MVP = cameraClient().viewProjectionMatrix(scale);
-  auto const inverseModelViewMatrix =
-      vMatrix.block<3, 3>(0, 0).inverse().eval();
-  constexpr std::array<GLuint, 3> attachments{
-      {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2}};
-
-  // Bind FBO and set it up for MRT
-  auto fboBinding = binding(lightingFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
-  assertGL("Failed to bind framebuffer");
-  glDrawBuffers(attachments.size(), attachments.data());
-
-  // glClearColor(0.f, 0.f, 0.f, 0.f);
-  // glClearDepth(1.0);
-  // glClearStencil(0);
-  // glDisable(GL_FRAMEBUFFER_SRGB);
-  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  glEnable(GL_DEPTH_TEST);
-  glDepthMask(true);
-  glColorMask(true, true, true, true);
-
-  // Render geometry to FBO
-  shaders_["geometryStage"].use();
-  assertGL("OpenGL Error stack not clean");
-
-  // bind volume texture
-  glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
-
-  shaders_["geometryStage"]["volume"] = 0;
-  shaders_["geometryStage"]["shininess"] = mesh_.shininess;
-  shaders_["geometryStage"]["modelViewProjectionMatrix"] = MVP;
-  shaders_["geometryStage"]["inverseModelViewMatrix"] = inverseModelViewMatrix;
-  shaders_["geometryStage"]["textureTransformMatrix"] =
-      textureTransformationMatrix();
-  if (mesh_.vao.name != 0) {
-    auto boundVao = GL::binding(mesh_.vao);
-    glDrawElements(GL_TRIANGLES, 3 * static_cast<GLsizei>(mesh_.nTriangles),
-                   GL_UNSIGNED_INT, nullptr);
-    assertGL("glDrawElements failed");
-  }
-
-  // switch back to single render target
-  glDrawBuffers(1, attachments.data());
 }
 
 void VisualizerImpl::renderGeometry() {
