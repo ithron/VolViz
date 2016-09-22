@@ -81,6 +81,7 @@ add_library(VolViz
   Camera.cpp
   Geometry.cpp
   GeometryFactory.cpp
+  Mesh.cpp
   Shaders.cpp
   Visualizer.cpp
   VisualizerImpl.cpp
