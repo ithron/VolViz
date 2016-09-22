@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a163fc1e73e0dd1ffa7810d333bcacd89',1,'VolViz::Private_::Geometry']]],
+  ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a163fc1e73e0dd1ffa7810d333bcacd89',1,'VolViz::Private_::Geometry::Geometry(VisualizerImpl &amp;visualizer)'],['../classVolViz_1_1Private___1_1Geometry.html#a8f545b522ec1a2aac1d96e21d854d1f0',1,'VolViz::Private_::Geometry::Geometry(GeometryDescriptor const &amp;descriptor, VisualizerImpl &amp;visualizer)']]],
   ['geometryfactory',['GeometryFactory',['../classVolViz_1_1Private___1_1GeometryFactory.html#afda9f9db98150b0f59751805a42ec14f',1,'VolViz::Private_::GeometryFactory']]],
   ['getgeometryundercursor',['getGeometryUnderCursor',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ac6623efca5add12696057d36758f3826',1,'VolViz::Private_::VisualizerImpl']]],
   ['glclipcontrol',['glClipControl',['../GLdefs_8h.html#a52731761e97be1dbb3f45f86abf7781d',1,'GLdefs.h']]],

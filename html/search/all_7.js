@@ -3,7 +3,7 @@ var searchData=
   ['geometries_5f',['geometries_',['../group__geomGroup.html#ga76b1aaf5b8f1555a81428503fad8d238',1,'VolViz::Private_::VisualizerImpl']]],
   ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html',1,'VolViz::Private_']]],
   ['geometry',['Geometry',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html',1,'VolViz::Private_::GL']]],
-  ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a163fc1e73e0dd1ffa7810d333bcacd89',1,'VolViz::Private_::Geometry']]],
+  ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a163fc1e73e0dd1ffa7810d333bcacd89',1,'VolViz::Private_::Geometry::Geometry(VisualizerImpl &amp;visualizer)'],['../classVolViz_1_1Private___1_1Geometry.html#a8f545b522ec1a2aac1d96e21d854d1f0',1,'VolViz::Private_::Geometry::Geometry(GeometryDescriptor const &amp;descriptor, VisualizerImpl &amp;visualizer)']]],
   ['geometry_2ecpp',['Geometry.cpp',['../Geometry_8cpp.html',1,'']]],
   ['geometry_2eh',['Geometry.h',['../Geometry_8h.html',1,'']]],
   ['geometry_2eh',['Geometry.h',['../GL_2Geometry_8h.html',1,'']]],

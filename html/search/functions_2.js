@@ -4,6 +4,6 @@ var searchData=
   ['cameraclient',['cameraClient',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a55524a7d986d51e685c46135c03603d4',1,'VolViz::Private_::VisualizerImpl::cameraClient()'],['../classVolViz_1_1Private___1_1CameraClient.html#a34b1e35e935cf011ee71762e86209a15',1,'VolViz::Private_::CameraClient::CameraClient()']]],
   ['client',['client',['../classVolViz_1_1Camera.html#aa6dffa20cc4b3474f8b1f1de08f00d18',1,'VolViz::Camera']]],
   ['compile',['compile',['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a48aee443e6472eb8d1c78d9d6dd6d1db',1,'VolViz::Private_::GL::Shader']]],
-  ['create',['create',['../classVolViz_1_1Private___1_1GeometryFactory.html#ab37293d0ff1ef3874b848c634b231ced',1,'VolViz::Private_::GeometryFactory']]],
+  ['create',['create',['../classVolViz_1_1Private___1_1GeometryFactory.html#ab37293d0ff1ef3874b848c634b231ced',1,'VolViz::Private_::GeometryFactory::create(AxisAlignedPlaneDescriptor const &amp;descriptor)'],['../classVolViz_1_1Private___1_1GeometryFactory.html#a990094909768db047b4de07b9741be35',1,'VolViz::Private_::GeometryFactory::create(MeshDescriptor const &amp;descriptor)']]],
   ['cyan',['Cyan',['../namespaceVolViz_1_1Colors.html#afd263975f5064fe34320130d84bdff78',1,'VolViz::Colors']]]
 ];

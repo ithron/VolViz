@@ -4,6 +4,6 @@ var searchData=
   ['names',['names',['../structVolViz_1_1Private___1_1GL_1_1Textures.html#a38301fc74901504a8ece39199be69647',1,'VolViz::Private_::GL::Textures']]],
   ['near',['near',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1DepthRange.html#ac26add3c52b99fa780cbfd4b03157e9e',1,'VolViz::Private_::VisualizerImpl::DepthRange::near()'],['../structVolViz_1_1DepthRange.html#a84444e9cab425c77677d501edacea1ee',1,'VolViz::DepthRange::near()']]],
   ['normalvisualizationfragshadersrc',['normalVisualizationFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#aae323efc9b69400da32273a434bcd881',1,'VolViz::Private_::GL::Shaders']]],
-  ['ntriangles',['nTriangles',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#a54d7fa4d359d6caac02fc59f9b30a53b',1,'VolViz::Private_::VisualizerImpl::MeshData']]],
-  ['nullvertshadersrc',['nullVertShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ad2203f54bf6ba9ea764f39756f94c431',1,'VolViz::Private_::GL::Shaders']]]
+  ['nullvertshadersrc',['nullVertShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ad2203f54bf6ba9ea764f39756f94c431',1,'VolViz::Private_::GL::Shaders']]],
+  ['numtriangles_5f',['numTriangles_',['../classVolViz_1_1Private___1_1Mesh.html#aff456ddf794242762cffdcafb0b1ace3',1,'VolViz::Private_::Mesh']]]
 ];

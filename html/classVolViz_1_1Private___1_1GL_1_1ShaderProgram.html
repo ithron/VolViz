@@ -89,9 +89,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">VolViz::Private_::GL::ShaderProgram Class Reference</div>  </div>
@@ -112,11 +113,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <area shape="rect" id="node3" href="classVolViz_1_1Private___1_1GL_1_1UniformProxy.html" title="{VolViz::Private_::GL\l::UniformProxy\n|&#45; location_\l|+ UniformProxy()\l+ UniformProxy()\l+ UniformProxy()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l}" alt="" coords="5,149,145,403"/><area shape="rect" id="node4" title="STL class. " alt="" coords="171,237,249,315"/><area shape="rect" id="node5" title="STL class. " alt="" coords="147,6,273,98"/></map>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:af952fe7dcffad94bff168d6da74b720f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f">UniformTable</a> = std::unordered_map&lt; std::string, <a class="el" href="classVolViz_1_1Private___1_1GL_1_1UniformProxy.html">UniformProxy</a> &gt;</td></tr>
-<tr class="separator:af952fe7dcffad94bff168d6da74b720f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a81efbb6cee962df55e47dd58e8131d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a81efbb6cee962df55e47dd58e8131d07">ShaderProgram</a> () noexcept</td></tr>
@@ -140,13 +136,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae6a9afcd003e0141da14f1a6c39d3d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2268fc898488bc7ab6f06483aeaf6d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1UniformProxy.html">UniformProxy</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ac2268fc898488bc7ab6f06483aeaf6d8">operator[]</a> (std::string const &amp;name) const </td></tr>
 <tr class="separator:ac2268fc898488bc7ab6f06483aeaf6d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8ca9b1c8605e13252b4f353f389ae42"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ad8ca9b1c8605e13252b4f353f389ae42">activeUniformNames</a> () const </td></tr>
+<tr class="separator:ad8ca9b1c8605e13252b4f353f389ae42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:af952fe7dcffad94bff168d6da74b720f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f">UniformTable</a> = std::unordered_map&lt; std::string, <a class="el" href="classVolViz_1_1Private___1_1GL_1_1UniformProxy.html">UniformProxy</a> &gt;</td></tr>
+<tr class="separator:af952fe7dcffad94bff168d6da74b720f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
 <tr class="memitem:a67e2e7b35a77bb9a11612d335e773b93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a67e2e7b35a77bb9a11612d335e773b93">detachShaders</a> () noexcept</td></tr>
 <tr class="separator:a67e2e7b35a77bb9a11612d335e773b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9e188aea459a6fea8bd4ef34817063c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ae9e188aea459a6fea8bd4ef34817063c">queryUniforms</a> ()</td></tr>
 <tr class="separator:ae9e188aea459a6fea8bd4ef34817063c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:aa58b3623f1fd106a88514f4cd48c656a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; GLuint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#aa58b3623f1fd106a88514f4cd48c656a">attachedShaders_</a></td></tr>
 <tr class="separator:aa58b3623f1fd106a88514f4cd48c656a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2bfcb63d363e7435919c3dca2a3dbf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f">UniformTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ac2bfcb63d363e7435919c3dca2a3dbf1">uniforms_</a></td></tr>
@@ -160,11 +166,19 @@ Public Attributes</h2></td></tr>
 <a class="anchor" id="af952fe7dcffad94bff168d6da74b720f"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f">VolViz::Private_::GL::ShaderProgram::UniformTable</a> =  std::unordered_map&lt;std::string, <a class="el" href="classVolViz_1_1Private___1_1GL_1_1UniformProxy.html">UniformProxy</a>&gt;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -265,6 +279,29 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad8ca9b1c8605e13252b4f353f389ae42"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto VolViz::Private_::GL::ShaderProgram::activeUniformNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a20ee28658f96fb23e6b19204c692e632"></a>
 <div class="memitem">
 <div class="memproto">
@@ -331,7 +368,7 @@ template&lt;class Container &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -404,6 +441,9 @@ template&lt;class Container &gt; </div>
 <a class="anchor" id="ae9e188aea459a6fea8bd4ef34817063c"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void VolViz::Private_::GL::ShaderProgram::queryUniforms </td>
@@ -412,6 +452,11 @@ template&lt;class Container &gt; </div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -443,11 +488,19 @@ template&lt;class Container &gt; </div>
 <a class="anchor" id="aa58b3623f1fd106a88514f4cd48c656a"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;GLuint&gt; VolViz::Private_::GL::ShaderProgram::attachedShaders_</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -455,11 +508,19 @@ template&lt;class Container &gt; </div>
 <a class="anchor" id="a84c76245d83e061741e37e1c42dc5f73"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">GLuint VolViz::Private_::GL::ShaderProgram::program_ = 0</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -467,11 +528,19 @@ template&lt;class Container &gt; </div>
 <a class="anchor" id="ac2bfcb63d363e7435919c3dca2a3dbf1"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f">UniformTable</a> VolViz::Private_::GL::ShaderProgram::uniforms_</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -483,7 +552,7 @@ template&lt;class Container &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 21 2016 14:10:05 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 22 2016 15:11:07 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

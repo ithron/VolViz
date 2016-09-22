@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scale',['scale',['../classVolViz_1_1Private___1_1Geometry.html#a51e8771aca8310184c40c823799f2ddf',1,'VolViz::Private_::Geometry::scale()'],['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8',1,'VolViz::Private_::GL::Geometry::scale()'],['../classVolViz_1_1Visualizer.html#a1a79282f8a9c7ffbb126df399f1ee4ba',1,'VolViz::Visualizer::scale()'],['../namespaceVolViz.html#a4fda4180376c21464201b4442eb1f923',1,'VolViz::Scale()']]],
+  ['scale',['scale',['../classVolViz_1_1Private___1_1Geometry.html#a51e8771aca8310184c40c823799f2ddf',1,'VolViz::Private_::Geometry::scale()'],['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a8c9274a2fe8b1f3c4ad4ba7f23fbdbe8',1,'VolViz::Private_::GL::Geometry::scale()'],['../structVolViz_1_1MeshDescriptor.html#af1e16e31948a38e9dadf0b3948184a97',1,'VolViz::MeshDescriptor::scale()'],['../classVolViz_1_1Visualizer.html#a1a79282f8a9c7ffbb126df399f1ee4ba',1,'VolViz::Visualizer::scale()'],['../namespaceVolViz.html#a4fda4180376c21464201b4442eb1f923',1,'VolViz::Scale()']]],
   ['scene3d',['Scene3D',['../group__privateMembers.html#ga3c07b4ab76735e055fb6a24da5e90f48',1,'VolViz::Private_::VisualizerImpl::Scene3D()'],['../group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa3cb31aacdc075941366cad3aba75b636',1,'VolViz::Private_::VisualizerImpl::Scene3D()']]],
   ['scrollwheelinputhandler',['scrollWheelInputHandler',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a4d219ec5b4367e19501c6a91c9479632',1,'VolViz::Private_::GL::GLFW']]],
   ['selectedgeometry_5f',['selectedGeometry_',['../group__privateMembers.html#ga286c42047be0c8fc7ac4049f9d11bc6a',1,'VolViz::Private_::VisualizerImpl']]],
@@ -13,7 +13,6 @@ var searchData=
   ['selectiontexture',['SelectionTexture',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaa2789dc665113eede4f3da4db1bd442a1',1,'VolViz::Private_::VisualizerImpl']]],
   ['set',['set',['../classVolViz_1_1DefaultSetPolicy.html#a0496439c45db73c44a23c5651df3ae2a',1,'VolViz::DefaultSetPolicy::set(T &amp;dest, T const &amp;src) const noexcept'],['../classVolViz_1_1DefaultSetPolicy.html#a517ce93a6c2be73c4cce6ff2d02a7d55',1,'VolViz::DefaultSetPolicy::set(T &amp;dest, T &amp;&amp;src) const noexcept'],['../classVolViz_1_1SetAndNotifyPolicy.html#a25066544e4ac116b5d601a35e566b374',1,'VolViz::SetAndNotifyPolicy::set()']]],
   ['setandnotifypolicy',['SetAndNotifyPolicy',['../classVolViz_1_1SetAndNotifyPolicy.html',1,'VolViz']]],
-  ['setmesh',['setMesh',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a760116aa58ff31f0cae362c6c55b0683',1,'VolViz::Private_::VisualizerImpl::setMesh()'],['../classVolViz_1_1Visualizer.html#a4f9044fb04c76a16111afe92ae0118e8',1,'VolViz::Visualizer::setMesh()']]],
   ['setpol',['SetPol',['../classVolViz_1_1AtomicWrapper.html#a5f4b60bdec18b1c0d2088aaa1a7b88ae',1,'VolViz::AtomicWrapper']]],
   ['setupfbos',['setupFBOs',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a03566172e5638ec1520a5da0be686128',1,'VolViz::Private_::VisualizerImpl']]],
   ['setupselectionbuffers',['setupSelectionBuffers',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ac7ce4ee61f48a62d91c651e94518edfd',1,'VolViz::Private_::VisualizerImpl']]],
@@ -33,7 +32,6 @@ var searchData=
   ['shaders_2eh',['Shaders.h',['../GL_2Shaders_8h.html',1,'']]],
   ['shaders_2eh',['Shaders.h',['../Shaders_8h.html',1,'']]],
   ['shaders_5f',['shaders_',['../classVolViz_1_1Private___1_1Shaders.html#a6fb1aa71a254e864d026eb8fadf0a59a',1,'VolViz::Private_::Shaders::shaders_()'],['../group__privateMembers.html#gaa8554500c8789dd5f3432a4aecaf2758',1,'VolViz::Private_::VisualizerImpl::shaders_()']]],
-  ['shininess',['shininess',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1MeshData.html#abe164acb93c85acc32878187dc067a90',1,'VolViz::Private_::VisualizerImpl::MeshData']]],
   ['show',['show',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a01c7ae52f32c891ab313dfdba2d4d4de',1,'VolViz::Private_::GL::GLFW']]],
   ['showgrid',['showGrid',['../classVolViz_1_1Visualizer.html#a780e15acd00a6f76fcc814789f681401',1,'VolViz::Visualizer']]],
   ['showvolumeboundingbox',['showVolumeBoundingBox',['../classVolViz_1_1Visualizer.html#ad2e7e99474ae1f8c126898792270abc1',1,'VolViz::Visualizer']]],

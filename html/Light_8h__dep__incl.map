@@ -2,9 +2,10 @@
 <area shape="rect" id="node2" href="$Visualizer_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/src/Visualizer.h" alt="" coords="167,109,325,165"/>
 <area shape="rect" id="node3" href="$Visualizer_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Visualizer.cpp" alt="" coords="5,421,149,477"/>
 <area shape="rect" id="node4" href="$VisualizerImpl_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.cpp" alt="" coords="174,421,319,477"/>
-<area shape="rect" id="node5" href="$VolViz_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/VolViz.h" alt="" coords="285,213,429,269"/>
-<area shape="rect" id="node6" href="$VisualizerImpl_8h.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.h" alt="" coords="315,317,460,373"/>
-<area shape="rect" id="node7" href="$AxisAlignedPlane_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/AxisAlignedPlane.cpp" alt="" coords="343,421,496,477"/>
-<area shape="rect" id="node8" href="$Geometry_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Geometry.cpp" alt="" coords="521,421,665,477"/>
-<area shape="rect" id="node9" href="$GeometryFactory_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/GeometryFactory.cpp" alt="" coords="691,421,843,477"/>
+<area shape="rect" id="node5" href="$VolViz_8h.html" title="/home/travis/build\l/ithron/VolViz/include\l/VolViz/VolViz.h" alt="" coords="315,213,460,269"/>
+<area shape="rect" id="node6" href="$VisualizerImpl_8h.html" title="/home/travis/build\l/ithron/VolViz/Source\l/VisualizerImpl.h" alt="" coords="347,317,492,373"/>
+<area shape="rect" id="node7" href="$AxisAlignedPlane_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/AxisAlignedPlane.cpp" alt="" coords="690,421,843,477"/>
+<area shape="rect" id="node8" href="$Geometry_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Geometry.cpp" alt="" coords="867,421,1012,477"/>
+<area shape="rect" id="node9" href="$GeometryFactory_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/GeometryFactory.cpp" alt="" coords="344,421,496,477"/>
+<area shape="rect" id="node10" href="$Mesh_8cpp.html" title="/home/travis/build\l/ithron/VolViz/Source\l/Mesh.cpp" alt="" coords="521,421,665,477"/>
 </map>

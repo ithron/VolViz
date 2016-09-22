@@ -8,5 +8,6 @@ var searchData=
   ['uniqueptr',['UniquePtr',['../classVolViz_1_1Private___1_1Geometry.html#a93e3ce21daca1d4b45452f1b2cd96f67',1,'VolViz::Private_::Geometry']]],
   ['unproject',['unproject',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a41753a08c4ba5a850acb2d11246a4d97',1,'VolViz::Private_::VisualizerImpl::unproject()'],['../classVolViz_1_1Camera.html#a0f1b9bd99d2ad72d91992c74be83b24f',1,'VolViz::Camera::unproject()'],['../classVolViz_1_1Private___1_1CameraClient.html#afff7ea887408442b1c3257e0c9d9b626',1,'VolViz::Private_::CameraClient::unproject()']]],
   ['upload',['upload',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a84c8bc1c65aecd1e9b31d1324ae0c686',1,'VolViz::Private_::GL::Buffer']]],
+  ['uploadmesh',['uploadMesh',['../classVolViz_1_1Private___1_1Mesh.html#ab6fa7d730a1846b22c94e6a3d3669606',1,'VolViz::Private_::Mesh']]],
   ['use',['use',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ae6a9afcd003e0141da14f1a6c39d3d5c',1,'VolViz::Private_::GL::ShaderProgram']]]
 ];

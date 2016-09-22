@@ -1,3 +1,3 @@
 <map id="VolViz::Private_::AxisAlignedPlane" name="VolViz::Private_::AxisAlignedPlane">
-<area shape="rect" id="node2" href="$classVolViz_1_1Private___1_1Geometry.html" title="{VolViz::Private_::Geometry\n|+ position\l+ orientation\l+ scale\l+ moveMask\l+ color\l# visualizer_\l|+ ~Geometry()\l+ init()\l+ render()\l# Geometry()\l# doInit()\l# doRender()\l}" alt="" coords="11,5,192,229"/>
+<area shape="rect" id="node2" href="$classVolViz_1_1Private___1_1Geometry.html" title="{VolViz::Private_::Geometry\n|+ position\l+ orientation\l+ scale\l+ moveMask\l+ color\l# visualizer_\l|+ ~Geometry()\l+ init()\l+ render()\l# Geometry()\l# Geometry()\l# doInit()\l# doRender()\l}" alt="" coords="11,6,192,245"/>
 </map>

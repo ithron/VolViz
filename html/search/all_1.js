@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['addgeometry',['addGeometry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ad15970d0ce5ad39b9499d4a9754ad830',1,'VolViz::Private_::VisualizerImpl::addGeometry()'],['../classVolViz_1_1Visualizer.html#ab43d0c8028b61c53bd8b1cdd2586fc9f',1,'VolViz::Visualizer::addGeometry()']]],
+  ['activeuniformnames',['activeUniformNames',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ad8ca9b1c8605e13252b4f353f389ae42',1,'VolViz::Private_::GL::ShaderProgram']]],
+  ['addgeometry',['addGeometry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ad15970d0ce5ad39b9499d4a9754ad830',1,'VolViz::Private_::VisualizerImpl::addGeometry()'],['../classVolViz_1_1Visualizer.html#a31c097a9b3555d781e17670a02af42a6',1,'VolViz::Visualizer::addGeometry()']]],
   ['addlight',['addLight',['../classVolViz_1_1Private___1_1VisualizerImpl.html#aaa06e14e0f2d9afda47734c37410f576',1,'VolViz::Private_::VisualizerImpl::addLight()'],['../classVolViz_1_1Visualizer.html#a8e9d97d6127d08d69276a1f75f52b0e1',1,'VolViz::Visualizer::addLight()']]],
   ['afteraction',['afterAction',['../classVolViz_1_1SetAndNotifyPolicy.html#ab9857c638bdcc3d445bc82c01b228b96',1,'VolViz::SetAndNotifyPolicy']]],
   ['albedo',['Albedo',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaaf879d0a27915d351a8e47c2223777710',1,'VolViz::Private_::VisualizerImpl']]],
@@ -18,8 +19,8 @@ var searchData=
   ['atomiccache_3c_20length_20_3e',['AtomicCache&lt; Length &gt;',['../classVolViz_1_1AtomicCache.html',1,'VolViz']]],
   ['atomiccache_3c_20matrix4_20_3e',['AtomicCache&lt; Matrix4 &gt;',['../classVolViz_1_1AtomicCache.html',1,'VolViz']]],
   ['atomicproperty',['AtomicProperty',['../classVolViz_1_1Visualizer.html#ae0fcbfc03c096c694ad2f1a37ee285e4',1,'VolViz::Visualizer']]],
-  ['atomicwrapper',['AtomicWrapper',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper',['AtomicWrapper',['../classVolViz_1_1AtomicWrapper.html#a48606dac32010781ca53e7d249c80322',1,'VolViz::AtomicWrapper::AtomicWrapper(T const &amp;obj)'],['../classVolViz_1_1AtomicWrapper.html#adba333851bb2f995a80847d2b587346a',1,'VolViz::AtomicWrapper::AtomicWrapper(T &amp;&amp;obj)'],['../classVolViz_1_1AtomicWrapper.html#a365567d4994d690beca4cb8dc6a2349b',1,'VolViz::AtomicWrapper::AtomicWrapper(AtomicWrapper const &amp;)=delete']]],
+  ['atomicwrapper',['AtomicWrapper',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_2eh',['AtomicWrapper.h',['../AtomicWrapper_8h.html',1,'']]],
   ['atomicwrapper_3c_20angle_20_3e',['AtomicWrapper&lt; Angle &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_3c_20float_20_3e',['AtomicWrapper&lt; float &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],

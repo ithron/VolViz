@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['addgeometry',['addGeometry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ad15970d0ce5ad39b9499d4a9754ad830',1,'VolViz::Private_::VisualizerImpl::addGeometry()'],['../classVolViz_1_1Visualizer.html#ab43d0c8028b61c53bd8b1cdd2586fc9f',1,'VolViz::Visualizer::addGeometry()']]],
+  ['activeuniformnames',['activeUniformNames',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#ad8ca9b1c8605e13252b4f353f389ae42',1,'VolViz::Private_::GL::ShaderProgram']]],
+  ['addgeometry',['addGeometry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ad15970d0ce5ad39b9499d4a9754ad830',1,'VolViz::Private_::VisualizerImpl::addGeometry()'],['../classVolViz_1_1Visualizer.html#a31c097a9b3555d781e17670a02af42a6',1,'VolViz::Visualizer::addGeometry()']]],
   ['addlight',['addLight',['../classVolViz_1_1Private___1_1VisualizerImpl.html#aaa06e14e0f2d9afda47734c37410f576',1,'VolViz::Private_::VisualizerImpl::addLight()'],['../classVolViz_1_1Visualizer.html#a8e9d97d6127d08d69276a1f75f52b0e1',1,'VolViz::Visualizer::addLight()']]],
   ['assertgl',['assertGL',['../Error_8h.html#ab4ca72098141b3549aa7e360f8722dbe',1,'Error.h']]],
   ['atomiccache',['AtomicCache',['../classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690',1,'VolViz::AtomicCache']]],
