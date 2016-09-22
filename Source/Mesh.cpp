@@ -61,8 +61,8 @@ void Mesh::uploadMesh() {
 
   auto const N = descriptor_->vertices.rows();
   auto const M = descriptor_->indices.rows();
-  auto const vertBuffSize = N * 8 * sizeof(float);
-  auto const indexBufferSize = M * 3 * sizeof(std::uint32_t);
+  auto const vertBuffSize = N * 8 * narrow_cast<int>(sizeof(float));
+  auto const indexBufferSize = M * 3 * narrow_cast<int>(sizeof(std::uint32_t));
 
   // Create and map vertex buffer
   Buffer vertBuffer;
@@ -131,7 +131,7 @@ void Mesh::uploadMesh() {
   vertexBuffer_ = std::move(vertBuffer);
   indexBuffer_ = std::move(indexBuffer);
   vertexArrayObject_ = std::move(vao);
-  numTriangles_ = M;
+  numTriangles_ = static_cast<std::size_t>(M);
 }
 
 } // namespace Private_
