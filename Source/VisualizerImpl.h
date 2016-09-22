@@ -44,10 +44,6 @@ public:
 
   Size3f volumeSize() const noexcept;
 
-  template <class VertBase, class IdxBase>
-  void setMesh(Eigen::MatrixBase<VertBase> const &V,
-               Eigen::MatrixBase<IdxBase> const &I);
-
   template <class Descriptor,
             typename = std::enable_if_t<std::is_base_of<
                 GeometryDescriptor, std::decay_t<Descriptor>>::value>>
@@ -116,9 +112,6 @@ private:
 
   /// Key input handler
   void handleKeyInput(int key, int scancode, int action, int mode);
-
-  /// Renders the set mesh if any
-  void renderMeshes();
 
   /// Renders the geometry
   void renderGeometry();
@@ -208,20 +201,6 @@ private:
       swap(readBuffer, writeBuffer);
     }
   } selectionBuffer_;
-
-  /// Data required to render a mesh
-  struct MeshData {
-    /// the vertex array object
-    GL::VertexArray vao{0};
-    /// vertex buffer
-    GL::Buffer vertices{0};
-    /// index buffer
-    GL::Buffer indices{0};
-    /// number of primitives (i.e. triangles) to render
-    std::size_t nTriangles = 0;
-    /// The shininess of the mesh surface
-    float shininess = 10.f;
-  } mesh_;
 
   /// @defgroup geomGroup Geometry processing related variables
   /// @{

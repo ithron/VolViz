@@ -60,13 +60,7 @@ void Visualizer::addGeometry(GeometryName name, Descriptor const &geom) {
 template void Visualizer::addGeometry<AxisAlignedPlaneDescriptor>(
     GeometryName name, AxisAlignedPlaneDescriptor const &);
 
-template <class VertBase, class IdxBase>
-void Visualizer::setMesh(Eigen::MatrixBase<VertBase> const &V,
-                         Eigen::MatrixBase<IdxBase> const &I) {
-  impl_->setMesh(V, I);
-}
+template void Visualizer::addGeometry<MeshDescriptor>(GeometryName name,
+                                                      MeshDescriptor const &);
 
-template void Visualizer::setMesh<>(Eigen::MatrixBase<Eigen::MatrixXd> const &,
-                                    Eigen::MatrixBase<Eigen::MatrixXi> const &);
-
-} // namespace VolViz
+} // namespace volviz
