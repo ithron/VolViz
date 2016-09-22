@@ -25,6 +25,7 @@ public:
 
 protected:
   Geometry(VisualizerImpl &visualizer);
+  Geometry(GeometryDescriptor const &descriptor, VisualizerImpl &visualizer);
 
   virtual void doInit();
 
