@@ -51,7 +51,10 @@ int main(int, char **) {
   // TODO: Not implemented, yet
   
   // set mesh
-  visualizer.setMesh(V, T);
+  MeshDescriptor mesh;
+  mesh.vertices = V;
+  mesh.indices = T;
+  visualizer.addGeometry("Mesh", mesh);
   
   // Opens the visualization window
   visualizer.start();
