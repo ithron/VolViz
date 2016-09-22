@@ -10,6 +10,8 @@
 
 namespace VolViz {
 
+using namespace gsl;
+
 using Vector3f = Eigen::Vector3f;
 
 using Matrix3 = Eigen::Matrix3f;
