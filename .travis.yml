@@ -22,6 +22,11 @@ addons:
       - doxygen-doc
       - graphviz
 
+env:
+  global:
+    - GH_REPO_NAME: VolViz
+    - GH_REPO_REF: github.com/ithron/VolViz.git
+
 matrix:
   include:
     - os: osx
