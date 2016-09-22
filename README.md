@@ -35,33 +35,33 @@ target_link_libraries(MyTarget PRIVATE MyDep1 MyDep2 VolViz::Visualizer)
 int main(int, char **) {
   // For physical units
   using namespace VolViz::literals;
-  
+
   // load volume
   ...
-  
+
   // load mesh into V and T (vertices and triangles)
   ...
-  
+
   auto visualizer = VolViz::Visualizer{};
-  
+
   // Set the physical scale you like to visualize, e.g. 1 unit equals 1cm
   visualizer.scale = 1_cm;
-  
+
   // set volume
   // TODO: Not implemented, yet
-  
+
   // set mesh
   MeshDescriptor mesh;
   mesh.vertices = V;
   mesh.indices = T;
   visualizer.addGeometry("Mesh", mesh);
-  
+
   // Opens the visualization window
   visualizer.start();
-  
+
   // main update loop
   while (visualizer) visualizer.renderOneFrame();
-  
+
   return EXIT_SUCCESS;
 }
 ~~~
