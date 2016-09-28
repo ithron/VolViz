@@ -46,6 +46,10 @@ public:
 
   void renderOneFrameAndWaitForEvents();
 
+  void renderAtFPS(double fps = 60.0);
+
+  void renderOnUserInteraction(double maxFps = 60.0);
+
   operator bool() const noexcept;
 
   template <class T>

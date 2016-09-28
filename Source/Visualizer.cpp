@@ -5,8 +5,10 @@
 #include <Eigen/Core>
 #include <gsl.h>
 
+#include <chrono>
 #include <iostream>
 #include <mutex>
+#include <thread>
 #include <type_traits>
 
 namespace VolViz {
@@ -52,6 +54,43 @@ void Visualizer::renderOneFrameAndWaitForEvents() {
   impl_->renderOneFrame(true);
 }
 
+void Visualizer::renderAtFPS(double fps) {
+  using Clock = std::chrono::steady_clock;
+  using namespace std::chrono_literals;
+
+  auto const frameDuration = 1.0 / fps * 1s;
+
+  while (*this) {
+    auto const t0 = Clock::now();
+
+    renderOneFrame();
+
+    auto const t1 = Clock::now();
+    auto const deltaT = t1 - t0;
+
+    if (deltaT < frameDuration)
+      std::this_thread::sleep_for(frameDuration - deltaT);
+  }
+}
+
+void Visualizer::renderOnUserInteraction(double maxFps) {
+  using Clock = std::chrono::steady_clock;
+  using namespace std::chrono_literals;
+
+  auto const frameDuration = 1.0 / maxFps * 1s;
+
+  while (*this) {
+    auto const t0 = Clock::now();
+
+    renderOneFrameAndWaitForEvents();
+
+    auto const t1 = Clock::now();
+    auto const deltaT = t1 - t0;
+
+    if (deltaT < frameDuration)
+      std::this_thread::sleep_for(frameDuration - deltaT);
+  }
+}
 
 void Visualizer::addLight(LightName name, Light const &light) {
   impl_->addLight(name, light);
