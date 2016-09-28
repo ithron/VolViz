@@ -44,6 +44,8 @@ public:
 
   void renderOneFrame();
 
+  void renderOneFrameAndWaitForEvents();
+
   operator bool() const noexcept;
 
   template <class T>

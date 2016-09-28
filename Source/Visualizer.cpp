@@ -46,7 +46,12 @@ template void Visualizer::setVolume(VolumeDescriptor const &,
 template void Visualizer::setVolume(VolumeDescriptor const &,
                                     gsl::span<Color const>);
 
-void Visualizer::renderOneFrame() { impl_->renderOneFrame(); }
+void Visualizer::renderOneFrame() { impl_->renderOneFrame(false); }
+
+void Visualizer::renderOneFrameAndWaitForEvents() {
+  impl_->renderOneFrame(true);
+}
+
 
 void Visualizer::addLight(LightName name, Light const &light) {
   impl_->addLight(name, light);

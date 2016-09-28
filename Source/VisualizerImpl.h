@@ -35,7 +35,7 @@ public:
 
   void start();
 
-  void renderOneFrame();
+  void renderOneFrame(bool block = true);
 
   operator bool() const noexcept;
 

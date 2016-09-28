@@ -47,6 +47,8 @@ public:
 
   inline void waitEvents() const noexcept { glfwWaitEvents(); }
 
+  inline void pollEvents() const noexcept { glfwPollEvents(); }
+
   bool supportsExtension(std::string name) const noexcept;
 
   inline decltype(auto) supportedExtensions() const noexcept {

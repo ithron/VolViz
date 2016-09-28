@@ -411,7 +411,7 @@ void VisualizerImpl::handleKeyInput(int key, int, int action, int) {
 
 #pragma mark Render Methods
 
-void VisualizerImpl::renderOneFrame() {
+void VisualizerImpl::renderOneFrame(bool block) {
 
   glfw_.makeCurrent();
 
@@ -474,7 +474,11 @@ void VisualizerImpl::renderOneFrame() {
   }
 
   glfw_.swapBuffers();
-  glfw_.waitEvents();
+
+  if (block)
+    glfw_.waitEvents();
+  else
+    glfw_.pollEvents();
 }
 
 void VisualizerImpl::renderGeometry() {
