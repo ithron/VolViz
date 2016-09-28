@@ -63,4 +63,24 @@ template void Visualizer::addGeometry<AxisAlignedPlaneDescriptor>(
 template void Visualizer::addGeometry<MeshDescriptor>(GeometryName name,
                                                       MeshDescriptor const &);
 
+template <class Descriptor, typename>
+void Visualizer::updateGeometry(GeometryName name, Descriptor &&geom) {
+  impl_->updateGeometry(name, std::forward<Descriptor>(geom));
+}
+
+template void Visualizer::updateGeometry<AxisAlignedPlaneDescriptor const &>(
+    GeometryName name, AxisAlignedPlaneDescriptor const &);
+template void Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &&>(
+    GeometryName name, AxisAlignedPlaneDescriptor &&);
+template void Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &>(
+    GeometryName name, AxisAlignedPlaneDescriptor &);
+
+template void
+Visualizer::updateGeometry<MeshDescriptor const &>(GeometryName name,
+                                                   MeshDescriptor const &);
+template void Visualizer::updateGeometry<MeshDescriptor &&>(GeometryName name,
+                                                            MeshDescriptor &&);
+template void Visualizer::updateGeometry<MeshDescriptor &>(GeometryName name,
+                                                           MeshDescriptor &);
+
 } // namespace volviz

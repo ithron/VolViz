@@ -53,6 +53,19 @@ public:
     geometryInitQueue_.emplace(name, geomFactory_.create(descriptor));
   }
 
+  template <class Descriptor,
+            typename = std::enable_if_t<std::is_base_of<
+                GeometryDescriptor, std::decay_t<Descriptor>>::value>>
+  inline void updateGeometry(Visualizer::GeometryName name,
+                             Descriptor &&descriptor) {
+    std::lock_guard<std::mutex> const lock{geometriesMutex_};
+    auto search = geometries_.find(name);
+    if (search == geometries_.end())
+      throw std::logic_error("Geometry " + name + " not found");
+
+    search->second->enqueueUpdate(std::forward<Descriptor>(descriptor));
+  }
+
   /// Convenience method for easy camera access
   inline Camera const &camera() const noexcept { return visualizer_->camera; }
   inline Camera &camera() noexcept { return visualizer_->camera; }
@@ -115,6 +128,9 @@ private:
 
   /// Renders the geometry
   void renderGeometry();
+
+  /// Update the geometry
+  void updateGeometries();
 
   /// Renders a grid
   void renderGrid();
@@ -207,6 +223,7 @@ private:
   GeometryList geometries_;
   GeometryInitQueue geometryInitQueue_;
   std::mutex geomInitQueueMutex_;
+  std::mutex geometriesMutex_;
   ///@}
 
   /// Data representing a single vertex, required by the grid and fullscreen
