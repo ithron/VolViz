@@ -5,20 +5,7 @@
 #include "Geometry.h"
 #include "Types.h"
 
-// clang-format off
-#if __has_include(<optional>)
-#  include <optional>
-#elif __has_include(<experimental/optional>)
-#  include <experimental/optional>
-namespace std {
-  using std::experimental::optional;
-  using std::experimental::nullopt_t;
-  using std::experimental::nullopt;
-} // namespace std
-#else
-#  error "No optional type available"
-#endif
-// clang-format on
+#include <concurrentqueue.h>
 
 namespace VolViz {
 namespace Private_ {
@@ -32,10 +19,16 @@ protected:
 
   virtual void doRender(std::uint32_t index, bool selected) override;
 
+  virtual void doUpdate() override;
+
+  virtual void doEnqueueUpdate(GeometryDescriptor const &descriptor) override;
+  virtual void doEnqueueUpdate(GeometryDescriptor &&descriptor) override;
+
 private:
+  using UpdateQueue = moodycamel::ConcurrentQueue<MeshDescriptor>;
   void uploadMesh();
 
-  std::optional<MeshDescriptor> descriptor_;
+  UpdateQueue updateQueue_;
 
   GL::Buffer vertexBuffer_;
   GL::Buffer indexBuffer_;
@@ -45,3 +38,4 @@ private:
 
 } // namespace Private_
 } // namespace VolViz
+

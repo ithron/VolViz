@@ -19,5 +19,10 @@ void Geometry::render(std::uint32_t index, bool selected) {
 
 void Geometry::doInit() {}
 
+void Geometry::doUpdate() {}
+
+void Geometry::doEnqueueUpdate(GeometryDescriptor const &) {}
+void Geometry::doEnqueueUpdate(GeometryDescriptor &&) {}
+
 } // namespace Private_
 } // namespace VolViz

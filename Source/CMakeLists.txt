@@ -80,6 +80,7 @@ add_library(VolViz
   AxisAlignedPlane.cpp
   Camera.cpp
   Geometry.cpp
+  GeometryDescriptor.cpp
   GeometryFactory.cpp
   Mesh.cpp
   Shaders.cpp
@@ -101,6 +102,7 @@ if (BUILD_SHARED_LIBS)
       glfw
       ${OPENGL_gl_LIBRARY}
       ${MKL_TARGET}
+      ConcurrentQueue
   )
 else()
   target_link_libraries(VolViz
