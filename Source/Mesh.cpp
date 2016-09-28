@@ -8,15 +8,15 @@
 namespace VolViz {
 namespace Private_ {
 
+using Lock = std::lock_guard<std::mutex>;
+
 Mesh::Mesh(MeshDescriptor const &descriptor, VisualizerImpl &visualizer)
-    : Geometry(descriptor, visualizer), descriptor_(descriptor) {
+    : Geometry(descriptor, visualizer) {
   scale = descriptor.scale;
+  updateQueue_.enqueue(descriptor);
 }
 
-void Mesh::doInit() {
-  uploadMesh();
-  descriptor_ = std::nullopt;
-}
+void Mesh::doInit() { uploadMesh(); }
 
 void Mesh::doRender(std::uint32_t index, bool selected) {
   Length const rScale = visualizer_.cachedScale;
@@ -58,14 +58,18 @@ void Mesh::doRender(std::uint32_t index, bool selected) {
   assertGL("glDrawElements failed");
 }
 
+void Mesh::doUpdate() { uploadMesh(); }
+
 void Mesh::uploadMesh() {
   using GL::Buffer;
   using GL::VertexArray;
 
-  if (!descriptor_) return;
+  MeshDescriptor descriptor;
 
-  auto const N = descriptor_->vertices.rows();
-  auto const M = descriptor_->indices.rows();
+  if (!updateQueue_.try_dequeue(descriptor)) return;
+
+  auto const N = descriptor.vertices.rows();
+  auto const M = descriptor.indices.rows();
   auto const vertBuffSize = N * 8 * narrow_cast<int>(sizeof(float));
   auto const indexBufferSize = M * 3 * narrow_cast<int>(sizeof(std::uint32_t));
 
@@ -96,15 +100,15 @@ void Mesh::uploadMesh() {
 
   // copy vertices
   for (int i = 0; i < N; ++i) {
-    vertices.row(i) << descriptor_->vertices.row(i), 0.f, 0.f, 0.f, 0.f, 0.f;
+    vertices.row(i) << descriptor.vertices.row(i), 0.f, 0.f, 0.f, 0.f, 0.f;
   }
 
   // copt indices
-  for (int i = 0; i < M; ++i) { indices.row(i) = descriptor_->indices.row(i); }
+  for (int i = 0; i < M; ++i) { indices.row(i) = descriptor.indices.row(i); }
 
   // compute normals
   for (int i = 0; i < M; ++i) {
-    auto const &I = descriptor_->indices;
+    auto const &I = descriptor.indices;
     auto &V = vertices;
     Vector3f const normal =
         (V.row(I(i, 1)) - V.row(I(i, 0)))
@@ -137,6 +141,14 @@ void Mesh::uploadMesh() {
   indexBuffer_ = std::move(indexBuffer);
   vertexArrayObject_ = std::move(vao);
   numTriangles_ = static_cast<std::size_t>(M);
+}
+
+void Mesh::doEnqueueUpdate(GeometryDescriptor const &descriptor) {
+  updateQueue_.enqueue(dynamic_cast<MeshDescriptor const &>(descriptor));
+}
+
+void Mesh::doEnqueueUpdate(GeometryDescriptor &&descriptor) {
+  updateQueue_.enqueue(std::move(dynamic_cast<MeshDescriptor &&>(descriptor)));
 }
 
 } // namespace Private_

@@ -429,9 +429,13 @@ void VisualizerImpl::renderOneFrame() {
     if (entry.second) {
       std::cout << "Init geometry '" << entry.first << "'" << std::endl;
       entry.second->init();
+      std::lock_guard<std::mutex> lock{geometriesMutex_};
       geometries_.emplace(entry.first, std::move(entry.second));
     }
   }
+
+  // update geometries
+  updateGeometries();
 
   assertGL("OpenGL Error stack not clear");
 
@@ -498,6 +502,10 @@ void VisualizerImpl::renderGeometry() {
 
   // switch back to single render target
   glDrawBuffers(1, attachments.data());
+}
+
+void VisualizerImpl::updateGeometries() {
+  for (auto &geom : geometries_) geom.second->update();
 }
 
 void VisualizerImpl::renderGrid() {

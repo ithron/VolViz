@@ -26,6 +26,7 @@ include(ImportGSL)
 include(ImportGLFW)
 include(ImportMKL)
 include(ImportPhysUnits)
+include(ImportConcurrentqueue)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)

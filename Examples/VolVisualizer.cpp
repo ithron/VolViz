@@ -6,6 +6,7 @@
 #include <igl/readPLY.h>
 #include <igl/readSTL.h>
 
+#include <chrono>
 #include <fstream>
 #include <iostream>
 
@@ -145,7 +146,20 @@ int main(int argc, char **argv) {
 
   viewer.setVolume(vol.first, gsl::as_span(vol.second));
 
-  while (viewer) { viewer.renderOneFrame(); }
+  using Clock = std::chrono::steady_clock;
+  using namespace std::chrono_literals;
+  auto t0 = Clock::now();
+  int count {0};
+  while (viewer) {
+    auto const now = Clock::now();
+    if ((now - t0) > 10ms) {
+      mesh.vertices *= count < 10 ? 1.01f : 0.99f;
+      viewer.updateGeometry("Mesh", mesh);
+      if (++count > 20) count = 0;
+    }
+    t0 = now;
+    viewer.renderOneFrame();
+  }
 
   return EXIT_SUCCESS;
 }

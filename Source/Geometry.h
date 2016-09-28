@@ -21,7 +21,16 @@ public:
 
   void init();
 
+  inline void update() { doUpdate(); }
+
   void render(std::uint32_t index, bool selected);
+
+  template <class Descriptor,
+            typename = std::enable_if_t<std::is_base_of<
+                GeometryDescriptor, std::decay_t<Descriptor>>::value>>
+  inline void enqueueUpdate(Descriptor &&descriptor) {
+    doEnqueueUpdate(std::forward<Descriptor>(descriptor));
+  }
 
 protected:
   Geometry(VisualizerImpl &visualizer);
@@ -30,6 +39,11 @@ protected:
   virtual void doInit();
 
   virtual void doRender(std::uint32_t index, bool selected) = 0;
+
+  virtual void doUpdate();
+
+  virtual void doEnqueueUpdate(GeometryDescriptor const &descriptor);
+  virtual void doEnqueueUpdate(GeometryDescriptor &&descriptor);
 
   VisualizerImpl &visualizer_;
 };

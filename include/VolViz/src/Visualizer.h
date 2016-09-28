@@ -56,6 +56,11 @@ public:
                 GeometryDescriptor, std::decay_t<Descriptor>>::value>>
   void addGeometry(GeometryName name, Descriptor const &geom);
 
+  template <class Descriptor,
+            typename = std::enable_if_t<std::is_base_of<
+                GeometryDescriptor, std::decay_t<Descriptor>>::value>>
+  void updateGeometry(GeometryName name, Descriptor &&geom);
+
   std::atomic<bool> showGrid{true};
   std::atomic<bool> showVolumeBoundingBox{true};
   AtomicProperty<Length> scale{1 * milli * meter};
