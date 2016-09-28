@@ -29,19 +29,32 @@ inline Vector3f maskToUnitVector(MoveMask mask) noexcept {
   return v;
 }
 
-struct GeometryDescriptor {
+class GeometryDescriptor {
+public:
   bool movable{true};
   Color color{Colors::White()};
+
+protected:
+  GeometryDescriptor() = default;
+  ~GeometryDescriptor() = default;
+
+  GeometryDescriptor(GeometryDescriptor const &) = default;
+  GeometryDescriptor(GeometryDescriptor &&) = default;
+
+  GeometryDescriptor &operator=(GeometryDescriptor const &) = default;
+  GeometryDescriptor &operator=(GeometryDescriptor &&) = default;
 };
 
 /// A geometry descriptor describing a axis aligned plane
-struct AxisAlignedPlaneDescriptor : public GeometryDescriptor {
+class AxisAlignedPlaneDescriptor : public GeometryDescriptor {
+public:
   Length intercept{0 * meter};
   Axis axis{Axis::X};
 };
 
 /// A geometry descriptor describing an arbitrary triangle mesh
-struct MeshDescriptor : public GeometryDescriptor {
+class MeshDescriptor : public GeometryDescriptor {
+public:
   Eigen::Matrix<float, Eigen::Dynamic, 3> vertices;
   Eigen::Matrix<std::uint32_t, Eigen::Dynamic, 3> indices;
   Length scale{1 * milli * meter};
@@ -50,3 +63,4 @@ struct MeshDescriptor : public GeometryDescriptor {
 } // namespace VolViz
 
 #endif // VolViz_Geometry_h
+
