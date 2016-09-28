@@ -13,3 +13,6 @@
 [submodule "Dependencies/PhysUnits"]
 	path = Dependencies/PhysUnits
 	url = https://github.com/martinmoene/PhysUnits-CT-Cpp11.git
+[submodule "Dependencies/concurrentqueue"]
+	path = Dependencies/concurrentqueue
+	url = git@github.com:ithron/concurrentqueue.git
