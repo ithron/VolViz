@@ -1,4 +1,0 @@
-<map id="VolViz::GeometryDescriptor" name="VolViz::GeometryDescriptor">
-<area shape="rect" id="node2" href="$structVolViz_1_1AxisAlignedPlaneDescriptor.html" title="A geometry descriptor describing a axis aligned plane. " alt="" coords="5,147,176,253"/>
-<area shape="rect" id="node3" href="$structVolViz_1_1MeshDescriptor.html" title="A geometry descriptor describing an arbitrary triangle mesh. " alt="" coords="200,147,359,253"/>
-</map>

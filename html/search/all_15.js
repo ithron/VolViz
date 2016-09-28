@@ -14,7 +14,7 @@ var searchData=
   ['vertexarrayobject_5f',['vertexArrayObject_',['../classVolViz_1_1Private___1_1Mesh.html#a0bc4149185b3f9c99dcc8dcd96d2ef0a',1,'VolViz::Private_::Mesh']]],
   ['vertexbuffer_5f',['vertexBuffer_',['../classVolViz_1_1Private___1_1Mesh.html#a39d396f3e70677373a89711680c5b79e',1,'VolViz::Private_::Mesh']]],
   ['verticalfieldofview',['verticalFieldOfView',['../classVolViz_1_1Camera.html#a3aaf035b07e479fd79d3e4847ec517ea',1,'VolViz::Camera']]],
-  ['vertices',['vertices',['../structVolViz_1_1MeshDescriptor.html#a9f9d71a80399a80ef11f3051d164d34e',1,'VolViz::MeshDescriptor']]],
+  ['vertices',['vertices',['../classVolViz_1_1MeshDescriptor.html#a9f9d71a80399a80ef11f3051d164d34e',1,'VolViz::MeshDescriptor']]],
   ['viewmatrix',['viewMatrix',['../classVolViz_1_1Camera.html#aa14c9b309c1ad938bfa3da327dd0785f',1,'VolViz::Camera::viewMatrix()'],['../classVolViz_1_1Private___1_1CameraClient.html#aa1c5eaca893e4dedee8619bde3f666ab',1,'VolViz::Private_::CameraClient::viewMatrix()']]],
   ['viewprojectionmatrix',['viewProjectionMatrix',['../classVolViz_1_1Camera.html#a683a36e60b89662cce6c49008fe895c4',1,'VolViz::Camera::viewProjectionMatrix()'],['../classVolViz_1_1Private___1_1CameraClient.html#a3410dde2df3f1103da1a9c3557fa1f2a',1,'VolViz::Private_::CameraClient::viewProjectionMatrix()']]],
   ['viewstate',['ViewState',['../group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f',1,'VolViz::Private_::VisualizerImpl']]],

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a163fc1e73e0dd1ffa7810d333bcacd89',1,'VolViz::Private_::Geometry::Geometry(VisualizerImpl &amp;visualizer)'],['../classVolViz_1_1Private___1_1Geometry.html#a8f545b522ec1a2aac1d96e21d854d1f0',1,'VolViz::Private_::Geometry::Geometry(GeometryDescriptor const &amp;descriptor, VisualizerImpl &amp;visualizer)']]],
+  ['geometrydescriptor',['GeometryDescriptor',['../classVolViz_1_1GeometryDescriptor.html#ad97c796111162163188ea95fe6e2f30d',1,'VolViz::GeometryDescriptor::GeometryDescriptor()=default'],['../classVolViz_1_1GeometryDescriptor.html#abf61831522d1e4b1df15b1c3f71dcfba',1,'VolViz::GeometryDescriptor::GeometryDescriptor(GeometryDescriptor const &amp;)=default'],['../classVolViz_1_1GeometryDescriptor.html#ab9d8796a4fa99ad2e3fe215830f86b78',1,'VolViz::GeometryDescriptor::GeometryDescriptor(GeometryDescriptor &amp;&amp;)=default']]],
   ['geometryfactory',['GeometryFactory',['../classVolViz_1_1Private___1_1GeometryFactory.html#afda9f9db98150b0f59751805a42ec14f',1,'VolViz::Private_::GeometryFactory']]],
   ['getgeometryundercursor',['getGeometryUnderCursor',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ac6623efca5add12696057d36758f3826',1,'VolViz::Private_::VisualizerImpl']]],
   ['glclipcontrol',['glClipControl',['../GLdefs_8h.html#a52731761e97be1dbb3f45f86abf7781d',1,'GLdefs.h']]],

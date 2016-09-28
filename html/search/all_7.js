@@ -1,13 +1,16 @@
 var searchData=
 [
   ['geometries_5f',['geometries_',['../group__geomGroup.html#ga76b1aaf5b8f1555a81428503fad8d238',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometriesmutex_5f',['geometriesMutex_',['../group__geomGroup.html#ga02df1bdd5faac776498efb51950170d9',1,'VolViz::Private_::VisualizerImpl']]],
   ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html',1,'VolViz::Private_']]],
   ['geometry',['Geometry',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html',1,'VolViz::Private_::GL']]],
   ['geometry',['Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a163fc1e73e0dd1ffa7810d333bcacd89',1,'VolViz::Private_::Geometry::Geometry(VisualizerImpl &amp;visualizer)'],['../classVolViz_1_1Private___1_1Geometry.html#a8f545b522ec1a2aac1d96e21d854d1f0',1,'VolViz::Private_::Geometry::Geometry(GeometryDescriptor const &amp;descriptor, VisualizerImpl &amp;visualizer)']]],
   ['geometry_2ecpp',['Geometry.cpp',['../Geometry_8cpp.html',1,'']]],
   ['geometry_2eh',['Geometry.h',['../Geometry_8h.html',1,'']]],
   ['geometry_2eh',['Geometry.h',['../GL_2Geometry_8h.html',1,'']]],
-  ['geometrydescriptor',['GeometryDescriptor',['../structVolViz_1_1GeometryDescriptor.html',1,'VolViz']]],
+  ['geometrydescriptor',['GeometryDescriptor',['../classVolViz_1_1GeometryDescriptor.html#ad97c796111162163188ea95fe6e2f30d',1,'VolViz::GeometryDescriptor::GeometryDescriptor()=default'],['../classVolViz_1_1GeometryDescriptor.html#abf61831522d1e4b1df15b1c3f71dcfba',1,'VolViz::GeometryDescriptor::GeometryDescriptor(GeometryDescriptor const &amp;)=default'],['../classVolViz_1_1GeometryDescriptor.html#ab9d8796a4fa99ad2e3fe215830f86b78',1,'VolViz::GeometryDescriptor::GeometryDescriptor(GeometryDescriptor &amp;&amp;)=default']]],
+  ['geometrydescriptor',['GeometryDescriptor',['../classVolViz_1_1GeometryDescriptor.html',1,'VolViz']]],
+  ['geometrydescriptor_2ecpp',['GeometryDescriptor.cpp',['../GeometryDescriptor_8cpp.html',1,'']]],
   ['geometrydescriptor_2eh',['GeometryDescriptor.h',['../GeometryDescriptor_8h.html',1,'']]],
   ['geometryfactory',['GeometryFactory',['../classVolViz_1_1Private___1_1GeometryFactory.html',1,'VolViz::Private_']]],
   ['geometryfactory',['GeometryFactory',['../classVolViz_1_1Private___1_1GeometryFactory.html#afda9f9db98150b0f59751805a42ec14f',1,'VolViz::Private_::GeometryFactory']]],
