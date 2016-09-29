@@ -112,6 +112,8 @@ bool GLFW::isHidden() const noexcept {
 
 void GLFW::makeCurrent() noexcept { glfwMakeContextCurrent(window); }
 
+void GLFW::detachContext() noexcept { glfwMakeContextCurrent(nullptr); }
+
 std::size_t GLFW::width() const noexcept {
   int w, h;
   glfwGetWindowSize(window, &w, &h);

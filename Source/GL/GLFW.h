@@ -39,6 +39,9 @@ public:
   /// Makes the window's conext current
   void makeCurrent() noexcept;
 
+  /// Detaches the context from the current thread
+  void detachContext() noexcept;
+
   inline operator bool() const noexcept {
     return !glfwWindowShouldClose(window);
   }
