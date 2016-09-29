@@ -78,9 +78,12 @@ void Mesh::uploadMesh() {
   auto const vertBinding =
       binding(vertBuffer, static_cast<GLenum>(GL_ARRAY_BUFFER));
   glBufferData(GL_ARRAY_BUFFER, vertBuffSize, nullptr, GL_STATIC_DRAW);
+  assertGL("glBufferData failed");
   float *mappedVertBuffer =
       reinterpret_cast<float *>(glMapBuffer(GL_ARRAY_BUFFER, GL_READ_WRITE));
+
   Ensures(mappedVertBuffer != nullptr);
+
   Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, 8, Eigen::RowMajor>> vertices(
       mappedVertBuffer, N, 8);
 
