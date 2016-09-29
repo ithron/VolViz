@@ -42,7 +42,15 @@ public:
 
   void start();
 
+  void enableMultithreading() noexcept;
+
   void renderOneFrame();
+
+  void renderOneFrameAndWaitForEvents();
+
+  void renderAtFPS(double fps = 60.0);
+
+  void renderOnUserInteraction(double maxFps = 60.0);
 
   operator bool() const noexcept;
 
@@ -59,7 +67,7 @@ public:
   template <class Descriptor,
             typename = std::enable_if_t<std::is_base_of<
                 GeometryDescriptor, std::decay_t<Descriptor>>::value>>
-  void updateGeometry(GeometryName name, Descriptor &&geom);
+  bool updateGeometry(GeometryName name, Descriptor &&geom);
 
   std::atomic<bool> showGrid{true};
   std::atomic<bool> showVolumeBoundingBox{true};

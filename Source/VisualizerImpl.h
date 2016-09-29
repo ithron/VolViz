@@ -9,11 +9,12 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 #include <VolViz/VolViz.h>
+#include <concurrentqueue.h>
 
 #include <atomic>
 #include <chrono>
 #include <mutex>
-#include <queue>
+#include <thread>
 #include <unordered_map>
 
 namespace VolViz {
@@ -24,7 +25,7 @@ class VisualizerImpl {
       std::pair<Visualizer::GeometryName, Geometry::UniquePtr>;
   using GeometryList =
       std::unordered_map<Visualizer::GeometryName, Geometry::UniquePtr>;
-  using GeometryInitQueue = std::queue<InitQueueEntry>;
+  using GeometryInitQueue = moodycamel::ConcurrentQueue<InitQueueEntry>;
 
 public:
   using Point2 = Eigen::Vector2f;
@@ -35,7 +36,9 @@ public:
 
   void start();
 
-  void renderOneFrame();
+  void enableMultithreading() noexcept;
+
+  void renderOneFrame(bool block = true);
 
   operator bool() const noexcept;
 
@@ -49,21 +52,29 @@ public:
                 GeometryDescriptor, std::decay_t<Descriptor>>::value>>
   inline void addGeometry(Visualizer::GeometryName name,
                           Descriptor const &descriptor) {
-    std::lock_guard<std::mutex> const lock{geomInitQueueMutex_};
-    geometryInitQueue_.emplace(name, geomFactory_.create(descriptor));
+    geometryInitQueue_.enqueue({name, geomFactory_.create(descriptor)});
   }
 
   template <class Descriptor,
             typename = std::enable_if_t<std::is_base_of<
                 GeometryDescriptor, std::decay_t<Descriptor>>::value>>
-  inline void updateGeometry(Visualizer::GeometryName name,
+  inline bool updateGeometry(Visualizer::GeometryName name,
                              Descriptor &&descriptor) {
-    std::lock_guard<std::mutex> const lock{geometriesMutex_};
+    std::lock_guard<std::mutex> lock{geometriesMutex_};
     auto search = geometries_.find(name);
-    if (search == geometries_.end())
+    if (search == geometries_.end()) {
+      // There are two reasons for not finding a geometry:
+      //   1. The geometry was not added (usage error). Nothing can be done to
+      //      recover -> throw exception.
+      //   2. Multithreading is enabled, in this case the geometry might have
+      //      been added but was not initialized, yet. In this case the user
+      //      can repeat the update later -> return false.
+      if (multithreadingEnabled_) return false;
       throw std::logic_error("Geometry " + name + " not found");
+    }
 
     search->second->enqueueUpdate(std::forward<Descriptor>(descriptor));
+    return true;
   }
 
   /// Convenience method for easy camera access
@@ -221,9 +232,8 @@ private:
   /// @defgroup geomGroup Geometry processing related variables
   /// @{
   GeometryList geometries_;
-  GeometryInitQueue geometryInitQueue_;
-  std::mutex geomInitQueueMutex_;
   std::mutex geometriesMutex_;
+  GeometryInitQueue geometryInitQueue_;
   ///@}
 
   /// Data representing a single vertex, required by the grid and fullscreen
@@ -262,6 +272,8 @@ private:
   //@}
 
   VolumeDescriptor currentVolume_;
+
+  bool multithreadingEnabled_{false};
 
   //@}
 };

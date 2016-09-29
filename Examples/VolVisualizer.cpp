@@ -9,6 +9,7 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <thread>
 
 auto generateVolume();
 
@@ -102,7 +103,6 @@ int main(int argc, char **argv) {
   mesh.color = Colors::White();
   viewer.addGeometry("Mesh", mesh);
 
-  viewer.start();
   viewer.showGrid = true;
 
   Light light;
@@ -146,20 +146,26 @@ int main(int argc, char **argv) {
 
   viewer.setVolume(vol.first, gsl::as_span(vol.second));
 
+  viewer.enableMultithreading();
+  std::thread viewerThread([&viewer]() {
+    viewer.start();
+    viewer.renderAtFPS(60);
+  });
+
   using Clock = std::chrono::steady_clock;
   using namespace std::chrono_literals;
-  auto t0 = Clock::now();
-  int count {0};
+  auto constexpr updateIntervall = 1s / 30.f;
+  int count{0};
   while (viewer) {
-    auto const now = Clock::now();
-    if ((now - t0) > 10ms) {
-      mesh.vertices *= count < 10 ? 1.01f : 0.99f;
-      viewer.updateGeometry("Mesh", mesh);
-      if (++count > 20) count = 0;
-    }
-    t0 = now;
-    viewer.renderOneFrame();
+    auto const t0 = Clock::now();
+    mesh.vertices *= count < 10 ? 1.01f : 0.99f;
+    viewer.updateGeometry("Mesh", mesh);
+    if (++count > 20) count = 0;
+    auto const timeLeft = -(Clock::now() - t0) + updateIntervall;
+    if (timeLeft > 0s) std::this_thread::sleep_for(timeLeft);
   }
+
+  viewerThread.join();
 
   return EXIT_SUCCESS;
 }

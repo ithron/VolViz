@@ -39,6 +39,9 @@ public:
   /// Makes the window's conext current
   void makeCurrent() noexcept;
 
+  /// Detaches the context from the current thread
+  void detachContext() noexcept;
+
   inline operator bool() const noexcept {
     return !glfwWindowShouldClose(window);
   }
@@ -46,6 +49,8 @@ public:
   inline void swapBuffers() const noexcept { glfwSwapBuffers(window); }
 
   inline void waitEvents() const noexcept { glfwWaitEvents(); }
+
+  inline void pollEvents() const noexcept { glfwPollEvents(); }
 
   bool supportsExtension(std::string name) const noexcept;
 
