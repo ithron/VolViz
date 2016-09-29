@@ -107,12 +107,14 @@ if (BUILD_SHARED_LIBS)
 else()
   target_link_libraries(VolViz
     PUBLIC
+      ${MKL_TARGET}
+      ${OPENGL_gl_LIBRARY}
       Eigen
       GSL
       PhysUnits
       glfw
-      ${OPENGL_gl_LIBRARY}
-      ${MKL_TARGET}
+    PRIVATE
+      ConcurrentQueue
   )
 endif()
 target_include_directories(VolViz PUBLIC

@@ -1,9 +1,18 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 add_library(Eigen INTERFACE IMPORTED)
-set_property(TARGET Eigen PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-  ${DEPENDENCIES_DIR}/Eigen-3.2.8
-)
+if(XCODE)
+  set_property(TARGET Eigen PROPERTY INTERFACE_COMPILE_OPTIONS
+    -isystem ${DEPENDENCIES_DIR}/Eigen-3.2.8
+  )
+else()
+  set_property(TARGET Eigen PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+    ${DEPENDENCIES_DIR}/Eigen-3.2.8
+  )
+  set_property(TARGET Eigen PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
+    ${DEPENDENCIES_DIR}/Eigen-3.2.8
+  )
+endif()
 
 # cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 #
