@@ -84,7 +84,7 @@ Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Textures.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Textures.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/VertexArray.h...
-Preproces/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:357: warning: no matching class member found for 
+Preproces/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:362: warning: no matching class member found for 
   template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< float >)
 Possible candidates:
   'template < T >
@@ -94,7 +94,7 @@ Possible candidates:
   'template <>
   void VolViz::Private_::VisualizerImpl::setVolume(VolumeDescriptor const &descriptor, gsl::span< Color const  > data)
 
-/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:359: warning: no matching class member found for 
+/home/travis/build/ithron/VolViz/Source/VisualizerImpl.cpp:364: warning: no matching class member found for 
   template void VolViz::Private_::VisualizerImpl::setVolume(const VolViz::VolumeDescriptor &, gsl::span< Eigen::Vector3f >)
 Possible candidates:
   'template < T >
@@ -568,5 +568,5 @@ Patching output file 80/83
 Patching output file 81/83
 Patching output file 82/83
 Patching output file 83/83
-lookup cache used 1407/65536 hits=5760 misses=1637
+lookup cache used 1417/65536 hits=5773 misses=1641
 finished...

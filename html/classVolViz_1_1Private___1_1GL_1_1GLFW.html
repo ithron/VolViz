@@ -137,12 +137,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a67deca851f61f0e718a11dd0fa0f941a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a67deca851f61f0e718a11dd0fa0f941a">makeCurrent</a> () noexcept</td></tr>
 <tr class="memdesc:a67deca851f61f0e718a11dd0fa0f941a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the window's conext current.  <a href="#a67deca851f61f0e718a11dd0fa0f941a">More...</a><br/></td></tr>
 <tr class="separator:a67deca851f61f0e718a11dd0fa0f941a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08dd75e76d8cf5371d84c7b442109fe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a08dd75e76d8cf5371d84c7b442109fe6">detachContext</a> () noexcept</td></tr>
+<tr class="memdesc:a08dd75e76d8cf5371d84c7b442109fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detaches the context from the current thread.  <a href="#a08dd75e76d8cf5371d84c7b442109fe6">More...</a><br/></td></tr>
+<tr class="separator:a08dd75e76d8cf5371d84c7b442109fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ce11b3f134e02e0bfdc36032204e87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#ab4ce11b3f134e02e0bfdc36032204e87">operator bool</a> () const noexcept</td></tr>
 <tr class="separator:ab4ce11b3f134e02e0bfdc36032204e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ef7fecf88513981ce746b1f7f308c59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a1ef7fecf88513981ce746b1f7f308c59">swapBuffers</a> () const noexcept</td></tr>
 <tr class="separator:a1ef7fecf88513981ce746b1f7f308c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5fd8ba5f603974f5c963760afe639ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#ad5fd8ba5f603974f5c963760afe639ce">waitEvents</a> () const noexcept</td></tr>
 <tr class="separator:ad5fd8ba5f603974f5c963760afe639ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c0b4c135caad4b9d2dd178f553bfdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a80c0b4c135caad4b9d2dd178f553bfdb">pollEvents</a> () const noexcept</td></tr>
+<tr class="separator:a80c0b4c135caad4b9d2dd178f553bfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6a9f8f0401270015ccdbef47245f51a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#ae6a9f8f0401270015ccdbef47245f51a">supportsExtension</a> (std::string name) const noexcept</td></tr>
 <tr class="separator:ae6a9f8f0401270015ccdbef47245f51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60e06abb78c10368718794e3057a003c"><td class="memItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Private___1_1GL_1_1GLFW.html#a60e06abb78c10368718794e3057a003c">supportedExtensions</a> () const noexcept</td></tr>
@@ -299,6 +304,31 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a08dd75e76d8cf5371d84c7b442109fe6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VolViz::Private_::GL::GLFW::detachContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Detaches the context from the current thread. </p>
+
+</div>
+</div>
 <a class="anchor" id="a2254de6656779aa124982e8b5ee9a6c4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -408,6 +438,29 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">VolViz::Private_::GL::GLFW::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a80c0b4c135caad4b9d2dd178f553bfdb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VolViz::Private_::GL::GLFW::pollEvents </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -683,7 +736,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 29 2016 12:46:34 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 15:05:15 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
