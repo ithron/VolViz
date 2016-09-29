@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${DEPENDENCIES_DIR}/cmake)
 include(ImportIgl)
 
+find_package(Threads REQUIRED)
+
 set(DEFAULT_COMPILE_FEATURES
   cxx_alias_templates
   cxx_alignas
@@ -83,6 +85,7 @@ add_executable(VolVisualizer VolVisualizer.cpp)
 target_link_libraries(VolVisualizer PRIVATE
   VolViz::VolViz
   IGL
+  ${CMAKE_THREAD_LIBS_INIT}
 )
 target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS})

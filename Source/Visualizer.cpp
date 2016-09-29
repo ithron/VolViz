@@ -35,6 +35,10 @@ Visualizer &Visualizer::operator=(Visualizer &&rhs) {
 
 void Visualizer::start() { impl_->start(); }
 
+void Visualizer::enableMultithreading() noexcept {
+  impl_->enableMultithreading();
+}
+
 Visualizer::operator bool() const noexcept { return *impl_; }
 
 template <class T>
@@ -108,23 +112,23 @@ template void Visualizer::addGeometry<MeshDescriptor>(GeometryName name,
                                                       MeshDescriptor const &);
 
 template <class Descriptor, typename>
-void Visualizer::updateGeometry(GeometryName name, Descriptor &&geom) {
-  impl_->updateGeometry(name, std::forward<Descriptor>(geom));
+bool Visualizer::updateGeometry(GeometryName name, Descriptor &&geom) {
+  return impl_->updateGeometry(name, std::forward<Descriptor>(geom));
 }
 
-template void Visualizer::updateGeometry<AxisAlignedPlaneDescriptor const &>(
+template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor const &>(
     GeometryName name, AxisAlignedPlaneDescriptor const &);
-template void Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &&>(
+template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &&>(
     GeometryName name, AxisAlignedPlaneDescriptor &&);
-template void Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &>(
+template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &>(
     GeometryName name, AxisAlignedPlaneDescriptor &);
 
-template void
+template bool
 Visualizer::updateGeometry<MeshDescriptor const &>(GeometryName name,
                                                    MeshDescriptor const &);
-template void Visualizer::updateGeometry<MeshDescriptor &&>(GeometryName name,
+template bool Visualizer::updateGeometry<MeshDescriptor &&>(GeometryName name,
                                                             MeshDescriptor &&);
-template void Visualizer::updateGeometry<MeshDescriptor &>(GeometryName name,
+template bool Visualizer::updateGeometry<MeshDescriptor &>(GeometryName name,
                                                            MeshDescriptor &);
 
 } // namespace volviz

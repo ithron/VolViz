@@ -278,6 +278,11 @@ Eigen::Matrix4f VisualizerImpl::textureTransformationMatrix() const noexcept {
 
 void VisualizerImpl::start() { glfw_.show(); }
 
+void VisualizerImpl::enableMultithreading() noexcept {
+  glfw_.detachContext();
+  multithreadingEnabled_ = true;
+}
+
 VisualizerImpl::operator bool() const noexcept { return glfw_; }
 
 template <>
@@ -417,20 +422,14 @@ void VisualizerImpl::renderOneFrame(bool block) {
 
   // Init all new geometry
   {
-    InitQueueEntry entry;
-    {
-      std::lock_guard<std::mutex> lock(geomInitQueueMutex_);
-      if (!geometryInitQueue_.empty()) {
-        entry = std::move(geometryInitQueue_.front());
-        geometryInitQueue_.pop();
-      }
-    } // release lock
-    // Init and add geometry if queue was not empty
-    if (entry.second) {
-      std::cout << "Init geometry '" << entry.first << "'" << std::endl;
-      entry.second->init();
+    InitQueueEntry item;
+    if (geometryInitQueue_.try_dequeue(item)) {
+      // Init and add geometry if queue was not empty
+      std::cout << "Init geometry '" << item.first << "'" << std::endl;
+      Expects(item.second);
+      item.second->init();
       std::lock_guard<std::mutex> lock{geometriesMutex_};
-      geometries_.emplace(entry.first, std::move(entry.second));
+      geometries_.emplace(item.first, std::move(item.second));
     }
   }
 
