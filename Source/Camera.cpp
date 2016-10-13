@@ -35,6 +35,18 @@ Matrix4 Camera::projectionMatrix() const noexcept {
 
   float const f = 1.f / gsl::narrow_cast<float>(std::tan(FOV / 2.0));
 
+  // This is a modification of the 'standard' projection matrix:
+  // + the far clipping plane is at infinity
+  // + the near clipping plane is at 0
+  // + the depth range goes from 1 to 0, where 1 is the nearest and 0 is the
+  //   farest
+  // Therfore: if (x, y, z, 1) are the 3D coordinates and (x', y', z', 1) are 
+  // the screen coordinates after perspective division, then:
+  //   lim z->infinity z' = 0
+  //   z = 0 <=> z' = 1
+  // This matrix requires a corresponding OpenGL setup:
+  // + reversed depth range
+  // + GL_GREATER depth test
   Matrix4 P;
   P << f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, 0, f, 0, 0, -1, f;
 
