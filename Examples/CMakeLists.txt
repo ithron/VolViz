@@ -84,7 +84,7 @@ endif()
 add_executable(VolVisualizer VolVisualizer.cpp)
 target_link_libraries(VolVisualizer PRIVATE
   VolViz::VolViz
-  IGL
+  VolViz::IGL
   ${CMAKE_THREAD_LIBS_INIT}
 )
 target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})

@@ -95,26 +95,26 @@ add_library(VolViz
 if (BUILD_SHARED_LIBS)
   target_link_libraries(VolViz
     PUBLIC
-      Eigen
-      GSL
-      PhysUnits
+      VolViz::Eigen
+      VolViz::GSL
+      VolViz::PhysUnits
     PRIVATE
       glfw
       ${OPENGL_gl_LIBRARY}
       ${MKL_TARGET}
-      ConcurrentQueue
+      VolViz::ConcurrentQueue
   )
 else()
   target_link_libraries(VolViz
     PUBLIC
       ${MKL_TARGET}
       ${OPENGL_gl_LIBRARY}
-      Eigen
-      GSL
-      PhysUnits
+      VolViz::Eigen
+      VolViz::GSL
+      VolViz::PhysUnits
       glfw
     PRIVATE
-      ConcurrentQueue
+      VolViz::ConcurrentQueue
   )
 endif()
 target_include_directories(VolViz PUBLIC
