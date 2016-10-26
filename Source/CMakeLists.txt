@@ -171,26 +171,22 @@ install(DIRECTORY ${DEPENDENCIES_DIR}/GSL/include
 install(DIRECTORY ${DEPENDENCIES_DIR}/PhysUnits/phys
   DESTINATION include/VolViz/src
 )
+install(FILES
+  ${DEPENDENCIES_DIR}/cmake/FindMKL.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportConcurrentqueue.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportEigen.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportGLFW.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportGSL.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportIgl.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportMKL.cmake
+  ${DEPENDENCIES_DIR}/cmake/ImportPhysUnits.cmake
+  DESTINATION lib/cmake/VolViz
+)
 
 export(EXPORT VolVizExport NAMESPACE VolViz::)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(VolVizConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
-  INSTALL_DESTINATION lib/cmake/VolViz
-)
-configure_package_config_file(
-  ${DEPENDENCIES_DIR}/cmake/FindMKL.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/FindMKL.cmake
-  INSTALL_DESTINATION lib/cmake/VolViz
-)
-configure_package_config_file(
-  ${DEPENDENCIES_DIR}/cmake/ImportEigen.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/ImportEigen.cmake
-  INSTALL_DESTINATION lib/cmake/VolViz
-)
-configure_package_config_file(
-  ${DEPENDENCIES_DIR}/cmake/ImportIgl.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/ImportIgl.cmake
   INSTALL_DESTINATION lib/cmake/VolViz
 )
 configure_package_config_file(
