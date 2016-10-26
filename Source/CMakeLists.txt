@@ -95,26 +95,26 @@ add_library(VolViz
 if (BUILD_SHARED_LIBS)
   target_link_libraries(VolViz
     PUBLIC
-      VolViz::Eigen
-      VolViz::GSL
-      VolViz::PhysUnits
+      Eigen
+      GSL
+      PhysUnits
     PRIVATE
       glfw
       ${OPENGL_gl_LIBRARY}
       ${MKL_TARGET}
-      VolViz::ConcurrentQueue
+      ConcurrentQueue
   )
 else()
   target_link_libraries(VolViz
     PUBLIC
       ${MKL_TARGET}
       ${OPENGL_gl_LIBRARY}
-      VolViz::Eigen
-      VolViz::GSL
-      VolViz::PhysUnits
+      Eigen
+      GSL
+      PhysUnits
       glfw
     PRIVATE
-      VolViz::ConcurrentQueue
+      ConcurrentQueue
   )
 endif()
 target_include_directories(VolViz PUBLIC
@@ -162,23 +162,13 @@ install(EXPORT VolVizExport NAMESPACE VolViz::
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz
   DESTINATION include
 )
-install(DIRECTORY ${DEPENDENCIES_DIR}/Eigen-3.2.8/Eigen
-  DESTINATION include/VolViz/src
-)
-install(DIRECTORY ${DEPENDENCIES_DIR}/GSL/include
-  DESTINATION include/VolViz/src/GSL
-)
-install(DIRECTORY ${DEPENDENCIES_DIR}/PhysUnits/phys
-  DESTINATION include/VolViz/src
-)
+# install(DIRECTORY ${DEPENDENCIES_DIR}/Eigen-3.2.8/Eigen
+#   DESTINATION include/VolViz/src
+# )
 install(FILES
   ${DEPENDENCIES_DIR}/cmake/FindMKL.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportConcurrentqueue.cmake
   ${DEPENDENCIES_DIR}/cmake/ImportEigen.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportGLFW.cmake
   ${DEPENDENCIES_DIR}/cmake/ImportGSL.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportIgl.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportMKL.cmake
   ${DEPENDENCIES_DIR}/cmake/ImportPhysUnits.cmake
   DESTINATION lib/cmake/VolViz
 )
@@ -198,3 +188,4 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
   DESTINATION lib/cmake/VolViz
 )
+

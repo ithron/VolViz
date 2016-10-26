@@ -1,16 +1,24 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-add_library(VolViz::ConcurrentQueue INTERFACE IMPORTED)
-if("${CMAKE_GENERATOR}" STREQUAL "Xcode")
-  set_property(TARGET VolViz::ConcurrentQueue PROPERTY INTERFACE_COMPILE_OPTIONS
-    -isystem${DEPENDENCIES_DIR}/concurrentqueue
-  )
-else()
-  set_property(TARGET VolViz::ConcurrentQueue PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-    ${DEPENDENCIES_DIR}/concurrentqueue
-  )
-  set_property(TARGET VolViz::ConcurrentQueue PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
-    ${DEPENDENCIES_DIR}/concurrentqueue
-  )
+if(NOT HAS_ConcurrentQueue)
+  set(HAS_ConcurrentQueue YES)
+
+  add_library(ConcurrentQueue INTERFACE)
+  if("${CMAKE_GENERATOR}" STREQUAL "Xcode")
+    set_property(TARGET ConcurrentQueue PROPERTY INTERFACE_COMPILE_OPTIONS
+      -isystem$<BUILD_INTERFACE:${DEPENDENCIES_DIR}/concurrentqueue>$<INSTALL_INTERFACE:include/VolViz/src/concurrentqueue>
+    )
+  else()
+    set_property(TARGET ConcurrentQueue PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/concurrentqueue>
+      $<INSTALL_INTERFACE:include/VolViz/src/concurrentqueue>
+    )
+    set_property(TARGET ConcurrentQueue PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
+      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/concurrentqueue>
+      $<INSTALL_INTERFACE:include/VolViz/src/concurrentqueue>
+    )
+  endif()
+
+  install(TARGETS ConcurrentQueue EXPORT VolVizExport)
 endif()
 
