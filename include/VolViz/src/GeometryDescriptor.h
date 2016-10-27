@@ -1,7 +1,8 @@
-#ifndef VolViz_Geometry_h
-#define VolViz_Geometry_h
+#pragma once
 
 #include "Types.h"
+
+#pragma clang diagnostic ignored "-Wpadded"
 
 namespace VolViz {
 
@@ -82,4 +83,3 @@ public:
 
 } // namespace VolViz
 
-#endif // VolViz_Geometry_h

@@ -3,6 +3,8 @@
 
 #include <mutex>
 
+#pragma clang diagnostic ignored "-Wpadded"
+
 namespace VolViz {
 
 /// Default set policy for AtomicWrapper class, justs sets dest to src
