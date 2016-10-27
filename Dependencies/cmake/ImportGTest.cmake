@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if(NOT GTest)
+if(NOT TARGET GTest)
   set(BUILD_TYPE ${CMAKE_BUILD_TYPE})
 
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build gtest as release build")

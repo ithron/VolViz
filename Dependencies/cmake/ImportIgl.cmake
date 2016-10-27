@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT IGL)
+if (NOT TARGET IGL)
 
   add_library(IGL INTERFACE)
   if(XCODE)

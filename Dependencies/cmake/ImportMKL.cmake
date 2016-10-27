@@ -1,6 +1,6 @@
 find_package(MKL)
 
-if(NOT MKL)
+if(NOT TARGET MKL)
   if(MKL_FOUND)
     option(USE_MKL "Use MKL to speed up Eigen operations" YES)
   endif()

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT PhysUnits)
+if (NOT TARGET PhysUnits)
   set(INSTALL_PhysUnits ON)
 
   add_library(PhysUnits INTERFACE)

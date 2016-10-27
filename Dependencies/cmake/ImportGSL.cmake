@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT GSL)
+if (NOT TARGET GSL)
 
   set(INSTALL_GSL ON)
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if(NOT ConcurrentQueue)
+if(NOT TARGET ConcurrentQueue)
 
   add_library(ConcurrentQueue INTERFACE)
   if("${CMAKE_GENERATOR}" STREQUAL "Xcode")
