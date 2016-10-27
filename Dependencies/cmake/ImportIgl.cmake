@@ -6,16 +6,14 @@ if (NOT HAS_IGL)
   add_library(IGL INTERFACE)
   if(XCODE)
     set_property(TARGET IGL PROPERTY INTERFACE_COMPILE_OPTIONS
-      -isystem$<BUILD_INTERFACE:${DEPENDENCIES_DIR}/libigl/include>$<INSTALL_INTERFACE:include/VolViz/src/IGL>
+      $<BUILD_INTERFACE:-system ${DEPENDENCIES_DIR}/libigl/include>
     )
   else()
     set_property(TARGET IGL PROPERTY INTERFACE_INCLUDE_DIRECTORIES
       $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/libigl/include>
-      $<INSTALL_INTERFACE:include/VolViz/src/IGL>
     )
     set_property(TARGET IGL PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
       $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/libigl/include>
-      $<INSTALL_INTERFACE:include/VolViz/src/IGL>
     )
   endif()
 

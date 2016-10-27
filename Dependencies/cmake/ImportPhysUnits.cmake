@@ -11,11 +11,9 @@ if (NOT HAS_PhysUnits)
   else()
     set_property(TARGET PhysUnits PROPERTY INTERFACE_INCLUDE_DIRECTORIES
       $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/PhysUnits>
-      $<INSTALL_INTERFACE:include/VolViz/src/PhysUnits>
     )
     set_property(TARGET PhysUnits PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
       $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/PhysUnits>
-      $<INSTALL_INTERFACE:include/VolViz/src/PhysUnits>
     )
   endif()
 
