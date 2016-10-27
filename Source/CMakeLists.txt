@@ -137,11 +137,6 @@ if (BUILD_TESTING)
 #add test targets here
 endif()
 
-if (BUILD_TESTING)
-#find_package(GTest REQUIRED)
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Dependencies/googletest gtest)
-endif()
-
 
 ###############################
 #Install and packaging
