@@ -1,25 +1,23 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT EIGEN_INCLUDE_DIR)
-  set(EIGEN_INCLUDE_DIR
-    $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/Eigen-3.2.8>
-  )
-set(EIGEN_INCLUDE_OPT "-isystem ${EIGEN_INCLUDE_DIR}")
-  set(INSTALL_EIGEN YES)
-endif()
+if (NOT Eigen)
 
-add_library(Eigen INTERFACE)
-if(XCODE)
-  set_property(TARGET Eigen PROPERTY INTERFACE_COMPILE_OPTIONS
-    ${EIGEN_INCLUDE_OPT}
-  )
-else()
-  set_property(TARGET Eigen PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-    ${EIGEN_INCLUDE_DIR}
-  )
-  set_property(TARGET Eigen PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
-    ${EIGEN_INCLUDE_DIR}
-  )
+  set(INSTALL_EIGEN ON)
+
+  add_library(Eigen INTERFACE)
+  if(XCODE)
+    set_property(TARGET Eigen PROPERTY INTERFACE_COMPILE_OPTIONS
+      $<BUILD_INTERFACE:-isystem ${DEPENDENCIES_DIR}/Eigen-3.2.8>
+    )
+  else()
+    set_property(TARGET Eigen PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/Eigen-3.2.8>
+    )
+    set_property(TARGET Eigen PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
+      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/Eigen-3.2.8>
+    )
+  endif()
+
 endif()
 
 install(TARGETS Eigen EXPORT VolVizExport)

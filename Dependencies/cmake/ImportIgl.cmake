@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT HAS_IGL)
-  set(HAS_IGL YES)
+if (NOT IGL)
 
   add_library(IGL INTERFACE)
   if(XCODE)
@@ -17,5 +16,6 @@ if (NOT HAS_IGL)
     )
   endif()
 
-  install(TARGETS IGL EXPORT VolVizExport)
 endif()
+
+install(TARGETS IGL EXPORT VolVizExport)

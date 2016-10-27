@@ -1,15 +1,8 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT GSL_INCLUDE_DIR)
+if (NOT GSL)
 
-  set(INSTALL_GSL)
-
-  set(GSL_INCLUDE_DIR
-    $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/include>
-    $<INSTALL_INTERFACE:include/VolViz/src/GSL>
-  )
-
-  set(GSL_INCLUDE_DIR_OPT)
+  set(INSTALL_GSL ON)
 
   add_library(GSL INTERFACE)
 
@@ -35,11 +28,13 @@ if (NOT GSL_INCLUDE_DIR)
       GSL_THROW_ON_CONTRACT_VIOLATION
     )
   endif()
+endif()
 
-  install(TARGETS GSL EXPORT VolVizExport)
+install(TARGETS GSL EXPORT VolVizExport)
+
+if (INSTALL_GSL)
   install(DIRECTORY
     ${DEPENDENCIES_DIR}/GSL/include
     DESTINATION include/VolViz/src/GSL
   )
-
 endif()

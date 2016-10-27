@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-if (NOT HAS_PhysUnits)
-  set(HAS_PhysUnits YES)
+if (NOT PhysUnits)
+  set(INSTALL_PhysUnits ON)
 
   add_library(PhysUnits INTERFACE)
   if(XCODE)
@@ -16,11 +16,13 @@ if (NOT HAS_PhysUnits)
       $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/PhysUnits>
     )
   endif()
+endif()
 
-  install(TARGETS PhysUnits EXPORT VolVizExport)
+install(TARGETS PhysUnits EXPORT VolVizExport)
+
+if(INSTALL_PhysUnits)
   install(DIRECTORY
     ${DEPENDENCIES_DIR}/PhysUnits/phys
     DESTINATION include/VolViz/src
   )
-
 endif()
