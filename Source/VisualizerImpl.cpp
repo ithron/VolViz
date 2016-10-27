@@ -286,8 +286,8 @@ void VisualizerImpl::enableMultithreading() noexcept {
 VisualizerImpl::operator bool() const noexcept { return glfw_; }
 
 template <>
-void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
-                               gsl::span<float const> data) {
+void VisualizerImpl::setVolume<float const>(VolumeDescriptor const &descriptor,
+                                            gsl::span<float const> data) {
   auto const nVoxels =
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
   auto const width = static_cast<GLsizei>(descriptor.size(0));

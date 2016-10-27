@@ -47,10 +47,10 @@ void Visualizer::setVolume(VolumeDescriptor const &descriptor,
   impl_->setVolume(descriptor, data);
 }
 
-template void Visualizer::setVolume(VolumeDescriptor const &,
-                                    gsl::span<float const>);
-template void Visualizer::setVolume(VolumeDescriptor const &,
-                                    gsl::span<Color const>);
+template void Visualizer::setVolume<float const>(VolumeDescriptor const &,
+                                                 gsl::span<float const>);
+template void Visualizer::setVolume<Color const>(VolumeDescriptor const &,
+                                                 gsl::span<Color const>);
 
 void Visualizer::renderOneFrame() { impl_->renderOneFrame(false); }
 
