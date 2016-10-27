@@ -16,6 +16,7 @@ if(NOT TARGET ConcurrentQueue)
     )
   endif()
 
+  install(TARGETS ConcurrentQueue EXPORT VolVizExport)
+
 endif()
 
-install(TARGETS ConcurrentQueue EXPORT VolVizExport)

@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 if (NOT TARGET Eigen)
 
-  set(INSTALL_EIGEN ON)
-
   add_library(Eigen INTERFACE)
   if(XCODE)
     set_property(TARGET Eigen PROPERTY INTERFACE_COMPILE_OPTIONS
@@ -18,13 +16,11 @@ if (NOT TARGET Eigen)
     )
   endif()
 
-endif()
+  install(TARGETS Eigen EXPORT VolVizExport)
 
-install(TARGETS Eigen EXPORT VolVizExport)
-
-if(INSTALL_EIGEN)
   install(DIRECTORY
     ${DEPENDENCIES_DIR}/Eigen-3.2.8/Eigen
     DESTINATION include/VolViz/src
   )
 endif()
+

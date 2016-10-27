@@ -16,6 +16,6 @@ if (NOT TARGET IGL)
     )
   endif()
 
-endif()
+  install(TARGETS IGL EXPORT VolVizExport)
 
-install(TARGETS IGL EXPORT VolVizExport)
+endif()
