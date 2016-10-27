@@ -5,7 +5,7 @@ if(NOT TARGET ConcurrentQueue)
   add_library(ConcurrentQueue INTERFACE)
   if("${CMAKE_GENERATOR}" STREQUAL "Xcode")
     set_property(TARGET ConcurrentQueue PROPERTY INTERFACE_COMPILE_OPTIONS
-      $<BUILD_INTERFACE:-isystem ${DEPENDENCIES_DIR}/concurrentqueue
+      $<BUILD_INTERFACE:-isystem ${DEPENDENCIES_DIR}/concurrentqueue>
     )
   else()
     set_property(TARGET ConcurrentQueue PROPERTY INTERFACE_INCLUDE_DIRECTORIES

@@ -5,7 +5,7 @@ if (NOT TARGET IGL)
   add_library(IGL INTERFACE)
   if(XCODE)
     set_property(TARGET IGL PROPERTY INTERFACE_COMPILE_OPTIONS
-      $<BUILD_INTERFACE:-system ${DEPENDENCIES_DIR}/libigl/include>
+      $<BUILD_INTERFACE:-isystem${DEPENDENCIES_DIR}/libigl/include>
     )
   else()
     set_property(TARGET IGL PROPERTY INTERFACE_INCLUDE_DIRECTORIES

@@ -5,7 +5,7 @@ if (NOT TARGET Eigen)
   add_library(Eigen INTERFACE)
   if(XCODE)
     set_property(TARGET Eigen PROPERTY INTERFACE_COMPILE_OPTIONS
-      $<BUILD_INTERFACE:-isystem ${DEPENDENCIES_DIR}/Eigen-3.2.8>
+      $<BUILD_INTERFACE:-isystem${DEPENDENCIES_DIR}/Eigen-3.2.8>
     )
   else()
     set_property(TARGET Eigen PROPERTY INTERFACE_INCLUDE_DIRECTORIES
