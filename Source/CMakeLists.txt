@@ -162,26 +162,11 @@ install(EXPORT VolVizExport NAMESPACE VolViz::
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz
   DESTINATION include
 )
-# install(DIRECTORY ${DEPENDENCIES_DIR}/Eigen-3.2.8/Eigen
-#   DESTINATION include/VolViz/src
-# )
-install(FILES
-  ${DEPENDENCIES_DIR}/cmake/FindMKL.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportEigen.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportGSL.cmake
-  ${DEPENDENCIES_DIR}/cmake/ImportPhysUnits.cmake
-  DESTINATION lib/cmake/VolViz
-)
 
 export(EXPORT VolVizExport NAMESPACE VolViz::)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(VolVizConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
-  INSTALL_DESTINATION lib/cmake/VolViz
-)
-configure_package_config_file(
-  ${DEPENDENCIES_DIR}/cmake/ImportMKL.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/ImportMKL.cmake
   INSTALL_DESTINATION lib/cmake/VolViz
 )
 install(FILES

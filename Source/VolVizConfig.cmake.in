@@ -1,8 +1,4 @@
 @PACKAGE_INIT@
 
-include("${CMAKE_CURRENT_LIST_DIR}/ImportMKL.cmake")
-include("${CMAKE_CURRENT_LIST_DIR}/ImportEigen.cmake")
-include("${CMAKE_CURRENT_LIST_DIR}/VolVizExport.cmake")
-
 check_required_components(VolViz)
 
