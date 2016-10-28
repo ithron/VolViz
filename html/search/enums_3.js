@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['textureid',['TextureID',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aa',1,'VolViz::Private_::VisualizerImpl']]]
+  ['viewstate',['ViewState',['../group__privateMembers.html#ga5ddcc241d09fbe3fe2c96d799ef1c01f',1,'VolViz::Private_::VisualizerImpl']]],
+  ['volumetype',['VolumeType',['../namespaceVolViz.html#ad208471555239219028c0bb4fd84858d',1,'VolViz']]]
 ];
