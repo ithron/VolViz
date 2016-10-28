@@ -11,6 +11,7 @@ var searchData=
   ['lightname',['LightName',['../classVolViz_1_1Visualizer.html#a62f4e6d35bc8479d8cd6c9711fb2d787',1,'VolViz::Visualizer']]],
   ['lights',['Lights',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ac5e808dd31a1efed72ca86b8da694ceb',1,'VolViz::Private_::VisualizerImpl']]],
   ['lights_5f',['lights_',['../group__privateMembers.html#ga755b9d552d3c07426167c76a308ad706',1,'VolViz::Private_::VisualizerImpl']]],
+  ['linear',['Linear',['../namespaceVolViz.html#ad58bdb690d5dc45bd7b5c4bda97d3470a32a843da6ea40ab3b17a3421ccdf671b',1,'VolViz']]],
   ['link',['link',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a8b000bafc4abe4376d868ec13b9ef398',1,'VolViz::Private_::GL::ShaderProgram']]],
   ['location_5f',['location_',['../classVolViz_1_1Private___1_1GL_1_1UniformProxy.html#ab10b409f3608c36b73c2b196ca90e0af',1,'VolViz::Private_::GL::UniformProxy']]],
   ['lock',['Lock',['../namespaceVolViz_1_1Private__.html#adf0ef1337e1273ba00fca820d050e705',1,'VolViz::Private_']]]

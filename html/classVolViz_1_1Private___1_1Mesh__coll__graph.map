@@ -22,7 +22,7 @@
 <area shape="rect" id="node24" href="$classVolViz_1_1Private___1_1GL_1_1UniformProxy.html" title="{VolViz::Private_::GL\l::UniformProxy\n|&#45; location_\l|+ UniformProxy()\l+ UniformProxy()\l+ UniformProxy()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l}" alt="" coords="2349,163,2489,416"/>
 <area shape="rect" id="node25" title="STL class. " alt="" coords="2131,251,2209,328"/>
 <area shape="rect" id="node26" title="STL class. " alt="" coords="2107,6,2233,98"/>
-<area shape="rect" id="node28" href="$structVolViz_1_1VolumeDescriptor.html" title="{VolViz::VolumeDescriptor\n|+ type\l+ size\l|}" alt="" coords="1763,1583,1935,1675"/>
+<area shape="rect" id="node28" href="$structVolViz_1_1VolumeDescriptor.html" title="{VolViz::VolumeDescriptor\n|+ type\l+ size\l+ interpolation\l|}" alt="" coords="1763,1576,1935,1683"/>
 <area shape="rect" id="node29" href="$structVolViz_1_1Range.html" title="{VolViz::Range\&lt; float \&gt;\n|+ min\l+ max\l|+ length()\l}" alt="" coords="1941,1331,2095,1423"/>
 <area shape="rect" id="node31" href="$classVolViz_1_1Private___1_1GL_1_1GLFW.html" title="RAII wrapper for GLFW. " alt="" coords="1803,944,1979,1256"/>
 <area shape="rect" id="node33" href="$structVolViz_1_1Private___1_1VisualizerImpl_1_1TextureWrapper.html" title="Auxiliary textures use in the deferred shading process. " alt="" coords="229,1583,411,1675"/>
