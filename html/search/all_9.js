@@ -7,7 +7,5 @@ var searchData=
   ['initqueueentry',['InitQueueEntry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a4ba09ab027c76f4bcc0eb232e0bffa58',1,'VolViz::Private_::VisualizerImpl']]],
   ['inselectionmode',['inSelectionMode',['../group__privateMembers.html#ga374ed4105b30757d58892af32811feeb',1,'VolViz::Private_::VisualizerImpl']]],
   ['intercept',['intercept',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#a6f73d7a17230f5e4fabeafcd545aeab1',1,'VolViz::AxisAlignedPlaneDescriptor']]],
-  ['interpolation',['interpolation',['../structVolViz_1_1VolumeDescriptor.html#a86abaf911dbc596e9485d670955e8099',1,'VolViz::VolumeDescriptor']]],
-  ['interpolationtype',['InterpolationType',['../namespaceVolViz.html#ad58bdb690d5dc45bd7b5c4bda97d3470',1,'VolViz']]],
   ['ishidden',['isHidden',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a921dc0cbc892916e003c472b4c1d24a4',1,'VolViz::Private_::GL::GLFW']]]
 ];
