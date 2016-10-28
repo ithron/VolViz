@@ -7,6 +7,8 @@ namespace VolViz {
 
 enum class VolumeType { GrayScale, ColorRGB };
 
+enum class InterpolationType { Nearest, Linear };
+
 struct VolumeDescriptor {
   VolumeType type{VolumeType::GrayScale};
 
@@ -15,6 +17,8 @@ struct VolumeDescriptor {
   Size3 size{Size3::Zero()};
 
   Range<float> range{0.f, 0.f};
+
+  InterpolationType interpolation{InterpolationType::Nearest};
 };
 
 } // namespace VolViz
