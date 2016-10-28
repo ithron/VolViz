@@ -13,6 +13,8 @@ struct VolumeDescriptor {
   VoxelSize voxelSize{{1 * milli * meter, 1 * milli *meter, 1 * milli *meter}};
 
   Size3 size{Size3::Zero()};
+
+  Range<float> range{0.f, 0.f};
 };
 
 } // namespace VolViz

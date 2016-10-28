@@ -30,6 +30,12 @@ using Size3 = Eigen::Matrix<std::size_t, 3, 1>;
 
 using Size3f = Eigen::Vector3f;
 
+/// An 1D range
+template <class T> struct Range {
+  T min, max;
+  constexpr auto length() const noexcept { return max - min; }
+};
+
 /// Normalized RGB color
 using Color = Eigen::Vector3f;
 

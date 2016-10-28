@@ -286,7 +286,7 @@ void VisualizerImpl::enableMultithreading() noexcept {
 VisualizerImpl::operator bool() const noexcept { return glfw_; }
 
 template <>
-void VisualizerImpl::setVolume<float const>(VolumeDescriptor const &descriptor,
+void VisualizerImpl::setVolume<float const>(VolumeDescriptor descriptor,
                                             gsl::span<float const> data) {
   auto const nVoxels =
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
@@ -295,6 +295,13 @@ void VisualizerImpl::setVolume<float const>(VolumeDescriptor const &descriptor,
   auto const depth = static_cast<GLsizei>(descriptor.size(2));
 
   Expects(width > 0 && height > 0 && depth > 0);
+
+  if (descriptor.range.length() < 1e-12) {
+    auto const minValue = *std::min_element(data.begin(), data.end());
+    auto const maxValue = *std::max_element(data.begin(), data.end());
+
+    descriptor.range = {minValue, maxValue};
+  }
 
   glBindTexture(GL_TEXTURE_3D, textures_[TextureID::VolumeTexture]);
 
@@ -346,7 +353,7 @@ Size3f VisualizerImpl::volumeSize() const noexcept {
 }
 
 template <>
-void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
+void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
                                gsl::span<Color const> data) {
   auto const nVoxels =
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
@@ -359,10 +366,18 @@ void VisualizerImpl::setVolume(VolumeDescriptor const &descriptor,
   setVolume(descriptor, gsl::as_span(ptr, size));
 }
 
-template void VisualizerImpl::setVolume(VolumeDescriptor const &,
+template void VisualizerImpl::setVolume(VolumeDescriptor,
                                         gsl::span<float const>);
-template void VisualizerImpl::setVolume(VolumeDescriptor const &,
+template void VisualizerImpl::setVolume(VolumeDescriptor,
                                         gsl::span<Color const>);
+
+void VisualizerImpl::attachVolumeToShader(GL::ShaderProgram &shader) const {
+  shader["volume"] = static_cast<GLint>(0);
+  shader["isGray"] =
+      static_cast<GLint>(currentVolume_.type == VolumeType::GrayScale);
+  auto const &range = currentVolume_.range;
+  shader["range"] = Eigen::Vector2f(range.min, range.max);
+}
 
 void VisualizerImpl::addLight(Visualizer::LightName name, Light const &light) {
   std::lock_guard<std::mutex> lock(lightMutex_);
