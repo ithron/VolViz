@@ -43,7 +43,7 @@ public:
   operator bool() const noexcept;
 
   template <class T>
-  void setVolume(VolumeDescriptor const &descriptor, gsl::span<T> data);
+  void setVolume(VolumeDescriptor descriptor, gsl::span<T> data);
 
   Size3f volumeSize() const noexcept;
 
@@ -84,6 +84,8 @@ public:
   inline auto cameraClient() const noexcept { return camera().client(); }
 
   inline Shaders &shaders() noexcept { return shaders_; }
+
+  void attachVolumeToShader(GL::ShaderProgram &shader) const;
 
   /// Issues an OpenGL draw call with a single vertex.
   /// This comes in handy if all the geometry is created by a geometry shader

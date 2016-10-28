@@ -40,8 +40,8 @@ void Mesh::doRender(std::uint32_t index, bool selected) {
   // Setup shader uniforms
   assertGL("Pevious OpenGL error");
   shaders["geometryStage"].use();
+  visualizer_.attachVolumeToShader(shaders["geometryStage"]);
   shaders["geometryStage"]["index"] = index;
-  shaders["geometryStage"]["volume"] = 0;
   shaders["geometryStage"]["color"] = selected ? (color * 1.2f).eval() : color;
   shaders["geometryStage"]["shininess"] = selected ? 10.0f : 1000.f;
   shaders["geometryStage"]["modelViewProjectionMatrix"] =

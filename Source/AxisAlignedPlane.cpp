@@ -67,8 +67,8 @@ void AxisAlignedPlane::doRender(std::uint32_t index, bool selected) {
   auto &shaders = visualizer_.shaders();
 
   shaders["plane"].use();
+  visualizer_.attachVolumeToShader(shaders["plane"]);
   shaders["plane"]["index"] = index;
-  shaders["plane"]["volume"] = 0;
   shaders["plane"]["modelMatrix"] = modelMat;
   shaders["plane"]["shininess"] = 10.f;
   shaders["plane"]["color"] = selected ? (color * 1.5f).eval() : color;
