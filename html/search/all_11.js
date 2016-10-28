@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['range',['Range',['../structVolViz_1_1Range.html',1,'VolViz']]],
+  ['range',['range',['../structVolViz_1_1VolumeDescriptor.html#a9ebbbb3700c90caac4bb0db026610e03',1,'VolViz::VolumeDescriptor']]],
+  ['range_3c_20float_20_3e',['Range&lt; float &gt;',['../structVolViz_1_1Range.html',1,'VolViz']]],
   ['readbuffer',['readBuffer',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a1ebc009eefe96634e4a41de591f2b550',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer']]],
   ['readme_2emd',['README.md',['../README_8md.html',1,'']]],
   ['red',['Red',['../namespaceVolViz_1_1Colors.html#a370df267aa54299c68cc263634fe56cd',1,'VolViz::Colors']]],

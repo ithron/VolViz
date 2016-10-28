@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['max',['max',['../structVolViz_1_1Range.html#a209118c7ce018d3444cceb5c0bdc24b5',1,'VolViz::Range']]],
+  ['min',['min',['../structVolViz_1_1Range.html#ac44598678a666cf600088fc93cf5ea98',1,'VolViz::Range']]],
   ['mousebuttoncallback',['mouseButtonCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a9877a6fdd95a63c3ab15a127f08df185',1,'VolViz::Private_::GL::GLFW']]],
   ['mousemovecallback',['mouseMoveCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a00b54cb9731f63b285b9a0ae65a9cd45',1,'VolViz::Private_::GL::GLFW']]],
   ['movable',['movable',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840',1,'VolViz::Private_::GL::Geometry::movable()'],['../classVolViz_1_1GeometryDescriptor.html#af12a9e274f948d07ed53459cfd8ae52f',1,'VolViz::GeometryDescriptor::movable()']]],

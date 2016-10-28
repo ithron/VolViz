@@ -8,7 +8,7 @@ var searchData=
   ['defaultsetpolicy_3c_20physicalposition_20_3e',['DefaultSetPolicy&lt; PhysicalPosition &gt;',['../classVolViz_1_1DefaultSetPolicy.html',1,'VolViz']]],
   ['deferredpassthroughfragshadersrc',['deferredPassthroughFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a8d625048e051789d1d3128988efee617',1,'VolViz::Private_::GL::Shaders']]],
   ['deferredvertexshadersrc',['deferredVertexShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a335e382edeb73f3f2b725821920c8c6d',1,'VolViz::Private_::GL::Shaders']]],
-  ['depth',['depth',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a130513446647b15811f6cd5a6a705460',1,'VolViz::Private_::VisualizerImpl::depth()'],['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaa675056ad1441b6375b2c5abd48c27ef1',1,'VolViz::Private_::VisualizerImpl::Depth()']]],
+  ['depth',['Depth',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaa675056ad1441b6375b2c5abd48c27ef1',1,'VolViz::Private_::VisualizerImpl::Depth()'],['../classVolViz_1_1Private___1_1VisualizerImpl.html#a130513446647b15811f6cd5a6a705460',1,'VolViz::Private_::VisualizerImpl::depth()']]],
   ['depthrange',['DepthRange',['../structVolViz_1_1DepthRange.html',1,'VolViz']]],
   ['depthrange',['depthRange',['../classVolViz_1_1Camera.html#ab600115fd58786289a851c0460ec0340',1,'VolViz::Camera']]],
   ['depthrange',['DepthRange',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1DepthRange.html',1,'VolViz::Private_::VisualizerImpl']]],
