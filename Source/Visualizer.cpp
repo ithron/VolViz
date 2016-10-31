@@ -3,7 +3,6 @@
 #include "VisualizerImpl.h"
 
 #include <Eigen/Core>
-#include <gsl.h>
 
 #include <chrono>
 #include <iostream>
@@ -42,15 +41,14 @@ void Visualizer::enableMultithreading() noexcept {
 Visualizer::operator bool() const noexcept { return *impl_; }
 
 template <class T>
-void Visualizer::setVolume(VolumeDescriptor const &descriptor,
-                           gsl::span<T> data) {
+void Visualizer::setVolume(VolumeDescriptor const &descriptor, span<T> data) {
   impl_->setVolume(descriptor, data);
 }
 
 template void Visualizer::setVolume<float const>(VolumeDescriptor const &,
-                                                 gsl::span<float const>);
+                                                 span<float const>);
 template void Visualizer::setVolume<Color const>(VolumeDescriptor const &,
-                                                 gsl::span<Color const>);
+                                                 span<Color const>);
 
 void Visualizer::renderOneFrame() { impl_->renderOneFrame(false); }
 

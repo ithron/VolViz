@@ -3,7 +3,7 @@
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
-#include <gsl.h>
+#include <gsl>
 #include <phys/units/quantity.hpp>
 
 #include <array>
@@ -79,6 +79,37 @@ using phys::units::abs;
 namespace literals = phys::units::literals;
 
 using VoxelSize = std::array<Length, 3>;
+
+/// @brief Conveniance wrapper for span<>
+/// @{
+template <class T>
+inline constexpr auto as_span(T *ptr,
+                              typename span<T>::index_type size) noexcept {
+  return span<T>(ptr, size);
+}
+
+template <
+    class Container,
+    class = std::enable_if_t<
+        !details::is_span<Container>::value &&
+        !details::is_std_array<Container>::value &&
+        std::is_convertible<typename Container::pointer,
+                            decltype(std::declval<Container>().data())>::value>>
+inline constexpr auto as_span(Container &c) {
+  return span<typename Container::value_type>(c);
+}
+
+template <
+    class Container,
+    class = std::enable_if_t<
+        !details::is_span<Container>::value &&
+        !details::is_std_array<Container>::value &&
+        std::is_convertible<typename Container::pointer,
+                            decltype(std::declval<Container>().data())>::value>>
+inline constexpr auto as_span(Container const &c) {
+  return span<typename Container::value_type const>(c);
+}
+///@}
 
 } // namespace VolViz
 

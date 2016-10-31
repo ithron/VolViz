@@ -1,7 +1,7 @@
 #ifndef VolViz_AtomicCache_h
 #define VolViz_AtomicCache_h
 
-#include <gsl.h>
+#include <gsl>
 
 #include <atomic>
 

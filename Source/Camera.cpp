@@ -33,7 +33,7 @@ Matrix4 Camera::projectionMatrix() const noexcept {
   float const aspect = aspectRatio;
   Angle const FOV = cachedVerticalFOV_;
 
-  float const f = 1.f / gsl::narrow_cast<float>(std::tan(FOV / 2.0));
+  float const f = 1.f / narrow_cast<float>(std::tan(FOV / 2.0));
 
   // This is a modification of the 'standard' projection matrix:
   // + the far clipping plane is at infinity
@@ -62,9 +62,9 @@ Matrix4 Camera::viewMatrix() const noexcept {
   Orientation const ori = orientation;
 
   Position const scaledPosition{
-      gsl::narrow_cast<float>(ppos(0) / cachedScale_),
-      gsl::narrow_cast<float>(ppos(1) / cachedScale_),
-      gsl::narrow_cast<float>(ppos(2) / cachedScale_)};
+      narrow_cast<float>(ppos(0) / cachedScale_),
+      narrow_cast<float>(ppos(1) / cachedScale_),
+      narrow_cast<float>(ppos(2) / cachedScale_)};
 
   return (ori * Eigen::Translation3f(scaledPosition)).inverse().matrix();
 }
@@ -79,7 +79,7 @@ Matrix4 Camera::viewProjectionMatrix() const noexcept {
 Position Camera::unproject(Position2 const &screenPos, float depth,
                            Length ambientScale) const noexcept {
   Angle const FOV = cachedVerticalFOV_;
-  float const f = 1.f / gsl::narrow_cast<float>(std::tan(FOV / 2.0));
+  float const f = 1.f / narrow_cast<float>(std::tan(FOV / 2.0));
   auto const w = f / depth;
   PositionH const p = PositionH(screenPos(0), screenPos(1), depth, 1) * w;
   cachedScale_ = ambientScale;

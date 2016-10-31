@@ -42,8 +42,7 @@ public:
 
   operator bool() const noexcept;
 
-  template <class T>
-  void setVolume(VolumeDescriptor descriptor, gsl::span<T> data);
+  template <class T> void setVolume(VolumeDescriptor descriptor, span<T> data);
 
   Size3f volumeSize() const noexcept;
 

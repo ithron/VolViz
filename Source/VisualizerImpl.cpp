@@ -5,7 +5,6 @@
 #include "Visualizer.h"
 
 #include <Eigen/Core>
-#include <gsl.h>
 
 #include <algorithm>
 #include <iostream>
@@ -78,7 +77,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
   glfw_.scrollWheelInputHandler = [this](double, double y) {
     Length const scale = cachedScale;
     PhysicalPosition pos = camera().position;
-    pos(2) -= 2 * gsl::narrow_cast<float>(y) * scale;
+    pos(2) -= 2 * narrow_cast<float>(y) * scale;
 
     camera().position = pos;
   };
@@ -287,7 +286,7 @@ VisualizerImpl::operator bool() const noexcept { return glfw_; }
 
 template <>
 void VisualizerImpl::setVolume<float const>(VolumeDescriptor descriptor,
-                                            gsl::span<float const> data) {
+                                            span<float const> data) {
   auto const nVoxels =
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
   auto const width = static_cast<GLsizei>(descriptor.size(0));
@@ -359,7 +358,7 @@ Size3f VisualizerImpl::volumeSize() const noexcept {
 
 template <>
 void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
-                               gsl::span<Color const> data) {
+                               span<Color const> data) {
   auto const nVoxels =
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
 
@@ -368,13 +367,11 @@ void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
 
   auto const *ptr = reinterpret_cast<float const *>(data.data());
   auto const size = static_cast<std::ptrdiff_t>(3 * data.size());
-  setVolume(descriptor, gsl::as_span(ptr, size));
+  setVolume(descriptor, as_span(ptr, size));
 }
 
-template void VisualizerImpl::setVolume(VolumeDescriptor,
-                                        gsl::span<float const>);
-template void VisualizerImpl::setVolume(VolumeDescriptor,
-                                        gsl::span<Color const>);
+template void VisualizerImpl::setVolume(VolumeDescriptor, span<float const>);
+template void VisualizerImpl::setVolume(VolumeDescriptor, span<Color const>);
 
 void VisualizerImpl::attachVolumeToShader(GL::ShaderProgram &shader) const {
   shader["volume"] = static_cast<GLint>(0);

@@ -9,7 +9,6 @@
 #include "Volume.h"
 
 #include <Eigen/Core>
-#include <gsl.h>
 
 #include <atomic>
 #include <memory>
@@ -55,7 +54,7 @@ public:
   operator bool() const noexcept;
 
   template <class T>
-  void setVolume(VolumeDescriptor const &descriptor, gsl::span<T> data);
+  void setVolume(VolumeDescriptor const &descriptor, span<T> data);
 
   void addLight(LightName name, Light const &light);
 

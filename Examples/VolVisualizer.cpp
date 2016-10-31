@@ -144,7 +144,7 @@ int main(int argc, char **argv) {
   auto const vol = generateVolume();
   std::cout << "done." << std::endl;
 
-  viewer.setVolume(vol.first, gsl::as_span(vol.second));
+  viewer.setVolume(vol.first, as_span(vol.second));
 
   viewer.enableMultithreading();
   std::thread viewerThread([&viewer]() {

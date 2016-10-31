@@ -8,15 +8,15 @@ if (NOT TARGET GSL)
 
   if (XCODE)
     set_property(TARGET GSL PROPERTY INTERFACE_COMPILE_OPTIONS
-      -isystem$<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/include>$<INSTALL_INTERFACE:include/VolViz/src/GSL>
+      -isystem$<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/gsl>$<INSTALL_INTERFACE:include/VolViz/src/GSL>
     )
   else()
     set_property(TARGET GSL PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/include>
+      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/gsl>
       $<INSTALL_INTERFACE:include/VolViz/src/GSL>
     )
     set_property(TARGET GSL PROPERTY INTERFACE_SYSTEM_INCLUDE_DIRECTORIES
-      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/include>
+      $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/GSL/gsl>
       $<INSTALL_INTERFACE:include/VolViz/src/GSL>
     )
   endif()
@@ -29,7 +29,7 @@ if (NOT TARGET GSL)
 
   install(TARGETS GSL EXPORT VolVizExport)
   install(DIRECTORY
-    ${DEPENDENCIES_DIR}/GSL/include
+    ${DEPENDENCIES_DIR}/GSL/gsl
     DESTINATION include/VolViz/src/GSL
   )
 
