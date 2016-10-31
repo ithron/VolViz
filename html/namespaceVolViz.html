@@ -204,6 +204,17 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ace3621bbed692648a2430786c06ed6ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceVolViz.html#a4b2d2365f616920725e15c8f7622ddae">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#ace3621bbed692648a2430786c06ed6ff">maskToUnitVector</a> (<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6f">MoveMask</a> mask) noexcept</td></tr>
 <tr class="separator:ace3621bbed692648a2430786c06ed6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a3435a91303d813882ffc13f37c230f19">as_span</a> (T *ptr, typename span&lt; T &gt;::index_type size) noexcept</td></tr>
+<tr class="memdesc:a3435a91303d813882ffc13f37c230f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conveniance wrapper for span&lt;&gt;  <a href="#a3435a91303d813882ffc13f37c230f19">More...</a><br/></td></tr>
+<tr class="separator:a3435a91303d813882ffc13f37c230f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplParams" colspan="2">template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#af7a4849aad403cc3367d046fee1c8470">as_span</a> (Container &amp;c)</td></tr>
+<tr class="separator:af7a4849aad403cc3367d046fee1c8470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplParams" colspan="2">template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a9f0a700fb7c46634e704dbca43f3ae24">as_span</a> (Container const &amp;c)</td></tr>
+<tr class="separator:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="a28e79e59e7ebef66fbd0aef9c09a3c02"></a>
@@ -514,6 +525,96 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a3435a91303d813882ffc13f37c230f19"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VolViz::as_span </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename span&lt; T &gt;::index_type&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Conveniance wrapper for span&lt;&gt; </p>
+
+</div>
+</div>
+<a class="anchor" id="af7a4849aad403cc3367d046fee1c8470"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VolViz::as_span </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9f0a700fb7c46634e704dbca43f3ae24"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto VolViz::as_span </td>
+          <td>(</td>
+          <td class="paramtype">Container const &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ace3621bbed692648a2430786c06ed6ff"></a>
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +642,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 28 2016 13:06:34 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 31 2016 08:10:04 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

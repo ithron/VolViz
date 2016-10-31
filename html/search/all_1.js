@@ -10,6 +10,7 @@ var searchData=
   ['ambientpassfragshadersrc',['ambientPassFragShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a8e5c6ad8ae066b728928bcacc54e5c66',1,'VolViz::Private_::GL::Shaders']]],
   ['angle',['Angle',['../namespaceVolViz.html#a28e79e59e7ebef66fbd0aef9c09a3c02',1,'VolViz']]],
   ['arg_5f',['arg_',['../classVolViz_1_1Private___1_1GL_1_1Binding2.html#a52384c6791e66aeb94a6e862bbe0e9c6',1,'VolViz::Private_::GL::Binding2']]],
+  ['as_5fspan',['as_span',['../namespaceVolViz.html#a3435a91303d813882ffc13f37c230f19',1,'VolViz::as_span(T *ptr, typename span&lt; T &gt;::index_type size) noexcept'],['../namespaceVolViz.html#af7a4849aad403cc3367d046fee1c8470',1,'VolViz::as_span(Container &amp;c)'],['../namespaceVolViz.html#a9f0a700fb7c46634e704dbca43f3ae24',1,'VolViz::as_span(Container const &amp;c)']]],
   ['aspectratio',['aspectRatio',['../classVolViz_1_1Camera.html#a6c9fdde7a63ae94e72caa036f15755da',1,'VolViz::Camera']]],
   ['assertgl',['assertGL',['../Error_8h.html#ab4ca72098141b3549aa7e360f8722dbe',1,'Error.h']]],
   ['atomiccache',['AtomicCache',['../classVolViz_1_1AtomicCache.html',1,'VolViz']]],
@@ -36,6 +37,6 @@ var searchData=
   ['axisalignedplane',['AxisAlignedPlane',['../classVolViz_1_1Private___1_1AxisAlignedPlane.html',1,'VolViz::Private_']]],
   ['axisalignedplane_2ecpp',['AxisAlignedPlane.cpp',['../AxisAlignedPlane_8cpp.html',1,'']]],
   ['axisalignedplane_2eh',['AxisAlignedPlane.h',['../AxisAlignedPlane_8h.html',1,'']]],
-  ['axisalignedplanedescriptor',['AxisAlignedPlaneDescriptor',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html',1,'VolViz']]],
-  ['axisalignedplanedescriptor',['AxisAlignedPlaneDescriptor',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#a64000a5877ee5fa68739b1f74775f5dd',1,'VolViz::AxisAlignedPlaneDescriptor::AxisAlignedPlaneDescriptor()=default'],['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#ae0093699eb9581c4cb6e2aad6075ec4f',1,'VolViz::AxisAlignedPlaneDescriptor::AxisAlignedPlaneDescriptor(AxisAlignedPlaneDescriptor const &amp;)=default'],['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#af347874a04f18b95a1e79c0d549a6a86',1,'VolViz::AxisAlignedPlaneDescriptor::AxisAlignedPlaneDescriptor(AxisAlignedPlaneDescriptor &amp;&amp;)=default']]]
+  ['axisalignedplanedescriptor',['AxisAlignedPlaneDescriptor',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#a64000a5877ee5fa68739b1f74775f5dd',1,'VolViz::AxisAlignedPlaneDescriptor::AxisAlignedPlaneDescriptor()=default'],['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#ae0093699eb9581c4cb6e2aad6075ec4f',1,'VolViz::AxisAlignedPlaneDescriptor::AxisAlignedPlaneDescriptor(AxisAlignedPlaneDescriptor const &amp;)=default'],['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#af347874a04f18b95a1e79c0d549a6a86',1,'VolViz::AxisAlignedPlaneDescriptor::AxisAlignedPlaneDescriptor(AxisAlignedPlaneDescriptor &amp;&amp;)=default']]],
+  ['axisalignedplanedescriptor',['AxisAlignedPlaneDescriptor',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html',1,'VolViz']]]
 ];

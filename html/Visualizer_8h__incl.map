@@ -1,8 +1,8 @@
 <map id="/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h" name="/home/travis/build/ithron/VolViz/include/VolViz/src/Visualizer.h">
-<area shape="rect" id="node2" href="$AtomicWrapper_8h.html" title="AtomicWrapper.h" alt="" coords="5,184,128,211"/>
-<area shape="rect" id="node4" href="$Camera_8h.html" title="Camera.h" alt="" coords="227,109,305,136"/>
-<area shape="rect" id="node8" href="$Types_8h.html" title="Types.h" alt="" coords="493,184,563,211"/>
-<area shape="rect" id="node14" href="$Light_8h.html" title="Light.h" alt="" coords="605,109,667,136"/>
-<area shape="rect" id="node15" href="$Volume_8h.html" title="Volume.h" alt="" coords="691,109,767,136"/>
-<area shape="rect" id="node5" href="$AtomicCache_8h.html" title="AtomicCache.h" alt="" coords="203,184,313,211"/>
+<area shape="rect" id="node2" href="$AtomicWrapper_8h.html" title="AtomicWrapper.h" alt="" coords="22,184,145,211"/>
+<area shape="rect" id="node4" href="$Camera_8h.html" title="Camera.h" alt="" coords="189,109,267,136"/>
+<area shape="rect" id="node8" href="$Types_8h.html" title="Types.h" alt="" coords="409,184,478,211"/>
+<area shape="rect" id="node14" href="$Light_8h.html" title="Light.h" alt="" coords="517,109,578,136"/>
+<area shape="rect" id="node15" href="$Volume_8h.html" title="Volume.h" alt="" coords="602,109,678,136"/>
+<area shape="rect" id="node5" href="$AtomicCache_8h.html" title="AtomicCache.h" alt="" coords="169,184,279,211"/>
 </map>

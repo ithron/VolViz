@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><code>#include &lt;Eigen/Core&gt;</code><br/>
 <code>#include &lt;Eigen/Geometry&gt;</code><br/>
-<code>#include &lt;gsl.h&gt;</code><br/>
+<code>#include &lt;gsl&gt;</code><br/>
 <code>#include &lt;phys/units/quantity.hpp&gt;</code><br/>
 <code>#include &lt;array&gt;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -206,11 +206,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a92b829d39a8a74c0761af3c3125be55a"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a92b829d39a8a74c0761af3c3125be55a"><td class="memTemplItemLeft" align="right" valign="top">constexpr T const &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>std::clamp</b> (T const &amp;v, T const &amp;lo, T const &amp;hi)</td></tr>
 <tr class="separator:a92b829d39a8a74c0761af3c3125be55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a3435a91303d813882ffc13f37c230f19">VolViz::as_span</a> (T *ptr, typename span&lt; T &gt;::index_type size) noexcept</td></tr>
+<tr class="memdesc:a3435a91303d813882ffc13f37c230f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conveniance wrapper for span&lt;&gt;  <a href="#a3435a91303d813882ffc13f37c230f19">More...</a><br/></td></tr>
+<tr class="separator:a3435a91303d813882ffc13f37c230f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplParams" colspan="2">template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#af7a4849aad403cc3367d046fee1c8470">VolViz::as_span</a> (Container &amp;c)</td></tr>
+<tr class="separator:af7a4849aad403cc3367d046fee1c8470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplParams" colspan="2">template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a9f0a700fb7c46634e704dbca43f3ae24">VolViz::as_span</a> (Container const &amp;c)</td></tr>
+<tr class="separator:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 28 2016 13:06:34 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 31 2016 08:10:04 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
