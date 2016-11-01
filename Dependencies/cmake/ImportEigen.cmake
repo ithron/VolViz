@@ -15,6 +15,7 @@ if (NOT TARGET Eigen)
       $<BUILD_INTERFACE:${DEPENDENCIES_DIR}/Eigen-3.2.8>
     )
   endif()
+  target_link_libraries(Eigen INTERFACE ${MKL_LIBRARIES})
 
   install(TARGETS Eigen EXPORT VolVizExport)
 
