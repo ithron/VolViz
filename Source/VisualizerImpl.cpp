@@ -284,9 +284,8 @@ void VisualizerImpl::enableMultithreading() noexcept {
 
 VisualizerImpl::operator bool() const noexcept { return glfw_; }
 
-template <>
-void VisualizerImpl::setVolume<float const>(VolumeDescriptor descriptor,
-                                            span<float const> data) {
+void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
+                               span<float const> data) {
   auto const nVoxels =
       descriptor.size(0) * descriptor.size(1) * descriptor.size(2);
   auto const width = static_cast<GLsizei>(descriptor.size(0));
@@ -356,7 +355,6 @@ Size3f VisualizerImpl::volumeSize() const noexcept {
           2.f);
 }
 
-template <>
 void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
                                span<Color const> data) {
   auto const nVoxels =
@@ -369,9 +367,6 @@ void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
   auto const size = static_cast<std::ptrdiff_t>(3 * data.size());
   setVolume(descriptor, as_span(ptr, size));
 }
-
-template void VisualizerImpl::setVolume(VolumeDescriptor, span<float const>);
-template void VisualizerImpl::setVolume(VolumeDescriptor, span<Color const>);
 
 void VisualizerImpl::attachVolumeToShader(GL::ShaderProgram &shader) const {
   shader["volume"] = static_cast<GLint>(0);

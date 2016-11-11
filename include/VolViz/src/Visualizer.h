@@ -79,6 +79,37 @@ private:
   std::unique_ptr<Private_::VisualizerImpl> impl_;
 };
 
+// Explicit template instaciation declarations
+#pragma mark Explicit template instanciation declarations
+extern template void Visualizer::addGeometry<AxisAlignedPlaneDescriptor>(
+    GeometryName, AxisAlignedPlaneDescriptor const &);
+
+extern template void
+Visualizer::addGeometry<MeshDescriptor>(GeometryName, MeshDescriptor const &);
+
+extern template void
+Visualizer::setVolume<float const>(VolumeDescriptor const &, span<float const>);
+extern template void
+Visualizer::setVolume<Color const>(VolumeDescriptor const &, span<Color const>);
+
+extern template bool
+Visualizer::updateGeometry<AxisAlignedPlaneDescriptor const &>(
+    GeometryName name, AxisAlignedPlaneDescriptor const &);
+extern template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &&>(
+    GeometryName name, AxisAlignedPlaneDescriptor &&);
+extern template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &>(
+    GeometryName name, AxisAlignedPlaneDescriptor &);
+
+extern template bool
+Visualizer::updateGeometry<MeshDescriptor const &>(GeometryName name,
+                                                   MeshDescriptor const &);
+extern template bool
+Visualizer::updateGeometry<MeshDescriptor &&>(GeometryName name,
+                                              MeshDescriptor &&);
+extern template bool
+Visualizer::updateGeometry<MeshDescriptor &>(GeometryName name,
+                                             MeshDescriptor &);
+
 } // namespace VolViz
 
 #endif // VolViz_Visualizer_h

@@ -42,7 +42,8 @@ public:
 
   operator bool() const noexcept;
 
-  template <class T> void setVolume(VolumeDescriptor descriptor, span<T> data);
+  void setVolume(VolumeDescriptor descriptor, span<float const> data);
+  void setVolume(VolumeDescriptor descriptor, span<Color const> data);
 
   Size3f volumeSize() const noexcept;
 
