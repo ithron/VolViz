@@ -116,7 +116,7 @@ matrix:
 before_install:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      wget https://cmake.org/files/v3.3/cmake-3.3.0-Linux-x86_64.sh &&
+      wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.0-Linux-x86_64.sh &&
         sh cmake-3.3.0-Linux-x86_64.sh --skip-license --prefix=$HOME/cmake
       alias cmake=$HOME/cmake/bin/cmake
       if [ "$CXX" = "clang++" ]; then
