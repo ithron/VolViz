@@ -15,7 +15,6 @@ addons:
       - libglu1-mesa-dev
       - mesa-common-dev
       - libpthread-stubs0-dev
-      - xrandr-dev
       - doxygen
       - doxygen-doc
       - graphviz
