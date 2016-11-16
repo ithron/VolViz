@@ -8,16 +8,14 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - george-edison55-precise-backports
-      - llvm-toolchain-precise-3.8
     packages:
       - g++-5
       - g++-6
-      - cmake
-      - cmake-data
       - xorg-dev
       - libglu1-mesa-dev
       - mesa-common-dev
+      - libpthread-stubs0-dev
+      - xrandr-dev
       - doxygen
       - doxygen-doc
       - graphviz
