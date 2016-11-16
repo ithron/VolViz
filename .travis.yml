@@ -91,7 +91,19 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: BUILD_TYPE=Release CLANG_VERSION=3.8.1 CREATE_DOC="yes"
+      env: BUILD_TYPE=Release CLANG_VERSION=3.8.1
+      compiler: clang
+
+    - os: linux
+      dist: trusty
+      sudo: required
+      env: BUILD_TYPE=Debug CLANG_VERSION=3.9.0
+      compiler: clang
+
+    - os: linux
+      dist: trusty
+      sudo: required
+      env: BUILD_TYPE=Release CLANG_VERSION=3.9.0 CREATE_DOC="yes"
       compiler: clang
 
     - os: linux
