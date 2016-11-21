@@ -1,4 +1,8 @@
-#include "config.h"
+// clang-format on
+#ifndef XCODE_BUILD
+#  include "config.h"
+#endif
+// clang-format off
 
 #define GLFW_INCLUDE_GLCOREARB
 #define GLFW_INCLUDE_GLEXT

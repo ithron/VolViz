@@ -1,7 +1,12 @@
 #ifndef VolViz_GLFW_h
 #define VolViz_GLFW_h
 
-#include "config.h"
+// clang-format off
+#ifndef XCODE_BUILD
+#  include "config.h"
+#endif
+// clang-format on
+
 #include "GLdefs.h"
 
 #include <functional>
