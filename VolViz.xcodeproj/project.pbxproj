@@ -226,25 +226,11 @@
 			remoteGlobalIDString = 01B6FA1EFE9E4493A88B06C9;
 			remoteInfo = windows;
 		};
-		F86847B21DE2244100FF3913 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F86847AB1DE2244100FF3913 /* gtest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 18D6773738D840CAA4FCE292;
-			remoteInfo = gtest;
-		};
-		F86847B41DE2244100FF3913 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F86847AB1DE2244100FF3913 /* gtest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 15C9C9BFEE0D4747B0DB305B;
-			remoteInfo = gtest_main;
-		};
 		F86848241DE2ECF900FF3913 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F86847551DE21EC900FF3913 /* GLFW.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = F3ED8EB402E14BAE98E5C99C;
+			remoteGlobalIDString = BDFBC77E2A534950A04565F9;
 			remoteInfo = glfw;
 		};
 		F86848351DE2F66E00FF3913 /* PBXContainerItemProxy */ = {
@@ -270,7 +256,6 @@
 
 /* Begin PBXFileReference section */
 		F86847551DE21EC900FF3913 /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = Dependencies/build/glfw/GLFW.xcodeproj; sourceTree = "<group>"; };
-		F86847AB1DE2244100FF3913 /* gtest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gtest.xcodeproj; path = Dependencies/build/googletest/gtest.xcodeproj; sourceTree = "<group>"; };
 		F86847B81DE2247900FF3913 /* VolViz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VolViz.h; path = include/VolViz/VolViz.h; sourceTree = "<group>"; };
 		F86847BB1DE224B800FF3913 /* AtomicCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AtomicCache.h; path = include/VolViz/src/AtomicCache.h; sourceTree = "<group>"; };
 		F86847BC1DE224B800FF3913 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Types.h; path = include/VolViz/src/Types.h; sourceTree = "<group>"; };
@@ -342,6 +327,9 @@
 		F894000B1DE3117300CAE22F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		F894000D1DE3118300CAE22F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		F894000F1DE311CE00CAE22F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		F89400361DE3147E00CAE22F /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		F89400371DE3148A00CAE22F /* .clang-format */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".clang-format"; sourceTree = "<group>"; };
+		F89400381DE3149800CAE22F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +362,7 @@
 				F86847B71DE2245C00FF3913 /* Public Headers */,
 				F86847C31DE224CA00FF3913 /* Sources */,
 				F86848261DE2F5F700FF3913 /* Examples */,
+				F89400131DE3142A00CAE22F /* Supporting Files */,
 				F86847B61DE2244B00FF3913 /* Dependencies */,
 				F86847D81DE2E6A900FF3913 /* Products */,
 				F89400011DE310E200CAE22F /* Frameworks */,
@@ -413,19 +402,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F86847AC1DE2244100FF3913 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F86847B31DE2244100FF3913 /* libgtest.a */,
-				F86847B51DE2244100FF3913 /* libgtest_main.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		F86847B61DE2244B00FF3913 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				F86847AB1DE2244100FF3913 /* gtest.xcodeproj */,
 				F86847551DE21EC900FF3913 /* GLFW.xcodeproj */,
 			);
 			name = Dependencies;
@@ -569,6 +548,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F89400131DE3142A00CAE22F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F89400371DE3148A00CAE22F /* .clang-format */,
+				F89400381DE3149800CAE22F /* .gitignore */,
+				F89400361DE3147E00CAE22F /* .travis.yml */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -651,7 +640,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F86847521DE21E6200FF3913 /* Build configuration list for PBXProject "VolVIz" */;
+			buildConfigurationList = F86847521DE21E6200FF3913 /* Build configuration list for PBXProject "VolViz" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -665,10 +654,6 @@
 				{
 					ProductGroup = F86847561DE21EC900FF3913 /* Products */;
 					ProjectRef = F86847551DE21EC900FF3913 /* GLFW.xcodeproj */;
-				},
-				{
-					ProductGroup = F86847AC1DE2244100FF3913 /* Products */;
-					ProjectRef = F86847AB1DE2244100FF3913 /* gtest.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -877,20 +862,6 @@
 			remoteRef = F86847A91DE21ECA00FF3913 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F86847B31DE2244100FF3913 /* libgtest.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libgtest.a;
-			remoteRef = F86847B21DE2244100FF3913 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F86847B51DE2244100FF3913 /* libgtest_main.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libgtest_main.a;
-			remoteRef = F86847B41DE2244100FF3913 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1021,7 +992,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1272,7 +1243,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F86847521DE21E6200FF3913 /* Build configuration list for PBXProject "VolVIz" */ = {
+		F86847521DE21E6200FF3913 /* Build configuration list for PBXProject "VolViz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F86847531DE21E6200FF3913 /* Debug */,
