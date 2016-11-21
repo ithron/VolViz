@@ -13,3 +13,6 @@
 [submodule "Dependencies/concurrentqueue"]
 	path = Dependencies/concurrentqueue
 	url = https://github.com/ithron/concurrentqueue.git
+[submodule "Dependencies/eigen"]
+	path = Dependencies/eigen
+	url = git@github.com:ithron/eigen.git
