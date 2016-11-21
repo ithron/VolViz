@@ -16,7 +16,13 @@ namespace GL {
 /// obj.unbind() on destruction.
 template <class T> class Binding {
 public:
-  Binding(T &&obj) noexcept : obj_(std::forward<T>(obj)) { obj_.bind(); }
+  explicit Binding(T &&obj) noexcept : obj_(std::forward<T>(obj)) {
+    obj_.bind();
+  }
+
+  Binding(Binding &&) = default;
+
+  Binding &operator=(Binding &&) = default;
 
   ~Binding() { obj_.unbind(); }
 
@@ -26,9 +32,14 @@ private:
 
 template <class T, class Arg> class Binding2 {
 public:
-  Binding2(T &&obj, Arg arg) noexcept : obj_(std::forward<T>(obj)), arg_(arg) {
+  explicit Binding2(T &&obj, Arg arg) noexcept
+      : obj_(std::forward<T>(obj)), arg_(arg) {
     obj_.bind(arg_);
   }
+
+  Binding2(Binding2 &&) = default;
+
+  Binding2 &operator=(Binding2 &&) = default;
 
   ~Binding2() { obj_.unbind(arg_); }
 

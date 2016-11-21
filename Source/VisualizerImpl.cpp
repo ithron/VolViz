@@ -71,7 +71,7 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
                static_cast<GLsizei>(glfw_.height()));
     float const FOV =
         static_cast<float>(glfw_.width()) / static_cast<float>(glfw_.height());
-    this->camera().verticalFieldOfView = FOV;
+    this->camera().verticalFieldOfView = static_cast<double>(FOV);
   };
 
   glfw_.scrollWheelInputHandler = [this](double, double y) {
@@ -113,11 +113,9 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
     auto const pos =
         Position2(2 * x / static_cast<double>(glfw_.width()) - 1.0,
                   -2 * y / static_cast<double>(glfw_.height()) + 1.0);
-    auto const pos3 = Position(
-        pos(0), pos(1), static_cast<float>(sqrt(1.0 - pos.squaredNorm())));
-    auto const lastPos3 =
-        Position(lastMousePos_(0), lastMousePos_(1),
-                 static_cast<float>(sqrt(1.0 - lastMousePos_.squaredNorm())));
+    auto const pos3 = Position(pos(0), pos(1), sqrtf(1.0f - pos.squaredNorm()));
+    auto const lastPos3 = Position(lastMousePos_(0), lastMousePos_(1),
+                                   sqrtf(1.0f - lastMousePos_.squaredNorm()));
 
     switch (moveState_) {
       case MoveState::Rotating: {
@@ -294,7 +292,7 @@ void VisualizerImpl::setVolume(VolumeDescriptor descriptor,
 
   Expects(width > 0 && height > 0 && depth > 0);
 
-  if (descriptor.range.length() < 1e-12) {
+  if (descriptor.range.length() < 1e-12f) {
     auto const minValue = *std::min_element(data.begin(), data.end());
     auto const maxValue = *std::max_element(data.begin(), data.end());
 
@@ -666,10 +664,11 @@ VisualizerImpl::getGeometryUnderCursor() {
   // convert mouse position to texture screen coordinates
   auto const windowSize =
       Size2(glfw_.width(), glfw_.height()).cast<double>().eval();
-  auto const pos = Position2((mousePos(0) + 1.0) * windowSize(0) / 2.0,
-                             (mousePos(1) + 1.0) * windowSize(1) / 2.0)
-                       .cast<GLint>()
-                       .eval();
+  auto const pos =
+      Position2(mousePos(0) + 1.0f * static_cast<float>(windowSize(0)) / 2.0f,
+                mousePos(1) + 1.0f * static_cast<float>(windowSize(1)) / 2.0f)
+          .cast<GLint>()
+          .eval();
 
   // Copy index and depth to selection(back) buffer
   auto const writeBinding = GL::binding(
@@ -848,7 +847,7 @@ void VisualizerImpl::renderDiffuseLighting() {
   for (auto const &lightEntry : lights_) {
     auto const &light = lightEntry.second;
 
-    Expects(std::abs(light.position(3)) < 1e-3);
+    Expects(std::fabs(light.position(3)) < 1e-3f);
 
     PositionH const lightPosition = (viewMat * light.position);
 
@@ -886,7 +885,7 @@ void VisualizerImpl::renderSpecularLighting() {
   for (auto const &lightEntry : lights_) {
     auto const &light = lightEntry.second;
 
-    Expects(std::abs(light.position(3)) < 1e-3);
+    Expects(std::fabs(light.position(3)) < 1e-3f);
 
     PositionH const lightPosition = (viewMat * light.position);
 

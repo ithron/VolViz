@@ -5,6 +5,8 @@
 
 #include <atomic>
 
+#pragma clang diagnostic ignored "-Wpadded"
+
 namespace VolViz {
 
 /// Class represening a cached value, that has a very basic thread safety.

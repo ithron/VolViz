@@ -7,6 +7,8 @@ namespace Shaders {
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wexit-time-destructors"
+#pragma clang diagnostic ignored "-Wglobal-constructors"
+
 std::string const nullVertShaderSrc =
 #include "Shaders/null.vert"
     ;
