@@ -38,3 +38,6 @@
 # build dir
 build/
 Dependencies/build/
+
+# Xcode
+**/xcuserdata/
