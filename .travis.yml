@@ -156,7 +156,7 @@ before_script:
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       $CMAKE -Wno-dev -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DBUILD_SHARED_LIBS=ON -DFIX_MISSING_GL_IMPLEMENTATIONS=1
     elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
-      ./configureDependencies.sh
+      ./configDependencies.sh
     fi
 
 script:
