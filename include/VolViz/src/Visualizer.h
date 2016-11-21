@@ -3,7 +3,7 @@
 
 #include "AtomicWrapper.h"
 #include "Camera.h"
-#include "Geometry.h"
+#include "GeometryDescriptor.h"
 #include "Light.h"
 #include "Types.h"
 #include "Volume.h"
