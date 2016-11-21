@@ -1,26 +1,26 @@
 Warning: ignoring unsupported tag `ALLOW_UNICODE_NAMES    =' at line 79, file /home/travis/build/ithron/VolViz/Doxyfile
 Warning: ignoring unsupported tag `MAN_SUBDIR             =' at line 1782, file /home/travis/build/ithron/VolViz/Doxyfile
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:11: warning: include file Shaders/null.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:14: warning: include file Shaders/quad.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:17: warning: include file Shaders/simpleTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:20: warning: include file Shaders/hdrTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:23: warning: include file Shaders/simple.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:26: warning: include file Shaders/passThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:30: warning: include file Shaders/grid.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:34: warning: include file Shaders/deferred.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:38: warning: include file Shaders/deferredPassThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:42: warning: include file Shaders/normalVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:46: warning: include file Shaders/depthVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:50: warning: include file Shaders/ambientPass.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:54: warning: include file Shaders/diffuseLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:58: warning: include file Shaders/specularLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:62: warning: include file Shaders/specularVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:66: warning: include file Shaders/plane.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:70: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:74: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:78: warning: include file Shaders/selection.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:82: warning: include file Shaders/selectionIndexVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:86: warning: include file Shaders/point.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:13: warning: include file Shaders/null.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:16: warning: include file Shaders/quad.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:19: warning: include file Shaders/simpleTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:22: warning: include file Shaders/hdrTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:25: warning: include file Shaders/simple.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:28: warning: include file Shaders/passThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:32: warning: include file Shaders/grid.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:36: warning: include file Shaders/deferred.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:40: warning: include file Shaders/deferredPassThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:44: warning: include file Shaders/normalVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:48: warning: include file Shaders/depthVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:52: warning: include file Shaders/ambientPass.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:56: warning: include file Shaders/diffuseLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:60: warning: include file Shaders/specularLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:64: warning: include file Shaders/specularVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:68: warning: include file Shaders/plane.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:72: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:76: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:80: warning: include file Shaders/selection.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:84: warning: include file Shaders/selectionIndexVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:88: warning: include file Shaders/point.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 Searching for include files...
 Searching for example files...
 Searching for images...
@@ -553,5 +553,5 @@ Patching output file 81/84
 Patching output file 82/84
 Patching output file 83/84
 Patching output file 84/84
-lookup cache used 1465/65536 hits=6003 misses=1692
+lookup cache used 1467/65536 hits=6045 misses=1694
 finished...

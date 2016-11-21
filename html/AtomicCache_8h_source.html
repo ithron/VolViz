@@ -97,48 +97,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>VolViz {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html">   20</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code" href="classVolViz_1_1AtomicCache.html">AtomicCache</a> {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> FetchOp&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690">   27</a></span>&#160;  <a class="code" href="classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690">AtomicCache</a>(FetchOp fetchOperation)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;      : <a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>(fetchOperation) {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Expects(<a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>.clear();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a42f148a49b90858cc5dd00d5a3498255">   36</a></span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a42f148a49b90858cc5dd00d5a3498255">markAsDirty</a>() noexcept { <a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>.clear(); }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#abf05889d3ed734e923a70552511901db">   41</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">operator</span> T <span class="keyword">const</span> &amp;() <span class="keyword">const</span> noexcept {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>.test_and_set()) <span class="keywordflow">return</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    Expects(<a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a> = std::move(<a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>());</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">   51</a></span>&#160;  <span class="keyword">mutable</span> T <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">   54</a></span>&#160;  <span class="keyword">mutable</span> std::atomic_flag <a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">   57</a></span>&#160;  std::function&lt;T()&gt; <span class="keyword">const</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace VolViz</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma clang diagnostic ignored &quot;-Wpadded&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>VolViz {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html">   22</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code" href="classVolViz_1_1AtomicCache.html">AtomicCache</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> FetchOp&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690">   29</a></span>&#160;  <a class="code" href="classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690">AtomicCache</a>(FetchOp fetchOperation)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      : <a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>(fetchOperation) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    Expects(<a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>.clear();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a42f148a49b90858cc5dd00d5a3498255">   38</a></span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a42f148a49b90858cc5dd00d5a3498255">markAsDirty</a>() noexcept { <a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>.clear(); }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#abf05889d3ed734e923a70552511901db">   43</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">operator</span> T <span class="keyword">const</span> &amp;() <span class="keyword">const</span> noexcept {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>.test_and_set()) <span class="keywordflow">return</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    Expects(<a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a> = std::move(<a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>());</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">   53</a></span>&#160;  <span class="keyword">mutable</span> T <a class="code" href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">value_</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">   56</a></span>&#160;  <span class="keyword">mutable</span> std::atomic_flag <a class="code" href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">dirtyFlag_</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">   59</a></span>&#160;  std::function&lt;T()&gt; <span class="keyword">const</span> <a class="code" href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">fetchOperation_</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif // VolViz_AtomicCache_h</span></div>
-<div class="ttc" id="classVolViz_1_1AtomicCache_html_a42f148a49b90858cc5dd00d5a3498255"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a42f148a49b90858cc5dd00d5a3498255">VolViz::AtomicCache::markAsDirty</a></div><div class="ttdeci">void markAsDirty() noexcept</div><div class="ttdef"><b>Definition:</b> AtomicCache.h:36</div></div>
-<div class="ttc" id="classVolViz_1_1AtomicCache_html_a4bbda9a2c6fedde08de253d647f76475"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">VolViz::AtomicCache::value_</a></div><div class="ttdeci">T value_</div><div class="ttdoc">The caced value. </div><div class="ttdef"><b>Definition:</b> AtomicCache.h:51</div></div>
-<div class="ttc" id="classVolViz_1_1AtomicCache_html_a523b482b58514af81e3d44d25dd42711"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">VolViz::AtomicCache::dirtyFlag_</a></div><div class="ttdeci">std::atomic_flag dirtyFlag_</div><div class="ttdoc">The atomic dirty flag. </div><div class="ttdef"><b>Definition:</b> AtomicCache.h:54</div></div>
-<div class="ttc" id="classVolViz_1_1AtomicCache_html_a9cc93fc1f71aed5a73ed171022eef1ad"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">VolViz::AtomicCache::fetchOperation_</a></div><div class="ttdeci">std::function&lt; T()&gt; const fetchOperation_</div><div class="ttdoc">The fetch operation. </div><div class="ttdef"><b>Definition:</b> AtomicCache.h:57</div></div>
-<div class="ttc" id="classVolViz_1_1AtomicCache_html"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html">VolViz::AtomicCache</a></div><div class="ttdef"><b>Definition:</b> AtomicCache.h:20</div></div>
-<div class="ttc" id="classVolViz_1_1AtomicCache_html_a7092767b28f2c1421ad3f88b6a98f690"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690">VolViz::AtomicCache::AtomicCache</a></div><div class="ttdeci">AtomicCache(FetchOp fetchOperation)</div><div class="ttdef"><b>Definition:</b> AtomicCache.h:27</div></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace VolViz</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif // VolViz_AtomicCache_h</span></div>
+<div class="ttc" id="classVolViz_1_1AtomicCache_html_a42f148a49b90858cc5dd00d5a3498255"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a42f148a49b90858cc5dd00d5a3498255">VolViz::AtomicCache::markAsDirty</a></div><div class="ttdeci">void markAsDirty() noexcept</div><div class="ttdef"><b>Definition:</b> AtomicCache.h:38</div></div>
+<div class="ttc" id="classVolViz_1_1AtomicCache_html_a4bbda9a2c6fedde08de253d647f76475"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a4bbda9a2c6fedde08de253d647f76475">VolViz::AtomicCache::value_</a></div><div class="ttdeci">T value_</div><div class="ttdoc">The caced value. </div><div class="ttdef"><b>Definition:</b> AtomicCache.h:53</div></div>
+<div class="ttc" id="classVolViz_1_1AtomicCache_html_a523b482b58514af81e3d44d25dd42711"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a523b482b58514af81e3d44d25dd42711">VolViz::AtomicCache::dirtyFlag_</a></div><div class="ttdeci">std::atomic_flag dirtyFlag_</div><div class="ttdoc">The atomic dirty flag. </div><div class="ttdef"><b>Definition:</b> AtomicCache.h:56</div></div>
+<div class="ttc" id="classVolViz_1_1AtomicCache_html_a9cc93fc1f71aed5a73ed171022eef1ad"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad">VolViz::AtomicCache::fetchOperation_</a></div><div class="ttdeci">std::function&lt; T()&gt; const fetchOperation_</div><div class="ttdoc">The fetch operation. </div><div class="ttdef"><b>Definition:</b> AtomicCache.h:59</div></div>
+<div class="ttc" id="classVolViz_1_1AtomicCache_html"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html">VolViz::AtomicCache</a></div><div class="ttdef"><b>Definition:</b> AtomicCache.h:22</div></div>
+<div class="ttc" id="classVolViz_1_1AtomicCache_html_a7092767b28f2c1421ad3f88b6a98f690"><div class="ttname"><a href="classVolViz_1_1AtomicCache.html#a7092767b28f2c1421ad3f88b6a98f690">VolViz::AtomicCache::AtomicCache</a></div><div class="ttdeci">AtomicCache(FetchOp fetchOperation)</div><div class="ttdef"><b>Definition:</b> AtomicCache.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 16 2016 15:00:01 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2016 17:05:49 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
