@@ -13,7 +13,8 @@ if [ ! -d "$PROJECT_ROOT/Dependencies/build/glfw" ]; then
   cd Dependencies/build
   mkdir -p glfw
   cd glfw
-  cmake ../../glfw -DCMAKE_BUILD_TYPE=Release -GXcode
+  cmake ../../glfw -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CONFIGURATION_TYPES="Release" -GXcode
 else
   echo "Skip glfw"
 fi
