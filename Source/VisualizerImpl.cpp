@@ -499,7 +499,8 @@ void VisualizerImpl::renderGeometry() {
   assertGL("Failed to bind framebuffer");
   glDrawBuffers(attachments.size(), attachments.data());
 
-  glClearColor(0.f, 0.f, 0.f, 0.f);
+  Color const bg = cachedBackgroundColor;
+  glClearColor(bg(0), bg(1), bg(2), 1.0);
   glClearDepth(0.0);
   glClearStencil(0);
   glDisable(GL_FRAMEBUFFER_SRGB);

@@ -41,6 +41,7 @@
 		F894000C1DE3117300CAE22F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F894000B1DE3117300CAE22F /* OpenGL.framework */; };
 		F894000E1DE3118300CAE22F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F894000D1DE3118300CAE22F /* CoreVideo.framework */; };
 		F89400101DE311CE00CAE22F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F894000F1DE311CE00CAE22F /* IOKit.framework */; };
+		F89401191DE345E700CAE22F /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86847781DE21ECA00FF3913 /* libglfw3.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,7 +231,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = F86847551DE21EC900FF3913 /* GLFW.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = BDFBC77E2A534950A04565F9;
+			remoteGlobalIDString = 6770A4E6E11E4075B79D0EE9;
 			remoteInfo = glfw;
 		};
 		F86848351DE2F66E00FF3913 /* PBXContainerItemProxy */ = {
@@ -239,6 +240,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F86847D61DE2E6A900FF3913;
 			remoteInfo = VolViz;
+		};
+		F89401171DE345DF00CAE22F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F86847551DE21EC900FF3913 /* GLFW.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6770A4E6E11E4075B79D0EE9;
+			remoteInfo = glfw;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -345,6 +353,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F89401191DE345E700CAE22F /* libglfw3.a in Frameworks */,
 				F86848391DE3070A00FF3913 /* libVolViz.a in Frameworks */,
 				F89400091DE3114D00CAE22F /* Cocoa.framework in Frameworks */,
 				F894000E1DE3118300CAE22F /* CoreVideo.framework in Frameworks */,
@@ -615,6 +624,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F89401181DE345DF00CAE22F /* PBXTargetDependency */,
 				F86848361DE2F66E00FF3913 /* PBXTargetDependency */,
 			);
 			name = VolVisualizer;
@@ -905,6 +915,11 @@
 			target = F86847D61DE2E6A900FF3913 /* VolViz */;
 			targetProxy = F86848351DE2F66E00FF3913 /* PBXContainerItemProxy */;
 		};
+		F89401181DE345DF00CAE22F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = glfw;
+			targetProxy = F89401171DE345DF00CAE22F /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -966,7 +981,7 @@
 					"-isystem",
 					"$(SRCROOT)/Dependencies/concurrentqueue",
 					"-isystem",
-					"$(SRCROOT)/Dependencies/Eigen-3.2.8",
+					"$(SRCROOT)/Dependencies/eigen",
 					"-isystem",
 					"$(SRCROOT)/Dependencies/glfw/include",
 					"-isystem",
@@ -1043,7 +1058,7 @@
 					"-isystem",
 					"$(SRCROOT)/Dependencies/concurrentqueue",
 					"-isystem",
-					"$(SRCROOT)/Dependencies/Eigen-3.2.8",
+					"$(SRCROOT)/Dependencies/eigen",
 					"-isystem",
 					"$(SRCROOT)/Dependencies/glfw/include",
 					"-isystem",

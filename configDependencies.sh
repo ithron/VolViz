@@ -2,17 +2,21 @@
 
 set -e
 
-mkdir -p Dependencies/build
+echo Configure VolViz
 
-cd Dependencies/build
+PROJECT_ROOT=`pwd`
+mkdir -p $PROJECT_ROOT/Dependencies/build
+
 
 # Build GLFW
-mkdir -p glfw
-cd glfw
-cmake ../../glfw -DCMAKE_BUILD_TYPE=Release -GXcode
-cd ..
+if [ ! -d "$PROJECT_ROOT/Dependencies/build/glfw" ]; then
+  cd Dependencies/build
+  mkdir -p glfw
+  cd glfw
+  cmake ../../glfw -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CONFIGURATION_TYPES="Release" -GXcode
+else
+  echo "Skip glfw"
+fi
 
-# # Build googletest
-# mkdir -p googletest
-# cd googletest
-# cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_GTEST=On -DBUILD_GMOCK=Off -GXcode ../../googletest
+cd $PROJECT_ROOT
