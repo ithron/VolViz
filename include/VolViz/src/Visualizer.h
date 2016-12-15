@@ -71,6 +71,7 @@ public:
   std::atomic<bool> showGrid{true};
   std::atomic<bool> showVolumeBoundingBox{true};
   AtomicProperty<Length> scale{1 * milli * meter};
+  AtomicProperty<Color> backgroundColor{Colors::Black()};
 
   /// The camera
   Camera camera;

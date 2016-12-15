@@ -104,6 +104,14 @@ public:
   AtomicCache<Length> cachedScale{
       [this]() -> Length { return visualizer_->scale; }};
 
+  /// Visualizer's background color is cached here, since it is accessed at
+  /// least once per
+  /// frame and is usually cahnged very rare. Since every access to Visualizer's
+  /// backgroundColor property requires thread synchronization, a cache is
+  /// necessary here.
+  AtomicCache<Color> cachedBackgroundColor{
+      [this]() -> Color { return visualizer_->backgroundColor; }};
+
 private:
   friend class ::VolViz::Visualizer;
 
