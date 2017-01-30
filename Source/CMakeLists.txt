@@ -100,7 +100,6 @@ if (BUILD_SHARED_LIBS)
       PhysUnits
     PRIVATE
       glfw
-      ${OPENGL_gl_LIBRARY}
       ${MKL_TARGET}
       ConcurrentQueue
   )
@@ -108,7 +107,6 @@ else()
   target_link_libraries(VolViz
     PUBLIC
       ${MKL_TARGET}
-      ${OPENGL_gl_LIBRARY}
       Eigen
       GSL
       PhysUnits
