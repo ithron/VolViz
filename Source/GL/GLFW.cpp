@@ -45,6 +45,10 @@ GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {
     throw std::runtime_error("Failed to create GLFW window");
   }
 
+  if (!gladLoadGL()) {
+    throw std::runtime_error("Failed to load OpenGL functions");
+  }
+
   glfwSetWindowUserPointer(window, this);
 
   // setup key callback handler
