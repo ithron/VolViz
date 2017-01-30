@@ -6,8 +6,6 @@ set(DEFAULT_COMPILE_FEATURES
   cxx_auto_type
   cxx_binary_literals
   cxx_constexpr
-  cxx_contextual_conversions
-  cxx_decltype_incomplete_return_types
   cxx_decltype
   cxx_decltype_auto
   cxx_default_function_template_args
@@ -91,6 +89,7 @@ add_library(VolViz
   GL/ShaderProgram.cpp
   GL/Shaders.cpp
   GL/Workarounds.cpp
+  GL/glad.c
 )
 if (BUILD_SHARED_LIBS)
   target_link_libraries(VolViz
@@ -126,6 +125,10 @@ target_include_directories(VolViz PUBLIC
 )
 target_compile_features(VolViz PUBLIC ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolViz PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+
+if (NOT WIN32) 
+  target_link_libraries(VolViz PUBLIC dl)
+endif() 
 
 set(INSTALL_TARGETS VolViz)
 

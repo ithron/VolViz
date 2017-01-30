@@ -4,9 +4,7 @@
 #endif
 // clang-format off
 
-#define GLFW_INCLUDE_GLCOREARB
-#define GLFW_INCLUDE_GLEXT
-#define GL_GLEXT_PROTOTYPES
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
 #ifndef GL_ZERO_TO_ONE

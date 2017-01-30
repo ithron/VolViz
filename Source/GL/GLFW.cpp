@@ -91,6 +91,11 @@ GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {
   });
 
   makeCurrent();
+  
+  if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
+    throw std::runtime_error("Failed to load OpenGL functions");
+  }
+  
   supportedExtensions_ = queryExtensions();
   glfwSwapInterval(1);
 }
