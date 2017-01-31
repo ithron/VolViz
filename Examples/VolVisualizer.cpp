@@ -147,25 +147,26 @@ int main(int argc, char **argv) {
   viewer.setVolume(vol.first, as_span(vol.second));
 
   viewer.enableMultithreading();
-  std::thread viewerThread([&viewer]() {
-    viewer.start();
-    viewer.renderAtFPS(60);
+  viewer.start();
+
+  std::thread workerThread([&viewer, &mesh]() {
+    using Clock = std::chrono::steady_clock;
+    using namespace std::chrono_literals;
+    auto constexpr updateIntervall = 1s / 30.f;
+    int count{0};
+    while (viewer) {
+      auto const t0 = Clock::now();
+      mesh.vertices *= count < 10 ? 1.01f : 0.99f;
+      viewer.updateGeometry("Mesh", mesh);
+      if (++count > 20) count = 0;
+      auto const timeLeft = -(Clock::now() - t0) + updateIntervall;
+      if (timeLeft > 0s) std::this_thread::sleep_for(timeLeft);
+    }
   });
 
-  using Clock = std::chrono::steady_clock;
-  using namespace std::chrono_literals;
-  auto constexpr updateIntervall = 1s / 30.f;
-  int count{0};
-  while (viewer) {
-    auto const t0 = Clock::now();
-    mesh.vertices *= count < 10 ? 1.01f : 0.99f;
-    viewer.updateGeometry("Mesh", mesh);
-    if (++count > 20) count = 0;
-    auto const timeLeft = -(Clock::now() - t0) + updateIntervall;
-    if (timeLeft > 0s) std::this_thread::sleep_for(timeLeft);
-  }
+  viewer.renderAtFPS(60);
 
-  viewerThread.join();
+  workerThread.join();
 
   return EXIT_SUCCESS;
 }
