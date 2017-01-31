@@ -4,8 +4,10 @@
 #endif
 // clang-format off
 
+#ifdef _WIN32
+#define APIENTRY __stdcall
+#endif
 #include "glad.h"
-#include <GLFW/glfw3.h>
 
 #ifndef GL_ZERO_TO_ONE
 #define GL_ZERO_TO_ONE 0x935F

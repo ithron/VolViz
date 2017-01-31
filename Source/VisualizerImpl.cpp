@@ -1,7 +1,5 @@
 #include "VisualizerImpl.h"
 
-#include "GL/GL.h"
-#include "GL/GLdefs.h"
 #include "Visualizer.h"
 
 #include <Eigen/Core>
