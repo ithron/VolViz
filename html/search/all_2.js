@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['backgroundcolor',['backgroundColor',['../classVolViz_1_1Visualizer.html#a5df55244eb852447082ecf36a032df52',1,'VolViz::Visualizer']]],
   ['bboxgeometryshadersrc',['bboxGeometryShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#aaead6a92999f8458a090e040186c44b9',1,'VolViz::Private_::GL::Shaders']]],
   ['beforeaction',['beforeAction',['../classVolViz_1_1SetAndNotifyPolicy.html#a3b8e1358a21e92bd8b97b88cb90d61db',1,'VolViz::SetAndNotifyPolicy']]],
   ['bind',['bind',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a59578e093b798dd8f47d71faf292aa5e',1,'VolViz::Private_::GL::Buffer::bind()'],['../structVolViz_1_1Private___1_1GL_1_1Framebuffer.html#a518d8dd7569fd63b69ba82db1bb1f2f4',1,'VolViz::Private_::GL::Framebuffer::bind()'],['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html#ab7884f0d1ab5cad5e96770babf57e0e0',1,'VolViz::Private_::GL::VertexArray::bind()']]],
@@ -12,8 +11,8 @@ var searchData=
   ['bindvolume',['bindVolume',['../classVolViz_1_1Private___1_1VisualizerImpl.html#af0e82e5a15467628dcf4daddc33d726b',1,'VolViz::Private_::VisualizerImpl']]],
   ['black',['Black',['../namespaceVolViz_1_1Colors.html#a998f33c3b169d2e9842494332763b49f',1,'VolViz::Colors']]],
   ['blue',['Blue',['../namespaceVolViz_1_1Colors.html#aa639455fab1670cf9ad9b60dc21e9a21',1,'VolViz::Colors']]],
-  ['buffer',['Buffer',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html',1,'VolViz::Private_::GL']]],
   ['buffer',['Buffer',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#aaec276218f9211486e4504cc3b337529',1,'VolViz::Private_::GL::Buffer::Buffer(int) noexcept'],['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a1775db960f716973a171c7f2b5fcb22f',1,'VolViz::Private_::GL::Buffer::Buffer() noexcept'],['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a9e4a1ec55062a334ec5db53a869a6d37',1,'VolViz::Private_::GL::Buffer::Buffer(Buffer const &amp;)=delete'],['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a7a613d9a184f5f4b1ea121d6299d1c64',1,'VolViz::Private_::GL::Buffer::Buffer(Buffer &amp;&amp;rhs) noexcept']]],
+  ['buffer',['Buffer',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html',1,'VolViz::Private_::GL']]],
   ['buffer_2eh',['Buffer.h',['../Buffer_8h.html',1,'']]],
   ['buffers',['Buffers',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a87a7b3f4d421d975b2eab98003ff21be',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer::Buffers()'],['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a56c4d88b531fb2d5b6ed40624c67aa60',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer::buffers()']]]
 ];

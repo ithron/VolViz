@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['cachedbackgroundcolor',['cachedBackgroundColor',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a06346d886ace44dedcd6840a2973213b',1,'VolViz::Private_::VisualizerImpl']]],
   ['cachedprojectionmatrix_5f',['cachedProjectionMatrix_',['../classVolViz_1_1Camera.html#a6a57eca3f3805768b9562d12283f99ea',1,'VolViz::Camera']]],
   ['cachedscale',['cachedScale',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a36d6619b22ce7511a4480b2cbb5e0780',1,'VolViz::Private_::VisualizerImpl']]],
   ['cachedscale_5f',['cachedScale_',['../classVolViz_1_1Camera.html#a56e1bd4738c23d559e4c909a48ea3db1',1,'VolViz::Camera']]],
