@@ -145,33 +145,64 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
 
 void VisualizerImpl::setupFBOs() {
 
+  glfw_.makeCurrent();
   auto const width = static_cast<GLsizei>(glfw_.width());
   auto const height = static_cast<GLsizei>(glfw_.height());
   // set up FBO
   { // textures and FBO for the geometry stage
     // normal and specular texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
+	assertGL("glBindTexture failed");
+#ifdef _WIN32
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+	assertGL("glTexImage2D failed");
+#else
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
+	assertGL("glTexStorage2D failed");
+#endif
+	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	assertGL("OpenGL Error Stack not clean");
 
     // albedo texure
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
+#ifdef _WIN32
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	assertGL("glTexImage2D failed");
+#else
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
+	assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	assertGL("OpenGL Error Stack not clean");
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
+#ifdef _WIN32
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	assertGL("glTexImage2D failed");
+#else
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
+	assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	assertGL("OpenGL Error Stack not clean");
 
     // Selection index texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, width, height);
+#ifdef _WIN32
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R32UI, width, height, 0, GL_RED_INTEGER, GL_UNSIGNED_INT, NULL);
+	assertGL("glTexImage2D failed");
+#else
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, width, height);
+	assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	assertGL("OpenGL Error Stack not clean");
 
     // setup FBO
     GL::Framebuffer fbo;
@@ -184,8 +215,11 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::SelectionTexture], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::Depth], 0);
+	assertGL("OpenGL Error Stack not clean");
     // check FBO
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+	  std::cerr << "Error: " << glCheckFramebufferStatus(GL_FRAMEBUFFER) << std::endl;
+      assertGL("Failed to init framebuffer");
       throw std::runtime_error(
           "Incomplete FBO: " +
           std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
@@ -194,18 +228,34 @@ void VisualizerImpl::setupFBOs() {
     lightingFbo_ = std::move(fbo);
   }
 
+  assertGL("OpenGL Error Stack not clean");
   { // textures and fbo for the lighting
     // final rendered image texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::RenderedImage]);
+	assertGL("glBindTexture failed");
+#ifdef _WIN32
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+	assertGL("glTexImage2D failed");
+#else
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
+	assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	assertGL("OpenGL Error Stack not clean");
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::FinalDepth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
+#ifdef _WIN32
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	assertGL("glTexImage2D failed");
+#else
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, width, height);
+	assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	assertGL("OpenGL Error Stack not clean");
 
     // setup FBO
     GL::Framebuffer fbo;
@@ -214,6 +264,7 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::RenderedImage], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::FinalDepth], 0);
+	assertGL("OpenGL Error Stack not clean");
     // check FBO
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
       throw std::runtime_error(
@@ -224,19 +275,23 @@ void VisualizerImpl::setupFBOs() {
     finalFbo_ = std::move(fbo);
   }
 
+  assertGL("OpenGL Error Stack not clean");
   // create dummy VAO for single single point rendering
   {
     auto vao = GL::VertexArray{};
     vao.enableVertexAttribArray(0);
+	assertGL("OpenGL Error Stack not clean");
 
     auto const vert = Eigen::Vector3f::Zero().eval();
     auto vb = GL::Buffer{};
     vb.upload(GL_ARRAY_BUFFER, 3 * sizeof(float), vert.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
+	assertGL("OpenGL Error Stack not clean");
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+	assertGL("OpenGL Error Stack not clean");
 
     singleVertexData_.vBuff = std::move(vb);
     singleVertexData_.vao = std::move(vao);

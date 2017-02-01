@@ -36,7 +36,7 @@ GLFW::GLFW(std::string title, std::size_t width, std::size_t height) {
 #if defined(__APPLE__)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   if (!(window =
