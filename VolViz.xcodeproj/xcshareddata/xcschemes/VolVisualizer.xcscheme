@@ -17,7 +17,7 @@
                BlueprintIdentifier = "F868482D1DE2F63C00FF3913"
                BuildableName = "VolVisualizer"
                BlueprintName = "VolVisualizer"
-               ReferencedContainer = "container:VolVIz.xcodeproj">
+               ReferencedContainer = "container:VolViz.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "F868482D1DE2F63C00FF3913"
             BuildableName = "VolVisualizer"
             BlueprintName = "VolVisualizer"
-            ReferencedContainer = "container:VolVIz.xcodeproj">
+            ReferencedContainer = "container:VolViz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,9 +58,15 @@
             BlueprintIdentifier = "F868482D1DE2F63C00FF3913"
             BuildableName = "VolVisualizer"
             BlueprintName = "VolVisualizer"
-            ReferencedContainer = "container:VolVIz.xcodeproj">
+            ReferencedContainer = "container:VolViz.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "${SOURCE_ROOT}/Examples/bunnyHi.obj"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -77,7 +83,7 @@
             BlueprintIdentifier = "F868482D1DE2F63C00FF3913"
             BuildableName = "VolVisualizer"
             BlueprintName = "VolVisualizer"
-            ReferencedContainer = "container:VolVIz.xcodeproj">
+            ReferencedContainer = "container:VolViz.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
