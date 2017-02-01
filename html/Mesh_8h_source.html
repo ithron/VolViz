@@ -109,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classVolViz_1_1Private___1_1Mesh.html#a386ed734720273f032e8597db74896c0">doInit</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classVolViz_1_1Private___1_1Mesh.html#a582baafc783a2de7c3dbf2dbd7ccae4f">doRender</a>(std::uint32_t index, <span class="keywordtype">bool</span> selected) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classVolViz_1_1Private___1_1Mesh.html#a582baafc783a2de7c3dbf2dbd7ccae4f">doRender</a>(std::uint32_t <a class="code" href="glad_8h.html#a57f14e05b1900f16a2da82ade47d0c6d">index</a>, <span class="keywordtype">bool</span> selected) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classVolViz_1_1Private___1_1Mesh.html#af6fe75aa873dcffc45f161bcd8cff854">doUpdate</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
@@ -144,9 +144,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classVolViz_1_1Private___1_1Mesh_html_a978c8b9a7f64e79fc5516ce6dabda9d2"><div class="ttname"><a href="classVolViz_1_1Private___1_1Mesh.html#a978c8b9a7f64e79fc5516ce6dabda9d2">VolViz::Private_::Mesh::indexBuffer_</a></div><div class="ttdeci">GL::Buffer indexBuffer_</div><div class="ttdef"><b>Definition:</b> Mesh.h:34</div></div>
 <div class="ttc" id="structVolViz_1_1Private___1_1GL_1_1VertexArray_html"><div class="ttname"><a href="structVolViz_1_1Private___1_1GL_1_1VertexArray.html">VolViz::Private_::GL::VertexArray</a></div><div class="ttdoc">RAII wrapper for OpenGL vertex arrays. </div><div class="ttdef"><b>Definition:</b> VertexArray.h:11</div></div>
 <div class="ttc" id="classVolViz_1_1Private___1_1Mesh_html_a386ed734720273f032e8597db74896c0"><div class="ttname"><a href="classVolViz_1_1Private___1_1Mesh.html#a386ed734720273f032e8597db74896c0">VolViz::Private_::Mesh::doInit</a></div><div class="ttdeci">virtual void doInit() override</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:19</div></div>
+<div class="ttc" id="glad_8h_html_a57f14e05b1900f16a2da82ade47d0c6d"><div class="ttname"><a href="glad_8h.html#a57f14e05b1900f16a2da82ade47d0c6d">index</a></div><div class="ttdeci">GLuint index</div><div class="ttdef"><b>Definition:</b> glad.h:2430</div></div>
 <div class="ttc" id="classVolViz_1_1Private___1_1Mesh_html_a346b2a68c86596bfe4cf19246c9991ec"><div class="ttname"><a href="classVolViz_1_1Private___1_1Mesh.html#a346b2a68c86596bfe4cf19246c9991ec">VolViz::Private_::Mesh::Mesh</a></div><div class="ttdeci">Mesh(MeshDescriptor const &amp;descriptor, VisualizerImpl &amp;visualizer)</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:13</div></div>
 <div class="ttc" id="classVolViz_1_1Private___1_1Mesh_html_ab6fa7d730a1846b22c94e6a3d3669606"><div class="ttname"><a href="classVolViz_1_1Private___1_1Mesh.html#ab6fa7d730a1846b22c94e6a3d3669606">VolViz::Private_::Mesh::uploadMesh</a></div><div class="ttdeci">void uploadMesh()</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:63</div></div>
-<div class="ttc" id="classVolViz_1_1Private___1_1VisualizerImpl_html"><div class="ttname"><a href="classVolViz_1_1Private___1_1VisualizerImpl.html">VolViz::Private_::VisualizerImpl</a></div><div class="ttdef"><b>Definition:</b> VisualizerImpl.h:23</div></div>
+<div class="ttc" id="classVolViz_1_1Private___1_1VisualizerImpl_html"><div class="ttname"><a href="classVolViz_1_1Private___1_1VisualizerImpl.html">VolViz::Private_::VisualizerImpl</a></div><div class="ttdef"><b>Definition:</b> VisualizerImpl.h:28</div></div>
 <div class="ttc" id="classVolViz_1_1Private___1_1Mesh_html_a0bc4149185b3f9c99dcc8dcd96d2ef0a"><div class="ttname"><a href="classVolViz_1_1Private___1_1Mesh.html#a0bc4149185b3f9c99dcc8dcd96d2ef0a">VolViz::Private_::Mesh::vertexArrayObject_</a></div><div class="ttdeci">GL::VertexArray vertexArrayObject_</div><div class="ttdef"><b>Definition:</b> Mesh.h:35</div></div>
 <div class="ttc" id="Buffer_8h_html"><div class="ttname"><a href="Buffer_8h.html">Buffer.h</a></div></div>
 <div class="ttc" id="classVolViz_1_1Private___1_1Mesh_html_aa291759de3707dc815dca37d4a38dc70"><div class="ttname"><a href="classVolViz_1_1Private___1_1Mesh.html#aa291759de3707dc815dca37d4a38dc70">VolViz::Private_::Mesh::doEnqueueUpdate</a></div><div class="ttdeci">virtual void doEnqueueUpdate(GeometryDescriptor const &amp;descriptor) override</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:149</div></div>
@@ -157,7 +158,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 31 2017 12:34:37 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 1 2017 14:31:09 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

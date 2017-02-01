@@ -1,17 +1,10 @@
 var searchData=
 [
-  ['_7eaxisalignedplanedescriptor',['~AxisAlignedPlaneDescriptor',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#a7eec0dd697526a6c8ab10be2acd6e2a3',1,'VolViz::AxisAlignedPlaneDescriptor']]],
-  ['_7ebinding',['~Binding',['../classVolViz_1_1Private___1_1GL_1_1Binding.html#a0dd6cb9797b31fdc8217e14784d981c8',1,'VolViz::Private_::GL::Binding']]],
-  ['_7ebinding2',['~Binding2',['../classVolViz_1_1Private___1_1GL_1_1Binding2.html#a649eaff419dd6bce81a735a79ed30210',1,'VolViz::Private_::GL::Binding2']]],
-  ['_7ebuffer',['~Buffer',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a593fbe200c26c3deb6752234ebaef9ba',1,'VolViz::Private_::GL::Buffer']]],
-  ['_7eframebuffer',['~Framebuffer',['../structVolViz_1_1Private___1_1GL_1_1Framebuffer.html#af4f45b91e0e41b6947513d71b22fc605',1,'VolViz::Private_::GL::Framebuffer']]],
-  ['_7egeometry',['~Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a7112efa63b85df2dabc87873500922c5',1,'VolViz::Private_::Geometry']]],
-  ['_7egeometrydescriptor',['~GeometryDescriptor',['../classVolViz_1_1GeometryDescriptor.html#a640335c2d3f3a8b529ed2238ef047a23',1,'VolViz::GeometryDescriptor']]],
-  ['_7eglfw',['~GLFW',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a7bf2bebc73803ca0f1ba017854f5a9b6',1,'VolViz::Private_::GL::GLFW']]],
-  ['_7emeshdescriptor',['~MeshDescriptor',['../classVolViz_1_1MeshDescriptor.html#aaefd2b246862fd5599d4175bf85a1cbb',1,'VolViz::MeshDescriptor']]],
-  ['_7eshader',['~Shader',['../classVolViz_1_1Private___1_1GL_1_1Shader.html#a765012638d7917758b8e725bd7dbc6d9',1,'VolViz::Private_::GL::Shader']]],
-  ['_7eshaderprogram',['~ShaderProgram',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#a6d00161d64f048e77761b0ef085d8814',1,'VolViz::Private_::GL::ShaderProgram']]],
-  ['_7etextures',['~Textures',['../structVolViz_1_1Private___1_1GL_1_1Textures.html#a8585231c10d2caa5c61fda17db7d4f4f',1,'VolViz::Private_::GL::Textures']]],
-  ['_7evertexarray',['~VertexArray',['../structVolViz_1_1Private___1_1GL_1_1VertexArray.html#a6a62f56c7c829ec7c173110748f9c311',1,'VolViz::Private_::GL::VertexArray']]],
-  ['_7evisualizer',['~Visualizer',['../classVolViz_1_1Visualizer.html#afe712597139726f790f31c6ed327612c',1,'VolViz::Visualizer']]]
+  ['z',['Z',['../namespaceVolViz_1_1Private___1_1GL.html#af68bf6b5e7fcceb464312728fb53b242a182293dbcb28ccbf8af29c6577c76f6a',1,'VolViz::Private_::GL::Z()'],['../namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6faee124c2f1feb5cf8e738b986477a119c',1,'VolViz::Z()'],['../namespaceVolViz.html#a4026a28cbb69255c9125111929b3f5c3a21c2e59531c8710156d34a3c30ac81d5',1,'VolViz::Z()'],['../glad_8h.html#a1483160fae141afea848a5393c286b2b',1,'z():&#160;glad.h']]],
+  ['zfail',['zfail',['../glad_8h.html#a0784d837e1696549a92220c9a838bafd',1,'glad.h']]],
+  ['zfar',['zFar',['../glad_8h.html#a1052a8235df129542aea6da80fbec6a1',1,'glad.h']]],
+  ['zmax',['zmax',['../glad_8h.html#a52fc0a3e9548e9c2ab1ad503d06b64e3',1,'glad.h']]],
+  ['znear',['zNear',['../glad_8h.html#a12d99226e590bbaaf0be69169eeb4834',1,'glad.h']]],
+  ['zoffset',['zoffset',['../glad_8h.html#a78276aa7b0c0355a1fc3501f7b8352a2',1,'glad.h']]],
+  ['zpass',['zpass',['../glad_8h.html#a47fbc9b2f9066297350fc4dcaa1977cc',1,'glad.h']]]
 ];

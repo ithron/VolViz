@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['range',['range',['../structVolViz_1_1VolumeDescriptor.html#a9ebbbb3700c90caac4bb0db026610e03',1,'VolViz::VolumeDescriptor']]],
-  ['readbuffer',['readBuffer',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a1ebc009eefe96634e4a41de591f2b550',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer']]]
+  ['quadgeomshadersrc',['quadGeomShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#ad3e97184d2128caae4d61c5e3ee1d6c6',1,'VolViz::Private_::GL::Shaders']]]
 ];
