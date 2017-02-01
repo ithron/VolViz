@@ -88,7 +88,6 @@ add_library(VolViz
   GL/GLFW.cpp
   GL/ShaderProgram.cpp
   GL/Shaders.cpp
-  GL/Workarounds.cpp
   GL/glad.c
 )
 if (BUILD_SHARED_LIBS)
