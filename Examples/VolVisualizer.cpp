@@ -104,6 +104,7 @@ int main(int argc, char **argv) {
   viewer.addGeometry("Mesh", mesh);
 
   viewer.showGrid = true;
+  viewer.backgroundColor = (Colors::Magenta() + Colors::Cyan()) / 2.0;
 
   Light light;
   light.ambientFactor = 1.0f;
