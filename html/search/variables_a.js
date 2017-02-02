@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['lastmousedelta_5f',['lastMouseDelta_',['../group__cameraRelated.html#ga8b534087ab915d4eb54ee6da29b28036',1,'VolViz::Private_::VisualizerImpl']]],
-  ['lastmousepos_5f',['lastMousePos_',['../group__cameraRelated.html#ga310230fe35cf5b3dd577152a525c2e41',1,'VolViz::Private_::VisualizerImpl']]],
-  ['libgl',['libGL',['../glad_8c.html#a3c299869dbd023d474ce0f8d7d77a09a',1,'glad.c']]],
-  ['lightingfbo_5f',['lightingFbo_',['../group__privateMembers.html#ga7806b8439078ab675a192696a3c21ac8',1,'VolViz::Private_::VisualizerImpl']]],
-  ['lightmutex_5f',['lightMutex_',['../group__privateMembers.html#gacebde9a9c64d3f169dc79d4ffcfd9544',1,'VolViz::Private_::VisualizerImpl']]],
-  ['lights_5f',['lights_',['../group__privateMembers.html#ga755b9d552d3c07426167c76a308ad706',1,'VolViz::Private_::VisualizerImpl']]],
-  ['location_5f',['location_',['../classVolViz_1_1Private___1_1GL_1_1UniformProxy.html#ab10b409f3608c36b73c2b196ca90e0af',1,'VolViz::Private_::GL::UniformProxy']]]
+  ['max',['max',['../structVolViz_1_1Range.html#a209118c7ce018d3444cceb5c0bdc24b5',1,'VolViz::Range']]],
+  ['min',['min',['../structVolViz_1_1Range.html#ac44598678a666cf600088fc93cf5ea98',1,'VolViz::Range']]],
+  ['mousebuttoncallback',['mouseButtonCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a9877a6fdd95a63c3ab15a127f08df185',1,'VolViz::Private_::GL::GLFW']]],
+  ['mousemovecallback',['mouseMoveCallback',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#a00b54cb9731f63b285b9a0ae65a9cd45',1,'VolViz::Private_::GL::GLFW']]],
+  ['movable',['movable',['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a0b5ba30445e11a049812e8fcd7467840',1,'VolViz::Private_::GL::Geometry::movable()'],['../classVolViz_1_1GeometryDescriptor.html#af12a9e274f948d07ed53459cfd8ae52f',1,'VolViz::GeometryDescriptor::movable()']]],
+  ['movemask',['moveMask',['../classVolViz_1_1Private___1_1Geometry.html#a367f61b184576bd6c985f22f2984dbea',1,'VolViz::Private_::Geometry::moveMask()'],['../structVolViz_1_1Private___1_1GL_1_1Geometry.html#a968f81bcda23957623036193f4db4a24',1,'VolViz::Private_::GL::Geometry::moveMask()']]],
+  ['movestate_5f',['moveState_',['../group__cameraRelated.html#gabfabf1dedcedc08fa39c5bc231dd915f',1,'VolViz::Private_::VisualizerImpl']]],
+  ['multithreadingenabled_5f',['multithreadingEnabled_',['../group__privateMembers.html#gae1cec384d485e28bee88207c4c6a9a3f',1,'VolViz::Private_::VisualizerImpl']]],
+  ['mutex_5f',['mutex_',['../classVolViz_1_1AtomicWrapper.html#aa7380b473af78681674bc7b245b581ff',1,'VolViz::AtomicWrapper']]]
 ];

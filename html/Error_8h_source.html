@@ -107,19 +107,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef NDEBUG</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="Error_8h.html#ab4ca72098141b3549aa7e360f8722dbe">   17</a></span>&#160;<span class="preprocessor"></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="Error_8h.html#ab4ca72098141b3549aa7e360f8722dbe">assertGL</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> *txt) noexcept {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> err = <a class="code" href="glad_8h.html#a0aac05c6a9cb27add42d6e1e4970d9cb">glGetError</a>();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> err = glGetError();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordflow">switch</span> (err) {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="glad_8h.html#a8868c96a8632a9a5b2af712c62dfd36a">GL_NO_ERROR</a>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">case</span> GL_NO_ERROR:</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="glad_8h.html#af14f7bb0d1f578a77e3c472d3bbd2cbd">GL_INVALID_ENUM</a>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordflow">case</span> GL_INVALID_ENUM:</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Error INVALID_ENUM:&quot;</span> &amp;&amp; txt);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="glad_8h.html#a0650f4789afcbe8e0d83d8cffd008719">GL_INVALID_VALUE</a>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordflow">case</span> GL_INVALID_VALUE:</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Error GL_INVALID_VALUE:&quot;</span> &amp;&amp; txt);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="glad_8h.html#a55c3653fe5c95b8070bd00c02b137693">GL_INVALID_OPERATION</a>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">case</span> GL_INVALID_OPERATION:</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Error GL_INVALID_OPERATION:&quot;</span> &amp;&amp; txt);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="glad_8h.html#ad339202fa82bc67ac98dbb43dd2d32b5">GL_OUT_OF_MEMORY</a>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordflow">case</span> GL_OUT_OF_MEMORY:</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Error GL_OUT_OF_MEMORY:&quot;</span> &amp;&amp; txt);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="glad_8h.html#aadde34fd502af6b251253c1815f35c50">GL_INVALID_FRAMEBUFFER_OPERATION</a>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordflow">case</span> GL_INVALID_FRAMEBUFFER_OPERATION:</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Error GL_INVALID_FRAMEBUFFER_OPERATION:&quot;</span> &amp;&amp; txt);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Unknown error: &quot;</span> &amp;&amp; txt);</div>
@@ -131,18 +131,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif // VolViz_Error_h</span></div>
 <div class="ttc" id="Error_8h_html_ab4ca72098141b3549aa7e360f8722dbe"><div class="ttname"><a href="Error_8h.html#ab4ca72098141b3549aa7e360f8722dbe">assertGL</a></div><div class="ttdeci">void assertGL(char const *txt) noexcept</div><div class="ttdef"><b>Definition:</b> Error.h:17</div></div>
-<div class="ttc" id="glad_8h_html_aadde34fd502af6b251253c1815f35c50"><div class="ttname"><a href="glad_8h.html#aadde34fd502af6b251253c1815f35c50">GL_INVALID_FRAMEBUFFER_OPERATION</a></div><div class="ttdeci">#define GL_INVALID_FRAMEBUFFER_OPERATION</div><div class="ttdef"><b>Definition:</b> glad.h:1285</div></div>
-<div class="ttc" id="glad_8h_html_a55c3653fe5c95b8070bd00c02b137693"><div class="ttname"><a href="glad_8h.html#a55c3653fe5c95b8070bd00c02b137693">GL_INVALID_OPERATION</a></div><div class="ttdeci">#define GL_INVALID_OPERATION</div><div class="ttdef"><b>Definition:</b> glad.h:782</div></div>
-<div class="ttc" id="glad_8h_html_ad339202fa82bc67ac98dbb43dd2d32b5"><div class="ttname"><a href="glad_8h.html#ad339202fa82bc67ac98dbb43dd2d32b5">GL_OUT_OF_MEMORY</a></div><div class="ttdeci">#define GL_OUT_OF_MEMORY</div><div class="ttdef"><b>Definition:</b> glad.h:783</div></div>
-<div class="ttc" id="glad_8h_html_a0650f4789afcbe8e0d83d8cffd008719"><div class="ttname"><a href="glad_8h.html#a0650f4789afcbe8e0d83d8cffd008719">GL_INVALID_VALUE</a></div><div class="ttdeci">#define GL_INVALID_VALUE</div><div class="ttdef"><b>Definition:</b> glad.h:781</div></div>
 <div class="ttc" id="GLdefs_8h_html"><div class="ttname"><a href="GLdefs_8h.html">GLdefs.h</a></div></div>
-<div class="ttc" id="glad_8h_html_a0aac05c6a9cb27add42d6e1e4970d9cb"><div class="ttname"><a href="glad_8h.html#a0aac05c6a9cb27add42d6e1e4970d9cb">glGetError</a></div><div class="ttdeci">#define glGetError</div><div class="ttdef"><b>Definition:</b> glad.h:2192</div></div>
-<div class="ttc" id="glad_8h_html_a8868c96a8632a9a5b2af712c62dfd36a"><div class="ttname"><a href="glad_8h.html#a8868c96a8632a9a5b2af712c62dfd36a">GL_NO_ERROR</a></div><div class="ttdeci">#define GL_NO_ERROR</div><div class="ttdef"><b>Definition:</b> glad.h:779</div></div>
-<div class="ttc" id="glad_8h_html_af14f7bb0d1f578a77e3c472d3bbd2cbd"><div class="ttname"><a href="glad_8h.html#af14f7bb0d1f578a77e3c472d3bbd2cbd">GL_INVALID_ENUM</a></div><div class="ttdeci">#define GL_INVALID_ENUM</div><div class="ttdef"><b>Definition:</b> glad.h:780</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 1 2017 19:52:01 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 2 2017 00:06:02 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

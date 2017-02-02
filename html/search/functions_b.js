@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['open_5fgl',['open_gl',['../glad_8c.html#a538b0e09de5780f026ad62462fade0a6',1,'glad.c']]],
   ['operator_20bool',['operator bool',['../classVolViz_1_1Private___1_1GL_1_1GLFW.html#ab4ce11b3f134e02e0bfdc36032204e87',1,'VolViz::Private_::GL::GLFW::operator bool()'],['../classVolViz_1_1Private___1_1VisualizerImpl.html#afcb9ee861de302b9c7bbbd12f55364de',1,'VolViz::Private_::VisualizerImpl::operator bool()'],['../classVolViz_1_1Visualizer.html#a5041fa585ccd1582e3d659a9eb2b94bc',1,'VolViz::Visualizer::operator bool()']]],
   ['operator_20t',['operator T',['../classVolViz_1_1AtomicWrapper.html#a441c7a52309952b5af1e70f653a9f65c',1,'VolViz::AtomicWrapper']]],
   ['operator_20t_20const_20_26',['operator T const &amp;',['../classVolViz_1_1AtomicCache.html#abf05889d3ed734e923a70552511901db',1,'VolViz::AtomicCache']]],

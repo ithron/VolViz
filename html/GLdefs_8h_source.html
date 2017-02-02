@@ -96,20 +96,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor"></span><span class="comment">// clang-format off</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define APIENTRY __stdcall</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="glad_8h.html">glad.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="GLdefs_8h.html#a7737bc5535f188b6f1ffffa9f9f4146c">    7</a></span>&#160;<span class="preprocessor">#define GLFW_INCLUDE_GLCOREARB</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="GLdefs_8h.html#a2b9565e626144ca0f30bab5b0467a4d0">    8</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GLFW_INCLUDE_GLEXT</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="GLdefs_8h.html#a120fb070bddb21f0bd899f50252c4cb5">    9</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GL_GLEXT_PROTOTYPES</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;GLFW/glfw3.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef GL_ZERO_TO_ONE</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GL_ZERO_TO_ONE 0x935F</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="GLdefs_8h.html#acc9382c0f9baac8561f62cb527b85566">   13</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GL_ZERO_TO_ONE 0x935F</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span></div>
-<div class="ttc" id="glad_8h_html"><div class="ttname"><a href="glad_8h.html">glad.h</a></div></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#if !defined(GL_ARB_clip_control) &amp;&amp; !defined(GL_ARB_clip_control_PROTOTYPE)</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="GLdefs_8h.html#aa0e98ffe07c9c7f45a87c9f0fe561a35">   17</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GL_ARB_clip_control_PROTOTYPE</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="GLdefs_8h.html#a52731761e97be1dbb3f45f86abf7781d">   18</a></span>&#160;<span class="preprocessor"></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="GLdefs_8h.html#a52731761e97be1dbb3f45f86abf7781d">glClipControl</a>(GLenum, GLenum) {}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="GLdefs_8h_html_a52731761e97be1dbb3f45f86abf7781d"><div class="ttname"><a href="GLdefs_8h.html#a52731761e97be1dbb3f45f86abf7781d">glClipControl</a></div><div class="ttdeci">void glClipControl(GLenum, GLenum)</div><div class="ttdef"><b>Definition:</b> GLdefs.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 1 2017 19:52:01 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 2 2017 00:06:02 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

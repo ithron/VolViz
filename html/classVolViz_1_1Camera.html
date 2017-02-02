@@ -131,7 +131,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a3aaf035b07e479fd79d3e4847ec517ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Camera.html#a71165c51f720767fd6f66561de686b4d">Property</a>&lt; <a class="el" href="namespaceVolViz.html#a28e79e59e7ebef66fbd0aef9c09a3c02">Angle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html#a3aaf035b07e479fd79d3e4847ec517ea">verticalFieldOfView</a> {110 * degree_angle}</td></tr>
 <tr class="memdesc:a3aaf035b07e479fd79d3e4847ec517ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertical field of view in rad.  <a href="#a3aaf035b07e479fd79d3e4847ec517ea">More...</a><br/></td></tr>
 <tr class="separator:a3aaf035b07e479fd79d3e4847ec517ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c9fdde7a63ae94e72caa036f15755da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Camera.html#a71165c51f720767fd6f66561de686b4d">Property</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html#a6c9fdde7a63ae94e72caa036f15755da">aspectRatio</a> {4.<a class="el" href="glad_8h.html#a691492ec0bd6383f91200e49f6ae40ed">f</a> / 3.<a class="el" href="glad_8h.html#a691492ec0bd6383f91200e49f6ae40ed">f</a>}</td></tr>
+<tr class="memitem:a6c9fdde7a63ae94e72caa036f15755da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVolViz_1_1Camera.html#a71165c51f720767fd6f66561de686b4d">Property</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html#a6c9fdde7a63ae94e72caa036f15755da">aspectRatio</a> {4.f / 3.f}</td></tr>
 <tr class="memdesc:a6c9fdde7a63ae94e72caa036f15755da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aspect ratio (width / height) or horizontal FOV / vertical FOV.  <a href="#a6c9fdde7a63ae94e72caa036f15755da">More...</a><br/></td></tr>
 <tr class="separator:a6c9fdde7a63ae94e72caa036f15755da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -152,7 +152,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a683a36e60b89662cce6c49008fe895c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceVolViz.html#a03b4725e4fa8c265c6ef5f8879c1b0fe">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html#a683a36e60b89662cce6c49008fe895c4">viewProjectionMatrix</a> () const noexcept</td></tr>
 <tr class="memdesc:a683a36e60b89662cce6c49008fe895c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the product of <a class="el" href="classVolViz_1_1Camera.html#aad20c2bd46f7fb699ef9300c5289c0b7" title="Returns the camera&#39;s projection matrix. ">projectionMatrix()</a> * viewMatrix(...)  <a href="#a683a36e60b89662cce6c49008fe895c4">More...</a><br/></td></tr>
 <tr class="separator:a683a36e60b89662cce6c49008fe895c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f1b9bd99d2ad72d91992c74be83b24f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceVolViz.html#adb9a559ef5e8c60874a9ce0feda8c553">Position</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html#a0f1b9bd99d2ad72d91992c74be83b24f">unproject</a> (<a class="el" href="namespaceVolViz.html#a45c02a646f8c477ff8ef5986d522551a">Position2</a> const &amp;screenPos, float <a class="el" href="glad_8h.html#a1c814629538debe12a7bfe2509a3671e">depth</a>, <a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a> ambientScale) const noexcept</td></tr>
+<tr class="memitem:a0f1b9bd99d2ad72d91992c74be83b24f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceVolViz.html#adb9a559ef5e8c60874a9ce0feda8c553">Position</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolViz_1_1Camera.html#a0f1b9bd99d2ad72d91992c74be83b24f">unproject</a> (<a class="el" href="namespaceVolViz.html#a45c02a646f8c477ff8ef5986d522551a">Position2</a> const &amp;screenPos, float depth, <a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a> ambientScale) const noexcept</td></tr>
 <tr class="separator:a0f1b9bd99d2ad72d91992c74be83b24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -430,7 +430,7 @@ template&lt;class T &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classVolViz_1_1Camera.html#a71165c51f720767fd6f66561de686b4d">Property</a>&lt;float&gt; VolViz::Camera::aspectRatio {4.<a class="el" href="glad_8h.html#a691492ec0bd6383f91200e49f6ae40ed">f</a> / 3.<a class="el" href="glad_8h.html#a691492ec0bd6383f91200e49f6ae40ed">f</a>}</td>
+          <td class="memname"><a class="el" href="classVolViz_1_1Camera.html#a71165c51f720767fd6f66561de686b4d">Property</a>&lt;float&gt; VolViz::Camera::aspectRatio {4.f / 3.f}</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -607,7 +607,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 1 2017 19:52:02 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 2 2017 00:06:02 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

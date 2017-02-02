@@ -7,8 +7,7 @@ var searchData=
   ['geometrydescriptor_2eh',['GeometryDescriptor.h',['../GeometryDescriptor_8h.html',1,'']]],
   ['geometryfactory_2ecpp',['GeometryFactory.cpp',['../GeometryFactory_8cpp.html',1,'']]],
   ['geometryfactory_2eh',['GeometryFactory.h',['../GeometryFactory_8h.html',1,'']]],
-  ['glad_2ec',['glad.c',['../glad_8c.html',1,'']]],
-  ['glad_2eh',['glad.h',['../glad_8h.html',1,'']]],
+  ['gl_2eh',['GL.h',['../GL_8h.html',1,'']]],
   ['gldefs_2eh',['GLdefs.h',['../GLdefs_8h.html',1,'']]],
   ['glfw_2ecpp',['GLFW.cpp',['../GLFW_8cpp.html',1,'']]],
   ['glfw_2eh',['GLFW.h',['../GLFW_8h.html',1,'']]]

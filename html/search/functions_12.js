@@ -5,6 +5,5 @@ var searchData=
   ['viewprojectionmatrix',['viewProjectionMatrix',['../classVolViz_1_1Camera.html#a683a36e60b89662cce6c49008fe895c4',1,'VolViz::Camera::viewProjectionMatrix()'],['../classVolViz_1_1Private___1_1CameraClient.html#a3410dde2df3f1103da1a9c3557fa1f2a',1,'VolViz::Private_::CameraClient::viewProjectionMatrix()']]],
   ['visualizer',['Visualizer',['../classVolViz_1_1Visualizer.html#acdd8f280cebe4aadafc1f62081f28db8',1,'VolViz::Visualizer::Visualizer()'],['../classVolViz_1_1Visualizer.html#a2c49194aef4366d70be0eba45ecd98be',1,'VolViz::Visualizer::Visualizer(Visualizer const &amp;)=delete'],['../classVolViz_1_1Visualizer.html#a04f3fdce20733fddc60c6ce8f8a67de0',1,'VolViz::Visualizer::Visualizer(Visualizer &amp;&amp;)']]],
   ['visualizerimpl',['VisualizerImpl',['../classVolViz_1_1Private___1_1VisualizerImpl.html#abde3d5ef1258f5b026eee0d83e137c42',1,'VolViz::Private_::VisualizerImpl']]],
-  ['void',['void',['../glad_8h.html#aef30cfca5b4a4c292babb2f60f6d3296',1,'void(APIENTRY *GLDEBUGPROC)(GLenum source:&#160;glad.h'],['../glad_8h.html#a950fc91edb4504f62f1c577bf4727c29',1,'void(APIENTRYP PFNGLCULLFACEPROC)(GLenum mode):&#160;glad.h']]],
   ['volumesize',['volumeSize',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a12337cd0e819e9a4e60c0743f32d6d80',1,'VolViz::Private_::VisualizerImpl']]]
 ];

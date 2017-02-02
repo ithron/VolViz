@@ -1,21 +1,9 @@
 var searchData=
 [
-  ['label',['label',['../glad_8h.html#acf58677e3c889698626acb55f6c474f5',1,'glad.h']]],
-  ['layer',['layer',['../glad_8h.html#ab2fb5ac19001403d8210b239a4cc0a8b',1,'glad.h']]],
-  ['layered',['layered',['../glad_8h.html#a12d02feb44c56035bf1af92d3e6a1a3b',1,'glad.h']]],
-  ['layers',['layers',['../glad_8h.html#a9d6b7c6ae9c7f090b02fd8c147bbbfeb',1,'glad.h']]],
-  ['left',['left',['../glad_8h.html#a85b8f6c07fbc1fb5d77c2ae090f21995',1,'glad.h']]],
-  ['len',['len',['../glad_8h.html#a652168017ea9a8bbcead03d5c16269fb',1,'glad.h']]],
-  ['length',['Length',['../namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d',1,'VolViz::Length()'],['../glad_8h.html#a921fa83f7755f0139c84ba1831417a2e',1,'length():&#160;glad.h']]],
-  ['lengths',['lengths',['../glad_8h.html#a18fb1afe3b837dc6dca24a287007f512',1,'glad.h']]],
-  ['level',['level',['../glad_8h.html#a2b536fca24f51d6a849aed325793e661',1,'glad.h']]],
-  ['levels',['levels',['../glad_8h.html#a9dddc5400c097d888e928278d710f8a2',1,'glad.h']]],
-  ['lightname',['LightName',['../classVolViz_1_1Visualizer.html#a62f4e6d35bc8479d8cd6c9711fb2d787',1,'VolViz::Visualizer']]],
-  ['lights',['Lights',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ac5e808dd31a1efed72ca86b8da694ceb',1,'VolViz::Private_::VisualizerImpl']]],
-  ['limit',['limit',['../glad_8h.html#a702e6dc059ad96a3ec3e24fd769fd6ac',1,'glad.h']]],
-  ['lists',['lists',['../glad_8h.html#aee5b17e8845a1f0784f0e26faf993605',1,'glad.h']]],
-  ['location',['location',['../glad_8h.html#a050778a7129cc14e57da7024beb87ce8',1,'glad.h']]],
-  ['locations',['locations',['../glad_8h.html#a2f371595a241033aea1f5c25c64ca890',1,'glad.h']]],
-  ['lock',['Lock',['../namespaceVolViz_1_1Private__.html#adf0ef1337e1273ba00fca820d050e705',1,'VolViz::Private_']]],
-  ['lod',['lod',['../glad_8h.html#a5b5a34b88a28ab9c203c2b432f6168b6',1,'glad.h']]]
+  ['scale',['Scale',['../namespaceVolViz.html#a4fda4180376c21464201b4442eb1f923',1,'VolViz']]],
+  ['setpol',['SetPol',['../classVolViz_1_1AtomicWrapper.html#a5f4b60bdec18b1c0d2088aaa1a7b88ae',1,'VolViz::AtomicWrapper']]],
+  ['shaderprogramtable',['ShaderProgramTable',['../classVolViz_1_1Private___1_1Shaders.html#a3b489d9c436b30f18168fa5b7e3e0f48',1,'VolViz::Private_::Shaders']]],
+  ['size2',['Size2',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a65c662421ff278c7e358d3468d4be5b0',1,'VolViz::Private_::VisualizerImpl::Size2()'],['../namespaceVolViz.html#a523c4cc78fa92776fba053d8a2f0fcdf',1,'VolViz::Size2()']]],
+  ['size3',['Size3',['../namespaceVolViz.html#a30b616bf5ad51a57fba8b04275c7db3b',1,'VolViz']]],
+  ['size3f',['Size3f',['../namespaceVolViz.html#ac7d52458d468b72e23194368a476386c',1,'VolViz']]]
 ];

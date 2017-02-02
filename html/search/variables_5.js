@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['far',['far',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1DepthRange.html#accf7555226f79f1609240fe8006d1d7a',1,'VolViz::Private_::VisualizerImpl::DepthRange::far()'],['../structVolViz_1_1DepthRange.html#ad0fb5bc4af7cbbebf9e80343dafb5962',1,'VolViz::DepthRange::far()']]],
-  ['fetchoperation_5f',['fetchOperation_',['../classVolViz_1_1AtomicCache.html#a9cc93fc1f71aed5a73ed171022eef1ad',1,'VolViz::AtomicCache']]],
-  ['finalfbo_5f',['finalFbo_',['../group__privateMembers.html#ga64eacb156ad8dd06604a5e9012811be4',1,'VolViz::Private_::VisualizerImpl']]]
+  ['geometries_5f',['geometries_',['../group__geomGroup.html#ga76b1aaf5b8f1555a81428503fad8d238',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometriesmutex_5f',['geometriesMutex_',['../group__geomGroup.html#ga02df1bdd5faac776498efb51950170d9',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geometryinitqueue_5f',['geometryInitQueue_',['../group__geomGroup.html#ga80742c9101428fdad5f12369524a18c4',1,'VolViz::Private_::VisualizerImpl']]],
+  ['geomfactory_5f',['geomFactory_',['../group__privateMembers.html#ga03fe5d3381e8ecd2559fb3a76aca9831',1,'VolViz::Private_::VisualizerImpl']]],
+  ['glfw_5f',['glfw_',['../group__privateMembers.html#ga29d82ff3888930b7f3d8a0f5b3c7c782',1,'VolViz::Private_::VisualizerImpl']]],
+  ['gridgeometryshadersrc',['gridGeometryShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a084a8e44063559cd9eceb82a1ae90a8e',1,'VolViz::Private_::GL::Shaders']]]
 ];

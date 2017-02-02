@@ -1,29 +1,6 @@
 var searchData=
 [
-  ['n',['n',['../glad_8h.html#ae2b4646468bc89d0ba646f5cf838e051',1,'glad.h']]],
-  ['name',['name',['../glad_8h.html#ad977737dfc9a274a62741b9500c49a32',1,'glad.h']]],
-  ['namelen',['namelen',['../glad_8h.html#a530c192f48a964d8ff63cc011b1459bb',1,'glad.h']]],
-  ['names',['names',['../glad_8h.html#a339b9616ddcfbc036f0258f8dcdd8902',1,'glad.h']]],
-  ['nbuffers',['nbuffers',['../glad_8h.html#aaaa03368c8f3e2e7cda82c4e3978ddfc',1,'glad.h']]],
-  ['nextqueryid',['nextQueryId',['../glad_8h.html#a911c194e3698fa3ef7611aaa48c260e8',1,'glad.h']]],
-  ['nocounters',['noCounters',['../glad_8h.html#a8b51f8addfef310a7487567243645de5',1,'glad.h']]],
-  ['noinstances',['noInstances',['../glad_8h.html#a5eb6c4b414704f00d227bd0bf57b5e62',1,'glad.h']]],
-  ['normalized',['normalized',['../glad_8h.html#a991495bc19f64c176dd83a350b8b1c88',1,'glad.h']]],
-  ['num',['num',['../glad_8h.html#abb50fc1ead3a02a46fb52daa2045f95c',1,'glad.h']]],
-  ['num_5fgroups_5fy',['num_groups_y',['../glad_8h.html#a69f7d16a5eaa8691a96a548622c98659',1,'glad.h']]],
-  ['num_5fgroups_5fz',['num_groups_z',['../glad_8h.html#a09dce46b395326182c7dec92a140a6b2',1,'glad.h']]],
-  ['numattachments',['numAttachments',['../glad_8h.html#af26fa7bb96c0c01a6e5b1e482c3fe73d',1,'glad.h']]],
-  ['numcommands',['numCommands',['../glad_8h.html#a3c3979185812930bdf007ebd833f4ce2',1,'glad.h']]],
-  ['numcoords',['numCoords',['../glad_8h.html#a9e9293ea14c48e030e2fb44e1303d9b1',1,'glad.h']]],
-  ['numcounters',['numCounters',['../glad_8h.html#ae45c717e89c73efe3356681886223080',1,'glad.h']]],
-  ['numglyphs',['numGlyphs',['../glad_8h.html#a65737ea5e1dda7e2255d03f4782f4cd5',1,'glad.h']]],
-  ['numlayers',['numlayers',['../glad_8h.html#a0cb61e7d2bf068c245e1f3e79c62f6d8',1,'glad.h']]],
-  ['numlevels',['numlevels',['../glad_8h.html#a93a74c475c73f67b5ee2e2b7d7b86bda',1,'glad.h']]],
-  ['numpaths',['numPaths',['../glad_8h.html#a69c74eb81fcffcf7de9489cc8c99106e',1,'glad.h']]],
-  ['numsegments',['numSegments',['../glad_8h.html#a989ab8ad405f01f310d420fca0c71a46',1,'glad.h']]],
-  ['numtexturenames',['numTextureNames',['../glad_8h.html#a6646884570b67a37d1a3f7d7241c1b80',1,'glad.h']]],
-  ['numviews',['numViews',['../glad_8h.html#aa238446a9c44fe72a04bc986604fcfb0',1,'glad.h']]],
-  ['nx',['nx',['../glad_8h.html#a1cdaeb4d2cb14447b113b02a4cd140eb',1,'glad.h']]],
-  ['ny',['ny',['../glad_8h.html#a4c721972cbdd25d88d4cbaed3bcd69c5',1,'glad.h']]],
-  ['nz',['nz',['../glad_8h.html#a15ad9edd32cb13fc6ab6b791af221bcc',1,'glad.h']]]
+  ['uniformtable',['UniformTable',['../classVolViz_1_1Private___1_1GL_1_1ShaderProgram.html#af952fe7dcffad94bff168d6da74b720f',1,'VolViz::Private_::GL::ShaderProgram']]],
+  ['uniqueptr',['UniquePtr',['../classVolViz_1_1Private___1_1Geometry.html#a93e3ce21daca1d4b45452f1b2cd96f67',1,'VolViz::Private_::Geometry']]],
+  ['updatequeue',['UpdateQueue',['../classVolViz_1_1Private___1_1Mesh.html#ae3c1240f886e93760b0c78716dd18f89',1,'VolViz::Private_::Mesh']]]
 ];

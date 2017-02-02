@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['renderedimage',['RenderedImage',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaae3a912a6c638f43bda22605debb058d8',1,'VolViz::Private_::VisualizerImpl']]],
-  ['rotating',['Rotating',['../group__cameraRelated.html#gga10d6654b81efdf637f50ffa2ecbaa294a0c607bfa6cdf8ff5cfa6e349c65731d6',1,'VolViz::Private_::VisualizerImpl']]]
+  ['scene3d',['Scene3D',['../group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa3cb31aacdc075941366cad3aba75b636',1,'VolViz::Private_::VisualizerImpl']]],
+  ['selectionindices',['SelectionIndices',['../group__privateMembers.html#gga5ddcc241d09fbe3fe2c96d799ef1c01fa64ccb78fd630d5419e1a2e457420e775',1,'VolViz::Private_::VisualizerImpl']]],
+  ['selectiontexture',['SelectionTexture',['../classVolViz_1_1Private___1_1VisualizerImpl.html#ada34ccb5e04681eca851eb52375120aaa2789dc665113eede4f3da4db1bd442a1',1,'VolViz::Private_::VisualizerImpl']]]
 ];
