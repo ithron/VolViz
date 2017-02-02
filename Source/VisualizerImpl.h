@@ -2,7 +2,12 @@
 #define VolViz_VisualizerImpl_h
 
 #include "AtomicCache.h"
-#include "GL/GL.h"
+#include "GL/Binding.h"
+#include "GL/Buffer.h"
+#include "GL/Framebuffer.h"
+#include "GL/GLFW.h"
+#include "GL/Textures.h"
+#include "GL/VertexArray.h"
 #include "GeometryFactory.h"
 #include "Shaders.h"
 
