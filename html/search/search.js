@@ -7,17 +7,17 @@
 
 var indexSectionsWithContent =
 {
-  0: ":abcdefghiklmnopqrstuvwxyz~",
+  0: ":_abcdefghiklmnopqrstuvwxyz~",
   1: "abcdfglmrstuv",
   2: "v",
-  3: "abcefglmrstvw",
+  3: "abcefgklmrstv",
   4: "abcdefghilmopqrstuvwy~",
-  5: "abcdfghiklmnopqrstuvw",
-  6: "abcghilmopstuv",
-  7: "aimtv",
-  8: "acdfglnrsvxyz",
+  5: "abcdefghiklmnopqrstuvw",
+  6: "abcdefghiklmnopqrstuvwxyz",
+  7: "aikmtv",
+  8: "acdfgklnrsvxyz",
   9: ":ampsv",
-  10: "g",
+  10: "_agk",
   11: "cgp"
 };
 

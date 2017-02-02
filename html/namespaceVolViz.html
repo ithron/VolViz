@@ -171,7 +171,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:a28e79e59e7ebef66fbd0aef9c09a3c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e165869a42afba86c617fe325374f13"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a8e165869a42afba86c617fe325374f13">PhysicalPosition</a> = Eigen::Matrix&lt; <a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a>, 3, 1 &gt;</td></tr>
 <tr class="separator:a8e165869a42afba86c617fe325374f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77e773db79ffbf3b25c535b4e8e6ffd1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a77e773db79ffbf3b25c535b4e8e6ffd1">VoxelSize</a> = std::array&lt; <a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a>, 3 &gt;</td></tr>
+<tr class="memitem:a77e773db79ffbf3b25c535b4e8e6ffd1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a77e773db79ffbf3b25c535b4e8e6ffd1">VoxelSize</a> = <a class="el" href="glad_8h.html#a52f38e7d822a46377fde7a02708eedb1">std::array</a>&lt; <a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a>, 3 &gt;</td></tr>
 <tr class="separator:a77e773db79ffbf3b25c535b4e8e6ffd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -202,18 +202,18 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ace3621bbed692648a2430786c06ed6ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceVolViz.html#a4b2d2365f616920725e15c8f7622ddae">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#ace3621bbed692648a2430786c06ed6ff">maskToUnitVector</a> (<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6f">MoveMask</a> mask) noexcept</td></tr>
+<tr class="memitem:ace3621bbed692648a2430786c06ed6ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceVolViz.html#a4b2d2365f616920725e15c8f7622ddae">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#ace3621bbed692648a2430786c06ed6ff">maskToUnitVector</a> (<a class="el" href="namespaceVolViz.html#a0adbcac39b4349d36375250a0e93ad6f">MoveMask</a> <a class="el" href="glad_8h.html#ae1838b9db98fcca9cd79d66954101c9f">mask</a>) noexcept</td></tr>
 <tr class="separator:ace3621bbed692648a2430786c06ed6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a3435a91303d813882ffc13f37c230f19">as_span</a> (T *ptr, typename span&lt; T &gt;::index_type size) noexcept</td></tr>
+<tr class="memitem:a3435a91303d813882ffc13f37c230f19"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a3435a91303d813882ffc13f37c230f19">as_span</a> (T *ptr, typename <a class="el" href="glad_8h.html#a91b8782accc3802e4927e32acaa0c418">span</a>&lt; T &gt;::index_type <a class="el" href="glad_8h.html#a3d1e3edfcf61ca2d831883e1afbad89e">size</a>) noexcept</td></tr>
 <tr class="memdesc:a3435a91303d813882ffc13f37c230f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conveniance wrapper for span&lt;&gt;  <a href="#a3435a91303d813882ffc13f37c230f19">More...</a><br/></td></tr>
 <tr class="separator:a3435a91303d813882ffc13f37c230f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplParams" colspan="2">template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#af7a4849aad403cc3367d046fee1c8470">as_span</a> (Container &amp;c)</td></tr>
+<tr class="memitem:af7a4849aad403cc3367d046fee1c8470"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#af7a4849aad403cc3367d046fee1c8470">as_span</a> (Container &amp;<a class="el" href="glad_8h.html#a1f2d7f8147412c43ba2303a56f97ee73">c</a>)</td></tr>
 <tr class="separator:af7a4849aad403cc3367d046fee1c8470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplParams" colspan="2">template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_span&lt;Container&gt;::value &amp;&amp;        !details::is_std_array&lt;Container&gt;::value &amp;&amp;        std::is_convertible&lt;typename Container::pointer,                            decltype(std::declval&lt;Container&gt;().data())&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a9f0a700fb7c46634e704dbca43f3ae24">as_span</a> (Container const &amp;c)</td></tr>
+<tr class="memitem:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceVolViz.html#a9f0a700fb7c46634e704dbca43f3ae24">as_span</a> (Container const &amp;<a class="el" href="glad_8h.html#a1f2d7f8147412c43ba2303a56f97ee73">c</a>)</td></tr>
 <tr class="separator:a9f0a700fb7c46634e704dbca43f3ae24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -412,7 +412,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceVolViz.html#a77e773db79ffbf3b25c535b4e8e6ffd1">VolViz::VoxelSize</a> = typedef std::array&lt;<a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a>, 3&gt;</td>
+          <td class="memname">using <a class="el" href="namespaceVolViz.html#a77e773db79ffbf3b25c535b4e8e6ffd1">VolViz::VoxelSize</a> = typedef <a class="el" href="glad_8h.html#a52f38e7d822a46377fde7a02708eedb1">std::array</a>&lt;<a class="el" href="namespaceVolViz.html#a192fba37d6d1df2742d3c3373e82629d">Length</a>, 3&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -543,7 +543,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">typename span&lt; T &gt;::index_type&#160;</td>
+          <td class="paramtype">typename <a class="el" href="glad_8h.html#a91b8782accc3802e4927e32acaa0c418">span</a>&lt; T &gt;::index_type&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -642,7 +642,7 @@ template&lt;class Container , class  = std::enable_if_t&lt;        !details::is_
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 2 2017 00:06:02 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 2 2017 04:00:29 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
