@@ -2,6 +2,7 @@ var searchData=
 [
   ['b',['b',['../glad_8h.html#a0f71581a41fd2264c8944126dabbd010',1,'glad.h']]],
   ['backfunc',['backfunc',['../glad_8h.html#a80bd5ace26a420c494f2b21d0421c5e2',1,'glad.h']]],
+  ['backgroundcolor',['backgroundColor',['../classVolViz_1_1Visualizer.html#a5df55244eb852447082ecf36a032df52',1,'VolViz::Visualizer']]],
   ['baseandcount',['baseAndCount',['../glad_8h.html#aff3d3e6976d443b0d5b454b9d5a4be6a',1,'glad.h']]],
   ['baseinstance',['baseinstance',['../glad_8h.html#a350cf093e1f028ec729839c9e7056f75',1,'glad.h']]],
   ['basevertex',['basevertex',['../glad_8h.html#aa9e7849bcbafd76702a30eb2c0bc2333',1,'glad.h']]],

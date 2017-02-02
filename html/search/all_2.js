@@ -45,6 +45,7 @@ var searchData=
   ['atomicwrapper',['AtomicWrapper',['../classVolViz_1_1AtomicWrapper.html#a48606dac32010781ca53e7d249c80322',1,'VolViz::AtomicWrapper::AtomicWrapper(T const &amp;obj)'],['../classVolViz_1_1AtomicWrapper.html#adba333851bb2f995a80847d2b587346a',1,'VolViz::AtomicWrapper::AtomicWrapper(T &amp;&amp;obj)'],['../classVolViz_1_1AtomicWrapper.html#a365567d4994d690beca4cb8dc6a2349b',1,'VolViz::AtomicWrapper::AtomicWrapper(AtomicWrapper const &amp;)=delete']]],
   ['atomicwrapper_2eh',['AtomicWrapper.h',['../AtomicWrapper_8h.html',1,'']]],
   ['atomicwrapper_3c_20angle_20_3e',['AtomicWrapper&lt; Angle &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
+  ['atomicwrapper_3c_20color_20_3e',['AtomicWrapper&lt; Color &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_3c_20float_20_3e',['AtomicWrapper&lt; float &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_3c_20length_20_3e',['AtomicWrapper&lt; Length &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
   ['atomicwrapper_3c_20orientation_20_3e',['AtomicWrapper&lt; Orientation &gt;',['../classVolViz_1_1AtomicWrapper.html',1,'VolViz']]],
