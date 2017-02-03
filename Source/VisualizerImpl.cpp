@@ -552,16 +552,24 @@ void VisualizerImpl::renderGeometry() {
   constexpr std::array<GLuint, 3> attachments{
       {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2}};
 
+  constexpr std::array<GLfloat, 4> normalAndSpecularClear{{0.f, 0.f, 0.f, 0.f}};
+  constexpr std::array<GLuint, 4> selectionClear{{0, 0, 0, 0}};
+
+  Color const bgColor = visualizer_->backgroundColor;
+  std::array<GLfloat, 4> clearColor{{bgColor(0), bgColor(1), bgColor(2), 1.f}};
+
   // Bind FBO and set it up for MRT
   auto fboBinding = binding(lightingFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
   assertGL("Failed to bind framebuffer");
   glDrawBuffers(attachments.size(), attachments.data());
 
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClearDepth(0.0);
-  glClearStencil(0);
   glDisable(GL_FRAMEBUFFER_SRGB);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  // Clear buffers
+  glClearBufferfv(GL_COLOR, 0, normalAndSpecularClear.data());
+  glClearBufferfv(GL_COLOR, 1, clearColor.data());
+  glClearBufferuiv(GL_COLOR, 2, selectionClear.data());
+  glClearBufferfi(GL_DEPTH_STENCIL, 0, 0.f, 0);
+
   glEnable(GL_DEPTH_TEST);
   glDepthMask(true);
   glColorMask(true, true, true, true);
@@ -845,9 +853,8 @@ void VisualizerImpl::renderLights() {
   auto fboBinding =
       GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
 
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClear(GL_COLOR_BUFFER_BIT);
-
+  glClearDepth(0.f);
+  glClear(GL_DEPTH_BUFFER_BIT);
   renderAmbientLighting();
 
   glBlendFunc(GL_ONE, GL_ONE);
@@ -877,6 +884,11 @@ void VisualizerImpl::renderAmbientLighting() {
   // Ambient pass
   shaders_["ambientPass"].use();
   shaders_["ambientPass"]["lightColor"] = ambientColor;
+  shaders_["ambientPass"]["indexTex"] = 1;
+
+
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
 
   renderFullscreenQuad(TextureID::Albedo, shaders_["ambientPass"]);
 }
@@ -890,6 +902,7 @@ void VisualizerImpl::renderDiffuseLighting() {
   shaders_["diffuseLightingPass"].use();
   shaders_["diffuseLightingPass"]["normalAndSpecularTex"] = 0;
   shaders_["diffuseLightingPass"]["albedoTex"] = 1;
+  shaders_["diffuseLightingPass"]["indexTex"] = 2;
   shaders_["diffuseLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
   shaders_["diffuseLightingPass"]["size"] =
       (2 * Eigen::Vector2f::Ones()).eval();
@@ -899,6 +912,9 @@ void VisualizerImpl::renderDiffuseLighting() {
 
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+
+  glActiveTexture(GL_TEXTURE2);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
 
   auto boundVao = GL::binding(singleVertexData_.vao);
 
@@ -928,6 +944,7 @@ void VisualizerImpl::renderSpecularLighting() {
   shaders_["specularLightingPass"].use();
   shaders_["specularLightingPass"]["normalAndSpecularTex"] = 0;
   shaders_["specularLightingPass"]["albedoTex"] = 1;
+  shaders_["specularLightingPass"]["indexTex"] = 2;
   shaders_["specularLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
   shaders_["specularLightingPass"]["size"] =
       (2 * Eigen::Vector2f::Ones()).eval();
@@ -937,6 +954,9 @@ void VisualizerImpl::renderSpecularLighting() {
 
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+
+  glActiveTexture(GL_TEXTURE2);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
 
   auto boundVao = GL::binding(singleVertexData_.vao);
 

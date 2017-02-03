@@ -6,6 +6,7 @@ layout(location = 0) in vec2 texcoord;
 
 uniform sampler2D normalAndSpecularTex;
 uniform sampler2D albedoTex;
+uniform sampler2D indexTex;
 
 layout(location = 0) out vec4 color;
 
@@ -16,6 +17,8 @@ void main() {
   // Read values from textures
   vec4 normalAndSpecular = texture(normalAndSpecularTex, texcoord);
   vec3 albedo = texture(albedoTex, texcoord).rgb;
+  vec4 idx = texture(indexTex, texcoord).rgba;
+  float isForeGround = max(1.0, idx.r + idx.g + idx.b + idx.a);
 
   vec2 normalUV = normalAndSpecular.xy;
   vec3 specular = vec3(normalAndSpecular.z);
@@ -32,9 +35,9 @@ void main() {
   // reflectedRatDirection.z
   vec3 specularColor =
      lightColor * specular *
-       pow(max(0.0, reflectedRayDirection.z), shininess);
+       min(isForeGround, pow(max(0.0, reflectedRayDirection.z), shininess));
 
-  color.rgb = albedo * specularColor;
+  color.rgb = albedo * (1.0 - isForeGround + specularColor);
 }
 
 )"
