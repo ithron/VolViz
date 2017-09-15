@@ -8,6 +8,25 @@
 #include <iostream>
 #include <mutex>
 
+#if __cplusplus < 201703L
+
+namespace std {
+
+template<class T>
+constexpr const T& clamp( const T& v, const T& lo, const T& hi ) {
+    return clamp( v, lo, hi, std::less<>() );
+}
+
+template<class T, class Compare>
+constexpr const T& clamp( const T& v, const T& lo, const T& hi, Compare comp ) {
+      return assert( !comp(hi, lo) ),
+             comp(v, lo) ? lo : comp(hi, v) ? hi : v;
+  }
+
+}
+
+#endif
+
 namespace VolViz {
 
 ////////////////////////////////
@@ -741,7 +760,7 @@ VisualizerImpl::getGeometryUnderCursor() {
       *selectionBuffer_.writeBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
   glPixelStorei(GL_PACK_ALIGNMENT, 4);
   glReadBuffer(GL_COLOR_ATTACHMENT2);
-  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, 0);
+  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, nullptr);
   glReadPixels(pos(0), pos(1), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
                reinterpret_cast<void *>(sizeof(std::uint32_t)));
   assertGL("Failed to read depth value under cursor");
