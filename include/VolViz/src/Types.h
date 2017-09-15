@@ -3,7 +3,7 @@
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
-#include <gsl>
+#include <gsl/gsl>
 #include <phys/units/quantity.hpp>
 
 #include <array>
