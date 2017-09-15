@@ -10,6 +10,7 @@
 #include "GL/VertexArray.h"
 #include "GeometryFactory.h"
 #include "Shaders.h"
+#include "Types.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>

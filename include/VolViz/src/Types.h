@@ -113,17 +113,23 @@ inline constexpr auto as_span(Container const &c) {
 
 } // namespace VolViz
 
+#if __cplusplus < 201703L
+
 namespace std {
 
-// assume that the standard library has a clamp implementation iff is has a
-// optional implementation
-#if !__has_include(<optional>)
-template <class T>
-inline constexpr T const &clamp(T const &v, T const &lo, T const &hi) {
-  return min(max(v, lo), hi);
+template<class T>
+constexpr const T& clamp( const T& v, const T& lo, const T& hi ) {
+    return clamp( v, lo, hi, std::less<>() );
 }
-#endif
 
-} // namespace std
+template<class T, class Compare>
+constexpr const T& clamp( const T& v, const T& lo, const T& hi, Compare comp ) {
+      return assert( !comp(hi, lo) ),
+             comp(v, lo) ? lo : comp(hi, v) ? hi : v;
+  }
+
+}
+
+#endif
 
 #endif // VolViz_Types_h
