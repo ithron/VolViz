@@ -1,11 +1,11 @@
 <map id="/home/travis/build/ithron/VolViz/Source/Mesh.h" name="/home/travis/build/ithron/VolViz/Source/Mesh.h">
-<area shape="rect" id="node2" href="$Buffer_8h.html" title="GL/Buffer.h" alt="" coords="165,109,253,136"/>
-<area shape="rect" id="node13" href="$VertexArray_8h.html" title="GL/VertexArray.h" alt="" coords="301,184,424,211"/>
-<area shape="rect" id="node14" href="$Geometry_8h.html" title="Geometry.h" alt="" coords="479,109,569,136"/>
-<area shape="rect" id="node16" href="$Types_8h.html" title="Types.h" alt="" coords="565,259,635,285"/>
-<area shape="rect" id="node3" href="$GLdefs_8h.html" title="GLdefs.h" alt="" coords="149,259,223,285"/>
-<area shape="rect" id="node10" href="$Error_8h.html" title="Error.h" alt="" coords="75,184,136,211"/>
+<area shape="rect" id="node2" href="$Buffer_8h.html" title="GL/Buffer.h" alt="" coords="169,109,257,136"/>
+<area shape="rect" id="node13" href="$VertexArray_8h.html" title="GL/VertexArray.h" alt="" coords="305,184,428,211"/>
+<area shape="rect" id="node14" href="$Geometry_8h.html" title="Geometry.h" alt="" coords="483,109,573,136"/>
+<area shape="rect" id="node16" href="$Types_8h.html" title="Types.h" alt="" coords="577,259,647,285"/>
+<area shape="rect" id="node3" href="$GLdefs_8h.html" title="GLdefs.h" alt="" coords="153,259,227,285"/>
+<area shape="rect" id="node10" href="$Error_8h.html" title="Error.h" alt="" coords="79,184,140,211"/>
 <area shape="rect" id="node5" href="$glad_8h.html" title="glad.h" alt="" coords="119,333,176,360"/>
 <area shape="rect" id="node7" href="$khrplatform_8h.html" title="khrplatform.h" alt="" coords="99,408,197,435"/>
-<area shape="rect" id="node15" href="$GeometryDescriptor_8h.html" title="GeometryDescriptor.h" alt="" coords="449,184,599,211"/>
+<area shape="rect" id="node15" href="$GeometryDescriptor_8h.html" title="GeometryDescriptor.h" alt="" coords="453,184,603,211"/>
 </map>

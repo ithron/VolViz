@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Eigen/Core&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;Eigen/Geometry&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;gsl&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;gsl/gsl&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;phys/units/quantity.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
@@ -196,20 +196,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;} <span class="comment">// namespace VolViz</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">namespace </span>std {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">// assume that the standard library has a clamp implementation iff is has a</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">// optional implementation</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#if !__has_include(&lt;optional&gt;)</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor"></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">inline</span> constexpr T <span class="keyword">const</span> &amp;<a class="code" href="glad_8h.html#abd92661d757c8e8c0e50c1b9c3ce496e">clamp</a>(T <span class="keyword">const</span> &amp;<a class="code" href="glad_8h.html#a10a82eabcb59d2fcd74acee063775f90">v</a>, T <span class="keyword">const</span> &amp;lo, T <span class="keyword">const</span> &amp;hi) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">return</span> min(max(v, lo), hi);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;} <span class="comment">// namespace std</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif // VolViz_Types_h</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#if __cplusplus &lt; 201703L</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">namespace </span>std {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;constexpr <span class="keyword">const</span> T&amp; <a class="code" href="glad_8h.html#abd92661d757c8e8c0e50c1b9c3ce496e">clamp</a>( <span class="keyword">const</span> T&amp; <a class="code" href="glad_8h.html#a10a82eabcb59d2fcd74acee063775f90">v</a>, <span class="keyword">const</span> T&amp; lo, <span class="keyword">const</span> T&amp; hi ) {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="glad_8h.html#abd92661d757c8e8c0e50c1b9c3ce496e">clamp</a>( v, lo, hi, std::less&lt;&gt;() );</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Compare&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;constexpr <span class="keyword">const</span> T&amp; <a class="code" href="glad_8h.html#abd92661d757c8e8c0e50c1b9c3ce496e">clamp</a>( <span class="keyword">const</span> T&amp; v, <span class="keyword">const</span> T&amp; lo, <span class="keyword">const</span> T&amp; hi, Compare comp ) {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      <span class="keywordflow">return</span> assert( !comp(hi, lo) ),</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;             comp(v, lo) ? lo : comp(hi, v) ? hi : <a class="code" href="glad_8h.html#a10a82eabcb59d2fcd74acee063775f90">v</a>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif // VolViz_Types_h</span></div>
 <div class="ttc" id="namespaceVolViz_html_a8e165869a42afba86c617fe325374f13"><div class="ttname"><a href="namespaceVolViz.html#a8e165869a42afba86c617fe325374f13">VolViz::PhysicalPosition</a></div><div class="ttdeci">Eigen::Matrix&lt; Length, 3, 1 &gt; PhysicalPosition</div><div class="ttdef"><b>Definition:</b> Types.h:66</div></div>
 <div class="ttc" id="namespaceVolViz_html_a4026a28cbb69255c9125111929b3f5c3a02129bb861061d1a052c592e2dc6b383"><div class="ttname"><a href="namespaceVolViz.html#a4026a28cbb69255c9125111929b3f5c3a02129bb861061d1a052c592e2dc6b383">VolViz::Axis::X</a></div></div>
 <div class="ttc" id="glad_8h_html_a77bef421a06300ba60fc8c18453bcaef"><div class="ttname"><a href="glad_8h.html#a77bef421a06300ba60fc8c18453bcaef">data</a></div><div class="ttdeci">GLboolean * data</div><div class="ttdef"><b>Definition:</b> glad.h:2184</div></div>
@@ -255,7 +261,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 3 2017 18:12:15 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 18 2017 10:43:15 for VolViz by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
