@@ -87,6 +87,13 @@ target_link_libraries(VolVisualizer PRIVATE
 )
 target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+if (${CMAKE_COMPILER_IS_GNUCXX})
+  if (${CMAKE_C_COMPILER_VERSION} VERSION_GREATER "5" AND
+      ${CMAKE_C_COMPILER_VERSION} VERSION_LESS "6")
+    target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS} -w)
+    message(WARNING "Disable -Werror for GCC-5 since libigl does not build otherwise")
+  endif()
+endif()
 
 
 ###############################
