@@ -107,6 +107,12 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
+      env: build_type=debug clang_version=5.0.0
+      compiler: clang
+
+    - os: linux
+      dist: trusty
+      sudo: required
       env: build_type=release clang_version=5.0.0 create_doc="yes"
       compiler: clang
 
