@@ -234,7 +234,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = F86847551DE21EC900FF3913 /* GLFW.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = BDFBC77E2A534950A04565F9;
+			remoteGlobalIDString = 7CF3CC08668E4FC790542B0C;
 			remoteInfo = glfw;
 		};
 		F86848351DE2F66E00FF3913 /* PBXContainerItemProxy */ = {
@@ -248,7 +248,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = F86847551DE21EC900FF3913 /* GLFW.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = BDFBC77E2A534950A04565F9;
+			remoteGlobalIDString = 7CF3CC08668E4FC790542B0C;
 			remoteInfo = glfw;
 		};
 /* End PBXContainerItemProxy section */
@@ -995,7 +995,7 @@
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-isystem",
-					"$(SRCROOT)/Dependencies/GSL/gsl",
+					"$(SRCROOT)/Dependencies/GSL/include",
 					"-isystem",
 					"$(SRCROOT)/Dependencies/concurrentqueue",
 					"-isystem",
@@ -1076,7 +1076,7 @@
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-isystem",
-					"$(SRCROOT)/Dependencies/GSL/gsl",
+					"$(SRCROOT)/Dependencies/GSL/include",
 					"-isystem",
 					"$(SRCROOT)/Dependencies/concurrentqueue",
 					"-isystem",
