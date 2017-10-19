@@ -101,19 +101,19 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: build_type=release clang_version=3.9.0
+      env: BUILD_TYPE=Release CLANG_VERSION=3.9.0
       compiler: clang
 
     - os: linux
       dist: trusty
       sudo: required
-      env: build_type=debug clang_version=5.0.0
+      env: BUILD_TYPE=Debug CLANG_VERSION=5.0.0
       compiler: clang
 
     - os: linux
       dist: trusty
       sudo: required
-      env: build_type=release clang_version=5.0.0 create_doc="yes"
+      env: BUILD_TYPE=Release CLANG_VERSION=5.0.0 CREATE_DOC="yes"
       compiler: clang
 
     - os: linux
