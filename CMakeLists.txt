@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR})
 
@@ -19,7 +19,7 @@ include_directories(SYSTEM ${DEPENDENCIES_DIR}/GLHeaders)
 
 set(PATH_TO_GL_LIBS "/usr/lib" CACHE PATH "Path to OpenGL libraries")
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${PATH_TO_GL_LIBS})
-find_package(OpenGL REQUIRED 4.5)
+find_package(OpenGL 4.5 REQUIRED COMPONENTS OpenGL)
 message(STATUS "Found OpenGL libraries: ${OPENGL_LIBRARIES}")
 include(ImportMKL)
 include(ImportEigen)
