@@ -8,4 +8,6 @@ AxisAlignedPlaneDescriptor::~AxisAlignedPlaneDescriptor() = default;
 
 MeshDescriptor::~MeshDescriptor() = default;
 
+CubeDescriptor::~CubeDescriptor() = default;
+
 } // namespace VolViz

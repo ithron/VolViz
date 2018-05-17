@@ -141,6 +141,12 @@ int main(int argc, char **argv) {
   plane.intercept = 0_mm;
   viewer.addGeometry("Z-Plane", plane);
 
+  // cube
+  CubeDescriptor cube;
+  cube.color = Colors::Magenta();
+  cube.position = {11.5f, 11.5f, 11.5f};
+  viewer.addGeometry("Cube", cube);
+
   std::cout << "Generating volume... " << std::flush;
   auto const vol = generateVolume();
   std::cout << "done." << std::endl;
@@ -150,7 +156,7 @@ int main(int argc, char **argv) {
   viewer.enableMultithreading();
   viewer.start();
 
-  std::thread workerThread([&viewer, &mesh]() {
+  std::thread workerThread([&viewer, &mesh, &cube]() {
     using Clock = std::chrono::steady_clock;
     using namespace std::chrono_literals;
     auto constexpr updateIntervall = 1s / 30.f;
@@ -158,6 +164,8 @@ int main(int argc, char **argv) {
     while (viewer) {
       auto const t0 = Clock::now();
       mesh.vertices *= count < 10 ? 1.01f : 0.99f;
+      cube.position[0] = static_cast<float>(count - 10) * 12.8f / 10.f;
+      viewer.updateGeometry("Cube", cube);
       viewer.updateGeometry("Mesh", mesh);
       if (++count > 20) count = 0;
       auto const timeLeft = -(Clock::now() - t0) + updateIntervall;

@@ -77,6 +77,7 @@ endif()
 add_library(VolViz
   AxisAlignedPlane.cpp
   Camera.cpp
+  Cube.cpp
   Geometry.cpp
   GeometryDescriptor.cpp
   GeometryFactory.cpp

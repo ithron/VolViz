@@ -14,6 +14,7 @@ public:
   GeometryFactory(VisualizerImpl &visualizer);
 
   GeometryPtr create(AxisAlignedPlaneDescriptor const &descriptor);
+  GeometryPtr create(CubeDescriptor const &descriptor);
   GeometryPtr create(MeshDescriptor const &descriptor);
 
 private:

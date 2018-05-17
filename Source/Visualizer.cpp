@@ -106,6 +106,9 @@ void Visualizer::addGeometry(GeometryName name, Descriptor const &geom) {
 template void Visualizer::addGeometry<AxisAlignedPlaneDescriptor>(
     GeometryName name, AxisAlignedPlaneDescriptor const &);
 
+template void Visualizer::addGeometry<CubeDescriptor>(GeometryName name,
+                                                      CubeDescriptor const &);
+
 template void Visualizer::addGeometry<MeshDescriptor>(GeometryName name,
                                                       MeshDescriptor const &);
 
@@ -122,6 +125,14 @@ template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &>(
     GeometryName name, AxisAlignedPlaneDescriptor &);
 
 template bool
+Visualizer::updateGeometry<CubeDescriptor const &>(GeometryName name,
+                                                   CubeDescriptor const &);
+template bool Visualizer::updateGeometry<CubeDescriptor &&>(GeometryName name,
+                                                            CubeDescriptor &&);
+template bool Visualizer::updateGeometry<CubeDescriptor &>(GeometryName name,
+                                                           CubeDescriptor &);
+
+template bool
 Visualizer::updateGeometry<MeshDescriptor const &>(GeometryName name,
                                                    MeshDescriptor const &);
 template bool Visualizer::updateGeometry<MeshDescriptor &&>(GeometryName name,
@@ -129,4 +140,4 @@ template bool Visualizer::updateGeometry<MeshDescriptor &&>(GeometryName name,
 template bool Visualizer::updateGeometry<MeshDescriptor &>(GeometryName name,
                                                            MeshDescriptor &);
 
-} // namespace volviz
+} // namespace VolViz

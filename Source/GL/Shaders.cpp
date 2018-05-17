@@ -68,6 +68,10 @@ std::string const planeGeomShaderSrc =
 #include "Shaders/plane.geom"
     ;
 
+std::string const cubeGeomShaderSrc =
+#include "Shaders/cube.geom"
+    ;
+
 std::string const coloredQuadFragmentShaderSrc =
 #include "Shaders/coloredQuad.frag"
     ;
