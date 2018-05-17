@@ -8,7 +8,6 @@
 #include <iostream>
 #include <mutex>
 
-
 namespace VolViz {
 
 ////////////////////////////////
@@ -492,9 +491,9 @@ void VisualizerImpl::renderOneFrame(bool block) {
   // Init all new geometry
   {
     InitQueueEntry item;
-    if (geometryInitQueue_.try_dequeue(item)) {
+    while (geometryInitQueue_.try_dequeue(item)) {
       // Init and add geometry if queue was not empty
-      std::cout << "Init geometry '" << item.first << "'" << std::endl;
+      // std::cout << "Init geometry '" << item.first << "'" << std::endl;
       Expects(item.second);
       item.second->init();
       std::lock_guard<std::mutex> lock{geometriesMutex_};
@@ -886,7 +885,6 @@ void VisualizerImpl::renderAmbientLighting() {
   shaders_["ambientPass"].use();
   shaders_["ambientPass"]["lightColor"] = ambientColor;
   shaders_["ambientPass"]["indexTex"] = 1;
-
 
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
