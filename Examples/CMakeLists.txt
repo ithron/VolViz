@@ -95,6 +95,22 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   endif()
 endif()
 
+add_executable(Cubes Cubes.cpp)
+target_link_libraries(Cubes PRIVATE
+  VolViz::VolViz
+  IGL
+  ${CMAKE_THREAD_LIBS_INIT}
+)
+target_compile_features(Cubes PRIVATE ${DEFAULT_COMPILE_FEATURES})
+target_compile_options(Cubes PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+if (${CMAKE_COMPILER_IS_GNUCXX})
+  if (${CMAKE_C_COMPILER_VERSION} VERSION_GREATER "5" AND
+      ${CMAKE_C_COMPILER_VERSION} VERSION_LESS "6")
+    target_compile_options(Cubes PRIVATE ${DEFAULT_COMPILER_OPTIONS} -w)
+    message(WARNING "Disable -Werror for GCC-5 since libigl does not build otherwise")
+  endif()
+endif()
+
 
 ###############################
 #Install and packaging
