@@ -4,6 +4,7 @@ var searchData=
   ['_7ebinding',['~Binding',['../classVolViz_1_1Private___1_1GL_1_1Binding.html#a0dd6cb9797b31fdc8217e14784d981c8',1,'VolViz::Private_::GL::Binding']]],
   ['_7ebinding2',['~Binding2',['../classVolViz_1_1Private___1_1GL_1_1Binding2.html#a649eaff419dd6bce81a735a79ed30210',1,'VolViz::Private_::GL::Binding2']]],
   ['_7ebuffer',['~Buffer',['../structVolViz_1_1Private___1_1GL_1_1Buffer.html#a593fbe200c26c3deb6752234ebaef9ba',1,'VolViz::Private_::GL::Buffer']]],
+  ['_7ecubedescriptor',['~CubeDescriptor',['../classVolViz_1_1CubeDescriptor.html#afe0306a74ad3ef1b54f514445bc833e8',1,'VolViz::CubeDescriptor']]],
   ['_7eframebuffer',['~Framebuffer',['../structVolViz_1_1Private___1_1GL_1_1Framebuffer.html#af4f45b91e0e41b6947513d71b22fc605',1,'VolViz::Private_::GL::Framebuffer']]],
   ['_7egeometry',['~Geometry',['../classVolViz_1_1Private___1_1Geometry.html#a7112efa63b85df2dabc87873500922c5',1,'VolViz::Private_::Geometry']]],
   ['_7egeometrydescriptor',['~GeometryDescriptor',['../classVolViz_1_1GeometryDescriptor.html#a640335c2d3f3a8b529ed2238ef047a23',1,'VolViz::GeometryDescriptor']]],

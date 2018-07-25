@@ -19,7 +19,7 @@ var searchData=
   ['inselectionmode',['inSelectionMode',['../group__privateMembers.html#ga374ed4105b30757d58892af32811feeb',1,'VolViz::Private_::VisualizerImpl']]],
   ['instancecount',['instancecount',['../glad_8h.html#ab239d1b3366afe2818cddcdaab3b7d44',1,'glad.h']]],
   ['intercept',['intercept',['../classVolViz_1_1AxisAlignedPlaneDescriptor.html#a6f73d7a17230f5e4fabeafcd545aeab1',1,'VolViz::AxisAlignedPlaneDescriptor']]],
-  ['internalformat',['internalformat',['../glad_8h.html#ab90692d7f8e57332a86e3885cdcfa784',1,'internalformat():&#160;glad.h'],['../glad_8h.html#af420f71e45280df7c11f7f60d3cb1392',1,'internalFormat():&#160;glad.h']]],
+  ['internalformat',['internalFormat',['../glad_8h.html#af420f71e45280df7c11f7f60d3cb1392',1,'internalFormat():&#160;glad.h'],['../glad_8h.html#ab90692d7f8e57332a86e3885cdcfa784',1,'internalformat():&#160;glad.h']]],
   ['interp',['interp',['../glad_8h.html#a8df6d532843e6b3c43d14798522b9f44',1,'glad.h']]],
   ['interpolation',['interpolation',['../structVolViz_1_1VolumeDescriptor.html#a86abaf911dbc596e9485d670955e8099',1,'VolViz::VolumeDescriptor']]],
   ['interpolationtype',['InterpolationType',['../namespaceVolViz.html#ad58bdb690d5dc45bd7b5c4bda97d3470',1,'VolViz']]],

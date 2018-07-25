@@ -1,5 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classVolViz_1_1Private___1_1Geometry.html" title="VolViz::Private_::Geometry" alt="" coords="5,41,187,68"/>
+<area shape="rect" id="node1" href="$classVolViz_1_1Private___1_1Geometry.html" title="VolViz::Private_::Geometry" alt="" coords="5,71,187,97"/>
 <area shape="rect" id="node2" href="$classVolViz_1_1Private___1_1AxisAlignedPlane.html" title="VolViz::Private_::AxisAligned\lPlane" alt="" coords="235,5,429,46"/>
-<area shape="rect" id="node3" href="$classVolViz_1_1Private___1_1Mesh.html" title="VolViz::Private_::Mesh" alt="" coords="254,71,410,97"/>
+<area shape="rect" id="node3" href="$classVolViz_1_1Private___1_1Cube.html" title="VolViz::Private_::Cube" alt="" coords="255,71,409,97"/>
+<area shape="rect" id="node4" href="$classVolViz_1_1Private___1_1Mesh.html" title="VolViz::Private_::Mesh" alt="" coords="254,121,410,148"/>
 </map>

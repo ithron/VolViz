@@ -10681,7 +10681,7 @@ var searchData=
   ['glwindowrectanglesext',['glWindowRectanglesEXT',['../glad_8h.html#a2adad6ea38ee837f1c0532524df12777',1,'glad.h']]],
   ['glwritemaskext',['glWriteMaskEXT',['../glad_8h.html#a1a0b7380dc21e51171317cc0c6bf281e',1,'glad.h']]],
   ['grayscale',['GrayScale',['../namespaceVolViz.html#ad208471555239219028c0bb4fd84858da4f90b9cafa6fec5c0bd8cb1df7281693',1,'VolViz']]],
-  ['green',['green',['../glad_8h.html#ac14cda87cf6c751d53b65a3cd41c35a1',1,'green():&#160;glad.h'],['../namespaceVolViz_1_1Colors.html#abe5f514da8451e0e6e750a5e59e75aa7',1,'VolViz::Colors::Green()']]],
+  ['green',['Green',['../namespaceVolViz_1_1Colors.html#abe5f514da8451e0e6e750a5e59e75aa7',1,'VolViz::Colors::Green()'],['../glad_8h.html#ac14cda87cf6c751d53b65a3cd41c35a1',1,'green():&#160;glad.h']]],
   ['gridgeometryshadersrc',['gridGeometryShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a084a8e44063559cd9eceb82a1ae90a8e',1,'VolViz::Private_::GL::Shaders']]],
   ['group',['group',['../glad_8h.html#a907548ce3e5521fd5399f50e8df298bf',1,'glad.h']]],
   ['group_5fsize_5fx',['group_size_x',['../glad_8h.html#a9ff5efccd386bdb4de1c7aab2edcc654',1,'glad.h']]],

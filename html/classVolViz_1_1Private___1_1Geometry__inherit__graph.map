@@ -1,4 +1,5 @@
 <map id="VolViz::Private_::Geometry" name="VolViz::Private_::Geometry">
 <area shape="rect" id="node2" href="$classVolViz_1_1Private___1_1AxisAlignedPlane.html" title="{VolViz::Private_::AxisAligned\lPlane\n||+ AxisAlignedPlane()\l# doInit()\l# doRender()\l}" alt="" coords="5,417,197,538"/>
-<area shape="rect" id="node3" href="$classVolViz_1_1Private___1_1Mesh.html" title="{VolViz::Private_::Mesh\n|&#45; updateQueue_\l&#45; vertexBuffer_\l&#45; indexBuffer_\l&#45; vertexArrayObject_\l&#45; numTriangles_\l|+ Mesh()\l# doInit()\l# doRender()\l# doUpdate()\l# doEnqueueUpdate()\l# doEnqueueUpdate()\l&#45; uploadMesh()\l}" alt="" coords="222,365,377,589"/>
+<area shape="rect" id="node3" href="$classVolViz_1_1Private___1_1Cube.html" title="{VolViz::Private_::Cube\n|&#45; radius\l&#45; updateQueue_\l|+ Cube()\l# doInit()\l# doRender()\l# doUpdate()\l# doEnqueueUpdate()\l# doEnqueueUpdate()\l}" alt="" coords="223,395,376,560"/>
+<area shape="rect" id="node4" href="$classVolViz_1_1Private___1_1Mesh.html" title="{VolViz::Private_::Mesh\n|&#45; updateQueue_\l&#45; vertexBuffer_\l&#45; indexBuffer_\l&#45; vertexArrayObject_\l&#45; numTriangles_\l|+ Mesh()\l# doInit()\l# doRender()\l# doUpdate()\l# doEnqueueUpdate()\l# doEnqueueUpdate()\l&#45; uploadMesh()\l}" alt="" coords="402,365,557,589"/>
 </map>

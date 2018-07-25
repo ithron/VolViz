@@ -1,26 +1,5 @@
 Warning: ignoring unsupported tag `ALLOW_UNICODE_NAMES    =' at line 79, file /home/travis/build/ithron/VolViz/Doxyfile
 Warning: ignoring unsupported tag `MAN_SUBDIR             =' at line 1782, file /home/travis/build/ithron/VolViz/Doxyfile
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:13: warning: include file Shaders/null.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:16: warning: include file Shaders/quad.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:19: warning: include file Shaders/simpleTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:22: warning: include file Shaders/hdrTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:25: warning: include file Shaders/simple.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:28: warning: include file Shaders/passThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:32: warning: include file Shaders/grid.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:36: warning: include file Shaders/deferred.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:40: warning: include file Shaders/deferredPassThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:44: warning: include file Shaders/normalVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:48: warning: include file Shaders/depthVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:52: warning: include file Shaders/ambientPass.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:56: warning: include file Shaders/diffuseLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:60: warning: include file Shaders/specularLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:64: warning: include file Shaders/specularVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:68: warning: include file Shaders/plane.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:72: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:76: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:80: warning: include file Shaders/selection.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:84: warning: include file Shaders/selectionIndexVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
-/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:88: warning: include file Shaders/point.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
 Searching for include files...
 Searching for example files...
 Searching for images...
@@ -44,6 +23,10 @@ Preprocessing /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/Camera.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/Camera.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/Cube.cpp...
+Parsing file /home/travis/build/ithron/VolViz/Source/Cube.cpp...
+Preprocessing /home/travis/build/ithron/VolViz/Source/Cube.h...
+Parsing file /home/travis/build/ithron/VolViz/Source/Cube.h...
 Preprocessing /home/travis/build/ithron/VolViz/Source/Geometry.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/Geometry.cpp...
 Preprocessing /home/travis/build/ithron/VolViz/Source/Geometry.h...
@@ -80,7 +63,29 @@ Preprocessing /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.cpp...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/ShaderProgram.h...
-Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp...
+Preprocessing /home/travis/build/ithr/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:13: warning: include file Shaders/null.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:16: warning: include file Shaders/quad.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:19: warning: include file Shaders/simpleTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:22: warning: include file Shaders/hdrTexture.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:25: warning: include file Shaders/simple.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:28: warning: include file Shaders/passThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:32: warning: include file Shaders/grid.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:36: warning: include file Shaders/deferred.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:40: warning: include file Shaders/deferredPassThrough.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:44: warning: include file Shaders/normalVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:48: warning: include file Shaders/depthVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:52: warning: include file Shaders/ambientPass.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:56: warning: include file Shaders/diffuseLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:60: warning: include file Shaders/specularLighting.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:64: warning: include file Shaders/specularVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:68: warning: include file Shaders/plane.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:72: warning: include file Shaders/cube.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:76: warning: include file Shaders/coloredQuad.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:80: warning: include file Shaders/bbox.geom not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:84: warning: include file Shaders/selection.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:88: warning: include file Shaders/selectionIndexVisualization.frag not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+/home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp:92: warning: include file Shaders/point.vert not found, perhaps you forgot to add its directory to INCLUDE_PATH?
+on/VolViz/Source/GL/Shaders.cpp...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Shaders.cpp...
 Preprocessing /home/travis/build/ithron/VolViz/Source/GL/Shaders.h...
 Parsing file /home/travis/build/ithron/VolViz/Source/GL/Shaders.h...
@@ -182,6 +187,7 @@ Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Vis
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/src/Volume.h...
 Generating code for file /home/travis/build/ithron/VolViz/include/VolViz/VolViz.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
+Generating code for file /home/travis/build/ithron/VolViz/Source/Cube.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/Geometry.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
 Generating code for file /home/travis/build/ithron/VolViz/Source/GeometryFactory.h...
@@ -214,6 +220,8 @@ Generating docs for file /home/travis/build/ithron/VolViz/README.md...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.cpp...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/AxisAlignedPlane.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/Camera.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/Cube.cpp...
+Generating docs for file /home/travis/build/ithron/VolViz/Source/Cube.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/Geometry.cpp...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/Geometry.h...
 Generating docs for file /home/travis/build/ithron/VolViz/Source/GL/Geometry.h...
@@ -260,6 +268,7 @@ Generating docs for compound VolViz::Camera...
 Generating docs for compound VolViz::GeometryDescriptor...
 Generating docs for compound VolViz::AxisAlignedPlaneDescriptor...
 Generating docs for compound VolViz::MeshDescriptor...
+Generating docs for compound VolViz::CubeDescriptor...
 Generating docs for compound VolViz::Light...
 Generating docs for compound VolViz::Range...
 Generating docs for compound VolViz::DepthRange...
@@ -268,6 +277,7 @@ Generating docs for compound VolViz::VolumeDescriptor...
 Generating docs for namespace VolViz::Colors
 Generating docs for namespace VolViz::Private_
 Generating docs for compound VolViz::Private_::AxisAlignedPlane...
+Generating docs for compound VolViz::Private_::Cube...
 Generating docs for compound VolViz::Private_::Geometry...
 Generating docs for compound VolViz::Private_::GeometryFactory...
 Generating docs for compound VolViz::Private_::Mesh...
@@ -314,255 +324,266 @@ Generating example index...
 finalizing index lists...
 Running dot...
 Generating dot graphs using 3 parallel threads...
-Running dot for graph 1/164
-Running dot for graph 2/164
-Running dot for graph 3/164
-Running dot for graph 4/164
-Running dot for graph 5/164
-Running dot for graph 6/164
-Running dot for graph 7/164
-Running dot for graph 8/164
-Running dot for graph 9/164
-Running dot for graph 10/164
-Running dot for graph 11/164
-Running dot for graph 12/164
-Running dot for graph 13/164
-Running dot for graph 14/164
-Running dot for graph 15/164
-Running dot for graph 16/164
-Running dot for graph 17/164
-Running dot for graph 18/164
-Running dot for graph 19/164
-Running dot for graph 20/164
-Running dot for graph 21/164
-Running dot for graph 22/164
-Running dot for graph 23/164
-Running dot for graph 24/164
-Running dot for graph 25/164
-Running dot for graph 26/164
-Running dot for graph 27/164
-Running dot for graph 28/164
-Running dot for graph 29/164
-Running dot for graph 30/164
-Running dot for graph 31/164
-Running dot for graph 32/164
-Running dot for graph 33/164
-Running dot for graph 34/164
-Running dot for graph 35/164
-Running dot for graph 36/164
-Running dot for graph 37/164
-Running dot for graph 38/164
-Running dot for graph 39/164
-Running dot for graph 40/164
-Running dot for graph 41/164
-Running dot for graph 42/164
-Running dot for graph 43/164
-Running dot for graph 44/164
-Running dot for graph 45/164
-Running dot for graph 46/164
-Running dot for graph 47/164
-Running dot for graph 48/164
-Running dot for graph 49/164
-Running dot for graph 50/164
-Running dot for graph 51/164
-Running dot for graph 52/164
-Running dot for graph 53/164
-Running dot for graph 54/164
-Running dot for graph 55/164
-Running dot for graph 56/164
-Running dot for graph 57/164
-Running dot for graph 58/164
-Running dot for graph 59/164
-Running dot for graph 60/164
-Running dot for graph 61/164
-Running dot for graph 62/164
-Running dot for graph 63/164
-Running dot for graph 64/164
-Running dot for graph 65/164
-Running dot for graph 66/164
-Running dot for graph 67/164
-Running dot for graph 68/164
-Running dot for graph 69/164
-Running dot for graph 70/164
-Running dot for graph 71/164
-Running dot for graph 72/164
-Running dot for graph 73/164
-Running dot for graph 74/164
-Running dot for graph 75/164
-Running dot for graph 76/164
-Running dot for graph 77/164
-Running dot for graph 78/164
-Running dot for graph 79/164
-Running dot for graph 80/164
-Running dot for graph 81/164
-Running dot for graph 82/164
-Running dot for graph 83/164
-Running dot for graph 84/164
-Running dot for graph 85/164
-Running dot for graph 86/164
-Running dot for graph 87/164
-Running dot for graph 88/164
-Running dot for graph 89/164
-Running dot for graph 90/164
-Running dot for graph 91/164
-Running dot for graph 92/164
-Running dot for graph 93/164
-Running dot for graph 94/164
-Running dot for graph 95/164
-Running dot for graph 96/164
-Running dot for graph 97/164
-Running dot for graph 98/164
-Running dot for graph 99/164
-Running dot for graph 100/164
-Running dot for graph 101/164
-Running dot for graph 102/164
-Running dot for graph 103/164
-Running dot for graph 104/164
-Running dot for graph 105/164
-Running dot for graph 106/164
-Running dot for graph 107/164
-Running dot for graph 108/164
-Running dot for graph 109/164
-Running dot for graph 110/164
-Running dot for graph 111/164
-Running dot for graph 112/164
-Running dot for graph 113/164
-Running dot for graph 114/164
-Running dot for graph 115/164
-Running dot for graph 116/164
-Running dot for graph 117/164
-Running dot for graph 118/164
-Running dot for graph 119/164
-Running dot for graph 120/164
-Running dot for graph 121/164
-Running dot for graph 122/164
-Running dot for graph 123/164
-Running dot for graph 124/164
-Running dot for graph 125/164
-Running dot for graph 126/164
-Running dot for graph 127/164
-Running dot for graph 128/164
-Running dot for graph 129/164
-Running dot for graph 130/164
-Running dot for graph 131/164
-Running dot for graph 132/164
-Running dot for graph 133/164
-Running dot for graph 134/164
-Running dot for graph 135/164
-Running dot for graph 136/164
-Running dot for graph 137/164
-Running dot for graph 138/164
-Running dot for graph 139/164
-Running dot for graph 140/164
-Running dot for graph 141/164
-Running dot for graph 142/164
-Running dot for graph 143/164
-Running dot for graph 144/164
-Running dot for graph 145/164
-Running dot for graph 146/164
-Running dot for graph 147/164
-Running dot for graph 148/164
-Running dot for graph 149/164
-Running dot for graph 150/164
-Running dot for graph 151/164
-Running dot for graph 152/164
-Running dot for graph 153/164
-Running dot for graph 154/164
-Running dot for graph 155/164
-Running dot for graph 156/164
-Running dot for graph 157/164
-Running dot for graph 158/164
-Running dot for graph 159/164
-Running dot for graph 160/164
-Running dot for graph 161/164
-Running dot for graph 162/164
-Running dot for graph 163/164
-Running dot for graph 164/164
-Patching output file 1/86
-Patching output file 2/86
-Patching output file 3/86
-Patching output file 4/86
-Patching output file 5/86
-Patching output file 6/86
-Patching output file 7/86
-Patching output file 8/86
-Patching output file 9/86
-Patching output file 10/86
-Patching output file 11/86
-Patching output file 12/86
-Patching output file 13/86
-Patching output file 14/86
-Patching output file 15/86
-Patching output file 16/86
-Patching output file 17/86
-Patching output file 18/86
-Patching output file 19/86
-Patching output file 20/86
-Patching output file 21/86
-Patching output file 22/86
-Patching output file 23/86
-Patching output file 24/86
-Patching output file 25/86
-Patching output file 26/86
-Patching output file 27/86
-Patching output file 28/86
-Patching output file 29/86
-Patching output file 30/86
-Patching output file 31/86
-Patching output file 32/86
-Patching output file 33/86
-Patching output file 34/86
-Patching output file 35/86
-Patching output file 36/86
-Patching output file 37/86
-Patching output file 38/86
-Patching output file 39/86
-Patching output file 40/86
-Patching output file 41/86
-Patching output file 42/86
-Patching output file 43/86
-Patching output file 44/86
-Patching output file 45/86
-Patching output file 46/86
-Patching output file 47/86
-Patching output file 48/86
-Patching output file 49/86
-Patching output file 50/86
-Patching output file 51/86
-Patching output file 52/86
-Patching output file 53/86
-Patching output file 54/86
-Patching output file 55/86
-Patching output file 56/86
-Patching output file 57/86
-Patching output file 58/86
-Patching output file 59/86
-Patching output file 60/86
-Patching output file 61/86
-Patching output file 62/86
-Patching output file 63/86
-Patching output file 64/86
-Patching output file 65/86
-Patching output file 66/86
-Patching output file 67/86
-Patching output file 68/86
-Patching output file 69/86
-Patching output file 70/86
-Patching output file 71/86
-Patching output file 72/86
-Patching output file 73/86
-Patching output file 74/86
-Patching output file 75/86
-Patching output file 76/86
-Patching output file 77/86
-Patching output file 78/86
-Patching output file 79/86
-Patching output file 80/86
-Patching output file 81/86
-Patching output file 82/86
-Patching output file 83/86
-Patching output file 84/86
-Patching output file 85/86
-Patching output file 86/86
-lookup cache used 13158/65536 hits=70442 misses=13396
+Running dot for graph 1/171
+Running dot for graph 2/171
+Running dot for graph 3/171
+Running dot for graph 4/171
+Running dot for graph 5/171
+Running dot for graph 6/171
+Running dot for graph 7/171
+Running dot for graph 8/171
+Running dot for graph 9/171
+Running dot for graph 10/171
+Running dot for graph 11/171
+Running dot for graph 12/171
+Running dot for graph 13/171
+Running dot for graph 14/171
+Running dot for graph 15/171
+Running dot for graph 16/171
+Running dot for graph 17/171
+Running dot for graph 18/171
+Running dot for graph 19/171
+Running dot for graph 20/171
+Running dot for graph 21/171
+Running dot for graph 22/171
+Running dot for graph 23/171
+Running dot for graph 24/171
+Running dot for graph 25/171
+Running dot for graph 26/171
+Running dot for graph 27/171
+Running dot for graph 28/171
+Running dot for graph 29/171
+Running dot for graph 30/171
+Running dot for graph 31/171
+Running dot for graph 32/171
+Running dot for graph 33/171
+Running dot for graph 34/171
+Running dot for graph 35/171
+Running dot for graph 36/171
+Running dot for graph 37/171
+Running dot for graph 38/171
+Running dot for graph 39/171
+Running dot for graph 40/171
+Running dot for graph 41/171
+Running dot for graph 42/171
+Running dot for graph 43/171
+Running dot for graph 44/171
+Running dot for graph 45/171
+Running dot for graph 46/171
+Running dot for graph 47/171
+Running dot for graph 48/171
+Running dot for graph 49/171
+Running dot for graph 50/171
+Running dot for graph 51/171
+Running dot for graph 52/171
+Running dot for graph 53/171
+Running dot for graph 54/171
+Running dot for graph 55/171
+Running dot for graph 56/171
+Running dot for graph 57/171
+Running dot for graph 58/171
+Running dot for graph 59/171
+Running dot for graph 60/171
+Running dot for graph 61/171
+Running dot for graph 62/171
+Running dot for graph 63/171
+Running dot for graph 64/171
+Running dot for graph 65/171
+Running dot for graph 66/171
+Running dot for graph 67/171
+Running dot for graph 68/171
+Running dot for graph 69/171
+Running dot for graph 70/171
+Running dot for graph 71/171
+Running dot for graph 72/171
+Running dot for graph 73/171
+Running dot for graph 74/171
+Running dot for graph 75/171
+Running dot for graph 76/171
+Running dot for graph 77/171
+Running dot for graph 78/171
+Running dot for graph 79/171
+Running dot for graph 80/171
+Running dot for graph 81/171
+Running dot for graph 82/171
+Running dot for graph 83/171
+Running dot for graph 84/171
+Running dot for graph 85/171
+Running dot for graph 86/171
+Running dot for graph 87/171
+Running dot for graph 88/171
+Running dot for graph 89/171
+Running dot for graph 90/171
+Running dot for graph 91/171
+Running dot for graph 92/171
+Running dot for graph 93/171
+Running dot for graph 94/171
+Running dot for graph 95/171
+Running dot for graph 96/171
+Running dot for graph 97/171
+Running dot for graph 98/171
+Running dot for graph 99/171
+Running dot for graph 100/171
+Running dot for graph 101/171
+Running dot for graph 102/171
+Running dot for graph 103/171
+Running dot for graph 104/171
+Running dot for graph 105/171
+Running dot for graph 106/171
+Running dot for graph 107/171
+Running dot for graph 108/171
+Running dot for graph 109/171
+Running dot for graph 110/171
+Running dot for graph 111/171
+Running dot for graph 112/171
+Running dot for graph 113/171
+Running dot for graph 114/171
+Running dot for graph 115/171
+Running dot for graph 116/171
+Running dot for graph 117/171
+Running dot for graph 118/171
+Running dot for graph 119/171
+Running dot for graph 120/171
+Running dot for graph 121/171
+Running dot for graph 122/171
+Running dot for graph 123/171
+Running dot for graph 124/171
+Running dot for graph 125/171
+Running dot for graph 126/171
+Running dot for graph 127/171
+Running dot for graph 128/171
+Running dot for graph 129/171
+Running dot for graph 130/171
+Running dot for graph 131/171
+Running dot for graph 132/171
+Running dot for graph 133/171
+Running dot for graph 134/171
+Running dot for graph 135/171
+Running dot for graph 136/171
+Running dot for graph 137/171
+Running dot for graph 138/171
+Running dot for graph 139/171
+Running dot for graph 140/171
+Running dot for graph 141/171
+Running dot for graph 142/171
+Running dot for graph 143/171
+Running dot for graph 144/171
+Running dot for graph 145/171
+Running dot for graph 146/171
+Running dot for graph 147/171
+Running dot for graph 148/171
+Running dot for graph 149/171
+Running dot for graph 150/171
+Running dot for graph 151/171
+Running dot for graph 152/171
+Running dot for graph 153/171
+Running dot for graph 154/171
+Running dot for graph 155/171
+Running dot for graph 156/171
+Running dot for graph 157/171
+Running dot for graph 158/171
+Running dot for graph 159/171
+Running dot for graph 160/171
+Running dot for graph 161/171
+Running dot for graph 162/171
+Running dot for graph 163/171
+Running dot for graph 164/171
+Running dot for graph 165/171
+Running dot for graph 166/171
+Running dot for graph 167/171
+Running dot for graph 168/171
+Running dot for graph 169/171
+Running dot for graph 170/171
+Running dot for graph 171/171
+Patching output file 1/90
+Patching output file 2/90
+Patching output file 3/90
+Patching output file 4/90
+Patching output file 5/90
+Patching output file 6/90
+Patching output file 7/90
+Patching output file 8/90
+Patching output file 9/90
+Patching output file 10/90
+Patching output file 11/90
+Patching output file 12/90
+Patching output file 13/90
+Patching output file 14/90
+Patching output file 15/90
+Patching output file 16/90
+Patching output file 17/90
+Patching output file 18/90
+Patching output file 19/90
+Patching output file 20/90
+Patching output file 21/90
+Patching output file 22/90
+Patching output file 23/90
+Patching output file 24/90
+Patching output file 25/90
+Patching output file 26/90
+Patching output file 27/90
+Patching output file 28/90
+Patching output file 29/90
+Patching output file 30/90
+Patching output file 31/90
+Patching output file 32/90
+Patching output file 33/90
+Patching output file 34/90
+Patching output file 35/90
+Patching output file 36/90
+Patching output file 37/90
+Patching output file 38/90
+Patching output file 39/90
+Patching output file 40/90
+Patching output file 41/90
+Patching output file 42/90
+Patching output file 43/90
+Patching output file 44/90
+Patching output file 45/90
+Patching output file 46/90
+Patching output file 47/90
+Patching output file 48/90
+Patching output file 49/90
+Patching output file 50/90
+Patching output file 51/90
+Patching output file 52/90
+Patching output file 53/90
+Patching output file 54/90
+Patching output file 55/90
+Patching output file 56/90
+Patching output file 57/90
+Patching output file 58/90
+Patching output file 59/90
+Patching output file 60/90
+Patching output file 61/90
+Patching output file 62/90
+Patching output file 63/90
+Patching output file 64/90
+Patching output file 65/90
+Patching output file 66/90
+Patching output file 67/90
+Patching output file 68/90
+Patching output file 69/90
+Patching output file 70/90
+Patching output file 71/90
+Patching output file 72/90
+Patching output file 73/90
+Patching output file 74/90
+Patching output file 75/90
+Patching output file 76/90
+Patching output file 77/90
+Patching output file 78/90
+Patching output file 79/90
+Patching output file 80/90
+Patching output file 81/90
+Patching output file 82/90
+Patching output file 83/90
+Patching output file 84/90
+Patching output file 85/90
+Patching output file 86/90
+Patching output file 87/90
+Patching output file 88/90
+Patching output file 89/90
+Patching output file 90/90
+lookup cache used 13222/65536 hits=70778 misses=13462
 finished...

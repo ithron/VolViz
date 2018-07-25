@@ -6,7 +6,7 @@ var searchData=
   ['sampler',['sampler',['../glad_8h.html#a4f7acaf0f814147f227f72b9065e8ed0',1,'glad.h']]],
   ['samplers',['samplers',['../glad_8h.html#a84e60a04ad95496f384d36ed0651a57d',1,'glad.h']]],
   ['samples',['samples',['../glad_8h.html#a1d93829fc44881966fb3b59a0241947f',1,'glad.h']]],
-  ['scale',['scale',['../glad_8h.html#a281421b881aa7a1266842b73a3bc7655',1,'scale():&#160;glad.h'],['../namespaceVolViz.html#a4fda4180376c21464201b4442eb1f923',1,'VolViz::Scale()']]],
+  ['scale',['Scale',['../namespaceVolViz.html#a4fda4180376c21464201b4442eb1f923',1,'VolViz::Scale()'],['../glad_8h.html#a281421b881aa7a1266842b73a3bc7655',1,'scale():&#160;glad.h']]],
   ['segment',['segment',['../glad_8h.html#a2d6cd939bf6b09d824622ca8ef24fd95',1,'glad.h']]],
   ['segments',['segments',['../glad_8h.html#a9de9a5d1cae284dc03dffb95200b422f',1,'glad.h']]],
   ['sequence_5fnum',['sequence_num',['../glad_8h.html#aa0a930adf11315c827636598f52e12ea',1,'glad.h']]],

@@ -14,7 +14,7 @@ var searchData=
   ['initqueueentry',['InitQueueEntry',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a4ba09ab027c76f4bcc0eb232e0bffa58',1,'VolViz::Private_::VisualizerImpl']]],
   ['input',['input',['../glad_8h.html#ad3c78daa7d8673f71649d4840c641779',1,'glad.h']]],
   ['instancecount',['instancecount',['../glad_8h.html#ab239d1b3366afe2818cddcdaab3b7d44',1,'glad.h']]],
-  ['internalformat',['internalformat',['../glad_8h.html#ab90692d7f8e57332a86e3885cdcfa784',1,'internalformat():&#160;glad.h'],['../glad_8h.html#af420f71e45280df7c11f7f60d3cb1392',1,'internalFormat():&#160;glad.h']]],
+  ['internalformat',['internalFormat',['../glad_8h.html#af420f71e45280df7c11f7f60d3cb1392',1,'internalFormat():&#160;glad.h'],['../glad_8h.html#ab90692d7f8e57332a86e3885cdcfa784',1,'internalformat():&#160;glad.h']]],
   ['interp',['interp',['../glad_8h.html#a8df6d532843e6b3c43d14798522b9f44',1,'glad.h']]],
   ['invert',['invert',['../glad_8h.html#afcc4054e54dc14717dc9df064f152b6b',1,'glad.h']]]
 ];

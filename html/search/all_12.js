@@ -1,8 +1,9 @@
 var searchData=
 [
   ['r',['r',['../glad_8h.html#a42ce7cdc612e53abee15043f80220d97',1,'glad.h']]],
-  ['range',['range',['../structVolViz_1_1VolumeDescriptor.html#a9ebbbb3700c90caac4bb0db026610e03',1,'VolViz::VolumeDescriptor::range()'],['../glad_8h.html#a73b00379db2c7ac5e30a3aa2954a50ee',1,'range():&#160;glad.h']]],
+  ['radius',['radius',['../classVolViz_1_1Private___1_1Cube.html#a92351fdc391c249e7944c815bfe47823',1,'VolViz::Private_::Cube::radius()'],['../classVolViz_1_1CubeDescriptor.html#a2b365b640729ca87ae651f576c88cf03',1,'VolViz::CubeDescriptor::radius()']]],
   ['range',['Range',['../structVolViz_1_1Range.html',1,'VolViz']]],
+  ['range',['range',['../structVolViz_1_1VolumeDescriptor.html#a9ebbbb3700c90caac4bb0db026610e03',1,'VolViz::VolumeDescriptor::range()'],['../glad_8h.html#a73b00379db2c7ac5e30a3aa2954a50ee',1,'range():&#160;glad.h']]],
   ['range_3c_20float_20_3e',['Range&lt; float &gt;',['../structVolViz_1_1Range.html',1,'VolViz']]],
   ['rawcountermaxvalue',['rawCounterMaxValue',['../glad_8h.html#a73a85d879bbf46a780ff3af927db1008',1,'glad.h']]],
   ['readbuffer',['readBuffer',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a1ebc009eefe96634e4a41de591f2b550',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer']]],

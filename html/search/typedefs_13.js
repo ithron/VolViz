@@ -14,7 +14,7 @@ var searchData=
   ['uniqueptr',['UniquePtr',['../classVolViz_1_1Private___1_1Geometry.html#a93e3ce21daca1d4b45452f1b2cd96f67',1,'VolViz::Private_::Geometry']]],
   ['units',['units',['../glad_8h.html#addd67ce0e8fb4710a17379b897ce70f9',1,'glad.h']]],
   ['uorder',['uorder',['../glad_8h.html#ab43abcff762493cadf40025621caba8f',1,'glad.h']]],
-  ['updatequeue',['UpdateQueue',['../classVolViz_1_1Private___1_1Mesh.html#ae3c1240f886e93760b0c78716dd18f89',1,'VolViz::Private_::Mesh']]],
+  ['updatequeue',['UpdateQueue',['../classVolViz_1_1Private___1_1Cube.html#a6c607194fbc9ad853f8fd6f460f973be',1,'VolViz::Private_::Cube::UpdateQueue()'],['../classVolViz_1_1Private___1_1Mesh.html#ae3c1240f886e93760b0c78716dd18f89',1,'VolViz::Private_::Mesh::UpdateQueue()']]],
   ['usage',['usage',['../glad_8h.html#afb85c5d9b1bce96aa3b530d581194d1a',1,'glad.h']]],
   ['userparam',['userParam',['../glad_8h.html#ab4ec56a88652a8ed0c9d17743767b6b1',1,'glad.h']]],
   ['ustride',['ustride',['../glad_8h.html#a33731be23c667fb819c037e6fb645ad3',1,'glad.h']]]
