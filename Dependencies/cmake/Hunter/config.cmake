@@ -22,3 +22,7 @@ hunter_config(libigl
     LIBIGL_WITH_XML=OFF
 )
 
+hunter_condif(PhysUnits
+  GIT_SUBMODULE "Dependencies/PhysUnits"
+)
+

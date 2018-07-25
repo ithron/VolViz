@@ -50,7 +50,9 @@ find_package(Microsoft.GSL CONFIG REQUIRED)
 hunter_add_package(glfw)
 find_package(glfw3 REQUIRED)
 
-include(ImportPhysUnits)
+hunter_add_package(PhysUnits)
+find_package(PhysUnits CONFIG REQUIRED)
+
 include(ImportConcurrentqueue)
 
 find_package(Doxygen)

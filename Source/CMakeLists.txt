@@ -96,7 +96,7 @@ if (BUILD_SHARED_LIBS)
     PUBLIC
       Eigen3::Eigen
       Microsoft.GSL::GSL
-      PhysUnits
+      PhysUnits::PhysUnits
     PRIVATE
       glfw
       ${MKL_TARGET}
@@ -108,7 +108,7 @@ else()
       ${MKL_TARGET}
       Eigen3::Eigen
       Microsoft.GSL::GSL
-      PhysUnits
+      PhysUnits::PhysUnits
       glfw
     PRIVATE
       ConcurrentQueue
