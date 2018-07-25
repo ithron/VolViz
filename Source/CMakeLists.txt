@@ -94,8 +94,8 @@ add_library(VolViz
 if (BUILD_SHARED_LIBS)
   target_link_libraries(VolViz
     PUBLIC
-      Eigen
-      GSL
+      Eigen3::Eigen
+      Microsoft.GSL::GSL
       PhysUnits
     PRIVATE
       glfw
@@ -106,8 +106,8 @@ else()
   target_link_libraries(VolViz
     PUBLIC
       ${MKL_TARGET}
-      Eigen
-      GSL
+      Eigen3::Eigen
+      Microsoft.GSL::GSL
       PhysUnits
       glfw
     PRIVATE
@@ -121,7 +121,6 @@ target_include_directories(VolViz PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz/src>
   $<INSTALL_INTERFACE:include/VolViz>
   $<INSTALL_INTERFACE:include/VolViz/src>
-  $<INSTALL_INTERFACE:include/VolViz/src/GSL>
 )
 target_compile_features(VolViz PUBLIC ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolViz PRIVATE ${DEFAULT_COMPILER_OPTIONS})
