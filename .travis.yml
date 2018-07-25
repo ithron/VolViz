@@ -2,6 +2,10 @@ branches:
   except:
     - gh-pages
 
+cache:
+  directories:
+    - ${HUNTER_ROOT}
+
 language: c++
 
 addons:
@@ -25,6 +29,7 @@ env:
     - GH_REPO_REF: github.com/ithron/VolViz.git
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
     - CTEST_OUTPUT_ON_FAILURE: TRUE¬
+    - HUNTER_ROOT: ${HOME}/hunter
 
 matrix:
   include:
