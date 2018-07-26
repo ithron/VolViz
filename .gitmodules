@@ -1,15 +1,6 @@
-[submodule "Dependencies/glfw"]
-	path = Dependencies/glfw
-	url = https://github.com/glfw/glfw.git
-[submodule "Dependencies/GSL"]
-	path = Dependencies/GSL
-	url = https://github.com/Microsoft/GSL.git
 [submodule "Dependencies/concurrentqueue"]
 	path = Dependencies/concurrentqueue
 	url = https://github.com/ithron/concurrentqueue.git
-[submodule "Dependencies/eigen"]
-	path = Dependencies/eigen
-	url = https://github.com/ithron/eigen.git
 [submodule "Dependencies/libigl"]
 	path = Dependencies/libigl
 	url = https://github.com/ithron/libigl.git
