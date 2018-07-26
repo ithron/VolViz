@@ -10,6 +10,7 @@ if (BUILD_SHARED_LIBS)
   set(HUNTER_BUILD_SHARED_LIBS ON)
 endif()
 
+include(InitSubmodules)
 include(HunterGate)
 
 HunterGate(
