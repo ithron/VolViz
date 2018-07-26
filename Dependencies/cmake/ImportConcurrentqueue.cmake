@@ -13,7 +13,6 @@ if(NOT TARGET ConcurrentQueue)
   )
 
   ExternalProject_Get_Property(ConcurrentQueue_EP SOURCE_DIR)
-  message("CQ SOURCE_DIR=${SOURCE_DIR}")
 
   add_library(ConcurrentQueue INTERFACE)
   if("${CMAKE_GENERATOR}" STREQUAL "Xcode")
