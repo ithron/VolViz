@@ -1,6 +1,7 @@
 var searchData=
 [
   ['c',['c',['../glad_8h.html#a1f2d7f8147412c43ba2303a56f97ee73',1,'glad.h']]],
+  ['cachedbackgroundcolor',['cachedBackgroundColor',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a06346d886ace44dedcd6840a2973213b',1,'VolViz::Private_::VisualizerImpl']]],
   ['cachedprojectionmatrix_5f',['cachedProjectionMatrix_',['../classVolViz_1_1Camera.html#a6a57eca3f3805768b9562d12283f99ea',1,'VolViz::Camera']]],
   ['cachedscale',['cachedScale',['../classVolViz_1_1Private___1_1VisualizerImpl.html#a36d6619b22ce7511a4480b2cbb5e0780',1,'VolViz::Private_::VisualizerImpl']]],
   ['cachedscale_5f',['cachedScale_',['../classVolViz_1_1Camera.html#a56e1bd4738c23d559e4c909a48ea3db1',1,'VolViz::Camera']]],
@@ -69,8 +70,8 @@ var searchData=
   ['cube',['Cube',['../classVolViz_1_1Private___1_1Cube.html',1,'VolViz::Private_']]],
   ['cube_2ecpp',['Cube.cpp',['../Cube_8cpp.html',1,'']]],
   ['cube_2eh',['Cube.h',['../Cube_8h.html',1,'']]],
-  ['cubedescriptor',['CubeDescriptor',['../classVolViz_1_1CubeDescriptor.html',1,'VolViz']]],
   ['cubedescriptor',['CubeDescriptor',['../classVolViz_1_1CubeDescriptor.html#a53d8822601fe2582d9f61afa0df0a235',1,'VolViz::CubeDescriptor::CubeDescriptor()=default'],['../classVolViz_1_1CubeDescriptor.html#af29d5d18b5cc6add1385cd6d747889d7',1,'VolViz::CubeDescriptor::CubeDescriptor(CubeDescriptor const &amp;)=default'],['../classVolViz_1_1CubeDescriptor.html#afbf3ad663e78944c3531598e0c960097',1,'VolViz::CubeDescriptor::CubeDescriptor(CubeDescriptor &amp;&amp;)=default']]],
+  ['cubedescriptor',['CubeDescriptor',['../classVolViz_1_1CubeDescriptor.html',1,'VolViz']]],
   ['cubegeomshadersrc',['cubeGeomShaderSrc',['../namespaceVolViz_1_1Private___1_1GL_1_1Shaders.html#a0d408777f075cddbe49262480109d915',1,'VolViz::Private_::GL::Shaders']]],
   ['currentvolume_5f',['currentVolume_',['../group__privateMembers.html#gaefc39474fa2e792682a52be46f3f4cd1',1,'VolViz::Private_::VisualizerImpl']]],
   ['cyan',['Cyan',['../namespaceVolViz_1_1Colors.html#afd263975f5064fe34320130d84bdff78',1,'VolViz::Colors']]]

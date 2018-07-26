@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classVolViz_1_1Light.html" title="Directional light. " alt="" coords="5,5,101,32"/>
+<area shape="rect" id="node1" href="$classVolViz_1_1GeometryDescriptor.html" title="VolViz::GeometryDescriptor" alt="" coords="6,71,191,97"/>
+<area shape="rect" id="node2" href="$classVolViz_1_1AxisAlignedPlaneDescriptor.html" title="A geometry descriptor describing a axis aligned plane. " alt="" coords="240,5,411,46"/>
+<area shape="rect" id="node3" href="$classVolViz_1_1CubeDescriptor.html" title="A geomentry descriptor describing an axis aligned cube. " alt="" coords="246,71,405,97"/>
+<area shape="rect" id="node4" href="$classVolViz_1_1MeshDescriptor.html" title="A geometry descriptor describing an arbitrary triangle mesh. " alt="" coords="245,121,405,148"/>
 </map>

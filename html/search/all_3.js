@@ -34,7 +34,7 @@ var searchData=
   ['buffer_2eh',['Buffer.h',['../Buffer_8h.html',1,'']]],
   ['bufferindex',['bufferIndex',['../glad_8h.html#a9ccbd4e5c2851a7870f0f335e25f1b72',1,'glad.h']]],
   ['buffermode',['bufferMode',['../glad_8h.html#a2aa69515df81676e80707ec330d38e18',1,'glad.h']]],
-  ['buffers',['buffers',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a56c4d88b531fb2d5b6ed40624c67aa60',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer::buffers()'],['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a87a7b3f4d421d975b2eab98003ff21be',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer::Buffers()'],['../glad_8h.html#acaf3212fc88caa23745613e709a3e869',1,'buffers():&#160;glad.h']]],
+  ['buffers',['Buffers',['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a87a7b3f4d421d975b2eab98003ff21be',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer::Buffers()'],['../structVolViz_1_1Private___1_1VisualizerImpl_1_1SelectionBuffer.html#a56c4d88b531fb2d5b6ed40624c67aa60',1,'VolViz::Private_::VisualizerImpl::SelectionBuffer::buffers()'],['../glad_8h.html#acaf3212fc88caa23745613e709a3e869',1,'buffers():&#160;glad.h']]],
   ['bufs',['bufs',['../glad_8h.html#a5b84408f2148e494d469b56711ede567',1,'glad.h']]],
   ['bufsize',['bufSize',['../glad_8h.html#adbd8042d80dfe4a3bebe68162d8641a1',1,'bufSize():&#160;glad.h'],['../glad_8h.html#aa9fd818c028a0115b261bdee2febd768',1,'bufsize():&#160;glad.h']]],
   ['bufstreams',['bufstreams',['../glad_8h.html#ad8e5fe797ce3bcf659a349ab4d40a528',1,'glad.h']]],
