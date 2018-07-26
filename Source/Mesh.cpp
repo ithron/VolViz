@@ -106,8 +106,8 @@ void Mesh::uploadMesh() {
     vertices.row(i) << descriptor.vertices.row(i), 0.f, 0.f, 0.f, 0.f, 0.f;
   }
 
-  // copt indices
-  for (int i = 0; i < M; ++i) { indices.row(i) = descriptor.indices.row(i); }
+  // copy indices
+  indices = descriptor.indices;
 
   // compute normals
   for (int i = 0; i < M; ++i) {
