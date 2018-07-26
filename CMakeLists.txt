@@ -6,6 +6,10 @@ set(DEPENDENCIES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DEPENDENCIES_DIR}/cmake")
 
 option(BUILD_SHARED_LIBS "Build shared instead of static libraries" OFF)
+option(BUILD_TESTING "Build tests" ON)
+option(BUILD_EXAMPLES "Build examples" ON)
+option(FIX_MISSING_GL_IMPLEMENTATIONS "Fix missing GL function implementations" OFF)
+
 if (BUILD_SHARED_LIBS)
   set(HUNTER_BUILD_SHARED_LIBS ON)
 endif()
@@ -70,7 +74,6 @@ if(DOXYGEN_FOUND)
   endif()
 endif()
 
-option(BUILD_TESTING "Build tests" ON)
 
 if(BUILD_TESTING)
   enable_testing()
@@ -80,9 +83,6 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/Source/config.h.in" "${PROJECT_BINARY_DIR}/config.h"
 )
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
-option(BUILD_EXAMPLES "Build examples" ON)
-option(FIX_MISSING_GL_IMPLEMENTATIONS "Fix missing GL function implementations" OFF)
 
 add_subdirectory(Source VolViz)
 if (BUILD_EXAMPLES)
