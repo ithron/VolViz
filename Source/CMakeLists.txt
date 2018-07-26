@@ -171,6 +171,7 @@ configure_package_config_file(VolVizConfig.cmake.in
   INSTALL_DESTINATION lib/cmake/VolViz
 )
 install(FILES
+  ${CMAKE_BINARY_DIR}/VolVizExport.cmake
   ${CMAKE_BINARY_DIR}/VolVizConfig.cmake
   DESTINATION lib/cmake/VolViz
 )
