@@ -14,8 +14,8 @@ include(InitSubmodules)
 include(HunterGate)
 
 HunterGate(
-  URL "https://github.com/ruslo/hunter/archive/v0.23.2.tar.gz"
-  SHA1 "e15171dee1ba970803d38199f1d518d217bcb93f"
+  URL "https://github.com/ruslo/hunter/archive/v0.23.4.tar.gz"
+  SHA1 "8b2255921208517a55c9533c500131387e3c3dd0"
   FILEPATH ${DEPENDENCIES_DIR}/cmake/Hunter/config.cmake
 )
 
