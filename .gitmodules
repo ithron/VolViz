@@ -1,6 +1,3 @@
 [submodule "Dependencies/libigl"]
 	path = Dependencies/libigl
 	url = https://github.com/ithron/libigl.git
-[submodule "Dependencies/PhysUnits"]
-	path = Dependencies/PhysUnits
-	url = https://github.com/ithron/PhysUnits-CT-Cpp11.git
