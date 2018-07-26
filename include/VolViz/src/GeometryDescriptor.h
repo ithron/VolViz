@@ -81,5 +81,22 @@ public:
   Length scale{1 * milli * meter};
 };
 
-} // namespace VolViz
+/// A geomentry descriptor describing an axis aligned cube
+class CubeDescriptor : public GeometryDescriptor {
+public:
+  virtual ~CubeDescriptor();
 
+  CubeDescriptor() = default;
+  CubeDescriptor(CubeDescriptor const &) = default;
+  CubeDescriptor(CubeDescriptor &&) = default;
+
+  CubeDescriptor &operator=(CubeDescriptor const &) = default;
+  CubeDescriptor &operator=(CubeDescriptor &&) = default;
+
+  Position position{Position::Zero()};
+  Length scale{1 * milli * meter};
+
+  Scale radius = 0.5f;
+};
+
+} // namespace VolViz

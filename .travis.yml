@@ -2,6 +2,10 @@ branches:
   except:
     - gh-pages
 
+cache:
+  directories:
+    - ${HUNTER_ROOT}
+
 language: c++
 
 addons:
@@ -25,24 +29,25 @@ env:
     - GH_REPO_REF: github.com/ithron/VolViz.git
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
     - CTEST_OUTPUT_ON_FAILURE: TRUE¬
+    - HUNTER_ROOT: ${HOME}/hunter
 
 matrix:
   include:
-    - os: osx
-      env: BUILD_TYPE=Debug
-      osx_image: xcode7.3
-
-    - os: osx
-      env: BUILD_TYPE=Release
-      osx_image: xcode7.3
-
-    - os: osx
-      env: BUILD_TYPE=Debug
-      osx_image: xcode8
-
-    - os: osx
-      env: BUILD_TYPE=Release
-      osx_image: xcode8
+    # - os: osx
+    #   env: BUILD_TYPE=Debug
+    #   osx_image: xcode7.3
+    #
+    # - os: osx
+    #   env: BUILD_TYPE=Release
+    #   osx_image: xcode7.3
+    #
+    # - os: osx
+    #   env: BUILD_TYPE=Debug
+    #   osx_image: xcode8
+    #
+    # - os: osx
+    #   env: BUILD_TYPE=Release
+    #   osx_image: xcode8
 
     - os: linux
       dist: trusty
@@ -101,7 +106,19 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: BUILD_TYPE=Release CLANG_VERSION=3.9.0 CREATE_DOC="yes"
+      env: BUILD_TYPE=Release CLANG_VERSION=3.9.0
+      compiler: clang
+
+    - os: linux
+      dist: trusty
+      sudo: required
+      env: BUILD_TYPE=Debug CLANG_VERSION=5.0.0 CLANG_URL="http://releases.llvm.org/5.0.0/clang+llvm-5.0.0-linux-x86_64-ubuntu14.04.tar.xz"
+      compiler: clang
+
+    - os: linux
+      dist: trusty
+      sudo: required
+      env: BUILD_TYPE=Release CLANG_VERSION=5.0.0 CREATE_DOC="yes" CLANG_URL="http://releases.llvm.org/5.0.0/clang+llvm-5.0.0-linux-x86_64-ubuntu14.04.tar.xz"
       compiler: clang
 
     - os: linux
@@ -132,15 +149,17 @@ before_install:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       mkdir -p $HOME/cmake
-      wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.0-Linux-x86_64.sh &&
-        sh cmake-3.3.0-Linux-x86_64.sh --skip-license --prefix=$HOME/cmake
+      wget --no-check-certificate https://cmake.org/files/v3.8/cmake-3.8.0-Linux-x86_64.sh &&
+        sh cmake-3.8.0-Linux-x86_64.sh --skip-license --prefix=$HOME/cmake
       export CMAKE=$HOME/cmake/bin/cmake
       if [ "$CXX" = "clang++" ]; then
         export DEPS_DIR=${TRAVIS_BUILD_DIR}/deps
         export CLANG_DIR=${DEPS_DIR}/clang-$CLANG_VERSION
         mkdir -p ${CLANG_DIR}
-        curl http://releases.llvm.org/$CLANG_VERSION/clang+llvm-$CLANG_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz |
-          tar xJ -C $CLANG_DIR --strip-components 1
+        if [[ -z "${CLANG_URL}" ]]; then
+          export CLANG_URL="http://releases.llvm.org/$CLANG_VERSION/clang+llvm-$CLANG_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz"
+        fi
+        curl ${CLANG_URL} | tar xJ -C $CLANG_DIR --strip-components 1
         export CPPFLAGS="-isystem $CLANG_DIR/include/c++/v1"
         export CXXFLAGS="-stdlib=libc++"
         export LDFLAGS="-L$CLANG_DIR/lib -lc++abi"

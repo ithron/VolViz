@@ -87,21 +87,16 @@ int main(int argc, char **argv) {
             << ((max - min).transpose() * static_cast<double>(meshScale / 1_mm))
             << " mm" << std::endl;
 
-  //  Eigen::MatrixXd V(3, 3);
-  //  V << 0, 1, 0, -1, -1, 0, 1, -1, 0;
-  //  Eigen::MatrixXi T(1, 3);
-  //  T << 0, 1, 2;
-
   auto viewer = Visualizer{};
 
-  // Add mesh
-  MeshDescriptor mesh;
-  mesh.vertices = V.cast<float>();
-  mesh.indices = T.cast<std::uint32_t>();
-  mesh.movable = true;
-  mesh.scale = 50_mm;
-  mesh.color = Colors::White();
-  viewer.addGeometry("Mesh", mesh);
+  for (auto i = 0; i < V.rows(); ++i) {
+    CubeDescriptor vertex;
+    vertex.position = V.row(i).transpose().cast<float>() * 50.f;
+    vertex.color = Colors::White();
+    vertex.scale = 500_um;
+
+    viewer.addGeometry("vertex-" + std::to_string(i), vertex);
+  }
 
   viewer.showGrid = true;
   viewer.backgroundColor = (Colors::Magenta() + Colors::Cyan()) / 2.0;
@@ -156,17 +151,15 @@ int main(int argc, char **argv) {
   viewer.enableMultithreading();
   viewer.start();
 
-  std::thread workerThread([&viewer, &mesh, &cube]() {
+  std::thread workerThread([&viewer, &cube]() {
     using Clock = std::chrono::steady_clock;
     using namespace std::chrono_literals;
     auto constexpr updateIntervall = 1s / 30.f;
     int count{0};
     while (viewer) {
       auto const t0 = Clock::now();
-      mesh.vertices *= count < 10 ? 1.01f : 0.99f;
       cube.position[0] = static_cast<float>(count - 10) * 12.8f / 10.f;
       viewer.updateGeometry("Cube", cube);
-      viewer.updateGeometry("Mesh", mesh);
       if (++count > 20) count = 0;
       auto const timeLeft = -(Clock::now() - t0) + updateIntervall;
       if (timeLeft > 0s) std::this_thread::sleep_for(timeLeft);

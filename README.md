@@ -7,6 +7,7 @@ Volumetric image visualization tool, e.g. for CT images
 - A compiler that supports C++14, e.g.
   * gcc-5 or newer
   * clang-3.6 or newer
+  * Microsoft Visual Studio 15
 
 
 ## Build

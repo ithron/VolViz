@@ -86,6 +86,9 @@ extern template void Visualizer::addGeometry<AxisAlignedPlaneDescriptor>(
     GeometryName, AxisAlignedPlaneDescriptor const &);
 
 extern template void
+Visualizer::addGeometry<CubeDescriptor>(GeometryName, CubeDescriptor const &);
+
+extern template void
 Visualizer::addGeometry<MeshDescriptor>(GeometryName, MeshDescriptor const &);
 
 extern template void
@@ -100,6 +103,16 @@ extern template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &&>(
     GeometryName name, AxisAlignedPlaneDescriptor &&);
 extern template bool Visualizer::updateGeometry<AxisAlignedPlaneDescriptor &>(
     GeometryName name, AxisAlignedPlaneDescriptor &);
+
+extern template bool
+Visualizer::updateGeometry<CubeDescriptor const &>(GeometryName name,
+                                                   CubeDescriptor const &);
+extern template bool
+Visualizer::updateGeometry<CubeDescriptor &&>(GeometryName name,
+                                              CubeDescriptor &&);
+extern template bool
+Visualizer::updateGeometry<CubeDescriptor &>(GeometryName name,
+                                             CubeDescriptor &);
 
 extern template bool
 Visualizer::updateGeometry<MeshDescriptor const &>(GeometryName name,

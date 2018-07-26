@@ -1,7 +1,5 @@
 #include "VisualizerImpl.h"
 
-#include "GL/GL.h"
-#include "GL/GLdefs.h"
 #include "Visualizer.h"
 
 #include <Eigen/Core>
@@ -147,33 +145,68 @@ VisualizerImpl::VisualizerImpl(Visualizer *vis)
 
 void VisualizerImpl::setupFBOs() {
 
+  glfw_.makeCurrent();
   auto const width = static_cast<GLsizei>(glfw_.width());
   auto const height = static_cast<GLsizei>(glfw_.height());
   // set up FBO
   { // textures and FBO for the geometry stage
     // normal and specular texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::NormalsAndSpecular]);
+    assertGL("glBindTexture failed");
+#ifdef _WIN32
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA,
+                 GL_FLOAT, NULL);
+    assertGL("glTexImage2D failed");
+#else
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
+    assertGL("glTexStorage2D failed");
+#endif
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    assertGL("OpenGL Error Stack not clean");
 
     // albedo texure
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+#ifdef _WIN32
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, width, height, 0, GL_RGBA,
+                 GL_UNSIGNED_BYTE, NULL);
+    assertGL("glTexImage2D failed");
+#else
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
+    assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    assertGL("OpenGL Error Stack not clean");
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Depth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
+#ifdef _WIN32
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0,
+                 GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    assertGL("glTexImage2D failed");
+#else
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, width, height);
+    assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    assertGL("OpenGL Error Stack not clean");
 
     // Selection index texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
+#ifdef _WIN32
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32UI, width, height, 0, GL_RED_INTEGER,
+                 GL_UNSIGNED_INT, NULL);
+    assertGL("glTexImage2D failed");
+#else
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, width, height);
+    assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    assertGL("OpenGL Error Stack not clean");
 
     // setup FBO
     GL::Framebuffer fbo;
@@ -186,8 +219,10 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::SelectionTexture], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::Depth], 0);
+    assertGL("OpenGL Error Stack not clean");
     // check FBO
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+      assertGL("Failed to init framebuffer");
       throw std::runtime_error(
           "Incomplete FBO: " +
           std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
@@ -196,18 +231,36 @@ void VisualizerImpl::setupFBOs() {
     lightingFbo_ = std::move(fbo);
   }
 
+  assertGL("OpenGL Error Stack not clean");
   { // textures and fbo for the lighting
     // final rendered image texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::RenderedImage]);
+    assertGL("glBindTexture failed");
+#ifdef _WIN32
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA,
+                 GL_FLOAT, NULL);
+    assertGL("glTexImage2D failed");
+#else
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
+    assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    assertGL("OpenGL Error Stack not clean");
 
     // depth and stencil texture
     glBindTexture(GL_TEXTURE_2D, textures_[TextureID::FinalDepth]);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, width, height);
+#ifdef _WIN32
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0,
+                 GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    assertGL("glTexImage2D failed");
+#else
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, width, height);
+    assertGL("glTexStorage2D failed");
+#endif
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    assertGL("OpenGL Error Stack not clean");
 
     // setup FBO
     GL::Framebuffer fbo;
@@ -216,6 +269,7 @@ void VisualizerImpl::setupFBOs() {
                            textures_[TextureID::RenderedImage], 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
                            textures_[TextureID::FinalDepth], 0);
+    assertGL("OpenGL Error Stack not clean");
     // check FBO
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
       throw std::runtime_error(
@@ -226,19 +280,23 @@ void VisualizerImpl::setupFBOs() {
     finalFbo_ = std::move(fbo);
   }
 
+  assertGL("OpenGL Error Stack not clean");
   // create dummy VAO for single single point rendering
   {
     auto vao = GL::VertexArray{};
     vao.enableVertexAttribArray(0);
+    assertGL("OpenGL Error Stack not clean");
 
     auto const vert = Eigen::Vector3f::Zero().eval();
     auto vb = GL::Buffer{};
     vb.upload(GL_ARRAY_BUFFER, 3 * sizeof(float), vert.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
+    assertGL("OpenGL Error Stack not clean");
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    assertGL("OpenGL Error Stack not clean");
 
     singleVertexData_.vBuff = std::move(vb);
     singleVertexData_.vao = std::move(vao);
@@ -433,9 +491,9 @@ void VisualizerImpl::renderOneFrame(bool block) {
   // Init all new geometry
   {
     InitQueueEntry item;
-    if (geometryInitQueue_.try_dequeue(item)) {
+    while (geometryInitQueue_.try_dequeue(item)) {
       // Init and add geometry if queue was not empty
-      std::cout << "Init geometry '" << item.first << "'" << std::endl;
+      // std::cout << "Init geometry '" << item.first << "'" << std::endl;
       Expects(item.second);
       item.second->init();
       std::lock_guard<std::mutex> lock{geometriesMutex_};
@@ -494,17 +552,24 @@ void VisualizerImpl::renderGeometry() {
   constexpr std::array<GLuint, 3> attachments{
       {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2}};
 
+  constexpr std::array<GLfloat, 4> normalAndSpecularClear{{0.f, 0.f, 0.f, 0.f}};
+  constexpr std::array<GLuint, 4> selectionClear{{0, 0, 0, 0}};
+
+  Color const bgColor = visualizer_->backgroundColor;
+  std::array<GLfloat, 4> clearColor{{bgColor(0), bgColor(1), bgColor(2), 1.f}};
+
   // Bind FBO and set it up for MRT
   auto fboBinding = binding(lightingFbo_, static_cast<GLenum>(GL_FRAMEBUFFER));
   assertGL("Failed to bind framebuffer");
   glDrawBuffers(attachments.size(), attachments.data());
 
-  Color const bg = cachedBackgroundColor;
-  glClearColor(bg(0), bg(1), bg(2), 1.0);
-  glClearDepth(0.0);
-  glClearStencil(0);
   glDisable(GL_FRAMEBUFFER_SRGB);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  // Clear buffers
+  glClearBufferfv(GL_COLOR, 0, normalAndSpecularClear.data());
+  glClearBufferfv(GL_COLOR, 1, clearColor.data());
+  glClearBufferuiv(GL_COLOR, 2, selectionClear.data());
+  glClearBufferfi(GL_DEPTH_STENCIL, 0, 0.f, 0);
+
   glEnable(GL_DEPTH_TEST);
   glDepthMask(true);
   glColorMask(true, true, true, true);
@@ -676,7 +741,7 @@ VisualizerImpl::getGeometryUnderCursor() {
       *selectionBuffer_.writeBuffer, static_cast<GLenum>(GL_PIXEL_PACK_BUFFER));
   glPixelStorei(GL_PACK_ALIGNMENT, 4);
   glReadBuffer(GL_COLOR_ATTACHMENT2);
-  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, 0);
+  glReadPixels(pos(0), pos(1), 1, 1, GL_RED_INTEGER, GL_UNSIGNED_INT, nullptr);
   glReadPixels(pos(0), pos(1), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
                reinterpret_cast<void *>(sizeof(std::uint32_t)));
   assertGL("Failed to read depth value under cursor");
@@ -788,9 +853,8 @@ void VisualizerImpl::renderLights() {
   auto fboBinding =
       GL::binding(finalFbo_, static_cast<GLenum>(GL_DRAW_FRAMEBUFFER));
 
-  glClearColor(0.f, 0.f, 0.f, 0.f);
-  glClear(GL_COLOR_BUFFER_BIT);
-
+  glClearDepth(0.f);
+  glClear(GL_DEPTH_BUFFER_BIT);
   renderAmbientLighting();
 
   glBlendFunc(GL_ONE, GL_ONE);
@@ -820,6 +884,10 @@ void VisualizerImpl::renderAmbientLighting() {
   // Ambient pass
   shaders_["ambientPass"].use();
   shaders_["ambientPass"]["lightColor"] = ambientColor;
+  shaders_["ambientPass"]["indexTex"] = 1;
+
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
 
   renderFullscreenQuad(TextureID::Albedo, shaders_["ambientPass"]);
 }
@@ -833,6 +901,7 @@ void VisualizerImpl::renderDiffuseLighting() {
   shaders_["diffuseLightingPass"].use();
   shaders_["diffuseLightingPass"]["normalAndSpecularTex"] = 0;
   shaders_["diffuseLightingPass"]["albedoTex"] = 1;
+  shaders_["diffuseLightingPass"]["indexTex"] = 2;
   shaders_["diffuseLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
   shaders_["diffuseLightingPass"]["size"] =
       (2 * Eigen::Vector2f::Ones()).eval();
@@ -842,6 +911,9 @@ void VisualizerImpl::renderDiffuseLighting() {
 
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+
+  glActiveTexture(GL_TEXTURE2);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
 
   auto boundVao = GL::binding(singleVertexData_.vao);
 
@@ -871,6 +943,7 @@ void VisualizerImpl::renderSpecularLighting() {
   shaders_["specularLightingPass"].use();
   shaders_["specularLightingPass"]["normalAndSpecularTex"] = 0;
   shaders_["specularLightingPass"]["albedoTex"] = 1;
+  shaders_["specularLightingPass"]["indexTex"] = 2;
   shaders_["specularLightingPass"]["topLeft"] = Eigen::Vector2f(-1, 1);
   shaders_["specularLightingPass"]["size"] =
       (2 * Eigen::Vector2f::Ones()).eval();
@@ -880,6 +953,9 @@ void VisualizerImpl::renderSpecularLighting() {
 
   glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, textures_[TextureID::Albedo]);
+
+  glActiveTexture(GL_TEXTURE2);
+  glBindTexture(GL_TEXTURE_2D, textures_[TextureID::SelectionTexture]);
 
   auto boundVao = GL::binding(singleVertexData_.vao);
 

@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${DEPENDENCIES_DIR}/cmake)
-include(ImportIgl)
 
 find_package(Threads REQUIRED)
 
@@ -11,8 +10,6 @@ set(DEFAULT_COMPILE_FEATURES
   cxx_auto_type
   cxx_binary_literals
   cxx_constexpr
-  cxx_contextual_conversions
-  cxx_decltype_incomplete_return_types
   cxx_decltype
   cxx_decltype_auto
   cxx_default_function_template_args
@@ -81,14 +78,40 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   )
 endif()
 
+hunter_add_package(libigl)
+find_package(libigl CONFIG REQUIRED)
+
 add_executable(VolVisualizer VolVisualizer.cpp)
 target_link_libraries(VolVisualizer PRIVATE
   VolViz::VolViz
-  IGL
+  igl::core
   ${CMAKE_THREAD_LIBS_INIT}
 )
 target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+if (${CMAKE_COMPILER_IS_GNUCXX})
+  if (${CMAKE_C_COMPILER_VERSION} VERSION_GREATER "5" AND
+      ${CMAKE_C_COMPILER_VERSION} VERSION_LESS "6")
+    target_compile_options(VolVisualizer PRIVATE ${DEFAULT_COMPILER_OPTIONS} -w)
+    message(WARNING "Disable -Werror for GCC-5 since libigl does not build otherwise")
+  endif()
+endif()
+
+add_executable(Cubes Cubes.cpp)
+target_link_libraries(Cubes PRIVATE
+  VolViz::VolViz
+  igl::core
+  ${CMAKE_THREAD_LIBS_INIT}
+)
+target_compile_features(Cubes PRIVATE ${DEFAULT_COMPILE_FEATURES})
+target_compile_options(Cubes PRIVATE ${DEFAULT_COMPILER_OPTIONS})
+if (${CMAKE_COMPILER_IS_GNUCXX})
+  if (${CMAKE_C_COMPILER_VERSION} VERSION_GREATER "5" AND
+      ${CMAKE_C_COMPILER_VERSION} VERSION_LESS "6")
+    target_compile_options(Cubes PRIVATE ${DEFAULT_COMPILER_OPTIONS} -w)
+    message(WARNING "Disable -Werror for GCC-5 since libigl does not build otherwise")
+  endif()
+endif()
 
 
 ###############################

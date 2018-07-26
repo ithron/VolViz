@@ -96,6 +96,7 @@ private:
 namespace Private_ {
 class VisualizerImpl;
 class AxisAlignedPlane;
+class Cube;
 class Mesh;
 
 class CameraClient {
@@ -105,6 +106,7 @@ class CameraClient {
   // All geometry subclasses should also have access. This smells like a dirty
   // workaround. TODO: find a better solution
   friend class AxisAlignedPlane;
+  friend class Cube;
   friend class Mesh;
 
   CameraClient(Camera const &cam) : cam_(cam) {}

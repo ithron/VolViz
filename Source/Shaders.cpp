@@ -155,6 +155,19 @@ void Shaders::init() {
                         GL::Shaders::deferredPassthroughFragShaderSrc))
                     .link()));
 
+  // Cube shader
+  shaders_.emplace(
+      "cube",
+      std::move(GL::ShaderProgram()
+                    .attachShader(GL::Shader(GL_VERTEX_SHADER,
+                                             GL::Shaders::nullVertShaderSrc))
+                    .attachShader(GL::Shader(GL_GEOMETRY_SHADER,
+                                             GL::Shaders::cubeGeomShaderSrc))
+                    .attachShader(GL::Shader(
+                        GL_FRAGMENT_SHADER,
+                        GL::Shaders::deferredPassthroughFragShaderSrc))
+                    .link()));
+
   // BBox shader
   shaders_.emplace(
       "bbox",
