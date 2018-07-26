@@ -5,7 +5,21 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR})
 set(DEPENDENCIES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DEPENDENCIES_DIR}/cmake")
 
-project(VolViz VERSION 0.1.1 LANGUAGES C CXX)
+option(BUILD_SHARED_LIBS "Build shared instead of static libraries" OFF)
+if (BUILD_SHARED_LIBS)
+  set(HUNTER_BUILD_SHARED_LIBS ON)
+endif()
+
+include(HunterGate)
+
+HunterGate(
+  URL "https://github.com/ruslo/hunter/archive/v0.23.2.tar.gz"
+  SHA1 "e15171dee1ba970803d38199f1d518d217bcb93f"
+  FILEPATH ${DEPENDENCIES_DIR}/cmake/Hunter/config.cmake
+)
+
+project(VolViz VERSION 0.1.2 LANGUAGES C CXX)
+
 
 # Set the default build type if none was specified
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -26,10 +40,19 @@ else()
 endif()
 message(STATUS "Found OpenGL libraries: ${OPENGL_LIBRARIES}")
 include(ImportMKL)
-include(ImportEigen)
-include(ImportGSL)
-include(ImportGLFW)
-include(ImportPhysUnits)
+
+hunter_add_package(Eigen)
+find_package(Eigen3 CONFIG REQUIRED)
+
+hunter_add_package(Microsoft.GSL)
+find_package(Microsoft.GSL CONFIG REQUIRED)
+
+hunter_add_package(glfw)
+find_package(glfw3 REQUIRED)
+
+hunter_add_package(PhysUnits)
+find_package(PhysUnits CONFIG REQUIRED)
+
 include(ImportConcurrentqueue)
 
 find_package(Doxygen)

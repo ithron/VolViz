@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${DEPENDENCIES_DIR}/cmake)
-include(ImportIgl)
 
 find_package(Threads REQUIRED)
 
@@ -79,10 +78,13 @@ if (${CMAKE_COMPILER_IS_GNUCXX})
   )
 endif()
 
+hunter_add_package(libigl)
+find_package(libigl CONFIG REQUIRED)
+
 add_executable(VolVisualizer VolVisualizer.cpp)
 target_link_libraries(VolVisualizer PRIVATE
   VolViz::VolViz
-  IGL
+  igl::core
   ${CMAKE_THREAD_LIBS_INIT}
 )
 target_compile_features(VolVisualizer PRIVATE ${DEFAULT_COMPILE_FEATURES})
@@ -98,7 +100,7 @@ endif()
 add_executable(Cubes Cubes.cpp)
 target_link_libraries(Cubes PRIVATE
   VolViz::VolViz
-  IGL
+  igl::core
   ${CMAKE_THREAD_LIBS_INIT}
 )
 target_compile_features(Cubes PRIVATE ${DEFAULT_COMPILE_FEATURES})

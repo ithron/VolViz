@@ -2,5 +2,9 @@
 
 include("${CMAKE_CURRENT_LIST_DIR}/VolVizExport.cmake")
 
+if(TARGET VolViz::VolViz)
+  set(VolViz_FOUND TRUE)
+endif()
+
 check_required_components(VolViz)
 

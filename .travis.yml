@@ -2,6 +2,10 @@ branches:
   except:
     - gh-pages
 
+cache:
+  directories:
+    - ${HUNTER_ROOT}
+
 language: c++
 
 addons:
@@ -25,24 +29,25 @@ env:
     - GH_REPO_REF: github.com/ithron/VolViz.git
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
     - CTEST_OUTPUT_ON_FAILURE: TRUE¬
+    - HUNTER_ROOT: ${HOME}/hunter
 
 matrix:
   include:
-    - os: osx
-      env: BUILD_TYPE=Debug
-      osx_image: xcode7.3
-
-    - os: osx
-      env: BUILD_TYPE=Release
-      osx_image: xcode7.3
-
-    - os: osx
-      env: BUILD_TYPE=Debug
-      osx_image: xcode8
-
-    - os: osx
-      env: BUILD_TYPE=Release
-      osx_image: xcode8
+    # - os: osx
+    #   env: BUILD_TYPE=Debug
+    #   osx_image: xcode7.3
+    #
+    # - os: osx
+    #   env: BUILD_TYPE=Release
+    #   osx_image: xcode7.3
+    #
+    # - os: osx
+    #   env: BUILD_TYPE=Debug
+    #   osx_image: xcode8
+    #
+    # - os: osx
+    #   env: BUILD_TYPE=Release
+    #   osx_image: xcode8
 
     - os: linux
       dist: trusty

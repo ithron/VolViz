@@ -94,9 +94,9 @@ add_library(VolViz
 if (BUILD_SHARED_LIBS)
   target_link_libraries(VolViz
     PUBLIC
-      Eigen
-      GSL
-      PhysUnits
+      Eigen3::Eigen
+      Microsoft.GSL::GSL
+      PhysUnits::PhysUnits
     PRIVATE
       glfw
       ${MKL_TARGET}
@@ -106,9 +106,9 @@ else()
   target_link_libraries(VolViz
     PUBLIC
       ${MKL_TARGET}
-      Eigen
-      GSL
-      PhysUnits
+      Eigen3::Eigen
+      Microsoft.GSL::GSL
+      PhysUnits::PhysUnits
       glfw
     PRIVATE
       ConcurrentQueue
@@ -121,7 +121,6 @@ target_include_directories(VolViz PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz/src>
   $<INSTALL_INTERFACE:include/VolViz>
   $<INSTALL_INTERFACE:include/VolViz/src>
-  $<INSTALL_INTERFACE:include/VolViz/src/GSL>
 )
 target_compile_features(VolViz PUBLIC ${DEFAULT_COMPILE_FEATURES})
 target_compile_options(VolViz PRIVATE ${DEFAULT_COMPILER_OPTIONS})
@@ -141,32 +140,40 @@ endif()
 
 ###############################
 #Install and packaging
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 install(
   TARGETS
     ${INSTALL_TARGETS}
   EXPORT
     VolVizExport
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-  INCLUDES DESTINATION include/VolViz
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+export(
+  TARGETS ${INSTALL_TARGETS}
+  FILE VolVizExport.cmake
 )
 install(EXPORT VolVizExport NAMESPACE VolViz::
-  DESTINATION lib/cmake/VolViz
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/VolViz/cmake
+  FILE VolVizExport.cmake
 )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/VolViz
   DESTINATION include
 )
 
-export(EXPORT VolVizExport NAMESPACE VolViz::)
-include(CMakePackageConfigHelpers)
+export(EXPORT VolVizExport NAMESPACE VolViz:: FILE ${CMAKE_BINARY_DIR}/VolVizExport.cmake)
 configure_package_config_file(VolVizConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
+  ${CMAKE_BINARY_DIR}/VolVizConfig.cmake
   INSTALL_DESTINATION lib/cmake/VolViz
 )
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/VolVizConfig.cmake
+  ${CMAKE_BINARY_DIR}/VolVizConfig.cmake
   DESTINATION lib/cmake/VolViz
 )
+
+export(PACKAGE VolViz)
 
