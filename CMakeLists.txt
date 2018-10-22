@@ -14,7 +14,9 @@ if (BUILD_SHARED_LIBS)
   set(HUNTER_BUILD_SHARED_LIBS ON)
 endif()
 
-include(InitSubmodules)
+if (${BUILD_EXAMPLES})
+  include(InitSubmodules)
+endif()
 include(HunterGate)
 
 HunterGate(
