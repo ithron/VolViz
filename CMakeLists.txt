@@ -14,12 +14,14 @@ if (BUILD_SHARED_LIBS)
   set(HUNTER_BUILD_SHARED_LIBS ON)
 endif()
 
-include(InitSubmodules)
+if (${BUILD_EXAMPLES})
+  include(InitSubmodules)
+endif()
 include(HunterGate)
 
 HunterGate(
-  URL "https://github.com/ruslo/hunter/archive/v0.23.4.tar.gz"
-  SHA1 "8b2255921208517a55c9533c500131387e3c3dd0"
+  URL "https://github.com/ruslo/hunter/archive/v0.23.34.tar.gz"
+  SHA1 "70287b1ffa810ee4e952052a9adff9b4856d0d54"
   FILEPATH ${DEPENDENCIES_DIR}/cmake/Hunter/config.cmake
 )
 

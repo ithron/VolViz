@@ -12,6 +12,7 @@
 
 #include <atomic>
 #include <memory>
+#include <functional>
 
 namespace VolViz {
 

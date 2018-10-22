@@ -2,6 +2,7 @@
 #define VolViz_AtomicWrapper_h
 
 #include <mutex>
+#include <functional>
 
 #pragma clang diagnostic ignored "-Wpadded"
 
